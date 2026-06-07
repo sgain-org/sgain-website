@@ -1,0 +1,27 @@
+{
+  "name": "sgain-website",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "astro build",
+    "check": "astro check",
+    "deploy": "astro build && ./scripts/deploy.sh",
+    "deploy:dry": "astro build && ./scripts/deploy.sh --dry-run",
+    "dev": "astro dev",
+    "lint": "biome check",
+    "lint:fix": "biome check --fix",
+    "preview": "astro preview",
+    "tree": "./scripts/tree.sh"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.4",
+    "d3": "^7.9.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@biomejs/biome": "^2.4.16",
+    "@types/d3": "^7.4.3",
+    "typescript": "^6.0.3"
+  }
+}

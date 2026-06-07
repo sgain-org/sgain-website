@@ -1,0 +1,19 @@
+{
+  "name": "extract",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0",
+    "fs-extra": "^11.3.5",
+    "playwright": "^1.60.0",
+    "slugify": "^1.6.9",
+    "turndown": "^7.2.4"
+  }
+}

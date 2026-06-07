@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="About & Cite — CGEL Database"
+  description="About the CGEL database and how to cite it — a SGAIN project output from the University of Bath, funded by UKRI."
+>
+  <section>
+    <div class="wrap prose">
+      <div class="sec-head">
+        <h2 class="serif">About &amp; Citation</h2>
+      </div>
+      <h3>About the database</h3>
+      <p>
+        The China's Global Environmental Leadership (CGEL) database is the first
+        and most comprehensive database that gathers granular data on
+        cross-border environmental governance initiatives led by Chinese state
+        and non-state actors in the 21st century. It systematically collects key
+        information on efforts by Chinese actors to lead governance initiatives
+        addressing different environmental issues through multilateral,
+        bilateral, and transnational channels.
+      </p>
+      <p>
+        The database is produced as part of the SGAIN project —
+        <em
+          >Sustainability Governance of China's Global Infrastructure
+          Investments</em
+        >
+        — a £1.7 million research programme led by Dr Yixian Sun at the
+        University of Bath, funded by a UKRI Future Leaders Fellowship.
+      </p>
+      <h3>How to cite</h3>
+      <div class="citebox">
+        <div class="lbl">Recommended citation</div>
+        Sun, Y., Ye, Y., Li, J., O'Brien, C., Ya, X., &amp; Zhao, H., 2025.
+        China's Global Environmental Leadership (CGEL) Database — Version 1.0.
+        SGAIN Project. University of Bath.
+        <div>
+          <button type="button" class="copybtn" id="copy-cite">
+            Copy citation
+          </button>
+        </div>
+      </div>
+      <h3>Access &amp; contact</h3>
+      <p>
+        The full database will be published shortly. For use enquiries, contact
+        <strong>sgain@bath.ac.uk</strong>.
+        <span class="placeholder"
+          >[待补：上线后补 DOI / 下载链接 / 许可协议]</span
+        >
+      </p>
+      <h3>Team</h3>
+      <p>
+        Yixian Sun · Yitong Ye · Jiang Li · C. O'Brien · X. Ya · H. Zhao.
+        <span class="placeholder">[待补：确认成员全名与排序]</span>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<script>
+const CITATION =
+  "Sun, Y., Ye, Y., Li, J., O'Brien, C., Ya, X., & Zhao, H., 2025. China's Global Environmental Leadership (CGEL) Database — Version 1.0. SGAIN Project. University of Bath.";
+
+const btn = document.getElementById("copy-cite");
+btn?.addEventListener("click", () => {
+  navigator.clipboard?.writeText(CITATION);
+  btn.textContent = "Copied ✓";
+  setTimeout(() => {
+    btn.textContent = "Copy citation";
+  }, 1500);
+});
+</script>

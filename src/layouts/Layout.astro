@@ -1,0 +1,85 @@
+---
+import "../styles/styles.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? new URL(image, Astro.site) : undefined;
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="canonical" href={canonical}>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="CGEL Database">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content={canonical}>
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Twitter -->
+    <meta
+      name="twitter:card"
+      content={ogImage ? "summary_large_image" : "summary"}
+    >
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spline+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    >
+  </head>
+  <body>
+    <nav>
+      <div class="wrap">
+        <div class="logo"><span class="mark"></span>CGEL Database</div>
+        <div class="navlinks">
+          <a href="/" class={isActive("/") ? "active" : ""}>Overview</a>
+          <a href="/browse/" class={isActive("/browse/") ? "active" : ""}
+            >Browse</a
+          >
+          <a
+            href="/methodology/"
+            class={isActive("/methodology/") ? "active" : ""}
+            >Methodology</a
+          >
+          <a href="/about/" class={isActive("/about/") ? "active" : ""}
+            >About &amp; Cite</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer>
+      <div class="wrap">
+        <div>
+          <strong class="serif" style="font-size:16px">CGEL Database</strong>
+          <br>China's Global Environmental Leadership
+        </div>
+        <div>
+          A SGAIN project · University of Bath · Funded by UKRI<br>sgain@bath.ac.uk
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

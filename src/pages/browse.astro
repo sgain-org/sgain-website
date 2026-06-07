@@ -1,0 +1,361 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Browse — CGEL Database"
+  description="Search and filter 291 China-led cross-border environmental governance initiatives by type, region, environmental issue, and governance level."
+>
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="serif">Browse the database</h2>
+        <p>
+          Search and filter 291 initiatives across type, region, environmental
+          issue, and governance level.
+        </p>
+      </div>
+      <div class="browse-layout">
+        <aside class="filters" id="filters"></aside>
+        <div>
+          <div class="toolbar">
+            <input
+              class="searchbar"
+              id="search"
+              placeholder="Search initiative name, acronym, or actor…"
+            >
+            <div class="viewtog">
+              <button type="button" id="vcard" class="on">▦ Cards</button
+              ><button type="button" id="vtable">☰ Table</button>
+            </div>
+            <button type="button" class="btn" id="exportBtn">
+              ↓ Export CSV
+            </button>
+          </div>
+          <div class="resultbar">
+            <span id="rcount"></span>
+            <span>
+              <span id="activeChips"></span>
+              <button type="button" class="clearbtn" id="clearBtn">
+                Clear all
+              </button>
+            </span>
+          </div>
+          <div class="cards" id="cards"></div>
+          <div id="tablewrap" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="overlay" id="overlay">
+    <div class="modal" id="modal"></div>
+  </div>
+</Layout>
+
+<script>
+import type { Initiative } from "../lib/data";
+import { loadInitiatives, yrInt } from "../lib/data";
+
+type FilterKey = "type" | "region" | "problem" | "gov";
+
+interface Filters {
+  type: Set<string>;
+  region: Set<string>;
+  problem: Set<string>;
+  gov: Set<string>;
+  q: string;
+  country: string | null;
+  ymin: number;
+  ymax: number;
+}
+
+let DATA: Initiative[] = [];
+let F: Filters = {
+  type: new Set(),
+  region: new Set(),
+  problem: new Set(),
+  gov: new Set(),
+  q: "",
+  country: null,
+  ymin: 1980,
+  ymax: 2024,
+};
+let view = "card",
+  sortField = "code",
+  sortDir = 1;
+
+// Element references (module scripts are deferred, so the DOM is ready).
+const filtersEl = document.getElementById("filters")!;
+const cardsEl = document.getElementById("cards")!;
+const tableEl = document.getElementById("tablewrap")!;
+const chipsEl = document.getElementById("activeChips")!;
+const modalEl = document.getElementById("modal")!;
+const overlayEl = document.getElementById("overlay")!;
+
+function uc(field: string): [string, number][] {
+  const m: Record<string, number> = {};
+  DATA.forEach((d) => {
+    const v = d[field] as string;
+    if (v) m[v] = (m[v] || 0) + 1;
+  });
+  return Object.entries(m).sort((a, b) => b[1] - a[1]);
+}
+function buildFilters() {
+  const g: [string, string, FilterKey][] = [
+    ["Initiative type", "type_primary", "type"],
+    ["Region", "region", "region"],
+    ["Environmental issue", "problem1", "problem"],
+    ["Governance level", "governance", "gov"],
+  ];
+  filtersEl.innerHTML = g
+    .map(
+      ([lab, fld, key]) =>
+        `<div class="fgroup"><h4>${lab}</h4>` +
+        uc(fld)
+          .map(
+            ([v, c]) =>
+              `<label class="fopt"><input type="checkbox" value="${v.replace(/"/g, "&quot;")}" data-key="${key}">${v}<span class="ct">${c}</span></label>`,
+          )
+          .join("") +
+        `</div>`,
+    )
+    .join("");
+}
+function tog(k: FilterKey, v: string, on: boolean) {
+  on ? F[k].add(v) : F[k].delete(v);
+  render();
+}
+function clearAll() {
+  F = {
+    type: new Set(),
+    region: new Set(),
+    problem: new Set(),
+    gov: new Set(),
+    q: "",
+    country: null,
+    ymin: 1980,
+    ymax: 2024,
+  };
+  document.querySelectorAll<HTMLInputElement>(".fopt input").forEach((i) => {
+    i.checked = false;
+  });
+  (document.getElementById("search") as HTMLInputElement).value = "";
+  render();
+}
+function inYears(d: Initiative) {
+  const y = yrInt(d);
+  if (y === null) return true;
+  return y >= F.ymin && y <= F.ymax;
+}
+function match(d: Initiative) {
+  if (F.type.size && !F.type.has(d.type_primary)) return false;
+  if (F.region.size && !F.region.has(d.region)) return false;
+  if (F.problem.size && !F.problem.has(d.problem1)) return false;
+  if (F.gov.size && !F.gov.has(d.governance)) return false;
+  if (!inYears(d)) return false;
+  if (F.country && !(d.countries || []).includes(F.country)) return false;
+  if (F.q) {
+    const s = (
+      d.name +
+      " " +
+      d.name_zh +
+      " " +
+      d.acronym +
+      " " +
+      d.lead_actor +
+      " " +
+      d.collab_name
+    ).toLowerCase();
+    if (!s.includes(F.q)) return false;
+  }
+  return true;
+}
+function render() {
+  const res = DATA.filter(match);
+  document.getElementById("rcount")!.textContent =
+    `${res.length} initiative${res.length !== 1 ? "s" : ""}`;
+  const chips: string[] = [];
+  if (F.country)
+    chips.push(
+      `<span class="activefilter">${F.country} <b data-clear-country>×</b></span>`,
+    );
+  chipsEl.innerHTML = chips.join("");
+  if (view === "card") renderCards(res);
+  else renderTable(res);
+}
+function renderCards(res: Initiative[]) {
+  cardsEl.innerHTML =
+    res
+      .slice(0, 80)
+      .map(
+        (d) =>
+          `<div class="card" data-code="${d.code}"><div class="ctop"><span class="code">CGEL-${d.code} · ${d.start_year || "—"}</span>${d.status ? `<span class="badge b-${d.status}">${d.status}</span>` : ""}</div><h3>${d.name}${d.acronym ? ` <span style="color:var(--muted);font-weight:400">(${d.acronym})</span>` : ""}</h3>${d.name_zh ? `<div class="zh">${d.name_zh}</div>` : ""}<div class="desc">${d.description || "—"}</div><div class="meta">${d.region ? `<span class="tag t-region">${d.region}</span>` : ""}${d.type_primary ? `<span class="tag">${d.type_primary}</span>` : ""}${d.problem1 ? `<span class="tag">${d.problem1}</span>` : ""}</div></div>`,
+      )
+      .join("") +
+    (res.length > 80
+      ? `<div style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:12px">Showing first 80 of ${res.length}</div>`
+      : "");
+}
+function renderTable(res: Initiative[]) {
+  const cols = [
+    ["code", "ID"],
+    ["name", "Initiative"],
+    ["collab_country", "Collaborator"],
+    ["start_year", "Year"],
+    ["type_primary", "Type"],
+    ["status", "Status"],
+  ];
+  res = [...res].sort((a, b) => {
+    let x: any = a[sortField] || "",
+      y: any = b[sortField] || "";
+    if (sortField === "start_year") {
+      x = +x || 0;
+      y = +y || 0;
+    }
+    if (sortField === "collab_country") {
+      x = (a.countries || []).join();
+      y = (b.countries || []).join();
+    }
+    return x > y ? sortDir : x < y ? -sortDir : 0;
+  });
+  tableEl.innerHTML =
+    `<table><thead><tr>${cols.map(([f, l]) => `<th data-sort="${f}">${l}${sortField === f ? (sortDir > 0 ? " ▲" : " ▼") : ""}</th>`).join("")}</tr></thead><tbody>${res
+      .slice(0, 200)
+      .map(
+        (d) =>
+          `<tr data-code="${d.code}"><td><span class="code">CGEL-${d.code}</span></td><td><strong>${d.name}</strong>${d.acronym ? ` (${d.acronym})` : ""}</td><td>${(d.countries || []).join(", ") || "—"}</td><td>${d.start_year || "—"}</td><td>${d.type_primary || "—"}</td><td>${d.status ? `<span class="badge b-${d.status}">${d.status}</span>` : "—"}</td></tr>`,
+      )
+      .join("")}</tbody></table>` +
+    (res.length > 200
+      ? `<div style="text-align:center;color:var(--muted);font-size:13px;padding:12px">Showing first 200 of ${res.length}</div>`
+      : "");
+}
+function setSort(f: string) {
+  if (sortField === f) sortDir *= -1;
+  else {
+    sortField = f;
+    sortDir = 1;
+  }
+  render();
+}
+function setView(v: string) {
+  view = v;
+  document.getElementById("vcard")?.classList.toggle("on", v === "card");
+  document.getElementById("vtable")?.classList.toggle("on", v === "table");
+  cardsEl.classList.toggle("hidden", v !== "card");
+  tableEl.classList.toggle("hidden", v !== "table");
+  render();
+}
+function exportCSV() {
+  const res = DATA.filter(match);
+  const cols = [
+    "code",
+    "name",
+    "name_zh",
+    "acronym",
+    "start_year",
+    "status",
+    "governance",
+    "region",
+    "type_primary",
+    "problem1",
+    "lead_actor",
+    "collab_name",
+    "collab_origin",
+    "website",
+  ];
+  const esc = (s: any) => `"${String(s || "").replace(/"/g, '""')}"`;
+  const csv = [cols.join(",")]
+    .concat(res.map((d) => cols.map((c) => esc(d[c])).join(",")))
+    .join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "cgel_filtered.csv";
+  a.click();
+}
+function detail(code: string) {
+  const d = DATA.find((x) => x.code === code);
+  if (!d) return;
+  const A: [string, string, string][] = [];
+  if (d.lead_actor)
+    A.push([
+      "cn",
+      d.lead_actor,
+      "Lead Chinese actor" +
+        (d.lead_actor_type ? ` · ${d.lead_actor_type}` : ""),
+    ]);
+  if (d.colead_actor) A.push(["cn", d.colead_actor, "Co-lead Chinese actor"]);
+  if (d.collab_name)
+    A.push([
+      "intl",
+      d.collab_name,
+      `Primary collaborator${d.collab_origin ? ` · ${d.collab_origin}` : ""}`,
+    ]);
+  modalEl.innerHTML = `<div class="mhead"><button class="close" data-close>×</button><div class="code">CGEL-${d.code}</div><h2>${d.name}${d.acronym ? ` (${d.acronym})` : ""}</h2>${d.name_zh ? `<div class="zh">${d.name_zh}</div>` : ""}<div class="mbadges">${d.start_year ? `<span class="mb">${d.start_year}${d.end_year ? `–${d.end_year}` : ""}</span>` : ""}${d.status ? `<span class="mb">${d.status}</span>` : ""}${d.governance ? `<span class="mb">${d.governance}</span>` : ""}${d.region ? `<span class="mb">${d.region}</span>` : ""}</div></div><div class="mbody">${d.description ? `<h4>Background</h4><p>${d.description}</p>` : ""}<h4>Classification</h4><div class="kv">${d.type_primary ? `<div><div class="k">Primary type</div><div class="v">${d.type_primary}</div></div>` : ""}${d.type_secondary ? `<div><div class="k">Secondary type</div><div class="v">${d.type_secondary}</div></div>` : ""}${d.problem1 ? `<div><div class="k">Environmental issue</div><div class="v">${d.problem1}</div></div>` : ""}${d.sdg ? `<div><div class="k">SDGs</div><div class="v">${d.sdg}</div></div>` : ""}</div><h4>Key actors</h4><div class="actors">${A.map(([t, n, r]) => `<div class="actor"><span class="dot ${t}"></span><div><div class="nm">${n}</div><div class="rl">${r}</div></div></div>`).join("") || '<p style="color:var(--muted)">No actor data.</p>'}</div>${d.website ? `<h4>Official source</h4><a class="weblink" href="${d.website.split(" ")[0]}" target="_blank">Visit official website →</a>` : ""}<div class="cite"><strong>Cite this entry:</strong><br>Sun, Y., Ye, Y., et al. (2025). "${d.name}". CGEL Database, CGEL-${d.code}, Version 1.0. SGAIN Project, University of Bath.</div></div>`;
+  overlayEl.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal() {
+  overlayEl.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+// ---- Event wiring (replaces the old inline onclick/onchange handlers) ----
+document.getElementById("search")?.addEventListener("input", (e) => {
+  F.q = (e.target as HTMLInputElement).value.toLowerCase();
+  render();
+});
+filtersEl.addEventListener("change", (e) => {
+  const t = e.target as HTMLInputElement;
+  if (t.matches('input[type="checkbox"][data-key]')) {
+    tog(t.dataset.key as FilterKey, t.value, t.checked);
+  }
+});
+cardsEl.addEventListener("click", (e) => {
+  const card = (e.target as HTMLElement).closest("[data-code]");
+  if (card) detail(card.getAttribute("data-code")!);
+});
+tableEl.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
+  const th = target.closest("th[data-sort]");
+  if (th) {
+    setSort(th.getAttribute("data-sort")!);
+    return;
+  }
+  const tr = target.closest("tr[data-code]");
+  if (tr) detail(tr.getAttribute("data-code")!);
+});
+chipsEl.addEventListener("click", (e) => {
+  if ((e.target as HTMLElement).closest("[data-clear-country]")) {
+    F.country = null;
+    render();
+  }
+});
+modalEl.addEventListener("click", (e) => {
+  if ((e.target as HTMLElement).closest("[data-close]")) closeModal();
+});
+overlayEl.addEventListener("click", (e) => {
+  if (e.target === overlayEl) closeModal();
+});
+document
+  .getElementById("vcard")
+  ?.addEventListener("click", () => setView("card"));
+document
+  .getElementById("vtable")
+  ?.addEventListener("click", () => setView("table"));
+document.getElementById("exportBtn")?.addEventListener("click", exportCSV);
+document.getElementById("clearBtn")?.addEventListener("click", clearAll);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
+});
+
+const params = new URLSearchParams(location.search);
+if (params.get("country")) F.country = params.get("country");
+loadInitiatives().then((rows) => {
+  DATA = rows;
+  buildFilters();
+  render();
+});
+</script>

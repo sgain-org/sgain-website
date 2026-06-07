@@ -1,0 +1,912 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="CGEL Database — China's Global Environmental Leadership"
+  description="The first and most comprehensive database of cross-border environmental governance initiatives led by Chinese state and non-state actors in the 21st century. A SGAIN project, University of Bath."
+>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">
+        China's Global Environmental Leadership · 2000–2024
+      </div>
+      <h1 class="title">
+        China's Global Environmental <em>Leadership</em> Database
+      </h1>
+      <p class="lede">
+        The first and most comprehensive database of cross-border environmental
+        governance initiatives led by Chinese state and non-state actors in the
+        21st century. A SGAIN project output, University of Bath.
+      </p>
+      <div class="stats" id="statbar"></div>
+    </div>
+  </header>
+
+  <section class="viz-row">
+    <div class="wrap">
+      <div class="viz-head">
+        <h2 class="serif">
+          Temporal Evolution of Chinese-led initiatives across governance levels
+          and scales
+        </h2>
+        <p>
+          China has become increasingly active in leading cross-border
+          environmental governance, with state agencies driving this expansion.
+          The widening spatial footprint reflects not only the diversification
+          of China's environmental partnerships but also its growing ambition to
+          shape global environmental agendas.
+        </p>
+      </div>
+      <div id="chart-temporal" class="chartbox"></div>
+    </div>
+  </section>
+
+  <section class="viz-row">
+    <div class="wrap">
+      <div class="viz-head">
+        <h2 class="serif">Governance functions across multiple levels</h2>
+        <p>
+          'Information sharing' and 'Capacity-building' emerged as key emphases.
+          In contrast, the provision of funding remains consistently limited,
+          setting China apart from traditional aid-based models of environmental
+          cooperation.
+        </p>
+      </div>
+      <div id="chart-heatmap" class="chartbox"></div>
+    </div>
+  </section>
+
+  <section class="viz-row">
+    <div class="wrap">
+      <div class="viz-head">
+        <h2 class="serif">
+          Environmental problems targeted by these initiatives across levels
+        </h2>
+        <p>
+          China's efforts to lead global environmental governance primarily
+          focus on climate change (30%), followed respectively by energy (16%),
+          water (12%). Meanwhile, around 11% of the initiatives in our database
+          address broad environmental issues without having a specific focus.
+        </p>
+      </div>
+      <div id="chart-problems" class="chartbox"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="serif">Where China collaborates</h2>
+        <p>
+          Countries shaded by the number of initiatives in which they are the
+          primary international collaborator. Adjust the year range; click a
+          country to explore it in Browse.
+        </p>
+      </div>
+      <div class="yearbar">
+        <label>From</label><span class="yv" id="y0">1980</span>
+        <div class="dualrange">
+          <div class="dr-rail"></div>
+          <div class="dr-fill" id="yfill" style="left: 0; width: 100%"></div>
+          <input
+            type="range"
+            id="ymin"
+            min="1980"
+            max="2024"
+            value="1980"
+            aria-label="From year"
+          >
+          <input
+            type="range"
+            id="ymax"
+            min="1980"
+            max="2024"
+            value="2024"
+            aria-label="To year"
+          >
+        </div>
+        <span class="yv" id="y1">2024</span><label>To</label>
+      </div>
+      <div id="map"></div>
+      <div class="map-note">
+        Each country is labelled with its ISO 3166-1 alpha-2 code (UN standard)
+        and shaded by the number of initiatives in which it is the primary
+        international collaborator; multi-country collaborators are split and
+        counted once each.
+        <strong
+          >The database covers governance initiatives active during 2000–2024,
+          but includes cases that started before 2000 (the earliest is 1980) and
+          remained active afterward — hence the year filter extends back to
+          1980.</strong
+        >
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+import * as d3 from "d3";
+import type { Initiative, WorldGeo } from "../lib/data";
+import { loadGeo, loadInitiatives, yrInt } from "../lib/data";
+
+let DATA: Initiative[] = [],
+  GEO: WorldGeo | null = null;
+const F = { ymin: 1980, ymax: 2024 };
+function inYears(d: Initiative) {
+  const y = yrInt(d);
+  if (y === null) return true;
+  return y >= F.ymin && y <= F.ymax;
+}
+function renderStatbar() {
+  document.getElementById("statbar")!.innerHTML = [
+    ["291", "Initiatives"],
+    ["56", "Collaborating countries"],
+    [new Set(DATA.map((d) => d.region).filter(Boolean)).size, "Regions"],
+    ["2000–2024", "Inclusion window"],
+    ["29", "Variables"],
+  ]
+    .map(
+      ([n, l]) =>
+        `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`,
+    )
+    .join("");
+}
+function syncYears() {
+  let a = +(document.getElementById("ymin") as HTMLInputElement).value,
+    b = +(document.getElementById("ymax") as HTMLInputElement).value;
+  if (a > b) {
+    [a, b] = [b, a];
+  }
+  F.ymin = a;
+  F.ymax = b;
+  document.getElementById("y0")!.textContent = `${a}`;
+  document.getElementById("y1")!.textContent = `${b}`;
+  const lo = ((a - 1980) / (2024 - 1980)) * 100,
+    hi = ((b - 1980) / (2024 - 1980)) * 100;
+  const fill = document.getElementById("yfill");
+  if (fill) {
+    fill.style.left = `${lo}%`;
+    fill.style.width = `${hi - lo}%`;
+  }
+  paintMap();
+}
+document.getElementById("ymin")?.addEventListener("input", syncYears);
+document.getElementById("ymax")?.addEventListener("input", syncYears);
+// ===== MAP (D3 Natural Earth projection — no edge-overflow streaks) =====
+const ISO: Record<string, string> = {
+  Afghanistan: "AF",
+  Angola: "AO",
+  Albania: "AL",
+  "United Arab Emirates": "AE",
+  Argentina: "AR",
+  Armenia: "AM",
+  Antarctica: "AQ",
+  Australia: "AU",
+  Austria: "AT",
+  Azerbaijan: "AZ",
+  Burundi: "BI",
+  Belgium: "BE",
+  Benin: "BJ",
+  "Burkina Faso": "BF",
+  Bangladesh: "BD",
+  Bulgaria: "BG",
+  Bahamas: "BS",
+  "Bosnia and Herz.": "BA",
+  Belarus: "BY",
+  Belize: "BZ",
+  Bolivia: "BO",
+  Brazil: "BR",
+  Brunei: "BN",
+  Bhutan: "BT",
+  Botswana: "BW",
+  "Central African Rep.": "CF",
+  Canada: "CA",
+  Switzerland: "CH",
+  Chile: "CL",
+  China: "CN",
+  "Côte d'Ivoire": "CI",
+  Cameroon: "CM",
+  "Dem. Rep. Congo": "CD",
+  Congo: "CG",
+  Colombia: "CO",
+  "Costa Rica": "CR",
+  Cuba: "CU",
+  Cyprus: "CY",
+  Czechia: "CZ",
+  Germany: "DE",
+  Djibouti: "DJ",
+  Denmark: "DK",
+  "Dominican Rep.": "DO",
+  Algeria: "DZ",
+  Ecuador: "EC",
+  Egypt: "EG",
+  Eritrea: "ER",
+  Spain: "ES",
+  Estonia: "EE",
+  Ethiopia: "ET",
+  Finland: "FI",
+  Fiji: "FJ",
+  France: "FR",
+  Gabon: "GA",
+  "United Kingdom": "GB",
+  Georgia: "GE",
+  Ghana: "GH",
+  Guinea: "GN",
+  Gambia: "GM",
+  "Guinea-Bissau": "GW",
+  "Eq. Guinea": "GQ",
+  Greece: "GR",
+  Greenland: "GL",
+  Guatemala: "GT",
+  Guyana: "GY",
+  Honduras: "HN",
+  Croatia: "HR",
+  Haiti: "HT",
+  Hungary: "HU",
+  Indonesia: "ID",
+  India: "IN",
+  Ireland: "IE",
+  Iran: "IR",
+  Iraq: "IQ",
+  Iceland: "IS",
+  Israel: "IL",
+  Italy: "IT",
+  Jamaica: "JM",
+  Jordan: "JO",
+  Japan: "JP",
+  Kazakhstan: "KZ",
+  Kenya: "KE",
+  Kyrgyzstan: "KG",
+  Cambodia: "KH",
+  "South Korea": "KR",
+  Kuwait: "KW",
+  "Lao PDR": "LA",
+  Laos: "LA",
+  Lebanon: "LB",
+  Liberia: "LR",
+  Libya: "LY",
+  "Sri Lanka": "LK",
+  Lesotho: "LS",
+  Lithuania: "LT",
+  Luxembourg: "LU",
+  Latvia: "LV",
+  Morocco: "MA",
+  Moldova: "MD",
+  Madagascar: "MG",
+  Mexico: "MX",
+  Macedonia: "MK",
+  "North Macedonia": "MK",
+  Mali: "ML",
+  Myanmar: "MM",
+  Montenegro: "ME",
+  Mongolia: "MN",
+  Mozambique: "MZ",
+  Mauritania: "MR",
+  Malawi: "MW",
+  Malaysia: "MY",
+  Namibia: "NA",
+  "New Caledonia": "NC",
+  Niger: "NE",
+  Nigeria: "NG",
+  Nicaragua: "NI",
+  Netherlands: "NL",
+  Norway: "NO",
+  Nepal: "NP",
+  "New Zealand": "NZ",
+  Oman: "OM",
+  Pakistan: "PK",
+  Panama: "PA",
+  Peru: "PE",
+  Philippines: "PH",
+  "Papua New Guinea": "PG",
+  Poland: "PL",
+  "North Korea": "KP",
+  Portugal: "PT",
+  Paraguay: "PY",
+  Palestine: "PS",
+  Qatar: "QA",
+  Romania: "RO",
+  Russia: "RU",
+  Rwanda: "RW",
+  "W. Sahara": "EH",
+  "Saudi Arabia": "SA",
+  Sudan: "SD",
+  "S. Sudan": "SS",
+  Senegal: "SN",
+  "Solomon Is.": "SB",
+  "Sierra Leone": "SL",
+  "El Salvador": "SV",
+  Somalia: "SO",
+  Serbia: "RS",
+  Suriname: "SR",
+  Slovakia: "SK",
+  Slovenia: "SI",
+  Sweden: "SE",
+  Eswatini: "SZ",
+  Syria: "SY",
+  Chad: "TD",
+  Togo: "TG",
+  Thailand: "TH",
+  Tajikistan: "TJ",
+  Turkmenistan: "TM",
+  "Timor-Leste": "TL",
+  "Trinidad and Tobago": "TT",
+  Tunisia: "TN",
+  Turkey: "TR",
+  Taiwan: "TW",
+  Tanzania: "TZ",
+  Uganda: "UG",
+  Ukraine: "UA",
+  Uruguay: "UY",
+  "United States of America": "US",
+  Uzbekistan: "UZ",
+  Venezuela: "VE",
+  Vietnam: "VN",
+  Vanuatu: "VU",
+  Yemen: "YE",
+  "South Africa": "ZA",
+  Zambia: "ZM",
+  Zimbabwe: "ZW",
+  Kosovo: "XK",
+  "Falkland Is.": "FK",
+  "Fr. S. Antarctic Lands": "TF",
+};
+const mapEl = document.getElementById("map")!;
+const tip = document.createElement("div");
+tip.className = "maptip";
+mapEl.appendChild(tip);
+let svg: any,
+  gCountries: any,
+  gLabels: any,
+  projection: any,
+  pathGen: any,
+  legendEl: any;
+function setupMap() {
+  const w = mapEl.clientWidth || 900,
+    h = mapEl.clientHeight || 540;
+  svg = d3.select(mapEl).append("svg").attr("viewBox", `0 0 ${w} ${h}`);
+  gCountries = svg.append("g");
+  gLabels = svg.append("g");
+  projection = d3.geoNaturalEarth1().fitExtent(
+    [
+      [6, 10],
+      [w - 6, h - 14],
+    ],
+    GEO as any,
+  );
+  pathGen = d3.geoPath(projection);
+  gCountries
+    .selectAll("path")
+    .data(GEO?.features)
+    .join("path")
+    .attr("class", "country")
+    .attr("d", pathGen)
+    .on("mousemove", (ev: any, f: any) => {
+      const nm = f.properties.name,
+        code = ISO[nm] || "",
+        n = curCounts[nm] || 0;
+      tip.innerHTML =
+        "<b>" +
+        nm +
+        (code ? ` (${code})` : "") +
+        "</b>" +
+        n +
+        " initiative" +
+        (n !== 1 ? "s" : "");
+      const r = mapEl.getBoundingClientRect();
+      tip.style.left = `${ev.clientX - r.left + 12}px`;
+      tip.style.top = `${ev.clientY - r.top + 12}px`;
+      tip.style.opacity = "1";
+    })
+    .on("mouseout", () => {
+      tip.style.opacity = "0";
+    })
+    .on("click", (_ev: any, f: any) => {
+      const nm = f.properties.name,
+        n = curCounts[nm] || 0;
+      if (!n) return;
+      location.href = `/browse/?country=${encodeURIComponent(nm)}`;
+    });
+  legendEl = document.createElement("div");
+  legendEl.className = "maplegend";
+  mapEl.appendChild(legendEl);
+  paintMap();
+}
+let curCounts: Record<string, number> = {};
+function countryCounts() {
+  const c: Record<string, number> = {};
+  DATA.filter(inYears).forEach((d) => {
+    (d.countries || []).forEach((k) => {
+      c[k] = (c[k] || 0) + 1;
+    });
+  });
+  return c;
+}
+function paintMap() {
+  if (!svg) return;
+  curCounts = countryCounts();
+  const mx = Math.max(1, ...Object.values(curCounts));
+  const col = d3
+    .scaleSequential(
+      d3.interpolateRgbBasis([
+        "#e3e8ec",
+        "#bcd0dd",
+        "#8aa7bd",
+        "#5b829f",
+        "#406383",
+        "#2b4a64",
+      ]),
+    )
+    .domain([0, mx]);
+  gCountries
+    .selectAll("path")
+    .attr("fill", (f: any) => {
+      const n = curCounts[f.properties.name] || 0;
+      return n ? col(n) : "#eef1f3";
+    })
+    .classed("nodata", (f: any) => !(curCounts[f.properties.name] || 0));
+  // labels for shaded countries
+  const shaded = GEO?.features.filter(
+    (f: any) =>
+      (curCounts[f.properties.name] || 0) > 0 && ISO[f.properties.name],
+  );
+  gLabels
+    .selectAll("text")
+    .data(shaded, (f: any) => f.properties.name)
+    .join("text")
+    .attr("class", "isolbl")
+    .attr("transform", (f: any) => {
+      const c = pathGen.centroid(f);
+      return `translate(${c[0]},${c[1]})`;
+    })
+    .attr("dy", ".32em")
+    .text((f: any) => ISO[f.properties.name]);
+  // legend: gradient bar + numeric axis
+  legendEl.innerHTML = '<div class="maplegend-title">Collaborations</div>';
+  const barW = 12,
+    barH = 110,
+    pad = 4,
+    steps = 40;
+  const lsvg = d3
+    .select(legendEl)
+    .append("svg")
+    .attr("width", 52)
+    .attr("height", barH + pad * 2);
+  for (let i = 0; i < steps; i++) {
+    lsvg
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", pad + (barH * i) / steps)
+      .attr("width", barW)
+      .attr("height", barH / steps + 1)
+      .attr("fill", col(mx * (1 - i / steps)));
+  }
+  const lscale = d3
+    .scaleLinear()
+    .domain([0, mx])
+    .range([pad + barH, pad]);
+  lsvg
+    .append("g")
+    .attr("transform", `translate(${barW},0)`)
+    .call(d3.axisRight(lscale).ticks(7).tickSize(3).tickFormat(d3.format("d")))
+    .call((g: any) => g.select(".domain").remove());
+}
+// ===== OVERVIEW REPORT CHARTS =====
+const REGIONS = [
+  "Africa",
+  "Asia",
+  "Europe",
+  "Latin America and the Caribbean",
+  "North America",
+  "Oceania",
+  "Global",
+];
+const GOVS = ["Bilateral", "Multilateral", "Transnational"];
+const regionColor = d3
+  .scaleOrdinal<string>()
+  .domain(REGIONS)
+  .range(
+    d3.quantize((t) => d3.interpolateBlues(0.28 + 0.62 * t), REGIONS.length),
+  );
+const govSymbol: Record<string, any> = {
+  Bilateral: d3.symbolCircle,
+  Multilateral: d3.symbolTriangle,
+  Transnational: d3.symbolSquare,
+};
+const YEARS = d3.range(1980, 2025);
+
+// shared chart tooltip
+const chartTip = document.createElement("div");
+chartTip.className = "maptip";
+chartTip.style.position = "fixed";
+document.body.appendChild(chartTip);
+function showTip(ev: any, html: string) {
+  chartTip.innerHTML = html;
+  chartTip.style.left = `${ev.clientX + 14}px`;
+  chartTip.style.top = `${ev.clientY + 14}px`;
+  chartTip.style.opacity = "1";
+}
+function hideTip() {
+  chartTip.style.opacity = "0";
+}
+const clampYear = (y: number) => Math.max(1980, Math.min(2024, y));
+
+function renderTemporal() {
+  const el = document.getElementById("chart-temporal");
+  if (!el) return;
+  const W = 800,
+    H = 440,
+    m = { t: 14, r: 214, b: 36, l: 54 };
+  const iw = W - m.l - m.r,
+    ih = H - m.t - m.b;
+  const idx = new Map(YEARS.map((y, i) => [y, i]));
+  const rows: any[] = YEARS.map((y) => {
+    const o: any = { year: y };
+    for (const rg of REGIONS) o[rg] = 0;
+    return o;
+  });
+  const govRows: any[] = YEARS.map(() => ({
+    Bilateral: 0,
+    Multilateral: 0,
+    Transnational: 0,
+  }));
+  for (const d of DATA) {
+    const y = yrInt(d);
+    if (y === null) continue;
+    const i = idx.get(clampYear(y))!;
+    if (REGIONS.includes(d.region)) rows[i][d.region]++;
+    if (GOVS.includes(d.governance)) govRows[i][d.governance]++;
+  }
+  for (let i = 1; i < YEARS.length; i++) {
+    for (const rg of REGIONS) rows[i][rg] += rows[i - 1][rg];
+    for (const gv of GOVS) govRows[i][gv] += govRows[i - 1][gv];
+  }
+  const x = d3.scaleBand<number>().domain(YEARS).range([0, iw]).padding(0.18);
+  const yMax =
+    d3.max(rows, (r) => REGIONS.reduce((s, rg) => s + r[rg], 0)) || 1;
+  const y = d3.scaleLinear().domain([0, yMax]).nice().range([ih, 0]);
+
+  const svg = d3
+    .select(el)
+    .append("svg")
+    .attr("viewBox", `0 0 ${W} ${H}`)
+    .attr("class", "chart");
+  const g = svg.append("g").attr("transform", `translate(${m.l},${m.t})`);
+  g.append("g")
+    .attr("transform", `translate(0,${ih})`)
+    .attr("class", "axis")
+    .call(
+      d3
+        .axisBottom(x)
+        .tickValues(YEARS.filter((yy) => yy % 5 === 0))
+        .tickSizeOuter(0),
+    );
+  g.append("g")
+    .attr("class", "axis")
+    .call(d3.axisLeft(y).ticks(4).tickSizeOuter(0));
+  svg
+    .append("text")
+    .attr("class", "axlabel")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -(m.t + ih / 2))
+    .attr("y", 14)
+    .attr("text-anchor", "middle")
+    .text("Cumulative number of initiatives");
+  const stacked = d3.stack().keys(REGIONS)(rows);
+  g.append("g")
+    .selectAll("g")
+    .data(stacked)
+    .join("g")
+    .attr("fill", (s: any) => regionColor(s.key))
+    .selectAll("rect")
+    .data((s: any) => s.map((p: any) => ({ p, key: s.key })))
+    .join("rect")
+    .attr("x", (d: any) => x(d.p.data.year)!)
+    .attr("width", x.bandwidth())
+    .attr("y", (d: any) => y(d.p[1]))
+    .attr("height", (d: any) => Math.max(0, y(d.p[0]) - y(d.p[1])))
+    .on("mousemove", (ev: any, d: any) =>
+      showTip(
+        ev,
+        `<b>${d.p.data.year} · ${d.key}</b>${d.p.data[d.key]} cumulative`,
+      ),
+    )
+    .on("mouseout", hideTip);
+  for (const gname of GOVS) {
+    const line = d3
+      .line<any>()
+      .x((_, i) => x(YEARS[i])! + x.bandwidth() / 2)
+      .y((v) => y(v[gname]));
+    g.append("path")
+      .datum(govRows)
+      .attr("fill", "none")
+      .attr("stroke", "var(--ink)")
+      .attr("stroke-width", 1.4)
+      .attr("d", line);
+    const sym = d3.symbol().type(govSymbol[gname]).size(14);
+    g.append("g")
+      .selectAll("path")
+      .data(govRows)
+      .join("path")
+      .attr("d", sym)
+      .attr("fill", "var(--ink)")
+      .attr(
+        "transform",
+        (v: any, i: number) =>
+          `translate(${x(YEARS[i])! + x.bandwidth() / 2},${y(v[gname])})`,
+      );
+  }
+  const lx = m.l + iw + 24;
+  const leg = svg.append("g").attr("transform", `translate(${lx},${m.t + 4})`);
+  leg.append("text").attr("class", "legtitle").text("Geographic scope");
+  REGIONS.forEach((rg, i) => {
+    const r = leg.append("g").attr("transform", `translate(0,${14 + i * 16})`);
+    r.append("rect")
+      .attr("width", 11)
+      .attr("height", 11)
+      .attr("fill", regionColor(rg));
+    r.append("text")
+      .attr("class", "legtext")
+      .attr("x", 16)
+      .attr("y", 9.5)
+      .text(rg);
+  });
+  const leg2 = svg
+    .append("g")
+    .attr(
+      "transform",
+      `translate(${lx},${m.t + 4 + 14 + REGIONS.length * 16 + 18})`,
+    );
+  leg2.append("text").attr("class", "legtitle").text("Governance level");
+  GOVS.forEach((gname, i) => {
+    const r = leg2.append("g").attr("transform", `translate(0,${14 + i * 16})`);
+    r.append("path")
+      .attr("d", d3.symbol().type(govSymbol[gname]).size(24))
+      .attr("transform", "translate(5,5)")
+      .attr("fill", "var(--ink)");
+    r.append("text")
+      .attr("class", "legtext")
+      .attr("x", 16)
+      .attr("y", 9.5)
+      .text(gname);
+  });
+}
+
+const TYPES = [
+  ["Information sharing and dialogues", "1- Information sharing and dialogues"],
+  ["Capacity-building and training", "2- Capacity-building and training"],
+  [
+    "Direction action and demonstration",
+    "3- Direction action and demonstration",
+  ],
+  ["Provision of funding", "4- Provision of funding"],
+  [
+    "Research and scientific knowledge production",
+    "5- Research and scientific knowledge production",
+  ],
+  [
+    "Rule-making and standard-setting initiatives",
+    "6- Rule-making and standard-setting initiatives",
+  ],
+];
+function renderHeatmap() {
+  const el = document.getElementById("chart-heatmap");
+  if (!el) return;
+  const W = 720,
+    H = 430,
+    m = { t: 16, r: 92, b: 54, l: 272 };
+  const iw = W - m.l - m.r,
+    ih = H - m.t - m.b;
+  const govTot: Record<string, number> = {};
+  for (const gv of GOVS)
+    govTot[gv] = DATA.filter((d) => d.governance === gv).length;
+  const share = (tv: string, gv: string) =>
+    govTot[gv]
+      ? DATA.filter((d) => d.governance === gv && d.type_primary === tv)
+          .length / govTot[gv]
+      : 0;
+  const x = d3.scaleBand<string>().domain(GOVS).range([0, iw]).padding(0.04);
+  const y = d3
+    .scaleBand<string>()
+    .domain(TYPES.map((t) => t[1]))
+    .range([ih, 0])
+    .padding(0.04);
+  const maxShare =
+    d3.max(TYPES, (t) => d3.max(GOVS, (gv) => share(t[0], gv))) || 0.4;
+  const col = d3.scaleSequential(d3.interpolateBlues).domain([0, maxShare]);
+
+  const svg = d3
+    .select(el)
+    .append("svg")
+    .attr("viewBox", `0 0 ${W} ${H}`)
+    .attr("class", "chart");
+  const g = svg.append("g").attr("transform", `translate(${m.l},${m.t})`);
+  for (const [tv, tl] of TYPES) {
+    for (const gv of GOVS) {
+      const s = share(tv, gv);
+      g.append("rect")
+        .attr("x", x(gv)!)
+        .attr("y", y(tl)!)
+        .attr("width", x.bandwidth())
+        .attr("height", y.bandwidth())
+        .attr("fill", col(s))
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 1.5)
+        .on("mousemove", (ev: any) =>
+          showTip(
+            ev,
+            `<b>${tl.replace(/^\d+- /, "")} · ${gv}</b>${(s * 100).toFixed(0)}% of ${gv.toLowerCase()}`,
+          ),
+        )
+        .on("mouseout", hideTip);
+    }
+  }
+  g.append("g")
+    .selectAll("text")
+    .data(TYPES)
+    .join("text")
+    .attr("class", "rowlbl")
+    .attr("x", -8)
+    .attr("y", (t: any) => y(t[1])! + y.bandwidth() / 2)
+    .attr("dy", ".32em")
+    .attr("text-anchor", "end")
+    .text((t: any) => t[1]);
+  g.append("g")
+    .selectAll("text")
+    .data(GOVS)
+    .join("text")
+    .attr("class", "collbl")
+    .attr("x", (gv: any) => x(gv)! + x.bandwidth() / 2)
+    .attr("y", ih + 18)
+    .attr("text-anchor", "middle")
+    .text((gv: any) => gv);
+  svg
+    .append("text")
+    .attr("class", "axlabel")
+    .attr("x", m.l + iw / 2)
+    .attr("y", H - 6)
+    .attr("text-anchor", "middle")
+    .text("Governance scale");
+  const lg = svg
+    .append("g")
+    .attr("transform", `translate(${m.l + iw + 26},${m.t})`);
+  lg.append("text").attr("class", "legtitle").attr("y", -4).text("Share");
+  const lh = ih - 18,
+    steps = 40;
+  const lscale = d3.scaleLinear().domain([0, maxShare]).range([lh, 0]);
+  for (let i = 0; i < steps; i++) {
+    lg.append("rect")
+      .attr("y", (lh * i) / steps)
+      .attr("width", 12)
+      .attr("height", lh / steps + 1)
+      .attr("fill", col(maxShare * (1 - i / steps)));
+  }
+  lg.append("g")
+    .attr("transform", "translate(12,0)")
+    .attr("class", "axis")
+    .call(d3.axisRight(lscale).ticks(4).tickFormat(d3.format(".0%")));
+}
+
+const PROBLEMS = [
+  ["Agriculture & Food security", "Agriculture & Food Security"],
+  ["Atmosphere", "Atmosphere"],
+  ["Biodiversity", "Biodiversity"],
+  ["", "Broad Problem"],
+  ["Chemicals & Wastes", "Chemicals & Wastes"],
+  ["Cities", "Cities"],
+  ["Climate change", "Climate Change"],
+  ["Disasters & Humanitarian Relief", "Disasters & Humanitarian Relief"],
+  ["Energy", "Energy"],
+  ["Forests", "Forests"],
+  ["Ocean & Coasts", "Ocean & Coasts"],
+  ["Water", "Water"],
+];
+const BAR_RAMP = d3.interpolateRgbBasis([
+  "#bcd0dd",
+  "#8aa7bd",
+  "#5b829f",
+  "#406383",
+  "#2b4a64",
+]);
+function renderProblems() {
+  const el = document.getElementById("chart-problems");
+  if (!el) return;
+  const views: [string, string | null][] = [
+    ["Overall", null],
+    ["Bilateral", "Bilateral"],
+    ["Multilateral", "Multilateral"],
+    ["Transnational", "Transnational"],
+  ];
+  const tally = (gov: string | null) => {
+    const sub = gov ? DATA.filter((d) => d.governance === gov) : DATA;
+    return PROBLEMS.map(([val, label]) => ({
+      label,
+      c: sub.filter((d) => (d.problem1 || "").trim() === val).length,
+    }));
+  };
+  const tabs = document.createElement("div");
+  tabs.className = "chart-tabs";
+  const holder = document.createElement("div");
+  el.append(tabs, holder);
+  const W = 760,
+    H = 400,
+    m = { t: 12, r: 14, b: 108, l: 40 };
+  const iw = W - m.l - m.r,
+    ih = H - m.t - m.b;
+  function draw(gov: string | null) {
+    holder.innerHTML = "";
+    const data = tally(gov);
+    const barColor = d3
+      .scaleSequential(BAR_RAMP)
+      .domain([0, d3.max(data, (d) => d.c) || 1]);
+    const x = d3
+      .scaleBand<string>()
+      .domain(data.map((d) => d.label))
+      .range([0, iw])
+      .padding(0.2);
+    const y = d3
+      .scaleLinear()
+      .domain([0, d3.max(data, (d) => d.c) || 1])
+      .nice()
+      .range([ih, 0]);
+    const svg = d3
+      .select(holder)
+      .append("svg")
+      .attr("viewBox", `0 0 ${W} ${H}`)
+      .attr("class", "chart");
+    const g = svg.append("g").attr("transform", `translate(${m.l},${m.t})`);
+    g.append("g")
+      .attr("transform", `translate(0,${ih})`)
+      .attr("class", "axis")
+      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .selectAll("text")
+      .attr("transform", "rotate(-40)")
+      .attr("text-anchor", "end")
+      .attr("dx", "-4")
+      .attr("dy", "6");
+    g.append("g")
+      .attr("class", "axis")
+      .call(d3.axisLeft(y).ticks(5).tickSizeOuter(0));
+    g.selectAll("rect.bar")
+      .data(data)
+      .join("rect")
+      .attr("class", "bar")
+      .attr("x", (d) => x(d.label)!)
+      .attr("width", x.bandwidth())
+      .attr("y", (d) => y(d.c))
+      .attr("height", (d) => ih - y(d.c))
+      .attr("fill", (d) => barColor(d.c))
+      .on("mousemove", (ev: any, d: any) =>
+        showTip(
+          ev,
+          `<b>${d.label}</b>${d.c} initiative${d.c !== 1 ? "s" : ""}`,
+        ),
+      )
+      .on("mouseout", hideTip);
+  }
+  views.forEach(([label, gov], i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = `chart-tab${i === 0 ? " on" : ""}`;
+    b.textContent = label;
+    b.addEventListener("click", () => {
+      for (const t of tabs.children) t.classList.remove("on");
+      b.classList.add("on");
+      draw(gov);
+    });
+    tabs.appendChild(b);
+  });
+  draw(null);
+}
+
+Promise.all([loadInitiatives(), loadGeo()]).then(([rows, geo]) => {
+  DATA = rows;
+  GEO = geo;
+  renderStatbar();
+  renderTemporal();
+  renderHeatmap();
+  renderProblems();
+  setTimeout(setupMap, 60);
+});
+</script>
