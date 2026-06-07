@@ -1,0 +1,643 @@
+---
+import {
+  Archive,
+  Award,
+  BookOpen,
+  Clapperboard,
+  Compass,
+  Database,
+  FileText,
+  Globe,
+  Library,
+  Megaphone,
+  Menu,
+  Newspaper,
+  PenLine,
+  Presentation,
+  Users,
+  X,
+} from "@lucide/astro";
+import {
+  contactLink,
+  homeLink,
+  type IconName,
+  navSections,
+} from "@/data/navigation";
+
+const logoWhite = "/logos/SGAIN_Logo_full_white.png";
+
+const currentPath = Astro.url.pathname.endsWith("/")
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+
+const normalize = (href: string) => (href.endsWith("/") ? href : `${href}/`);
+const isActive = (href: string) => currentPath === normalize(href);
+const sectionActive = (links: Array<{ href: string; external?: boolean }>) =>
+  links.some((link) => !link.external && isActive(link.href));
+
+const iconFor: Record<IconName, typeof Menu> = {
+  research: Compass,
+  database: Database,
+  team: Users,
+  partners: Globe,
+  advisory: Award,
+  publications: Library,
+  articles: BookOpen,
+  policy: FileText,
+  nonAcademic: Newspaper,
+  multimedia: Clapperboard,
+  news: Megaphone,
+  conference: Presentation,
+  archive: Archive,
+  blog: PenLine,
+};
+---
+
+<a class="skip-link" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-bar">
+    <a class="brand" href="/" aria-label="SGAIN Project home">
+      <img class="brand-logo" src={logoWhite} alt="SGAIN Project" />
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <Menu
+        class="nav-toggle-icon nav-toggle-open"
+        size={28}
+        aria-hidden="true"
+      />
+      <X
+        class="nav-toggle-icon nav-toggle-close"
+        size={28}
+        aria-hidden="true"
+      />
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a
+        href={homeLink.href}
+        class:list={["nav-link", isActive(homeLink.href) && "active"]}
+      >
+        {homeLink.label}
+      </a>
+
+      {
+        navSections.map((section) => (
+          <details
+            name="nav-section"
+            class:list={["nav-menu", sectionActive(section.links) && "active"]}
+          >
+            <summary>{section.label}</summary>
+            <div class="nav-panel">
+              <div class="nav-card">
+                <p class="nav-card-eyebrow">{section.label}</p>
+                {section.links.map((link) => {
+                  const Icon = iconFor[link.icon];
+                  return (
+                    <a
+                      href={link.href}
+                      class:list={["nav-row", isActive(link.href) && "active"]}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                    >
+                      <span class="nav-row-icon">
+                        <Icon size={18} aria-hidden="true" />
+                      </span>
+                      <span class="nav-row-text">
+                        <span class="nav-row-title">{link.label}</span>
+                        <span class="nav-row-desc">{link.description}</span>
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </details>
+        ))
+      }
+
+      <a
+        href={contactLink.href}
+        class:list={["nav-link", isActive(contactLink.href) && "active"]}
+      >
+        {contactLink.label}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLElement>(".nav-toggle");
+  const nav = document.getElementById("site-nav");
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const root = document.documentElement;
+  const body = document.body;
+
+  const isOpen = () => body.classList.contains("nav-open");
+
+  const setHeaderHeight = () => {
+    if (header) {
+      root.style.setProperty("--header-h", `${header.offsetHeight}px`);
+    }
+  };
+
+  window.addEventListener("scroll", () => {
+    header?.classList.toggle("scrolled", window.scrollY > 12);
+  });
+
+  const openMenu = () => {
+    body.classList.add("nav-open");
+    toggle?.setAttribute("aria-expanded", "true");
+    toggle?.setAttribute("aria-label", "Close menu");
+    nav?.querySelector<HTMLElement>("a, summary")?.focus();
+  };
+
+  const closeMenu = ({ focusToggle = false } = {}) => {
+    body.classList.remove("nav-open");
+    toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-label", "Open menu");
+    if (focusToggle) toggle?.focus();
+  };
+
+  toggle?.addEventListener("click", () => {
+    if (isOpen()) {
+      closeMenu({ focusToggle: true });
+    } else {
+      openMenu();
+    }
+  });
+
+  nav?.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement | null)?.closest("a")) closeMenu();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isOpen()) closeMenu({ focusToggle: true });
+  });
+
+  // Reset state when resizing up to the desktop breakpoint.
+  const desktop = window.matchMedia("(min-width: 981px)");
+  desktop.addEventListener("change", (event) => {
+    if (event.matches && isOpen()) closeMenu();
+  });
+
+  // Desktop: reveal dropdown cards on hover/focus. A closed <details> hides
+  // its content, so CSS :hover alone can't show the panel — we open the
+  // element instead. On touch/mobile the native click toggle drives the
+  // accordion, so we leave it untouched there.
+  const canHover = window.matchMedia("(hover: hover) and (min-width: 981px)");
+  const menus = document.querySelectorAll<HTMLDetailsElement>(".nav-menu");
+
+  menus.forEach((menu) => {
+    let closeTimer = 0;
+
+    const openCard = () => {
+      window.clearTimeout(closeTimer);
+      menu.open = true;
+    };
+    const scheduleClose = () => {
+      window.clearTimeout(closeTimer);
+      // Brief grace period so moving from the label into the card (or to a
+      // sibling) doesn't flicker the panel shut.
+      closeTimer = window.setTimeout(() => {
+        menu.open = false;
+      }, 120);
+    };
+
+    menu.addEventListener("pointerenter", () => {
+      if (canHover.matches) openCard();
+    });
+    menu.addEventListener("pointerleave", () => {
+      if (canHover.matches) scheduleClose();
+    });
+    menu.addEventListener("focusin", () => {
+      if (canHover.matches) openCard();
+    });
+    menu.addEventListener("focusout", (event) => {
+      if (canHover.matches && !menu.contains(event.relatedTarget as Node)) {
+        menu.open = false;
+      }
+    });
+    // On desktop the card is hover/focus driven, so a click on the summary
+    // shouldn't toggle it shut.
+    menu.querySelector("summary")?.addEventListener("click", (event) => {
+      if (canHover.matches) event.preventDefault();
+    });
+  });
+
+  // Collapse any hover-opened cards when crossing down to mobile.
+  canHover.addEventListener("change", (event) => {
+    if (!event.matches) {
+      menus.forEach((menu) => {
+        menu.open = false;
+      });
+    }
+  });
+
+  // Keep the overlay's top offset exactly under the sticky header.
+  let resizeFrame = 0;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(setHeaderHeight);
+  });
+
+  setHeaderHeight();
+</script>
+
+<style>
+  .skip-link {
+    position: fixed;
+    left: 16px;
+    top: 12px;
+    z-index: 20;
+    transform: translateY(-140%);
+    border: 1px solid var(--teal);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--teal-d);
+    padding: 8px 12px;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    background: var(--slate);
+    transition: box-shadow 0.3s var(--ease);
+  }
+
+  .site-header.scrolled {
+    box-shadow: 0 8px 30px -18px rgba(12, 34, 54, 0.45);
+  }
+
+  .site-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    max-width: 1220px;
+    min-height: 74px;
+    margin: 0 auto;
+    padding: 12px 28px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-width: 240px;
+    text-decoration: none;
+  }
+
+  .brand-logo {
+    width: auto;
+    height: 52px;
+    object-fit: contain;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .nav-link,
+  .nav-menu summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      background 0.2s,
+      border-color 0.2s;
+  }
+
+  .nav-link:hover,
+  .nav-menu:hover summary,
+  .nav-menu[open] summary,
+  .nav-menu:focus-within summary {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .nav-link.active,
+  .nav-menu.active summary {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-menu {
+    position: relative;
+  }
+
+  .nav-menu summary {
+    list-style: none;
+  }
+
+  .nav-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-menu summary::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-top: -2px;
+    margin-left: 8px;
+    border-bottom: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.25s var(--ease);
+  }
+
+  .nav-menu:hover summary::after,
+  .nav-menu[open] summary::after,
+  .nav-menu:focus-within summary::after {
+    transform: rotate(225deg);
+  }
+
+  /* Desktop hover card (mega-menu) */
+  .nav-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1;
+    /* Transparent bridge so the cursor can cross from summary to card
+       without the panel closing. */
+    padding-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition:
+      opacity 0.2s var(--ease),
+      transform 0.2s var(--ease),
+      visibility 0.2s;
+  }
+
+  .nav-menu:hover .nav-panel,
+  .nav-menu[open] .nav-panel,
+  .nav-menu:focus-within .nav-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-card {
+    width: max-content;
+    min-width: 320px;
+    max-width: 360px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    padding: 8px;
+  }
+
+  .nav-card-eyebrow {
+    margin: 0 0 4px;
+    padding: 6px 10px 8px;
+    border-bottom: 1px solid var(--line);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
+    padding: 9px 10px;
+    text-decoration: none;
+  }
+
+  .nav-row-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--paper2);
+    color: var(--teal);
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  .nav-row-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .nav-row-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+
+  .nav-row-desc {
+    margin-top: 2px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--muted);
+  }
+
+  .nav-row:hover,
+  .nav-row.active {
+    background: var(--paper2);
+  }
+
+  .nav-row:hover .nav-row-title,
+  .nav-row.active .nav-row-title {
+    color: var(--teal-d);
+  }
+
+  .nav-row:hover .nav-row-icon,
+  .nav-row.active .nav-row-icon {
+    background: var(--teal);
+    color: #fff;
+  }
+
+  .nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    margin: -3px -8px -3px 0;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .nav-toggle :global(.nav-toggle-close) {
+    display: none;
+  }
+
+  @media (max-width: 980px) {
+    .nav-toggle {
+      display: inline-flex;
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: var(--header-h, 80px) 0 0 0;
+      z-index: 5;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 4px;
+      padding: 12px 16px 32px;
+      background: var(--slate);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+    }
+
+    :global(body.nav-open) .site-nav {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+
+    :global(body.nav-open) {
+      overflow: hidden;
+    }
+
+    :global(body.nav-open) .nav-toggle :global(.nav-toggle-open) {
+      display: none;
+    }
+
+    :global(body.nav-open) .nav-toggle :global(.nav-toggle-close) {
+      display: block;
+    }
+
+    .nav-link,
+    .nav-menu summary {
+      width: 100%;
+      min-width: 0;
+      padding: 12px 10px;
+      font-size: 1rem;
+    }
+
+    .nav-menu {
+      position: static;
+    }
+
+    .nav-menu summary {
+      justify-content: space-between;
+    }
+
+    /* Flatten the hover card into an inline accordion panel. */
+    .nav-panel {
+      position: static;
+      display: none;
+      padding-top: 0;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: none;
+    }
+
+    .nav-menu[open] .nav-panel {
+      display: block;
+    }
+
+    .nav-card {
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      margin: 2px 0 6px;
+      border: 0;
+      border-radius: 12px;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px;
+    }
+
+    .nav-card-eyebrow,
+    .nav-row-desc {
+      display: none;
+    }
+
+    .nav-row-icon {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--paper);
+    }
+
+    .nav-row-title {
+      color: var(--paper);
+    }
+
+    .nav-row:hover,
+    .nav-row.active {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-row:hover .nav-row-title,
+    .nav-row.active .nav-row-title {
+      color: #fff;
+    }
+
+    .nav-row:hover .nav-row-icon,
+    .nav-row.active .nav-row-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .site-bar {
+      padding: 12px 16px;
+    }
+
+    .brand {
+      min-width: 0;
+    }
+
+    .brand-logo {
+      height: 44px;
+    }
+  }
+</style>

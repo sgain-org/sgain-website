@@ -1,0 +1,309 @@
+---
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const frontmatter = {
+  title: "SGAIN Project: Research | SGAIN Project",
+  description:
+    "Explore the SGAIN project, focusing on its rationale and methodology. Discover the three key research questions and our strategic approach to answering them effectively.",
+  oldUrl: "https://sgain.org/research",
+};
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/photo-1496568816309-51d7c20e3b21-533d875038.jpg"
+    title="Research"
+  />
+
+  <nav class="page-nav" aria-label="Research sections">
+    <div class="page-nav__inner">
+      <a href="/research/#rationale">Rationale</a>
+      <a href="/research/#research-questions">Research Questions</a>
+      <a href="/research/#methodology">Methodology</a>
+    </div>
+  </nav>
+
+  <Band id="rationale">
+    <SectionTitle as="h3" align="left"><strong>Rationale</strong></SectionTitle>
+    <div class="prose">
+      <p>
+        The rise of China as a global power is a defining feature of world
+        politics in the 21st century, but research on the impacts of a rising
+        China on global development remains at a very embryonic stage. As a
+        flagship foreign policy initiative of Beijing, the Belt and Road
+        Initiative (BRI) launched in 2013 has brought fundamental changes to
+        international development through large-scale infrastructure investments
+        in the Global South. While some see the BRI as a new and inclusive model
+        of international development cooperation, others point to significant
+        environmental risks associated with many China-funded projects. However,
+        due to the lack of primary data and local expertise, very little
+        research has carefully explored the sustainability impact of Chinese
+        investments on the ground and compare them across national and local
+        contexts.
+      </p>
+      <p>
+        At the same time, our world urgently needs transformative changes to
+        address ecological crises and achieve the Sustainable Development Goals,
+        especially in developing countries. As an emerging power, under what
+        conditions China&#39;s overseas engagement can support global
+        sustainable development has become an important question. Given
+        China&#39;s growing ambition and vital importance in global
+        environmental governance, it is also crucial to understand various
+        mechanisms through which Chinese actors pursue green investments in the
+        Global South, and the extent to which China&#39;s effort can benefit
+        host countries&#39; green development in the changing geopolitical
+        context.
+      </p>
+      <p>
+        SGAIN aims to fill these knowledge gaps by investigating sustainability
+        governance of China&#39;s global infrastructure investments, through
+        in-depth research across different host country contexts in the Global
+        South. We focus on Chinese investments in the energy and transportation
+        sectors, starting with three large developing countries in Asia -
+        Pakistan, Indonesia and Bangladesh, chosen due to the scale of Chinese
+        investments they have received, and the vital variation in their
+        domestic political economy. Our research will contribute to the debate
+        on the &#39;China model&#39; of international development and advance
+        understanding of China&#39;s role in global sustainability governance.
+        Following a transdisciplinary approach, we will actively engage with all
+        relevant stakeholders in our research process. Ultimately, we will use
+        our findings to help policy practitioners across the globe develop more
+        effective strategies to engage China for supporting global sustainable
+        development.
+      </p>
+    </div>
+  </Band>
+
+  <SectionDivider />
+
+  <Band id="research-questions">
+    <SectionTitle as="h3" align="left"
+      ><strong>Research Questions</strong></SectionTitle
+    >
+    <div class="prose">
+      <p>
+        The primary goal of SGAIN is to assess China&#39;s efforts to promote
+        green development through its overseas engagement and also investigate
+        the environmental and social impacts of Chinese infrastructure projects
+        in different host contexts. To do this, the project will address three
+        sets of research questions, which focus, respectively, on:
+      </p>
+      <p>
+        By answering these questions, SGAIN will identify the ways in which
+        Chinese investments reshape local politics and societies in different
+        host country contexts.
+      </p>
+    </div>
+    <div class="rq-grid">
+      <article class="rq-card">
+        <h6 class="rq-card__num">1</h6>
+        <h6 class="rq-card__title"><strong>Policy and Governance</strong></h6>
+        <p class="rq-card__desc">
+          Analysing the design and implementation of Chinese initiatives to
+          govern overseas investments for green development
+        </p>
+      </article>
+      <article class="rq-card">
+        <h6 class="rq-card__num">2</h6>
+        <h6 class="rq-card__title"><strong>Sustainability Impact</strong></h6>
+        <p class="rq-card__desc">
+          Examining on-the-ground environmental and social impacts of key
+          China-funded projects for different local stakeholders
+        </p>
+      </article>
+      <article class="rq-card">
+        <h6 class="rq-card__num">3</h6>
+        <h6 class="rq-card__title"><strong>Prospective measures</strong></h6>
+        <p class="rq-card__desc">
+          Identify future scenarios and possible measures able to align
+          international investments with local sustainability needs
+        </p>
+      </article>
+    </div>
+  </Band>
+
+  <SectionDivider />
+
+  <Band id="methodology">
+    <SectionTitle as="h3" align="left"
+      ><strong>Methodology</strong></SectionTitle
+    >
+    <div class="prose">
+      <p>
+        SGAIN takes an interdisciplinary approach by integrating theories and
+        methods from different social science disciplines including
+        international relations, political economy, development studies,
+        economics, sociology and geography. This is demonstrated by diverse
+        backgrounds of our <a href="/team/">team members</a>.
+      </p>
+      <p>
+        We will collect large amounts of primary data from various sources,
+        including interviews with practitioners representing key stakeholders,
+        nationally representative surveys in host countries, and key informant
+        interviews and focus groups with local communities. Our international
+        team allows us to conduct in-depth fieldwork in challenging contexts. We
+        will also apply cutting-edge social science methods including Natural
+        Language Processing, Qualitative Impact Protocol, and participatory
+        approaches to gather and analyse our data. Ultimately, SGAIN will
+        generate novel insights into the processes through which Chinese
+        investments support or hinder sustainable development in different host
+        contexts and offer timely policy recommendations on sustainable
+        infrastructure investments.
+      </p>
+      <p class="download-note">
+        <strong
+          >Download this <a
+            href="https://assets.zyrosite.com/mxB7zBBp2Bc866y1/sgain-flyer-AoPGjMD7j8Fwq3o2.pdf"
+            target="_blank"
+            rel="noopener noreferrer">flyer</a
+          > describing our research programme</strong
+        ><strong>.</strong>
+      </p>
+    </div>
+  </Band>
+</Layout>
+
+<style>
+  /* Section nav */
+  .page-nav {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  .page-nav__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 24px;
+  }
+
+  .page-nav a {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--teal-d);
+    padding: 0.5rem 0.95rem;
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .page-nav a:hover {
+    border-color: var(--teal-d);
+    background: var(--teal-d);
+    color: #fff;
+  }
+
+  /* Prose */
+  .prose > * + * {
+    margin-top: 1.05rem;
+  }
+
+  .prose p {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.13rem;
+    line-height: 1.62;
+  }
+
+  .prose a {
+    color: var(--teal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .prose a:hover {
+    color: var(--rust);
+  }
+
+  .prose strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .download-note {
+    margin-top: clamp(1.5rem, 4vw, 2rem);
+    border-left: 3px solid var(--teal);
+    background: var(--paper2);
+    padding: 1rem 1.25rem;
+  }
+
+  /* Research question cards */
+  .rq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+    align-items: start;
+  }
+
+  .rq-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--teal);
+    border-radius: 12px;
+    background: #fff;
+    padding: 1.25rem 1.35rem 1.4rem;
+    box-shadow: 0 6px 22px rgba(38, 51, 63, 0.06);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .rq-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+  }
+
+  .rq-card__num {
+    margin: 0;
+    color: var(--rust);
+    font-family: "Fraunces", serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .rq-card__title {
+    margin: 0.6rem 0 0;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .rq-card__title strong {
+    font-weight: 600;
+  }
+
+  .rq-card__desc {
+    margin: 0.6rem 0 0;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  @media (min-width: 760px) {
+    .rq-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

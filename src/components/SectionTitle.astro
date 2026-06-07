@@ -1,0 +1,43 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"h2"> & {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  align?: "center" | "left";
+};
+
+const {
+  as: Tag = "h2",
+  align = "center",
+  class: className,
+  ...rest
+} = Astro.props as Props;
+---
+
+<Tag class:list={["section-title", align, className]} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .section-title {
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-weight: 700;
+    line-height: 1.16;
+  }
+
+  .section-title.center {
+    margin: 0 0 2rem;
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+    text-align: center;
+  }
+
+  .section-title.left {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+  }
+
+  .section-title :global(strong) {
+    font-weight: 700;
+  }
+</style>

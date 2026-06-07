@@ -1,0 +1,172 @@
+---
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const frontmatter = {
+  title: "Articles and Book Chapters | SGAIN Project",
+  description:
+    "Read the most recent articles and book chapters from members of the SGAIN team in journals and books.",
+  oldUrl: "https://sgain.org/articles-and-book-chapters",
+};
+
+type Publication = {
+  type: "Article" | "Book chapter";
+  title: string;
+  slug: string;
+  citation: string;
+};
+
+const publications: Publication[] = [
+  {
+    type: "Article",
+    title:
+      "Dataset development in earth system governance: Learnings, stakes, and pathways for impact.",
+    slug: "dataset-development-in-earth-system-governance-learnings-stakes-and-pathways-for-impact",
+    citation:
+      "Morin, J.-F., Hollway, J., Sun, Y., Vadrot, A. B. M., Allan, J., Bernauer, T., Betsill, M. M., Brandi, C., Fast, C., Kim, R. E., Laurens, N., Lecavalier, E., McCracken, M., Mitchell, R. B., Morton, K., Orsini, A., Papin, M., Rowan, S., & Widerberg, O. E., 2026. Earth System Governance, 28, 100328",
+  },
+  {
+    type: "Article",
+    title:
+      "Varieties of Local Implementation for Net Zero in China: Evidence From Three Cities",
+    slug: "varieties-of-local-implementation-for-net-zero-in-china-evidence-from-three-cities",
+    citation:
+      "Guan, T., Gou, Z., and Sun, Y. 2026. Environmental Policy and Governance",
+  },
+  {
+    type: "Article",
+    title:
+      "Compound path dependence in green transitions: a comparative analysis of EV policy coordination in Indonesia and Thailand",
+    slug: "compound-path-dependence-in-green-transitions-a-comparative-analysis-of-ev-policy-coordination-in-indonesia-and-thailand",
+    citation:
+      "Ye, C., Xia, Y., Sun, Y., and Cashore, B., 2026. Policy Sciences",
+  },
+  {
+    type: "Book chapter",
+    title: "Climate governance in China: a multi-actor perspective",
+    slug: "climate-governance-in-china-a-multiactor-perspective",
+    citation:
+      "Ye, Y., and Sun, Y., 2026. in: Handbook of Research on Sustainability and Governance",
+  },
+  {
+    type: "Article",
+    title:
+      "Is goal-setting an effective strategy for global sustainability governance? Insights from the Sustainable Development Goals",
+    slug: "is-goalsetting-an-effective-strategy-for-global-sustainability-governance-insights-from-the-sustainable-development-goals",
+    citation:
+      "Hickmann, T., Senit, C.A., and Sun, Y., 2026. Earth System Governance, 27, 100309",
+  },
+  {
+    type: "Article",
+    title: "Global Environmental Politics amid Geopolitical Turbulence",
+    slug: "global-environmental-politics-amid-geopolitical-turbulence",
+    citation:
+      "Sun, Y., Clapp, J., Andonova, L., Dauvergne, P., Jayaram, D., Mbeva, K., Paterson, M., Wijaya, T., and Wu, F. 2026. Global Environmental Politics, 26(1)",
+  },
+  {
+    type: "Book chapter",
+    title: "Environmental governance in China",
+    slug: "environmental-governance-in-china",
+    citation: "Sun, Y., 2026. Elgar Encyclopedia of Business and Government",
+  },
+  {
+    type: "Article",
+    title:
+      "China Aspires to be an Environmental Leader: How Should the Rest of the World Engage?",
+    slug: "china-aspires-to-be-an-environmental-leader-how-should-the-rest-of-the-world-engage",
+    citation:
+      "Harlan, T., Sun, Y., Lu, J., DiCarlo, J., Goron, C., Li, Y., Liao, J. C., Mao, K., Rodenbiker, J., Seligsohn, D., Wang, A., Weins, N., & Zhu, A. L., 2025. Journal of Current Chinese Affairs",
+  },
+  {
+    type: "Article",
+    title: "Global climate governance remains resilient under Trump 2.0",
+    slug: "global-climate-governance-remains-resilient-under-trump-20",
+    citation:
+      "Sun, Y., and Yitong, Y., 2025. Global Public Policy and Governance, 5",
+  },
+  {
+    type: "Article",
+    title:
+      "Assessing climate ambition through policy outputs: a comparative measure of 35 major emitters",
+    slug: "assessing-climate-ambition-through-policy-outputs-a-comparative-measure-of-35-major-emitters",
+    citation: "Ye, Y., 2025. npj Climate Action, 4(75)",
+  },
+  {
+    type: "Book chapter",
+    title:
+      "Steering Political Conflicts for Climate Stability: The Case of China",
+    slug: "steering-political-conflicts-for-climate-stability-the-case-of-china",
+    citation:
+      "Sun, Y., Shen, W., Lewis, J.I, 2025. in: Stability and Politicization in Climate Governance.",
+  },
+  {
+    type: "Book chapter",
+    title:
+      "Essential Concepts for Implementing the Sustainable Development Goals: An A-Z Guide.",
+    slug: "essential-concepts-for-implementing-the-sustainable-development-goals-an-az-guide",
+    citation:
+      "Biermann, F., Hickmann, T., Kang, Y.H., Senit, C-A., & Sun, Y. (Eds)., 2025.",
+  },
+  {
+    type: "Article",
+    title:
+      "Unpacking China’s climate policy mixes shows a disconnect between policy density and intensity in the post-Paris era.",
+    slug: "unpacking-chinas-climate-policy-mixes-shows-a-disconnect-between-policy-density-and-intensity-in-the-postparis-era",
+    citation:
+      "Li, X., He, S., Gu, Y., & Sun, Y., 2025. npj Climate Action, 4(30)",
+  },
+];
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/photo-1528214968864-8dd00782fa9e-132b852a90.jpg"
+    title="Articles and Book Chapters"
+  />
+
+  <Band>
+    <p class="pub-lead">
+      Read the most recent publications from members of our team in journals and
+      books
+    </p>
+
+    <div class="pub-grid">
+      {
+        publications.map((publication) => (
+          <PublicationCard
+            meta={publication.type}
+            title={publication.title}
+            href={`/publications/${publication.slug}/`}
+            lines={[publication.citation]}
+          />
+        ))
+      }
+    </div>
+  </Band>
+</Layout>
+
+<style>
+  .pub-lead {
+    margin: 0 0 clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 70ch;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: start;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
