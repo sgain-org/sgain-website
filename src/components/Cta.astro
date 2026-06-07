@@ -1,0 +1,38 @@
+---
+type Props = {
+  as?: "a" | "span";
+  href?: string;
+  class?: string;
+};
+
+const { as = "a", href, class: className, ...rest } = Astro.props as Props;
+const Tag = as;
+---
+
+<Tag
+  class:list={["cta", className]}
+  href={as === "a" ? href : undefined}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .cta {
+    display: inline-flex;
+    border: 1px solid var(--teal);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--teal-d);
+    padding: 0.58rem 0.95rem;
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .cta:hover {
+    border-color: var(--rust);
+    color: var(--rust);
+  }
+</style>

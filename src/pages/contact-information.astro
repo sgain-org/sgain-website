@@ -1,0 +1,169 @@
+---
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import SocialLinks from "@/components/social/SocialLinks.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const frontmatter = {
+  title: "SGAIN: Contact Information | SGAIN Project",
+  description:
+    "Find all the contact information for the SGAIN Project here. Reach out via email for more project information, or follow our social media.",
+  oldUrl: "https://sgain.org/contact-information",
+};
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/photo-1718127581405-19e304c855b3-8ff00e8b38.jpg"
+    title="Contact Us"
+  />
+
+  <Band>
+    <div class="contact">
+      <h2 class="contact-title">Get in touch</h2>
+
+      <p class="contact-text">Follow SGAIN on social media.</p>
+      <div class="contact-social">
+        <SocialLinks size={28} />
+      </div>
+
+      <p class="contact-text">
+        Or email the team at <a href="mailto:sgain@bath.ac.uk"
+          >sgain@bath.ac.uk</a
+        >.
+      </p>
+    </div>
+  </Band>
+
+  <Band>
+    <div class="fellowship">
+      <h2 class="fellowship-title">Visiting Fellowship</h2>
+
+      <p class="fellowship-text">
+        Our fellowship programme is to support early career researchers (PhD
+        students) who want to work with our project team to conduct research (up
+        to six months) as visiting researchers at the University of Bath. Each
+        year, we will award a few fellows who will receive travel support for
+        their visit at Bath. If you are interested in joining this programme,
+        please submit an application or make inquiries at <a
+          href="mailto:sgain@bath.ac.uk">sgain@bath.ac.uk</a
+        >.
+      </p>
+
+      <p class="fellowship-text">The application must include:</p>
+      <ul class="fellowship-list">
+        <li>
+          A short research plan (up to 3 pages) with ideas for at least one
+          research article to be co-authored with our team
+        </li>
+        <li>
+          A cover letter explaining your motivation and how the fellowship can
+          support your career development
+        </li>
+        <li>Your latest CV</li>
+      </ul>
+
+      <p class="fellowship-text">
+        We evaluate applications on a recurring basis, but the approval of the
+        fellowship will follow the admin procedures at the University of Bath
+        and may take some time. We advise you to apply 6&ndash;9 months before
+        the planned start date of your visit.
+      </p>
+    </div>
+  </Band>
+</Layout>
+
+<style>
+  .contact {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-title {
+    margin: 0 0 1.5rem;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.16;
+  }
+
+  .contact-social {
+    display: flex;
+    justify-content: center;
+    margin: 1.25rem 0 2rem;
+    color: var(--teal-d);
+  }
+
+  .contact-text {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.13rem;
+    line-height: 1.62;
+  }
+
+  .contact-text a {
+    color: var(--teal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .contact-text a:hover {
+    color: var(--rust);
+  }
+
+  .fellowship {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .fellowship-title {
+    margin: 0 0 1.5rem;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.16;
+  }
+
+  .fellowship-text {
+    margin: 0 0 1.25rem;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.13rem;
+    line-height: 1.62;
+  }
+
+  .fellowship-text:last-child {
+    margin-bottom: 0;
+  }
+
+  .fellowship-text a {
+    color: var(--teal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .fellowship-text a:hover {
+    color: var(--rust);
+  }
+
+  .fellowship-list {
+    margin: 0 0 1.25rem;
+    padding-left: 1.25rem;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.13rem;
+    line-height: 1.62;
+  }
+
+  .fellowship-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .fellowship-list li:last-child {
+    margin-bottom: 0;
+  }
+</style>

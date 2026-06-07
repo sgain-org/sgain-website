@@ -1,0 +1,7 @@
+# dependencies
+node_modules
+
+# output
+migration
+robots.txt
+sitemap.xml

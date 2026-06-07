@@ -1,0 +1,214 @@
+---
+import { getCollection, render } from "astro:content";
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import Layout from "@/layouts/Layout.astro";
+import { toYearAnchor } from "@/lib/news";
+
+const frontmatter = {
+  title: "SGAIN: News and Events  | SGAIN Project",
+  description:
+    "Discover various events that our team members have attended, including workshops and conferences where we share our latest research and insights. Stay updated on our participation in key gatherings. ",
+  oldUrl: "https://sgain.org/news-and-events",
+};
+
+const currentYear = new Date().getFullYear();
+
+const allNews = await getCollection("news", ({ data }) => data.type === "news");
+
+const posts = await Promise.all(
+  allNews
+    .filter((entry) => entry.data.year === currentYear)
+    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+    .map(async (entry) => {
+      const { Content } = await render(entry);
+      return { entry, Content };
+    }),
+);
+
+const archivedYears = [
+  ...new Set(
+    allNews
+      .map((entry) => entry.data.year)
+      .filter((year): year is number => year !== undefined && year !== currentYear),
+  ),
+].sort((a, b) => b - a);
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/photo-1502252007251-fd6a4d508125-1d415067fd.jpg"
+    title="News & Events"
+  />
+
+  <Band prose class="news-intro">
+    <p class="news-lead">
+      <strong
+        >On this page we share updates about SGAIN, and various events attended
+        by our team members.</strong
+      >
+    </p>
+    {
+      archivedYears.length > 0 && (
+        <p class="news-archive">
+          For updates from previous years:{" "}
+          {archivedYears.map((year, index) => (
+            <>
+              {index > 0 && ", "}
+              <strong>
+                <a href={`/news/archive/#${toYearAnchor(year)}`}>{year}</a>
+              </strong>
+            </>
+          ))}
+        </p>
+      )
+    }
+  </Band>
+
+  <SectionDivider />
+
+  <Band prose class="news-feed">
+    {
+      posts.map(({ entry, Content }) => (
+        <article class="news-item">
+          <p class="news-item__date">
+            <strong>{entry.data.displayDate}</strong>
+          </p>
+          <h2 class="news-item__title">{entry.data.title}</h2>
+          <Content />
+        </article>
+      ))
+    }
+  </Band>
+</Layout>
+
+<style>
+  /* Intro */
+  .news-lead {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .news-lead strong {
+    font-weight: 600;
+  }
+
+  .news-archive {
+    margin: 1.4rem 0 0;
+    color: var(--muted);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  .news-archive strong {
+    font-weight: 400;
+  }
+
+  .news-archive a {
+    color: var(--teal);
+    font-weight: 700;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .news-archive a:hover {
+    color: var(--rust);
+  }
+
+  /* News feed */
+  .news-item + .news-item {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .news-item__date {
+    margin: 0;
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .news-item__date strong {
+    font-weight: 700;
+  }
+
+  .news-item__title {
+    margin: 0.5rem 0 0;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .news-item__title strong {
+    font-weight: 700;
+  }
+
+  :global(.news-text) {
+    margin: 1.1rem 0 0;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.08rem;
+    line-height: 1.62;
+  }
+
+  :global(.news-text a) {
+    color: var(--teal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  :global(.news-text a:hover) {
+    color: var(--rust);
+  }
+
+  :global(.news-text strong) {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* Image galleries */
+  :global(.news-gallery) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 0.85rem;
+    margin-top: 1.4rem;
+  }
+
+  :global(.news-gallery figure) {
+    margin: 0;
+  }
+
+  :global(.news-gallery img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+
+  :global(.news-figure) {
+    margin: 1.4rem 0 0;
+  }
+
+  :global(.news-figure img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+</style>
