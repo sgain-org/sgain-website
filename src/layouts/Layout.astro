@@ -1,19 +1,83 @@
 ---
 import "../styles/styles.css";
 
-interface Props {
-  title: string;
-  description: string;
+interface Frontmatter {
+  title?: string;
+  description?: string;
   image?: string;
+  oldUrl?: string;
 }
 
-const { title, description, image } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  frontmatter?: Frontmatter;
+}
 
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = image ? new URL(image, Astro.site) : undefined;
+const {
+  frontmatter = {},
+  title: propTitle,
+  description: propDescription,
+  image: propImage,
+} = Astro.props as Props;
 
-const path = Astro.url.pathname;
-const isActive = (href: string) => path === href;
+const title = propTitle ?? frontmatter.title ?? "SGAIN Project";
+const description =
+  propDescription ??
+  frontmatter.description ??
+  "Sustainability Governance of China's Global Infrastructure Investments, a UKRI Future Leaders Fellowship project at the University of Bath.";
+const image = propImage ?? frontmatter.image;
+
+const site = Astro.site ?? new URL("https://sgain.org");
+const canonical = new URL(Astro.url.pathname, site).toString();
+const ogImage = image ? new URL(image, site).toString() : undefined;
+
+const currentPath = Astro.url.pathname.endsWith("/")
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+
+const normalize = (href: string) => (href.endsWith("/") ? href : `${href}/`);
+const isActive = (href: string) => currentPath === normalize(href);
+
+const navSections = [
+  {
+    label: "Research",
+    links: [
+      { href: "/research/", label: "Research" },
+      { href: "/cgel-database/", label: "CGEL Database" },
+    ],
+  },
+  {
+    label: "Publications",
+    links: [
+      { href: "/publications/", label: "Publications" },
+      {
+        href: "/news/academic-publications/",
+        label: "Academic Publications and Policy Reports",
+      },
+      {
+        href: "/non-academic-publications/",
+        label: "Non-Academic Publications",
+      },
+      { href: "/multimedia/", label: "Multimedia" },
+    ],
+  },
+  {
+    label: "News & Events",
+    links: [
+      { href: "/news/", label: "News & Events" },
+      {
+        href: "/news/bath-conference-on-china-and-global-sustainability-transition/",
+        label: "Bath Conference",
+      },
+      { href: "/news/archive/", label: "Archive" },
+      { href: "/blog/", label: "Blog" },
+    ],
+  },
+];
+
+const sectionActive = (links: Array<{ href: string }>) => links.some((link) => isActive(link.href));
 ---
 
 <!doctype html>
@@ -25,59 +89,111 @@ const isActive = (href: string) => path === href;
     <meta name="description" content={description}>
     <link rel="canonical" href={canonical}>
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="CGEL Database">
+    <meta property="og:site_name" content="SGAIN Project">
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:url" content={canonical}>
     {ogImage && <meta property="og:image" content={ogImage} />}
 
-    <!-- Twitter -->
-    <meta
-      name="twitter:card"
-      content={ogImage ? "summary_large_image" : "summary"}
-    >
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"}>
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spline+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     >
   </head>
   <body>
-    <nav>
-      <div class="wrap">
-        <div class="logo"><span class="mark"></span>CGEL Database</div>
-        <div class="navlinks">
-          <a href="/" class={isActive("/") ? "active" : ""}>Overview</a>
-          <a href="/browse/" class={isActive("/browse/") ? "active" : ""}
-            >Browse</a
-          >
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-bar">
+        <a class="brand" href="/" aria-label="SGAIN Project home">
+          <span class="brand-mark">SGAIN</span>
+          <span class="brand-copy">
+            <strong>SGAIN Project</strong>
+            <span>Sustainability governance research</span>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="/" class:list={["nav-link", isActive("/") && "active"]}>Home</a>
+
+          {navSections.slice(0, 1).map((section) => (
+            <details class:list={["nav-menu", sectionActive(section.links) && "active"]}>
+              <summary>{section.label}</summary>
+              <div class="nav-panel">
+                {section.links.map((link) => (
+                  <a href={link.href} class:list={[isActive(link.href) && "active"]}>
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </details>
+          ))}
+
+          <a href="/team/" class:list={["nav-link", isActive("/team/") && "active"]}>Team</a>
+          <a href="/network/" class:list={["nav-link", isActive("/network/") && "active"]}>
+            Network
+          </a>
+
+          {navSections.slice(1).map((section) => (
+            <details class:list={["nav-menu", sectionActive(section.links) && "active"]}>
+              <summary>{section.label}</summary>
+              <div class="nav-panel">
+                {section.links.map((link) => (
+                  <a href={link.href} class:list={[isActive(link.href) && "active"]}>
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </details>
+          ))}
+
           <a
-            href="/methodology/"
-            class={isActive("/methodology/") ? "active" : ""}
-            >Methodology</a
+            href="/contact-information/"
+            class:list={["nav-link", isActive("/contact-information/") && "active"]}
           >
-          <a href="/about/" class={isActive("/about/") ? "active" : ""}
-            >About &amp; Cite</a
-          >
-        </div>
+            Contact
+          </a>
+        </nav>
       </div>
-    </nav>
+    </header>
 
-    <slot />
+    <main id="content" class="site-main">
+      <article class="content-shell markdown-content">
+        <slot />
+      </article>
+    </main>
 
-    <footer>
-      <div class="wrap">
+    <footer class="site-footer">
+      <div class="footer-grid">
         <div>
-          <strong class="serif" style="font-size:16px">CGEL Database</strong>
-          <br>China's Global Environmental Leadership
+          <div class="footer-brand">SGAIN Project</div>
+          <p>
+            Sustainability Governance of China's Global Infrastructure Investments, University of
+            Bath.
+          </p>
         </div>
         <div>
-          A SGAIN project · University of Bath · Funded by UKRI<br>sgain@bath.ac.uk
+          <h2>Contact</h2>
+          <p>
+            <a href="mailto:sgain@bath.ac.uk">sgain@bath.ac.uk</a><br>
+            University of Bath, Claverton Down, BA2 7AY
+          </p>
+        </div>
+        <div>
+          <h2>Follow</h2>
+          <p class="social-links">
+            <a href="https://x.com/sgain_project">X</a>
+            <a href="https://www.linkedin.com/company/sgain/?viewAsMember=true">LinkedIn</a>
+            <a href="https://bsky.app/profile/sgain.bsky.social">Bluesky</a>
+          </p>
         </div>
       </div>
     </footer>

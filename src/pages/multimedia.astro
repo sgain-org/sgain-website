@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const frontmatter = {
+  title: "Multimedia | SGAIN Project",
+  description: "",
+  oldUrl: "https://sgain.org/multimedia",
+};
+const content =
+  '<p><img src="https://images.unsplash.com/photo-1528214968864-8dd00782fa9e?auto=format&fit=crop&w=1920" alt="aerial view photography of mountains"></p>\n<h1><strong>Multimedia</strong></h1>\n<h4>Insights from the 2025 Bath Conference</h4>\n<p><img src="https://i.vimeocdn.com/video/2122631576-64d02201ed935027a03a31955962fdbe166b1133eefd8e149c7da9bbeed3742a-d_720?region=us" alt=""></p>\n<h6><strong>Challenges &amp; Next Steps for China’s Sustainability Leadership</strong></h6>\n<p>China is reshaping the global sustainability landscape. From clean energy technology to global governance, its actions influence the world’s transition in multiple ways. At our conference, global experts shared their perspectives on China’s evolving role</p>\n<h6><strong>China’s Evolving Role in Global Sustainability Transition</strong></h6>\n<p>As China’s role in global sustainability grows, experts highlight a range of challenges that may influence its future direction. These include domestic policy considerations, sectoral transitions, and evolving international dynamics. In this video, we explore how these factors shape China’s potential next steps in sustainability leadership.</p>\n<h6><strong>China’s Global Partnerships for Sustainability</strong></h6>\n<p>China’s global role is reflected in its expanding partnerships across world regions, particularly in the Global South. These partnerships vary widely - shaped by local priorities, development needs, and environmental goals. In this video, experts share regional perspectives on China’s contributions and expectations for future collaboration.</p>\n<h4>Interviews</h4>\n<h6><strong>COP30 Key Takeaways</strong></h6>\n<p>The University of Bath interviewed PI Dr Yixian Sun after he returned from COP30 to discuss key takeaways that could shape the future of sustainability.</p>\n<h6><strong>The China Pivot: What will Beijing’s climate leadership look like?</strong></h6>\n<p>The Outrage and Optimism podcast featured project PI Dr. Yixian Sun for the 348th episode, to dicusss China&#39;s vision of leadership, its evolving role in the Global South, and the risks and opportunities of an increasingly multipolar climate order.</p>\n<h6><strong>Can China Lead the World on Climate Change?</strong></h6>\n<p>Mapping Global China Conversations hosts project PI Dr. Yixian Sun and Dr. Yifei Li, asking them about China’s evolving role in environmental governance, its efforts to green the Belt and Road Initiative (BRI), and the competing narratives of soft power and coercion in its global environmental strategy.</p>\n<p><img src="https://i.ytimg.com/vi/br2w5eeqzD8/hqdefault.jpg" alt=""></p>';
+---
+
+<Layout frontmatter={frontmatter}>
+  <Fragment set:html={content} />
+</Layout>

@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const frontmatter = {
+  title: "SGAIN: Blogs | SGAIN Project",
+  description:
+    "Explore our blogs, a place for our team members to share thier insights and experiences, covering academic conferences, overseas trips, and global field research. ",
+  oldUrl: "https://sgain.org/blogs",
+};
+const intro =
+  '<p><img src="https://images.unsplash.com/photo-1502252007251-fd6a4d508125?auto=format&fit=crop&w=1920" alt="body of water surrounded by orange trees"></p>\n<h1><strong>Blogs</strong></h1>\n<h3>A space for our community to share thoughts and reflections</h3>';
+const posts = (await getCollection("blog")).sort((a, b) => b.data.date.localeCompare(a.data.date));
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(`${value}T00:00:00`));
+---
+
+<Layout frontmatter={frontmatter}>
+  <Fragment set:html={intro} />
+
+  <section class="content-list" aria-label="Blog posts">
+    {posts.map((post) => (
+      <article class="publication-card">
+        <p class="publication-card__meta">Blog</p>
+        <h3>
+          <a href={`/blog/${post.id.replace(/\.md$/, "")}/`}>{post.data.title}</a>
+        </h3>
+        <p>{post.data.author}</p>
+        <p>
+          <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+          {post.data.readingTime && <> · {post.data.readingTime}</>}
+        </p>
+      </article>
+    ))}
+  </section>
+</Layout>

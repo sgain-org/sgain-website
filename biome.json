@@ -10,6 +10,7 @@
       "**/*",
       "!**/.astro",
       "!**/dist",
+      "!**/extract",
       "!**/node_modules",
       "!**/resources"
     ],
@@ -19,7 +20,8 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineEnding": "lf"
+    "lineEnding": "lf",
+    "lineWidth": 100
   },
   "linter": {
     "enabled": true,
@@ -37,10 +39,7 @@
     }
   },
   "html": {
-    "experimentalFullSupportEnabled": true,
-    "formatter": {
-      "enabled": true
-    }
+    "experimentalFullSupportEnabled": true
   },
   "assist": {
     "enabled": true,

@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const frontmatter = {
+  title: "SGAIN: Contact Information | SGAIN Project",
+  description:
+    "Find all the contact information for the SGAIN Project here. Submit your questions using our form, reach out via email for more project information, or follow our social media.",
+  oldUrl: "https://sgain.org/contact-information",
+};
+const content =
+  '<p><img src="https://images.unsplash.com/photo-1718127581405-19e304c855b3?auto=format&fit=crop&w=1920" alt="a body of water with waves coming in and out of it"></p>\n<h1><strong>Contact Us</strong></h1>\n<p><a href="https://www.linkedin.com/company/sgain/?viewAsMember=true" title="Go to Linkedin-in page"></a><a href="https://bsky.app/profile/sgain.bsky.social" title="Go to Bluesky page"></a><a href="https://x.com/sgain_project" title="Go to Twitter page"></a></p>\n<p><a href="https://www.linkedin.com/company/sgain/?viewAsMember=true">Social Media</a></p>\n<p><a href="mailto:sgain@bath.ac.uk">Email</a></p>\n<p><a href="mailto:sgain@bath.ac.uk" title="Go to Mail page"></a></p>\n<p><a href="/contact-us#contact-us">Send a Message</a></p>\n<p>First Name*</p>\n<p>Last Name*</p>\n<p>Contact*</p>\n<p>Message*</p>\n<p>Submit</p>';
+---
+
+<Layout frontmatter={frontmatter}>
+  <Fragment set:html={content} />
+</Layout>
