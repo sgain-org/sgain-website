@@ -1,0 +1,62 @@
+---
+type Props = {
+  href: string;
+  label: string;
+  title?: string;
+};
+
+const { href, label, title = `Go to ${label} page` } = Astro.props as Props;
+---
+
+<a
+  class="social-link"
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={label}
+  title={title}
+>
+  <slot />
+  <span class="sr-only">{label}</span>
+</a>
+
+<style>
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    color: inherit;
+    line-height: 0;
+    text-decoration: none;
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .social-link:hover,
+  .social-link:focus-visible {
+    opacity: 0.82;
+    transform: translateY(-1px);
+  }
+
+  .social-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

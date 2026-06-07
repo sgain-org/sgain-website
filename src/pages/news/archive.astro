@@ -1,0 +1,115 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import Prose from "@/components/Prose.astro";
+import Layout from "@/layouts/Layout.astro";
+import { toYearAnchor } from "@/lib/news";
+
+const frontmatter = {
+  title: "Archive | SGAIN Project",
+  description:
+    "Archived SGAIN news, events, and project updates from previous years.",
+  oldUrl: "https://sgain.org/archive",
+};
+
+const currentYear = new Date().getFullYear();
+
+type RenderedArchiveEntry = {
+  entry: CollectionEntry<"news">;
+  RenderedContent: Awaited<ReturnType<typeof render>>["Content"];
+};
+
+const archiveEntries = await Promise.all(
+  (
+    await getCollection(
+      "news",
+      ({ data }) =>
+        data.type === "news" &&
+        data.year !== undefined &&
+        data.year !== currentYear,
+    )
+  )
+    .sort(
+      (a, b) =>
+        (b.data.year ?? 0) - (a.data.year ?? 0) ||
+        (a.data.order ?? 0) - (b.data.order ?? 0),
+    )
+    .map(async (entry) => {
+      const { Content: RenderedContent } = await render(entry);
+      return { entry, RenderedContent } satisfies RenderedArchiveEntry;
+    }),
+);
+
+const archiveGroups = archiveEntries.reduce<
+  Array<{
+    year: number;
+    entries: RenderedArchiveEntry[];
+  }>
+>((groups, entry) => {
+  const year = entry.entry.data.year;
+  if (!year) {
+    return groups;
+  }
+  const existingGroup = groups.find((group) => group.year === year);
+  if (existingGroup) {
+    existingGroup.entries.push(entry);
+    return groups;
+  }
+  groups.push({ year, entries: [entry] });
+  return groups;
+}, []);
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/photo-1502252007251-fd6a4d508125-1d415067fd.jpg"
+    title="Archive"
+  >
+    <p>
+      On this page you can find updates about SGAIN, and various events attended
+      by our team members from previous years
+    </p>
+  </Hero>
+
+  <Band>
+    <Prose>
+      {
+        archiveGroups.length > 0 && (
+          <>
+            <p>
+              {archiveGroups.map((group, index) => (
+                <>
+                  {index > 0 && ", "}
+                  <strong>
+                    <a href={`#${toYearAnchor(group.year)}`}>{group.year}</a>
+                  </strong>
+                </>
+              ))}
+            </p>
+
+            {archiveGroups.map((group) => (
+              <section aria-labelledby={toYearAnchor(group.year)}>
+                <h2 id={toYearAnchor(group.year)}>{group.year}</h2>
+
+                {group.entries.map(({ entry, RenderedContent }) => (
+                  <article>
+                    <h3>
+                      <a href={`/news/${entry.id.replace(/\.md$/, "")}/`}>
+                        {entry.data.title}
+                      </a>
+                    </h3>
+                    {entry.data.displayDate && (
+                      <p class="post-meta">{entry.data.displayDate}</p>
+                    )}
+                    <RenderedContent />
+                  </article>
+                ))}
+              </section>
+            ))}
+          </>
+        )
+      }
+    </Prose>
+  </Band>
+</Layout>

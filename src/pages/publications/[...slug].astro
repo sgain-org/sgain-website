@@ -1,0 +1,30 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { toPageTitle } from "@/lib/page";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("publications");
+  return pages.map((page) => ({
+    params: { slug: page.id.replace(/\.md$/, "") },
+    props: { page },
+  }));
+}
+
+type Props = {
+  page: CollectionEntry<"publications">;
+};
+
+const { page } = Astro.props as Props;
+const { Content } = await render(page);
+
+const frontmatter = {
+  title: toPageTitle(page.data.title),
+  description: page.data.description,
+  oldUrl: page.data.oldUrl,
+};
+---
+
+<Layout frontmatter={frontmatter}>
+  <Content />
+</Layout>

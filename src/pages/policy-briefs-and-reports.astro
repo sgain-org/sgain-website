@@ -1,0 +1,101 @@
+---
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const frontmatter = {
+  title: "Policy Briefs and Reports | SGAIN Project",
+  description:
+    "All publications in the SGAIN policy brief and report series are open access and shared here on our website.",
+  oldUrl: "https://sgain.org/policy-briefs-and-reports",
+};
+
+type Report = {
+  meta: string;
+  title: string;
+  slug: string;
+  lines: string[];
+};
+
+const reports: Report[] = [
+  {
+    meta: "Most recent policy report",
+    title: "China and Global Sustainability Transition Outlook 2025",
+    slug: "china-and-global-sustainability-transition-outlook-2025",
+    lines: [
+      "China’s emerging leadership in global sustainability governance amid geopolitical turbulence.",
+      "Sun, Y., Chant, F., O’Brien, C., Ye, Y., Li, J., Gu, Y., & Xiao, Y.",
+      "12/30/2025",
+    ],
+  },
+  {
+    meta: "Policy report",
+    title:
+      "From Solar Boom to Green Industrialization: Policy Pathways to Localizing Solar Value Chains in Pakistan",
+    slug: "from-solar-boom-to-green-industrialization-policy-pathways-to-localizing-solar-value-chains-in-pakistan",
+    lines: [
+      "Sustainable Development Policy Institute (SDPI) and SGAIN",
+      "11/14/2025",
+    ],
+  },
+  {
+    meta: "Policy report",
+    title:
+      "Towards a Just Transition: Integrating Fair Share, Equity and Justice into Climate Transition Plans",
+    slug: "towards-a-just-transition-integrating-fair-share-equity-and-justice-into-climate-transition-plans",
+    lines: ["Race to Zero Working Group Report", "11/3/2025"],
+  },
+];
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/photo-1528214968864-8dd00782fa9e-132b852a90.jpg"
+    title="Policy Briefs and Reports"
+  />
+
+  <Band>
+    <p class="pub-lead">
+      All publications in our policy brief and report series are open access and
+      shared here on our website.
+    </p>
+
+    <div class="pub-grid">
+      {
+        reports.map((report) => (
+          <PublicationCard
+            meta={report.meta}
+            title={report.title}
+            href={`/publications/${report.slug}/`}
+            lines={report.lines}
+          />
+        ))
+      }
+    </div>
+  </Band>
+</Layout>
+
+<style>
+  .pub-lead {
+    margin: 0 0 clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 70ch;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: start;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
