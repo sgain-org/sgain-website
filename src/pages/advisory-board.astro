@@ -1,0 +1,39 @@
+---
+import Hero from "@/components/Hero.astro";
+import TeamSection from "@/components/TeamSection.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  loadTeamMembers,
+  selectMembers,
+  type TeamSectionData,
+  withMembers,
+} from "@/lib/team";
+
+const frontmatter = {
+  title: "SGAIN: Advisory Board | SGAIN Project",
+  description:
+    "Meet the distinguished advisors guiding the SGAIN project across sustainability governance, climate policy and global development.",
+  oldUrl: "https://sgain.org/advisory-board",
+};
+
+const teamMembers = await loadTeamMembers();
+
+const section: TeamSectionData = {
+  id: "advisory-board",
+  groups: withMembers([
+    {
+      id: "advisory-board-members",
+      members: selectMembers(teamMembers, "advisory"),
+    },
+  ]),
+};
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/shared/site-hero.jpg"
+    title="Advisory Board"
+  />
+
+  <TeamSection section={section} />
+</Layout>

@@ -1,0 +1,34 @@
+---
+import { redirects } from "@/lib/redirects";
+
+export function getStaticPaths() {
+  return redirects.map(({ from, to }) => ({
+    params: { redirect: from },
+    props: { from, to },
+  }));
+}
+
+const { from, to } = Astro.props;
+const site = Astro.site ?? new URL("https://sgain.org");
+const canonical = new URL(to, site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <link rel="canonical" href={canonical} />
+    <title>Redirecting | SGAIN Project</title>
+    <script is:inline define:vars={{ to }}>
+      window.location.replace(to);
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>Redirecting</h1>
+      <p>The page <code>/{from}/</code> has moved to <a href={to}>{to}</a>.</p>
+    </main>
+  </body>
+</html>

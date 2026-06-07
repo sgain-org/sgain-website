@@ -1,0 +1,49 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { entrySlug } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: entrySlug(post.id) },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+const frontmatter = {
+  title: `${post.data.title} | SGAIN Project`,
+  description: post.data.description,
+  image: post.data.heroImage,
+  oldUrl: post.data.oldUrl,
+};
+const formattedDate = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${post.data.date}T00:00:00`));
+---
+
+<Layout frontmatter={frontmatter}>
+  <h1>{post.data.title}</h1>
+  <p class="post-meta">
+    {post.data.author}
+    <br />
+    <time datetime={post.data.date}>{formattedDate}</time>
+    {post.data.readingTime && <> · {post.data.readingTime}</>}
+  </p>
+  {
+    post.data.heroImage && (
+      <p>
+        <img src={post.data.heroImage} alt="" />
+      </p>
+    )
+  }
+  <Content />
+</Layout>

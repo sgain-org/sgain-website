@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { entrySlug } from "@/lib/content";
+import { toDisplayTitle } from "@/lib/page";
+
+const frontmatter = {
+  title: "Policy Briefs and Reports | SGAIN Project",
+  description:
+    "All publications in the SGAIN policy brief and report series are open access and shared here on our website.",
+  oldUrl: "https://sgain.org/policy-briefs-and-reports",
+};
+
+const reports = (await getCollection("publications"))
+  .filter((entry) => entry.data.category === "policy-report")
+  .sort(
+    (a, b) =>
+      (a.data.order ?? Number.POSITIVE_INFINITY) -
+      (b.data.order ?? Number.POSITIVE_INFINITY),
+  );
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/shared/publications-hero.jpg"
+    title="Policy Briefs and Reports"
+  />
+
+  <Band>
+    <p class="pub-lead">
+      All publications in our policy brief and report series are open access and
+      shared here on our website.
+    </p>
+
+    <div class="pub-grid">
+      {
+        reports.map((report, index) => (
+          <PublicationCard
+            meta={index === 0 ? "Most recent policy report" : "Policy report"}
+            title={toDisplayTitle(report.data.title)}
+            href={`/publications/${entrySlug(report.id)}/`}
+            lines={[
+              report.data.summary,
+              report.data.citation,
+              report.data.displayDate,
+            ].filter((line): line is string => Boolean(line))}
+            image={report.data.image}
+            imageAlt={report.data.imageAlt}
+          />
+        ))
+      }
+    </div>
+  </Band>
+</Layout>
+
+<style>
+  .pub-lead {
+    margin: 0 0 clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 70ch;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: stretch;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

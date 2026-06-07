@@ -1,0 +1,269 @@
+---
+import Band from "@/components/Band.astro";
+import type { TeamSectionData } from "@/lib/team";
+
+type Props = {
+  section: TeamSectionData;
+};
+
+const { section } = Astro.props as Props;
+const headingId = section.title ? `${section.id}-heading` : undefined;
+---
+
+<Band
+  id={section.id}
+  class="team-section"
+  aria-labelledby={headingId}
+>
+  {
+    (section.title || section.asset) && (
+      <div class="team-section__header">
+        {section.title && (
+          <h3 id={headingId}>
+            <strong>{section.title}</strong>
+          </h3>
+        )}
+        {section.asset && (
+          <img class="team-logo" src={section.asset.src} alt={section.asset.alt} />
+        )}
+      </div>
+    )
+  }
+
+  {
+    section.groups.map((group) => (
+      <div class="team-group">
+        {(group.title || group.asset) && (
+          <div class="team-group__header">
+            {group.title && (
+              <h4>
+                <strong>{group.title}</strong>
+              </h4>
+            )}
+            {group.asset && (
+              <img class="team-logo" src={group.asset.src} alt={group.asset.alt} />
+            )}
+          </div>
+        )}
+
+        <div class="team-grid">
+          {group.members.map(({ Content, data }) => (
+            <article class="team-card">
+              {data.image && (
+                <div class="team-card__image-wrap">
+                  <img
+                    class="team-card__image"
+                    src={data.image}
+                    alt={`Portrait of ${data.name}`}
+                  />
+                </div>
+              )}
+
+              <div class="team-card__text">
+                <h5 class="team-card__name">
+                  {data.profileUrl ? (
+                    <a
+                      href={data.profileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {data.name}
+                    </a>
+                  ) : (
+                    data.name
+                  )}
+                </h5>
+
+                {data.role && <p class="team-card__role">{data.role}</p>}
+
+                <div class="team-card__body">
+                  <Content />
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</Band>
+
+<style>
+  /* Band renders the element, so reach it globally by its passed-through class. */
+  :global(.team-section) {
+    scroll-margin-top: 100px;
+  }
+
+  /* Section + group headers */
+  .team-section__header,
+  .team-group__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem 1.5rem;
+  }
+
+  .team-section__header {
+    margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  .team-section h3 {
+    margin: 0;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.16;
+  }
+
+  .team-group + .team-group {
+    margin-top: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  .team-group__header {
+    margin-bottom: 1.25rem;
+  }
+
+  .team-group h4 {
+    margin: 0;
+    color: var(--slate);
+    font-family: "Fraunces", serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .team-logo {
+    height: 42px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+  }
+
+  /* Member grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.25rem, 3vw, 1.85rem);
+    align-items: stretch;
+  }
+
+  /* Member card */
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 6px 22px rgba(38, 51, 63, 0.06);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .team-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+  }
+
+  .team-card__image-wrap {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--paper2);
+  }
+
+  .team-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.4s ease;
+  }
+
+  .team-card:hover .team-card__image {
+    transform: scale(1.04);
+  }
+
+  .team-card__text {
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem 1.25rem 1.35rem;
+  }
+
+  .team-card__name {
+    margin: 0;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .team-card__name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .team-card__name a:hover {
+    color: var(--rust);
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+  }
+
+  .team-card__role {
+    margin: 0.45rem 0 0;
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .team-card__body {
+    margin-top: 0.85rem;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .team-card__body:empty {
+    display: none;
+  }
+
+  .team-card__body :global(p) {
+    margin: 0;
+  }
+
+  .team-card__body :global(p + p) {
+    margin-top: 0.7rem;
+  }
+
+  .team-card__body :global(a) {
+    color: var(--teal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .team-card__body :global(a:hover) {
+    color: var(--rust);
+  }
+
+  .team-card__body :global(strong) {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  @media (min-width: 640px) {
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 900px) {
+    .team-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

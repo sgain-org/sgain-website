@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section"> & {
+  prose?: boolean;
+};
+
+const { prose = false, class: className, ...rest } = Astro.props as Props;
+---
+
+<section class:list={["band", { prose }, className]} {...rest}>
+  <slot />
+</section>
+
+<style>
+  .band {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) 24px;
+  }
+
+  .band.prose {
+    max-width: 820px;
+  }
+</style>

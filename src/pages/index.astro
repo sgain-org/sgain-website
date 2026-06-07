@@ -1,0 +1,124 @@
+---
+import Band from "@/components/Band.astro";
+import CardGrid from "@/components/CardGrid.astro";
+import Cta from "@/components/Cta.astro";
+import Hero from "@/components/Hero.astro";
+import MediaCard from "@/components/MediaCard.astro";
+import PartnerNetwork from "@/components/PartnerNetwork.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import Layout from "@/layouts/Layout.astro";
+import { networkCentre, networkPartners } from "@/lib/network";
+
+const frontmatter = {
+  title:
+    "SGAIN Project: Sustainability Governance of China's Global Infrastructure Investments | SGAIN Project",
+  description:
+    "Discover key information about the SGAIN Project based at the University of Bath. Explore our website for detailed insights and links to subpages about this academic research initiative.",
+  oldUrl: "https://sgain.org",
+};
+
+const heroImage = "/images/pages/shared/site-hero.jpg";
+---
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .about h2 {
+    margin: 0 0 1.1rem;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.16;
+  }
+
+  .about p {
+    margin: 0 0 1.5rem;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.08rem;
+    line-height: 1.62;
+  }
+
+  @media (max-width: 720px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image={heroImage}
+    title="Sustainability Governance of China's Global Infrastructure Investments"
+  >
+    <p>
+      <strong
+        >Sustainability Governance of China&#39;s Global Infrastructure
+        Investments (SGAIN)</strong
+      > is a £1.7 million research project awarded to <strong
+        >Dr <a
+          href="https://www.yixiansun.com"
+          target="_blank"
+          rel="noopener noreferrer">Yixian Sun</a
+        ></strong
+      > at the University of Bath by the UKRI Future Leaders Fellowship.
+    </p>
+    <p>
+      Our seven-year study programme integrates innovative mixed methods to
+      assess China&#39;s efforts to promote green development through overseas
+      infrastructure investments and also environmental and social impacts of
+      key Chinese projects in different host contexts across the Global South.
+      Our research aims to advance understanding of China&#39;s overseas
+      engagement and its influence on global sustainable development. Our work
+      will help policy practitioners develop suitable strategies to align
+      international investments with local sustainability needs.
+    </p>
+    <Cta href="/research/">Learn more</Cta>
+  </Hero>
+
+  <Band data-reveal>
+    <div class="about">
+      <div class="about__figure">
+        <PartnerNetwork centre={networkCentre} partners={networkPartners} />
+      </div>
+      <div class="about__copy">
+        <h2>About Us</h2>
+        <p>
+          The project team includes leading researchers across the globe in the
+          fields of international relations, environmental governance and
+          development studies based at Fudan University (China), Universitas
+          Gadjah Mada (Indonesia), University of Dhaka (Bangladesh), Sustainable
+          Development Policy Institute (Pakistan), and National University of
+          Singapore (Singapore).
+        </p>
+        <Cta href="/team/">Meet the team</Cta>
+      </div>
+    </div>
+  </Band>
+
+  <SectionDivider />
+
+  <Band>
+    <SectionTitle data-reveal>Recent Updates</SectionTitle>
+    <CardGrid data-reveal>
+      <MediaCard
+        href="/news/bath-conference-on-china-and-global-sustainability-transition/"
+        image="/images/pages/index/card-1.jpg"
+        title="Bath Conference June 2025"
+      />
+      <MediaCard
+        href="/publications/"
+        image="/images/pages/index/card-2.jpg"
+        imageAlt="bundle of newspaper on table"
+        title="SGAIN International News"
+      />
+    </CardGrid>
+  </Band>
+</Layout>

@@ -1,0 +1,90 @@
+---
+import { getCollection } from "astro:content";
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { entrySlug } from "@/lib/content";
+import { toDisplayTitle } from "@/lib/page";
+
+const frontmatter = {
+  title: "Articles and Book Chapters | SGAIN Project",
+  description:
+    "Read the most recent articles and book chapters from members of the SGAIN team in journals and books.",
+  oldUrl: "https://sgain.org/articles-and-book-chapters",
+};
+
+const typeLabels = {
+  article: "Article",
+  "book-chapter": "Book chapter",
+} as const;
+
+const publications = (await getCollection("publications"))
+  .filter(
+    (entry) =>
+      entry.data.category === "article" ||
+      entry.data.category === "book-chapter",
+  )
+  .sort(
+    (a, b) =>
+      (a.data.order ?? Number.POSITIVE_INFINITY) -
+      (b.data.order ?? Number.POSITIVE_INFINITY),
+  );
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/shared/publications-hero.jpg"
+    title="Articles and Book Chapters"
+  />
+
+  <Band>
+    <p class="pub-lead">
+      Read the most recent publications from members of our team in journals and
+      books
+    </p>
+
+    <div class="pub-grid">
+      {
+        publications.map((publication) => (
+          <PublicationCard
+            meta={
+              publication.data.category === "book-chapter"
+                ? typeLabels["book-chapter"]
+                : typeLabels.article
+            }
+            title={toDisplayTitle(publication.data.title)}
+            href={`/publications/${entrySlug(publication.id)}/`}
+            lines={[publication.data.citation ?? publication.data.description]}
+            image={publication.data.image}
+            imageAlt={publication.data.imageAlt}
+          />
+        ))
+      }
+    </div>
+  </Band>
+</Layout>
+
+<style>
+  .pub-lead {
+    margin: 0 0 clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 70ch;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: stretch;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

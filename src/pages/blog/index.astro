@@ -1,0 +1,104 @@
+---
+import { getCollection } from "astro:content";
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { entrySlug } from "@/lib/content";
+
+const frontmatter = {
+  title: "SGAIN: Blogs | SGAIN Project",
+  description:
+    "Explore our blogs, a place for our team members to share their insights and experiences, covering academic conferences, overseas trips, and global field research. ",
+  oldUrl: "https://sgain.org/blogs",
+};
+const posts = (await getCollection("blog")).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date),
+);
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(`${value}T00:00:00`));
+
+const postYears = [
+  ...new Set(posts.map((post) => new Date(`${post.data.date}T00:00:00`).getFullYear())),
+].sort((a, b) => b - a);
+
+const postGroups = postYears.map((year) => ({
+  year,
+  posts: posts.filter(
+    (post) => new Date(`${post.data.date}T00:00:00`).getFullYear() === year,
+  ),
+}));
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/shared/listing-hero.jpg"
+    title="Blogs"
+  >
+    <p>A space for our community to share thoughts and reflections</p>
+  </Hero>
+
+  {
+    postGroups.map(({ year, posts: yearPosts }) => (
+      <Band aria-label={`Blog posts from ${year}`}>
+        <h2 class="blog-year">{year}</h2>
+        <div class="pub-grid">
+          {yearPosts.map((post) => (
+            <PublicationCard
+              meta="Blog"
+              title={post.data.title}
+              href={`/blog/${entrySlug(post.id)}/`}
+              lines={[post.data.author]}
+              image={post.data.heroImage}
+            >
+              <p class="post-date">
+                <time datetime={post.data.date}>
+                  {formatDate(post.data.date)}
+                </time>
+                {post.data.readingTime && <> · {post.data.readingTime}</>}
+              </p>
+            </PublicationCard>
+          ))}
+        </div>
+      </Band>
+    ))
+  }
+</Layout>
+
+<style>
+  .blog-year {
+    margin: 0 0 clamp(1rem, 2.5vw, 1.5rem);
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: stretch;
+  }
+
+  /* Slotted into PublicationCard, so it sits in this page's style scope. */
+  .post-date {
+    margin: 0.7rem 0 0;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

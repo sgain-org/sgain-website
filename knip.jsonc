@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreFiles": [
+    ".github/scripts/comment-preview-url.cjs" // GitHub Actions script
+  ],
+  "entry": [
+    "src/lib/motion.ts" // loaded from Astro <script> tag
+  ]
+}

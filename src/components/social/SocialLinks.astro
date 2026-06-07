@@ -1,0 +1,65 @@
+---
+import BlueskyIcon from "@/components/social/icons/BlueskyIcon.astro";
+import LinkedInIcon from "@/components/social/icons/LinkedInIcon.astro";
+import XIcon from "@/components/social/icons/XIcon.astro";
+import SocialLink from "@/components/social/SocialLink.astro";
+
+type Props = {
+  ariaLabel?: string;
+  class?: string;
+  size?: number;
+};
+
+const {
+  ariaLabel = "SGAIN social media",
+  class: className,
+  size = 24,
+} = Astro.props as Props;
+
+const socialLinks = [
+  {
+    href: "https://www.linkedin.com/company/sgain",
+    label: "LinkedIn",
+    Icon: LinkedInIcon,
+  },
+  {
+    href: "https://bsky.app/profile/sgain.bsky.social",
+    label: "Bluesky",
+    Icon: BlueskyIcon,
+  },
+  {
+    href: "https://x.com/sgain_project",
+    label: "X",
+    Icon: XIcon,
+  },
+] as const;
+---
+
+<nav class:list={["social-links", className]} aria-label={ariaLabel}>
+  <ul>
+    {
+      socialLinks.map(({ href, label, Icon }) => (
+        <li>
+          <SocialLink href={href} label={label}>
+            <Icon size={size} />
+          </SocialLink>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .social-links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .social-links li {
+    display: flex;
+  }
+</style>

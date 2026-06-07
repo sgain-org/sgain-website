@@ -1,0 +1,112 @@
+---
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import PartnerMap from "@/components/PartnerMap.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import TeamSection from "@/components/TeamSection.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  loadTeamMembers,
+  selectMembers,
+  type TeamSectionData,
+  withMembers,
+} from "@/lib/team";
+
+const frontmatter = {
+  title: "SGAIN: International Partners | SGAIN Project",
+  description:
+    "Meet the SGAIN project's international partners and collaborators across Indonesia, China, Bangladesh, Pakistan and beyond.",
+  oldUrl: "https://sgain.org/international-partners",
+};
+
+const teamMembers = await loadTeamMembers();
+
+const sections: TeamSectionData[] = [
+  {
+    id: "indonesia",
+    title: "Indonesia",
+    groups: [
+      {
+        id: "indonesia",
+        members: selectMembers(teamMembers, "partners", "indonesia"),
+      },
+    ],
+  },
+  {
+    id: "china",
+    title: "China",
+    groups: [
+      { id: "china", members: selectMembers(teamMembers, "partners", "china") },
+    ],
+  },
+  {
+    id: "bangladesh",
+    title: "Bangladesh",
+    groups: [
+      {
+        id: "bangladesh",
+        members: selectMembers(teamMembers, "partners", "bangladesh"),
+      },
+    ],
+  },
+  {
+    id: "pakistan",
+    title: "Pakistan",
+    groups: [
+      {
+        id: "pakistan",
+        members: selectMembers(teamMembers, "partners", "pakistan"),
+      },
+    ],
+  },
+  {
+    id: "causal-map",
+    title: "Causal Map Team",
+    groups: [
+      {
+        id: "causal-map",
+        members: selectMembers(teamMembers, "partners", "causal-map"),
+      },
+    ],
+  },
+]
+  .map((section) => ({ ...section, groups: withMembers(section.groups) }))
+  .filter((section) => section.groups.length > 0);
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/international-partners/hero.jpg"
+    title="International Partners"
+  />
+
+  <Band>
+    <p class="map-caption">
+      The map below shows the location of all of our international partners and
+      collaborators, including those in addition to the official partners listed
+      below.
+    </p>
+    <PartnerMap sections={sections.map((section) => section.id)} />
+  </Band>
+
+  {
+    sections.map((section) => (
+      <>
+        <SectionDivider />
+        <TeamSection section={section} />
+      </>
+    ))
+  }
+</Layout>
+
+<style>
+  .map-caption {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+</style>

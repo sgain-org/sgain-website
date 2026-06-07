@@ -1,0 +1,270 @@
+---
+import { geoEquirectangular, geoPath } from "d3-geo";
+import type { GeoJsonProperties, MultiPolygon, Polygon } from "geojson";
+import { feature } from "topojson-client";
+import type { GeometryCollection, Topology } from "topojson-specification";
+// `?raw` keeps this a build-time string: the prerender sandbox has no `fs`, and
+// importing the JSON directly makes TypeScript infer the whole 100KB literal.
+import worldAtlas from "world-atlas/countries-110m.json?raw";
+import {
+  MAP_HEIGHT,
+  MAP_LAT_NORTH,
+  MAP_LAT_SOUTH,
+  MAP_WIDTH,
+  mapRegions,
+} from "@/lib/partners-map";
+
+type Props = {
+  /** Sections that exist on the page, so pins never link to a missing anchor. */
+  sections?: readonly string[];
+};
+
+const { sections = [] } = Astro.props as Props;
+
+const topology = JSON.parse(worldAtlas) as Topology<{
+  countries: GeometryCollection<GeoJsonProperties>;
+}>;
+
+const countries = feature(topology, topology.objects.countries);
+
+const frame: Polygon = {
+  type: "Polygon",
+  coordinates: [
+    [
+      [-180, MAP_LAT_SOUTH],
+      [180, MAP_LAT_SOUTH],
+      [180, MAP_LAT_NORTH],
+      [-180, MAP_LAT_NORTH],
+      [-180, MAP_LAT_SOUTH],
+    ],
+  ],
+};
+
+const projection = geoEquirectangular().fitSize([MAP_WIDTH, MAP_HEIGHT], frame);
+
+// d3 emits full float precision, which triples the path for detail no one can
+// see. Rounding to whole viewBox units leaves ~0.5px of precision at the
+// widest the map is ever drawn.
+let d = "";
+const round = (n: number) => Math.round(n);
+const path = geoPath(projection, {
+  beginPath() {},
+  moveTo(x: number, y: number) {
+    d += `M${round(x)},${round(y)}`;
+  },
+  lineTo(x: number, y: number) {
+    d += `L${round(x)},${round(y)}`;
+  },
+  arc() {},
+  closePath() {
+    d += "Z";
+  },
+});
+
+path({
+  type: "FeatureCollection",
+  // Antarctica falls outside the frame, so it is bytes that never render.
+  features: countries.features.filter((f) => f.properties?.name !== "Antarctica"),
+} as GeoJSON.FeatureCollection<Polygon | MultiPolygon>);
+
+const landPath = d;
+
+const pins = mapRegions.flatMap((region) =>
+  region.locations.map(({ label, leader, section, ...location }) => {
+    const [x, y] = projection([location.lon, location.lat]) ?? [0, 0];
+
+    return {
+      ...location,
+      label,
+      x: round(x),
+      y: round(y),
+      // Stop the leader short of the text, and aim at its optical centre.
+      leader: leader
+        ? { x: label.anchor === "end" ? label.x + 7 : label.x - 7, y: label.y - 6 }
+        : null,
+      href: section && sections.includes(section) ? `#${section}` : null,
+    };
+  }),
+);
+---
+
+<figure class="partner-map">
+  <svg
+    viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <title>
+      World map pinning the cities where SGAIN partners and collaborators are
+      based.
+    </title>
+
+    <path class="land" d={landPath} aria-hidden="true" />
+
+    {
+      pins.map((pin) => {
+        const Tag = pin.href ? "a" : "g";
+        return (
+          <Tag
+            class:list={["pin-group", { "pin-group--linked": pin.href }]}
+            href={pin.href ?? undefined}
+            aria-label={pin.href ? `${pin.name} — see partners` : undefined}
+            aria-hidden={pin.href ? undefined : "true"}
+          >
+            {pin.leader && (
+              <line
+                class="leader"
+                x1={pin.x}
+                y1={pin.y}
+                x2={pin.leader.x}
+                y2={pin.leader.y}
+              />
+            )}
+            <text
+              class="label"
+              x={pin.label.x}
+              y={pin.label.y}
+              text-anchor={pin.label.anchor}
+            >
+              {pin.name}
+            </text>
+            <circle class="pin" cx={pin.x} cy={pin.y} r="6" />
+            <circle class="pin-hit" cx={pin.x} cy={pin.y} r="22" />
+          </Tag>
+        );
+      })
+    }
+  </svg>
+
+  <figcaption class="map-key">
+    <dl>
+      {
+        mapRegions.map((region) => (
+          <div class="map-key__region">
+            <dt>{region.name}</dt>
+            <dd>
+              {/* Source order follows the label ladder, which means nothing to a reader. */}
+              {region.locations
+                .map((location) => location.name)
+                .sort((a, b) => a.localeCompare(b))
+                .join(" · ")}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </figcaption>
+</figure>
+
+<style>
+  .partner-map {
+    margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* No ocean plate: the page shows through, so the coastlines carry the shape. */
+  .land {
+    fill: #fff;
+    stroke: var(--line);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+  }
+
+  .pin {
+    fill: var(--teal-d);
+    transition:
+      fill 0.15s var(--ease),
+      r 0.15s var(--ease);
+  }
+
+  .pin-hit {
+    fill: transparent;
+  }
+
+  .leader {
+    stroke: var(--sky);
+    stroke-width: 2;
+  }
+
+  .label {
+    fill: var(--ink);
+    font-family: "Work Sans", sans-serif;
+    font-size: 20px;
+    transition: fill 0.15s var(--ease);
+  }
+
+  .pin-group--linked {
+    cursor: pointer;
+  }
+
+  .pin-group:hover .pin,
+  .pin-group:focus-visible .pin {
+    r: 9;
+    fill: var(--rust);
+  }
+
+  .pin-group:hover .label,
+  .pin-group:focus-visible .label {
+    fill: var(--rust);
+    font-weight: 600;
+  }
+
+  .pin-group:focus-visible {
+    outline: none;
+  }
+
+  .pin-group:focus-visible .pin-hit {
+    stroke: var(--rust);
+    stroke-width: 2;
+  }
+
+  /* Labels are unreadable once the 2048-unit viewBox is scaled to a phone, so
+     they give way to the region list below. */
+  @media (max-width: 680px) {
+    .label,
+    .leader {
+      display: none;
+    }
+  }
+
+  .map-key {
+    display: grid;
+    gap: 0.75rem 2rem;
+    grid-template-columns: 1fr;
+    margin-top: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .map-key dl {
+    display: grid;
+    gap: 0.75rem 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin: 0;
+  }
+
+  .map-key dt {
+    color: var(--teal-d);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .map-key dd {
+    margin: 0.2rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pin,
+    .label {
+      transition: none;
+    }
+  }
+</style>

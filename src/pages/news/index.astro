@@ -1,0 +1,319 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import Layout from "@/layouts/Layout.astro";
+import { entrySlug } from "@/lib/content";
+import { toYearAnchor } from "@/lib/news";
+
+const frontmatter = {
+  title: "SGAIN: News and Events  | SGAIN Project",
+  description:
+    "Discover various events that our team members have attended, including workshops and conferences where we share our latest research and insights. Stay updated on our participation in key gatherings. ",
+  oldUrl: "https://sgain.org/news-and-events",
+};
+
+const currentYear = new Date().getFullYear();
+
+const allNews = await getCollection("news", ({ data }) => data.type === "news");
+
+const byOrder = (a: CollectionEntry<"news">, b: CollectionEntry<"news">) =>
+  (a.data.order ?? 0) - (b.data.order ?? 0);
+
+// The current year is rendered in full; older years are listed by year below.
+const current = await Promise.all(
+  allNews
+    .filter((entry) => entry.data.year === currentYear)
+    .sort(byOrder)
+    .map(async (entry) => {
+      const { Content } = await render(entry);
+      return { entry, Content };
+    }),
+);
+
+const previousYears = [
+  ...new Set(
+    allNews
+      .map((entry) => entry.data.year)
+      .filter((year): year is number => year !== undefined && year !== currentYear),
+  ),
+].sort((a, b) => b - a);
+
+const previousGroups = previousYears.map((year) => ({
+  year,
+  entries: allNews.filter((entry) => entry.data.year === year).sort(byOrder),
+}));
+
+const navYears = [...(current.length > 0 ? [currentYear] : []), ...previousYears];
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/shared/listing-hero.jpg"
+    title="News & Events"
+  />
+
+  <Band prose class="news-intro">
+    <p class="news-lead">
+      <strong
+        >On this page we share updates about SGAIN, and various events attended
+        by our team members.</strong
+      >
+    </p>
+    {
+      navYears.length > 1 && (
+        <p class="news-jump">
+          Browse by year:{" "}
+          {navYears.map((year, index) => (
+            <>
+              {index > 0 && " · "}
+              <a href={`#${toYearAnchor(year)}`}>{year}</a>
+            </>
+          ))}
+        </p>
+      )
+    }
+  </Band>
+
+  <SectionDivider />
+
+  <Band prose class="news-feed">
+    {
+      current.length > 0 && (
+        <section class="news-year" aria-labelledby={toYearAnchor(currentYear)}>
+          <h2 class="news-year__heading" id={toYearAnchor(currentYear)}>
+            {currentYear}
+          </h2>
+          {current.map(({ entry, Content }) => (
+            <article class="news-item">
+              {entry.data.displayDate && (
+                <p class="news-item__date">
+                  <strong>{entry.data.displayDate}</strong>
+                </p>
+              )}
+              <h3 class="news-item__title">{entry.data.title}</h3>
+              <div class="news-item__body">
+                <Content />
+              </div>
+            </article>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      previousGroups.map(({ year, entries }) => (
+        <section class="news-year news-year--archive" aria-labelledby={toYearAnchor(year)}>
+          <h2 class="news-year__heading" id={toYearAnchor(year)}>
+            {year}
+          </h2>
+          <ul class="news-archive-list">
+            {entries.map((entry) => (
+              <li class="news-archive-item">
+                <a href={`/news/${entrySlug(entry.id)}/`}>{entry.data.title}</a>
+                {entry.data.displayDate && (
+                  <span class="news-archive-item__date">{entry.data.displayDate}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </Band>
+</Layout>
+
+<style>
+  /* Intro */
+  .news-lead {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .news-lead strong {
+    font-weight: 600;
+  }
+
+  .news-jump {
+    margin: 1.4rem 0 0;
+    color: var(--muted);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  .news-jump a {
+    color: var(--teal);
+    font-weight: 700;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .news-jump a:hover {
+    color: var(--rust);
+  }
+
+  /* Year sections */
+  .news-year + .news-year {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .news-year__heading {
+    margin: 0;
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Current-year feed */
+  .news-item {
+    margin-top: clamp(1.6rem, 4vw, 2.4rem);
+  }
+
+  .news-item + .news-item {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .news-item__date {
+    margin: 0;
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .news-item__date strong {
+    font-weight: 700;
+  }
+
+  .news-item__title {
+    margin: 0.5rem 0 0;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .news-item__title strong {
+    font-weight: 700;
+  }
+
+  .news-item__body :global(p) {
+    margin: 1.1rem 0 0;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.08rem;
+    line-height: 1.62;
+  }
+
+  .news-item__body :global(a) {
+    color: var(--teal);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .news-item__body :global(a:hover) {
+    color: var(--rust);
+  }
+
+  .news-item__body :global(strong) {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* Archived years — compact, linked list */
+  .news-archive-list {
+    margin: 1.4rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .news-archive-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .news-archive-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .news-archive-item a {
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .news-archive-item a:hover {
+    color: var(--rust);
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+  }
+
+  .news-archive-item__date {
+    color: var(--muted);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Image galleries */
+  :global(.news-gallery) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 0.85rem;
+    margin-top: 1.4rem;
+  }
+
+  :global(.news-gallery figure) {
+    margin: 0;
+  }
+
+  :global(.news-gallery img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+
+  /* Single content image (markdown ![](src) -> <p><img></p>) */
+  .news-item__body :global(p:has(> img)) {
+    margin-top: 1.4rem;
+  }
+
+  .news-item__body :global(p > img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+</style>

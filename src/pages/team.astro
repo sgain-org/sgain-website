@@ -1,0 +1,96 @@
+---
+import Hero from "@/components/Hero.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import TeamSection from "@/components/TeamSection.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  loadTeamMembers,
+  selectMembers,
+  type TeamSectionData,
+  withMembers,
+} from "@/lib/team";
+
+const frontmatter = {
+  title: "SGAIN: Team | SGAIN Project",
+  description:
+    "Discover the SGAIN project team, including members from around the globe and our esteemed advisory board. Learn about their affiliations and research areas contributing to the project's success.",
+  oldUrl: "https://sgain.org/team",
+};
+
+const teamMembers = await loadTeamMembers();
+
+const sections: TeamSectionData[] = [
+  {
+    id: "bath-team",
+    title: "Bath Team",
+    asset: {
+      src: "/logos/Uni_of_Bath_logo_black.png",
+      alt: "University of Bath logo",
+    },
+    groups: [
+      {
+        id: "bath",
+        members: selectMembers(teamMembers, "bath", "bath"),
+      },
+    ],
+  },
+  {
+    id: "alumni",
+    title: "Alumni",
+    groups: [
+      {
+        id: "alumni-members",
+        members: selectMembers(teamMembers, "alumni"),
+      },
+    ],
+  },
+].map((section) => ({ ...section, groups: withMembers(section.groups) }));
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/team/hero.jpg"
+    title="Team"
+  />
+
+  <figure class="team-feature">
+    <img
+      src="/images/pages/team/team-photo.jpg"
+      alt="Members of the SGAIN project team"
+    />
+  </figure>
+
+  {
+    sections.map((section, index) => (
+      <>
+        {index > 0 && <SectionDivider />}
+        <TeamSection section={section} />
+      </>
+    ))
+  }
+</Layout>
+
+<style>
+  /* Featured team photo */
+  .team-feature {
+    max-width: 1100px;
+    margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+    padding: 0 24px;
+  }
+
+  .team-feature img {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: var(--shadow);
+  }
+
+  @media (max-width: 680px) {
+    .team-feature img {
+      max-height: 280px;
+      border-radius: 12px;
+    }
+  }
+</style>

@@ -1,0 +1,13 @@
+---
+title: "Global climate governance remains resilient under Trump 2.0"
+oldUrl: "https://sgain.org/global-climate-governance-remains-resilient-under-trump-20"
+category: "article"
+citation: "Sun, Y., and Yitong, Y., 2025. Global Public Policy and Governance, 5"
+displayDate: "11/17/2025"
+order: 9
+image: "/images/publications/global-climate-governance-remains-resilient-under-trump-20.jpg"
+imageAlt: "our world our future our choice streamer"
+link: "https://link.springer.com/article/10.1007/s43508-025-00131-x"
+---
+
+The US is retreating from climate action under the second Trump administration, as demonstrated by the country’s withdrawal from the Paris Agreement, cancellation of its international climate finance program, and also various policies supporting oil and gas exploration. How is global climate governance impacted by Trump’s anti-climate policy, and how do different actors react to this shift? By assessing the changing dynamics in multilateral and transnational arenas of climate governance, we argue that Trump’s anti-climate policy cannot reverse net zero transitions across the globe due to polycentric climate governance. At the multilateral level, the Paris Agreement remains resilient to the US withdrawal, demonstrated by the continuous support of other major emitters. At the transnational level, subnational entities and businesses have strong incentives to continue net zero transitions to respond growing impact of the climate crisis. In the Global South, many countries have accelerated net zero transitions due to accessibility to cheaper technologies and financing from new sources especially China. Our analysis suggests that Trumpism has limited impact on the polycentric system of global climate governance where various actors with strong incentives to take climate action operate through institutions and networks across multiple scales.

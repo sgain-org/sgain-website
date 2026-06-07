@@ -1,0 +1,57 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { externalLinkAttrs } from "@/lib/links.ts";
+import { toDisplayTitle, toPageTitle } from "@/lib/page";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("publications");
+  return pages.map((page) => ({
+    params: { slug: page.id.replace(/\.md$/, "") },
+    props: { page },
+  }));
+}
+
+type Props = {
+  page: CollectionEntry<"publications">;
+};
+
+const { page } = Astro.props as Props;
+const { Content } = await render(page);
+
+const frontmatter = {
+  title: toPageTitle(page.data.title),
+  description: page.data.description,
+  oldUrl: page.data.oldUrl,
+};
+
+const linkLabels = {
+  article: "View full article",
+  "book-chapter": "View full chapter",
+  "non-academic": "View full article",
+  "policy-report": "View full report",
+} as const;
+
+const linkLabel = page.data.category
+  ? linkLabels[page.data.category]
+  : "View full publication";
+---
+
+<Layout frontmatter={frontmatter}>
+  <h1>{toDisplayTitle(page.data.title)}</h1>
+  {page.data.summary && <p>{page.data.summary}</p>}
+  {page.data.citation && <p>{page.data.citation}</p>}
+  {page.data.displayDate && <p>{page.data.displayDate}</p>}
+
+  <Content />
+
+  {
+    page.data.link && (
+      <p>
+        <a href={page.data.link} {...externalLinkAttrs(page.data.link)}>
+          {linkLabel}
+        </a>
+      </p>
+    )
+  }
+</Layout>

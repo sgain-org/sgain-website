@@ -1,0 +1,112 @@
+---
+import { getCollection } from "astro:content";
+import Band from "@/components/Band.astro";
+import CardGrid from "@/components/CardGrid.astro";
+import Hero from "@/components/Hero.astro";
+import MediaCard from "@/components/MediaCard.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import Layout from "@/layouts/Layout.astro";
+import { entrySlug } from "@/lib/content";
+import { toDisplayTitle } from "@/lib/page";
+
+const frontmatter = {
+  title: "Publications | SGAIN Project",
+  description: "",
+  oldUrl: "https://sgain.org/publications",
+};
+
+const recentPublications = (await getCollection("publications"))
+  .filter(
+    (entry) =>
+      entry.data.category === "article" || entry.data.category === "book-chapter",
+  )
+  .sort(
+    (a, b) =>
+      (a.data.order ?? Number.POSITIVE_INFINITY) -
+      (b.data.order ?? Number.POSITIVE_INFINITY),
+  )
+  .slice(0, 4);
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/shared/publications-hero.jpg"
+    title="Publications"
+  >
+    <p>
+      Below you can find a sample of our most recent publications, as well as
+      navigation to our different publications, including journal articles and
+      books, non-academic publications, policy briefs, and mentions of SGAIN and
+      our work in the media
+    </p>
+  </Hero>
+
+  <Band>
+    <div class="pub-grid">
+      {
+        recentPublications.map((publication) => (
+          <PublicationCard
+            meta={`Most recent ${publication.data.category === "book-chapter" ? "book" : "article"}`}
+            title={toDisplayTitle(publication.data.title)}
+            href={`/publications/${entrySlug(publication.id)}/`}
+            lines={[
+              publication.data.citation ?? publication.data.description,
+              publication.data.displayDate,
+            ].filter((line): line is string => Boolean(line))}
+            image={publication.data.image}
+            imageAlt={publication.data.imageAlt}
+          />
+        ))
+      }
+    </div>
+  </Band>
+
+  <SectionDivider />
+
+  <Band>
+    <SectionTitle>Explore our publications</SectionTitle>
+    <CardGrid>
+      <MediaCard
+        href="/articles-and-book-chapters/"
+        image="/images/pages/publications/card-1.jpg"
+        imageAlt="white and brown book on brown woven surface"
+        title="Articles and Book Chapters"
+      />
+      <MediaCard
+        href="/non-academic-publications/#non-academic"
+        image="/images/pages/publications/card-2.jpg"
+        imageAlt="person holding book"
+        title="Non-Academic Publications"
+      />
+      <MediaCard
+        href="/policy-briefs-and-reports/"
+        image="/images/pages/publications/card-3.jpg"
+        imageAlt="person holding pencil near laptop computer"
+        title="Policy Briefs and Reports"
+      />
+      <MediaCard
+        href="/non-academic-publications/#media-coverage"
+        image="/images/pages/publications/card-4.jpg"
+        imageAlt="people using phone while standing"
+        title="Media Coverage"
+      />
+    </CardGrid>
+  </Band>
+</Layout>
+
+<style>
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: stretch;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

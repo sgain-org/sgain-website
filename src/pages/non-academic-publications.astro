@@ -1,0 +1,181 @@
+---
+import { getCollection } from "astro:content";
+import Band from "@/components/Band.astro";
+import CardGrid from "@/components/CardGrid.astro";
+import Hero from "@/components/Hero.astro";
+import MediaCard from "@/components/MediaCard.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import Layout from "@/layouts/Layout.astro";
+import { entrySlug } from "@/lib/content";
+import { toDisplayTitle } from "@/lib/page";
+
+const frontmatter = {
+  title: "Non-Academic Publications | SGAIN Project",
+  description: "",
+  oldUrl: "https://sgain.org/non-academic-publications",
+};
+
+const opEds = (await getCollection("publications"))
+  .filter((entry) => entry.data.category === "non-academic")
+  .sort(
+    (a, b) =>
+      (a.data.order ?? Number.POSITIVE_INFINITY) -
+      (b.data.order ?? Number.POSITIVE_INFINITY),
+  );
+---
+
+<style>
+  .year-title {
+    margin: clamp(2rem, 4vw, 3rem) 0 2rem;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .pub-lead {
+    margin: 0 auto clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 70ch;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: stretch;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/pages/shared/publications-hero.jpg"
+    title="Non-Academic Publications"
+  />
+
+  <Band>
+    <SectionTitle id="non-academic">Comments and Op-eds</SectionTitle>
+    <p class="pub-lead">
+      Read the most recent publications from members of our team in online
+      articles
+    </p>
+
+    <div class="pub-grid">
+      {
+        opEds.map((opEd) => (
+          <PublicationCard
+            meta="Non-academic"
+            title={toDisplayTitle(opEd.data.title)}
+            href={`/publications/${entrySlug(opEd.id)}/`}
+            lines={[opEd.data.citation ?? opEd.data.description]}
+            image={opEd.data.image}
+            imageAlt={opEd.data.imageAlt}
+          />
+        ))
+      }
+    </div>
+  </Band>
+
+  <SectionDivider />
+
+  <Band>
+    <SectionTitle id="media-coverage">Media Coverage</SectionTitle>
+    <CardGrid>
+      <MediaCard
+        href="https://www.outrageandoptimism.org/episodes/the-china-pivot-what-will-beijings-climate-leadership-look-like?hsLang=en"
+        image="/images/pages/non-academic-publications/card-1.jpg"
+        imageAlt="Great Wall Of China, China"
+        title="The China Pivot: What will Beijing's climate leadership look like?"
+        meta="30/01"
+        cta="Interview"
+      />
+      <MediaCard
+        href="https://www.carbonbrief.org/experts-what-to-expect-from-china-on-energy-and-climate-action-in-2026/"
+        image="/images/pages/non-academic-publications/card-2.jpg"
+        imageAlt="people in a city street during daytime"
+        title="Experts: What to expect from China on energy and climate action in 2026"
+        meta="16/01"
+        cta="Interview"
+      />
+      <MediaCard
+        href="https://www.chinadaily.com.cn/a/202601/13/WS69659a41a310d6866eb33586.html"
+        image="/images/pages/non-academic-publications/card-3.jpg"
+        imageAlt="north american p-51 mustang"
+        title="2025 in review: Resilience amid headwinds"
+        meta="13/01"
+        cta="Interview"
+      />
+      <MediaCard
+        href="https://www.chinadaily.com.cn/a/202601/13/WS69659bcba310d6866eb335a9.html"
+        image="/images/pages/non-academic-publications/card-4.jpg"
+        imageAlt="two white goats near fence"
+        title="Trade tensions threaten green goals, scholars warn"
+        meta="13/01"
+        cta="Interview"
+      />
+    </CardGrid>
+
+    <h3 class="year-title">2025</h3>
+    <CardGrid>
+      <MediaCard
+        href="https://www.reuters.com/sustainability/climate-energy/can-china-fill-vacuum-climate-leadership--ecmii-2025-11-04/"
+        image="/images/pages/non-academic-publications/card-5.jpg"
+        imageAlt="aerial photography of cars on road path"
+        title="Can China fill the vacuum in climate leadership?"
+        meta="04/11"
+        cta="Interview"
+      />
+      <MediaCard
+        href="https://dailysomabes.com/news/6824"
+        image="/images/pages/non-academic-publications/card-6.jpg"
+        title="Stakeholder workshop on sustainable governance of Chinese energy investment in Bangladesh"
+        meta="18/10"
+        cta="Event Coverage"
+      />
+      <MediaCard
+        href="https://chinaglobalsouth.com/analysis/africa-solar-manufacturing-dependence-on-china/"
+        image="/images/pages/non-academic-publications/card-7.jpg"
+        imageAlt="the sun is setting behind power lines and telephone poles"
+        title="China’s Manufacturing Might Keep Africa Tied to Its Solar Supply Chain"
+        meta="15/10"
+        cta="Interview"
+      />
+      <MediaCard
+        href="https://dialogue.earth/en/business/can-china-share-its-green-expertise-with-the-global-south/"
+        image="/images/pages/non-academic-publications/card-8.jpg"
+        imageAlt="a close up of a machine with a spiral design"
+        title="Can China share its green expertise with the Global South?"
+        meta="26/09"
+        cta="Event Coverage"
+      />
+      <MediaCard
+        href="https://www.carbonbrief.org/qa-will-china-and-the-brics-fill-the-leadership-gap-on-climate-change/"
+        image="/images/pages/non-academic-publications/card-9.jpg"
+        imageAlt="a red and yellow chinese flag in front of a city skyline"
+        title="Will China and the BRICS fill the 'leadership gap' on climate change?"
+        meta="18/09"
+        cta="Interview"
+      />
+      <MediaCard
+        href="https://www.app.com.pk/national/dr-shamshad-for-prioritizing-climate-resilience-through-green-finance-under-cpec/"
+        image="/images/pages/non-academic-publications/card-10.jpg"
+        title="Dr Shamshad for prioritizing climate resilience through green finance under CPEC"
+        meta="16/09"
+        cta="Event Coverage"
+      />
+    </CardGrid>
+  </Band>
+</Layout>
