@@ -8,116 +8,285 @@ const frontmatter = {
     "Discover key information about the SGAIN Project based at the University of Bath. Explore our website for detailed insights and links to subpages about this academic research initiative.",
   oldUrl: "https://sgain.org",
 };
+
+const heroImage =
+  "/images/remote/images-unsplash-com/photo-1515344905723-babc01aac23d.jpg";
 ---
 
 <style>
-  .home-media {
-    margin: 2rem 0;
+  /* Hero */
+  .hero {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(43, 74, 100, 0.86) 0%,
+        rgba(43, 74, 100, 0.55) 45%,
+        rgba(43, 74, 100, 0.68) 100%
+      ),
+      var(--hero-image) center / cover no-repeat;
+    color: var(--paper);
+    padding: clamp(3rem, 8vw, 6rem) 24px clamp(3.5rem, 9vw, 7rem);
   }
 
-  .home-media img {
+  .hero__inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    margin: 0 0 1.6rem;
+    color: #fff;
+    font-family: "Fraunces", serif;
+    font-size: clamp(2.25rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .hero p {
+    margin: 0 0 1.1rem;
+    max-width: 72ch;
+    color: rgba(255, 255, 255, 0.94);
+    font-family: "Source Serif 4", serif;
+    font-size: clamp(1rem, 1.6vw, 1.13rem);
+    line-height: 1.62;
+  }
+
+  .hero a:not(.home-cta) {
+    color: #fff;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  /* Section dividers and bands */
+  .section-divider {
+    padding: 0 24px;
+  }
+
+  .section-divider::before {
+    content: "";
+    display: block;
+    max-width: 1100px;
+    height: 2px;
+    margin: 0 auto;
+    background: var(--ink);
+  }
+
+  .band {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) 24px;
+  }
+
+  /* About Us */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .about__figure img {
+    display: block;
     width: 100%;
-    max-height: 430px;
-    object-fit: cover;
-    border-radius: 18px;
-    box-shadow: var(--shadow);
+    height: auto;
   }
 
+  .about h2,
+  .updates__title {
+    margin: 0 0 1.1rem;
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.16;
+  }
+
+  .about p {
+    margin: 0 0 1.5rem;
+    color: var(--ink);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.08rem;
+    line-height: 1.62;
+  }
+
+  /* Recent Updates */
+  .updates__title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .updates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .update-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+  }
+
+  .update-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .update-card:hover img {
+    transform: scale(1.04);
+  }
+
+  .update-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    background: linear-gradient(
+      0deg,
+      rgba(38, 51, 63, 0.86) 0%,
+      rgba(38, 51, 63, 0.18) 58%,
+      rgba(38, 51, 63, 0) 100%
+    );
+  }
+
+  .update-card__title {
+    color: #fff;
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.18;
+  }
+
+  /* Call-to-action buttons (square, matches site style) */
   .home-cta-wrap {
     display: inline-flex;
-    margin-top: 0.9rem;
-    margin-right: 0.55rem;
+    margin: 0;
   }
 
   .home-cta {
     border: 1px solid var(--teal);
     background: var(--paper);
     color: var(--teal-d);
-    padding: 0.58rem 0.82rem;
+    padding: 0.58rem 0.95rem;
     font-family: "Work Sans", sans-serif;
     font-size: 0.86rem;
     font-weight: 700;
     text-decoration: none;
   }
 
-  .home-cta:hover {
+  .home-cta:hover,
+  .update-card:hover .home-cta {
     border-color: var(--rust);
     color: var(--rust);
   }
 
-  @media (max-width: 680px) {
-    .home-media img {
-      max-height: 300px;
+  @media (max-width: 720px) {
+    .about,
+    .updates {
+      grid-template-columns: 1fr;
     }
   }
 </style>
 
-<Layout frontmatter={frontmatter}>
-  <h1>
-    <strong
-      >Sustainability Governance of China&#39;s Global Infrastructure
-      Investments</strong
-    >
-  </h1>
-  <p>
-    <strong
-      >Sustainability Governance of China&#39;s Global Infrastructure
-      Investments (SGAIN)</strong
-    > is a £1.7 million research project awarded to <strong
-      >Dr <a href="https://www.yixiansun.com">Yixian Sun</a></strong
-    > at the University of Bath by the UKRI Future Leaders Fellowship.
-  </p>
-  <p>
-    Our seven-year study programme integrates innovative mixed methods to assess
-    China&#39;s efforts to promote green development through overseas
-    infrastructure investments and also environmental and social impacts of key
-    Chinese projects in different host contexts across the Global South. Our
-    research aims to advance understanding of China&#39;s overseas engagement
-    and its influence on global sustainable development. Our work will help
-    policy practitioners develop suitable strategies to align international
-    investments with local sustainability needs.
-  </p>
-  <p class="home-cta-wrap">
-    <a class="home-cta" href="/research/">Learn more</a>
-  </p>
-  <h3><strong>About Us</strong></h3>
-  <p>
-    The project team includes leading researchers across the globe in the fields
-    of international relations, environmental governance and development studies
-    based at Fudan University (China), Universitas Gadjah Mada (Indonesia),
-    University of Dhaka (Bangladesh), Sustainable Development Policy Institute
-    (Pakistan), and National University of Singapore (Singapore).
-  </p>
-  <p class="home-media">
-    <img
-      src="/images/remote/assets-zyrosite-com/screenshot-2024-09-11-100621-m2wqr5er0ah1zbym-4d9c09fe7e.png"
-      alt=""
-    />
-  </p>
-  <p class="home-cta-wrap">
-    <a class="home-cta" href="/team/">Meet the team</a>
-  </p>
-  <h3><strong>Recent Updates</strong></h3>
-  <p class="home-media">
-    <img
-      src="/images/remote/assets-zyrosite-com/dsc01886-yleq5rrxkjiqjvop-13b7ce341f.jpg"
-      alt=""
-    />
-  </p>
-  <h6><strong>Bath Conference June 2025</strong></h6>
-  <p class="home-cta-wrap">
-    <a
-      class="home-cta"
-      href="/news/bath-conference-on-china-and-global-sustainability-transition/"
-      >See more</a
-    >
-  </p>
-  <p class="home-media">
-    <img
-      src="/images/remote/images-unsplash-com/photo-1523995462485-3d171b5c8fa9-b700a78d0c.jpg"
-      alt="bundle of newspaper on table"
-    />
-  </p>
-  <h6><strong>SGAIN International News</strong></h6>
-  <p class="home-cta-wrap"><a class="home-cta" href="/news/">See more</a></p>
+<Layout frontmatter={frontmatter} bare>
+  <section class="hero" style={`--hero-image: url("${heroImage}")`}>
+    <div class="hero__inner">
+      <h1>
+        Sustainability Governance of China&#39;s Global Infrastructure
+        Investments
+      </h1>
+      <p>
+        <strong
+          >Sustainability Governance of China&#39;s Global Infrastructure
+          Investments (SGAIN)</strong
+        > is a £1.7 million research project awarded to <strong
+          >Dr <a href="https://www.yixiansun.com">Yixian Sun</a></strong
+        > at the University of Bath by the UKRI Future Leaders Fellowship.
+      </p>
+      <p>
+        Our seven-year study programme integrates innovative mixed methods to
+        assess China&#39;s efforts to promote green development through overseas
+        infrastructure investments and also environmental and social impacts of
+        key Chinese projects in different host contexts across the Global South.
+        Our research aims to advance understanding of China&#39;s overseas
+        engagement and its influence on global sustainable development. Our work
+        will help policy practitioners develop suitable strategies to align
+        international investments with local sustainability needs.
+      </p>
+      <p class="home-cta-wrap">
+        <a class="home-cta" href="/research/">Learn more</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="band">
+    <div class="about">
+      <div class="about__figure">
+        <img
+          src="/images/remote/assets-zyrosite-com/screenshot-2024-09-11-100621-m2wqr5er0ah1zbym-4d9c09fe7e.png"
+          alt=""
+        />
+      </div>
+      <div class="about__copy">
+        <h2>About Us</h2>
+        <p>
+          The project team includes leading researchers across the globe in the
+          fields of international relations, environmental governance and
+          development studies based at Fudan University (China), Universitas
+          Gadjah Mada (Indonesia), University of Dhaka (Bangladesh), Sustainable
+          Development Policy Institute (Pakistan), and National University of
+          Singapore (Singapore).
+        </p>
+        <p class="home-cta-wrap">
+          <a class="home-cta" href="/team/">Meet the team</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="band">
+    <h2 class="updates__title">Recent Updates</h2>
+    <div class="updates">
+      <a
+        class="update-card"
+        href="/news/bath-conference-on-china-and-global-sustainability-transition/"
+      >
+        <img
+          src="/images/remote/assets-zyrosite-com/dsc01886-yleq5rrxkjiqjvop-13b7ce341f.jpg"
+          alt=""
+        />
+        <span class="update-card__overlay">
+          <span class="update-card__title">Bath Conference June 2025</span>
+          <span class="home-cta">See more</span>
+        </span>
+      </a>
+      <a class="update-card" href="/news/">
+        <img
+          src="/images/remote/images-unsplash-com/photo-1523995462485-3d171b5c8fa9-b700a78d0c.jpg"
+          alt="bundle of newspaper on table"
+        />
+        <span class="update-card__overlay">
+          <span class="update-card__title">SGAIN International News</span>
+          <span class="home-cta">See more</span>
+        </span>
+      </a>
+    </div>
+  </section>
 </Layout>

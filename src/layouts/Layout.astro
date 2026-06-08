@@ -14,6 +14,7 @@ interface Props {
   description?: string;
   image?: string;
   frontmatter?: Frontmatter;
+  bare?: boolean;
 }
 
 const {
@@ -21,7 +22,11 @@ const {
   title: propTitle,
   description: propDescription,
   image: propImage,
+  bare = false,
 } = Astro.props as Props;
+
+const logoWhite =
+  "/images/remote/assets-zyrosite-com/sgain-logo-full-white.png";
 
 const title = propTitle ?? frontmatter.title ?? "SGAIN Project";
 const description =
@@ -104,9 +109,8 @@ const sectionActive = (links: Array<{ href: string }>) =>
     position: sticky;
     top: 0;
     z-index: 10;
-    border-bottom: 1px solid var(--line);
-    background: rgba(245, 246, 247, 0.94);
-    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--teal-d);
   }
 
   .site-bar {
@@ -123,38 +127,14 @@ const sectionActive = (links: Array<{ href: string }>) =>
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
     min-width: 240px;
-    color: var(--ink);
     text-decoration: none;
   }
 
-  .brand-mark {
-    display: grid;
-    width: 54px;
-    height: 54px;
-    place-items: center;
-    border: 2px solid var(--teal);
-    color: var(--teal-d);
-    font-family: "Fraunces", serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-  }
-
-  .brand-copy {
-    display: grid;
-    gap: 1px;
-  }
-
-  .brand-copy strong {
-    font-family: "Fraunces", serif;
-    font-size: 1.16rem;
-    font-weight: 700;
-  }
-
-  .brand-copy span {
-    color: var(--muted);
-    font-size: 0.78rem;
+  .brand-logo {
+    width: auto;
+    height: 52px;
+    object-fit: contain;
   }
 
   .site-nav {
@@ -173,7 +153,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
     min-height: 38px;
     border: 1px solid transparent;
     padding: 8px 10px;
-    color: var(--ink);
+    color: var(--paper);
     text-decoration: none;
     cursor: pointer;
   }
@@ -181,15 +161,15 @@ const sectionActive = (links: Array<{ href: string }>) =>
   .nav-link:hover,
   .nav-menu:hover summary,
   .nav-menu[open] summary {
-    border-color: var(--line);
-    background: var(--paper2);
-    color: var(--teal-d);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
   }
 
   .nav-link.active,
   .nav-menu.active summary {
-    color: var(--teal);
-    border-bottom-color: var(--teal);
+    color: #fff;
+    border-bottom-color: var(--paper);
   }
 
   .nav-menu {
@@ -247,6 +227,10 @@ const sectionActive = (links: Array<{ href: string }>) =>
 
   .site-main {
     padding: 54px 24px 78px;
+  }
+
+  .site-main--flush {
+    padding: 0;
   }
 
   .content-shell {
@@ -441,8 +425,8 @@ const sectionActive = (links: Array<{ href: string }>) =>
   }
 
   .site-footer {
-    border-top: 1px solid var(--line);
-    background: var(--teal-d);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--slate);
     color: var(--paper);
     padding: 42px 28px;
   }
@@ -452,10 +436,21 @@ const sectionActive = (links: Array<{ href: string }>) =>
     grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr) minmax(
         180px,
         0.7fr
-      );
+      ) auto;
+    align-items: start;
     gap: 36px;
     max-width: 1220px;
     margin: 0 auto;
+  }
+
+  .footer-logo {
+    justify-self: end;
+  }
+
+  .footer-logo img {
+    width: auto;
+    height: 70px;
+    object-fit: contain;
   }
 
   .footer-brand,
@@ -500,6 +495,15 @@ const sectionActive = (links: Array<{ href: string }>) =>
       box-shadow: none;
       margin-top: 4px;
     }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-logo {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
   }
 
   @media (max-width: 680px) {
@@ -512,9 +516,8 @@ const sectionActive = (links: Array<{ href: string }>) =>
       min-width: 0;
     }
 
-    .brand-mark {
-      width: 46px;
-      height: 46px;
+    .brand-logo {
+      height: 44px;
     }
 
     .site-nav {
@@ -618,11 +621,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
     <header class="site-header">
       <div class="site-bar">
         <a class="brand" href="/" aria-label="SGAIN Project home">
-          <span class="brand-mark">SGAIN</span>
-          <span class="brand-copy">
-            <strong>SGAIN Project</strong>
-            <span>Sustainability governance research</span>
-          </span>
+          <img class="brand-logo" src={logoWhite} alt="SGAIN Project" />
         </a>
 
         <nav class="site-nav" aria-label="Main navigation">
@@ -700,11 +699,19 @@ const sectionActive = (links: Array<{ href: string }>) =>
       </div>
     </header>
 
-    <main id="content" class="site-main">
-      <article class="content-shell markdown-content">
-        <slot />
-      </article>
-    </main>
+    {
+      bare ? (
+        <main id="content" class="site-main site-main--flush">
+          <slot />
+        </main>
+      ) : (
+        <main id="content" class="site-main">
+          <article class="content-shell markdown-content">
+            <slot />
+          </article>
+        </main>
+      )
+    }
 
     <footer class="site-footer">
       <div class="footer-grid">
@@ -725,6 +732,9 @@ const sectionActive = (links: Array<{ href: string }>) =>
         <div>
           <h2>Follow</h2>
           <SocialLinks />
+        </div>
+        <div class="footer-logo">
+          <img src={logoWhite} alt="SGAIN Project" />
         </div>
       </div>
     </footer>
