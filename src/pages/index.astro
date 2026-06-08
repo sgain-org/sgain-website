@@ -10,6 +10,48 @@ const frontmatter = {
 };
 ---
 
+<style>
+  .home-media {
+    margin: 2rem 0;
+  }
+
+  .home-media img {
+    width: 100%;
+    max-height: 430px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+  }
+
+  .home-cta-wrap {
+    display: inline-flex;
+    margin-top: 0.9rem;
+    margin-right: 0.55rem;
+  }
+
+  .home-cta {
+    border: 1px solid var(--teal);
+    background: var(--paper);
+    color: var(--teal-d);
+    padding: 0.58rem 0.82rem;
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .home-cta:hover {
+    border-color: var(--rust);
+    color: var(--rust);
+  }
+
+  @media (max-width: 680px) {
+    .home-media img {
+      max-height: 300px;
+    }
+  }
+</style>
+
 <Layout frontmatter={frontmatter}>
   <p>
     <strong
@@ -29,11 +71,14 @@ const frontmatter = {
     policy practitioners develop suitable strategies to align international
     investments with local sustainability needs.
   </p>
-  <p><a href="/research/">Learn more</a></p>
+  <p class="home-cta-wrap">
+    <a class="home-cta" href="/research/">Learn more</a>
+  </p>
   <h1>
     <strong
       >Sustainability Governance of China&#39;s Global Infrastructure
-      Investments</strong>
+      Investments</strong
+    >
   </h1>
   <p>
     The project team includes leading researchers across the globe in the fields
@@ -43,32 +88,36 @@ const frontmatter = {
     (Pakistan), and National University of Singapore (Singapore).
   </p>
   <h3><strong>About Us</strong></h3>
-  <p>
+  <p class="home-media">
     <img
       src="/images/remote/assets-zyrosite-com/screenshot-2024-09-11-100621-m2wqr5er0ah1zbym-4d9c09fe7e.png"
       alt=""
     />
   </p>
-  <p><a href="/team/">Meet the team</a></p>
-  <p>
+  <p class="home-cta-wrap">
+    <a class="home-cta" href="/team/">Meet the team</a>
+  </p>
+  <p class="home-media">
     <img
       src="/images/remote/images-unsplash-com/photo-1523995462485-3d171b5c8fa9-b700a78d0c.jpg"
       alt="bundle of newspaper on table"
     />
   </p>
   <h6><strong>SGAIN International News</strong></h6>
-  <p><a href="/news/">See more</a></p>
+  <p class="home-cta-wrap"><a class="home-cta" href="/news/">See more</a></p>
   <h3><strong>Recent Updates</strong></h3>
-  <p>
+  <p class="home-media">
     <img
       src="/images/remote/assets-zyrosite-com/dsc01886-yleq5rrxkjiqjvop-13b7ce341f.jpg"
       alt=""
     />
   </p>
   <h6><strong>Bath Conference June 2025</strong></h6>
-  <p>
+  <p class="home-cta-wrap">
     <a
+      class="home-cta"
       href="/news/bath-conference-on-china-and-global-sustainability-transition/"
-      >See more</a>
+      >See more</a
+    >
   </p>
 </Layout>

@@ -352,7 +352,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
     background: var(--paper);
   }
 
-  .markdown-content > p:has(> img:only-child) {
+  .markdown-content > p:has(> img:only-child):not(.home-media) {
     margin: 2rem 0;
   }
 
@@ -362,13 +362,13 @@ const sectionActive = (links: Array<{ href: string }>) =>
     object-fit: cover;
   }
 
-  .markdown-content > p:has(> a:only-child) {
+  .markdown-content > p:has(> a:only-child):not(.home-cta-wrap) {
     display: inline-flex;
     margin-top: 0.9rem;
     margin-right: 0.55rem;
   }
 
-  .markdown-content > p:has(> a:only-child) a {
+  .markdown-content > p:has(> a:only-child):not(.home-cta-wrap) a {
     border: 1px solid var(--teal);
     background: var(--paper);
     color: var(--teal-d);
@@ -379,7 +379,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
     text-decoration: none;
   }
 
-  .markdown-content > p:has(> a:only-child) a:hover {
+  .markdown-content > p:has(> a:only-child):not(.home-cta-wrap) a:hover {
     border-color: var(--rust);
     color: var(--rust);
   }
