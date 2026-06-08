@@ -1,4 +1,5 @@
 ---
+import SocialLinks from "../components/social/SocialLinks.astro";
 import "../styles/styles.css";
 
 interface Frontmatter {
@@ -477,12 +478,6 @@ const sectionActive = (links: Array<{ href: string }>) =>
     color: var(--paper);
   }
 
-  .social-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
   @media (max-width: 980px) {
     .site-bar {
       align-items: flex-start;
@@ -729,13 +724,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
         </div>
         <div>
           <h2>Follow</h2>
-          <p class="social-links">
-            <a href="https://x.com/sgain_project">X</a>
-            <a href="https://www.linkedin.com/company/sgain/?viewAsMember=true"
-              >LinkedIn</a
-            >
-            <a href="https://bsky.app/profile/sgain.bsky.social">Bluesky</a>
-          </p>
+          <SocialLinks />
         </div>
       </div>
     </footer>

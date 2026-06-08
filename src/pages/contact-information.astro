@@ -1,4 +1,5 @@
 ---
+import SocialLinks from "../components/social/SocialLinks.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -7,14 +8,18 @@ const frontmatter = {
     "Find all the contact information for the SGAIN Project here. Submit your questions using our form, reach out via email for more project information, or follow our social media.",
   oldUrl: "https://sgain.org/contact-information",
 };
-
 ---
 
 <Layout frontmatter={frontmatter}>
-  <p><img src="/images/remote/images-unsplash-com/photo-1718127581405-19e304c855b3-8ff00e8b38.jpg" alt="a body of water with waves coming in and out of it"></p>
+  <p>
+    <img
+      src="/images/remote/images-unsplash-com/photo-1718127581405-19e304c855b3-8ff00e8b38.jpg"
+      alt="a body of water with waves coming in and out of it"
+    />
+  </p>
   <h1><strong>Contact Us</strong></h1>
-  <p><a href="https://www.linkedin.com/company/sgain/?viewAsMember=true" title="Go to Linkedin-in page"></a><a href="https://bsky.app/profile/sgain.bsky.social" title="Go to Bluesky page"></a><a href="https://x.com/sgain_project" title="Go to Twitter page"></a></p>
-  <p><a href="https://www.linkedin.com/company/sgain/?viewAsMember=true">Social Media</a></p>
+  <p>Follow SGAIN on social media.</p>
+  <SocialLinks />
   <p><a href="mailto:sgain@bath.ac.uk">Email</a></p>
   <p><a href="mailto:sgain@bath.ac.uk" title="Go to Mail page"></a></p>
   <p><a href="/contact-us#contact-us">Send a Message</a></p>
