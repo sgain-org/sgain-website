@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Hero from "../../components/Hero.astro";
 import Layout from "../../layouts/Layout.astro";
 
 const frontmatter = {
@@ -8,7 +9,9 @@ const frontmatter = {
     "Explore our blogs, a place for our team members to share thier insights and experiences, covering academic conferences, overseas trips, and global field research. ",
   oldUrl: "https://sgain.org/blogs",
 };
-const posts = (await getCollection("blog")).sort((a, b) => b.data.date.localeCompare(a.data.date));
+const posts = (await getCollection("blog")).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date),
+);
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
@@ -17,24 +20,104 @@ const formatDate = (value: string) =>
   }).format(new Date(`${value}T00:00:00`));
 ---
 
-<Layout frontmatter={frontmatter}>
-  <p><img src="/images/remote/images-unsplash-com/photo-1502252007251-fd6a4d508125-1d415067fd.jpg" alt="body of water surrounded by orange trees"></p>
-  <h1><strong>Blogs</strong></h1>
-  <h3>A space for our community to share thoughts and reflections</h3>
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/remote/images-unsplash-com/photo-1502252007251-fd6a4d508125-1d415067fd.jpg"
+    title="Blogs"
+  >
+    <p>A space for our community to share thoughts and reflections</p>
+  </Hero>
 
-  <section class="content-list" aria-label="Blog posts">
-    {posts.map((post) => (
-      <article class="publication-card">
-        <p class="publication-card__meta">Blog</p>
-        <h3>
-          <a href={`/blog/${post.id.replace(/\.md$/, "")}/`}>{post.data.title}</a>
-        </h3>
-        <p>{post.data.author}</p>
-        <p>
-          <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
-          {post.data.readingTime && <> · {post.data.readingTime}</>}
-        </p>
-      </article>
-    ))}
+  <section class="band" aria-label="Blog posts">
+    <div class="pub-grid">
+      {
+        posts.map((post) => (
+          <article class="publication-card">
+            <p class="publication-card__meta">Blog</p>
+            <h3>
+              <a href={`/blog/${post.id.replace(/\.md$/, "")}/`}>
+                {post.data.title}
+              </a>
+            </h3>
+            <p>{post.data.author}</p>
+            <p>
+              <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+              {post.data.readingTime && <> · {post.data.readingTime}</>}
+            </p>
+          </article>
+        ))
+      }
+    </div>
   </section>
 </Layout>
+
+<style>
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    align-items: start;
+  }
+
+  .publication-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--teal);
+    border-radius: 12px;
+    background: #fff;
+    padding: 1.25rem 1.35rem 1.4rem;
+    box-shadow: 0 6px 22px rgba(38, 51, 63, 0.06);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .publication-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+  }
+
+  .publication-card__meta {
+    margin: 0;
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .publication-card h3 {
+    margin: 0.6rem 0 0;
+    font-family: "Fraunces", serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .publication-card h3 a {
+    color: var(--teal-d);
+    text-decoration: none;
+  }
+
+  .publication-card h3 a:hover {
+    color: var(--rust);
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+  }
+
+  .publication-card p:not(.publication-card__meta) {
+    margin: 0.7rem 0 0;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  @media (min-width: 720px) {
+    .pub-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

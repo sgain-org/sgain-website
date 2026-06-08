@@ -1,0 +1,70 @@
+---
+type Props = {
+  image: string;
+  title: string;
+};
+
+const { image, title } = Astro.props as Props;
+---
+
+<section class="hero" style={`--hero-image: url("${image}")`}>
+  <div class="hero__inner">
+    <h1 class="hero__title">{title}</h1>
+    <div class="hero__body"><slot /></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(43, 74, 100, 0.86) 0%,
+        rgba(43, 74, 100, 0.55) 45%,
+        rgba(43, 74, 100, 0.68) 100%
+      ),
+      var(--hero-image) center / cover no-repeat;
+    color: var(--paper);
+    padding: clamp(3rem, 8vw, 6rem) 24px clamp(3.5rem, 9vw, 7rem);
+  }
+
+  .hero__inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero__title {
+    margin: 0;
+    color: #fff;
+    font-family: "Fraunces", serif;
+    font-size: clamp(2.25rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .hero__body {
+    margin-top: 1.6rem;
+  }
+
+  /* The slot carries page paragraphs / CTAs as plain markup. */
+  .hero__body :global(p) {
+    margin: 0 0 1.1rem;
+    max-width: 72ch;
+    color: rgba(255, 255, 255, 0.94);
+    font-family: "Source Serif 4", serif;
+    font-size: clamp(1rem, 1.6vw, 1.13rem);
+    line-height: 1.62;
+  }
+
+  .hero__body :global(a:not(.home-cta)) {
+    color: #fff;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .hero__body:empty {
+    display: none;
+  }
+</style>

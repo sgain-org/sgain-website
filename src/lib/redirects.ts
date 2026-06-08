@@ -1,7 +1,7 @@
 export const redirects = [
   {
     from: "academic-publications-and-policy-reports",
-    to: "/news/academic-publications/",
+    to: "/academic-publications/",
   },
   {
     from: "archive",

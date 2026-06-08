@@ -1,4 +1,5 @@
 ---
+import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
 
 type MediaVariant = "landscape" | "portrait" | "audio";
@@ -120,125 +121,96 @@ const interviews: MediaItem[] = [
 ];
 ---
 
-<Layout frontmatter={frontmatter}>
-  <div class="multimedia-page">
-    <p>
-      <img
-        src="/images/remote/images-unsplash-com/photo-1528214968864-8dd00782fa9e-132b852a90.jpg"
-        alt="Aerial view of mountains"
-      />
-    </p>
-    <h1>Multimedia</h1>
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/remote/images-unsplash-com/photo-1528214968864-8dd00782fa9e-132b852a90.jpg"
+    title="Multimedia"
+  />
 
-    <section class="media-section" aria-labelledby="conference-coverage-title">
-      <h2 id="conference-coverage-title">
-        Insights from the 2025 Bath Conference
-      </h2>
-      <div class="media-grid">
-        {
-          conferenceCoverage.map((item) => (
-            <article
-              class:list={[
-                "media-card",
-                item.embed.variant === "portrait" && "media-card--portrait",
-                item.embed.variant === "audio" && "media-card--audio",
-              ]}
-            >
-              <div class="media-card__embed">
-                <iframe
-                  class:list={[
-                    "media-frame",
-                    item.embed.variant === "portrait" &&
-                      "media-frame--portrait",
-                    item.embed.variant === "audio" && "media-frame--audio",
-                  ]}
-                  src={item.embed.src}
-                  title={item.embed.title}
-                  width={item.embed.width}
-                  height={item.embed.height}
-                  loading="lazy"
-                  allow={item.embed.allow}
-                  sandbox={item.embed.sandbox}
-                  allowfullscreen={item.embed.allowFullScreen}
-                />
-              </div>
-              <div class="media-card__body">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
+  <section class="band" aria-labelledby="conference-coverage-title">
+    <h2 id="conference-coverage-title" class="section-title">
+      Insights from the 2025 Bath Conference
+    </h2>
+    <div class="media-grid">
+      {
+        conferenceCoverage.map((item) => (
+          <article
+            class:list={[
+              "media-card",
+              item.embed.variant === "portrait" && "media-card--portrait",
+              item.embed.variant === "audio" && "media-card--audio",
+            ]}
+          >
+            <div class="media-card__embed">
+              <iframe
+                class:list={[
+                  "media-frame",
+                  item.embed.variant === "portrait" && "media-frame--portrait",
+                  item.embed.variant === "audio" && "media-frame--audio",
+                ]}
+                src={item.embed.src}
+                title={item.embed.title}
+                width={item.embed.width}
+                height={item.embed.height}
+                loading="lazy"
+                allow={item.embed.allow}
+                sandbox={item.embed.sandbox}
+                allowfullscreen={item.embed.allowFullScreen}
+              />
+            </div>
+            <div class="media-card__body">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 
-    <section class="media-section" aria-labelledby="interviews-title">
-      <h2 id="interviews-title">Interviews</h2>
-      <div class="media-grid">
-        {
-          interviews.map((item) => (
-            <article
-              class:list={[
-                "media-card",
-                item.embed.variant === "portrait" && "media-card--portrait",
-                item.embed.variant === "audio" && "media-card--audio",
-              ]}
-            >
-              <div class="media-card__embed">
-                <iframe
-                  class:list={[
-                    "media-frame",
-                    item.embed.variant === "portrait" &&
-                      "media-frame--portrait",
-                    item.embed.variant === "audio" && "media-frame--audio",
-                  ]}
-                  src={item.embed.src}
-                  title={item.embed.title}
-                  width={item.embed.width}
-                  height={item.embed.height}
-                  loading="lazy"
-                  allow={item.embed.allow}
-                  sandbox={item.embed.sandbox}
-                  allowfullscreen={item.embed.allowFullScreen}
-                />
-              </div>
-              <div class="media-card__body">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-  </div>
+  <div class="section-divider"></div>
+
+  <section class="band" aria-labelledby="interviews-title">
+    <h2 id="interviews-title" class="section-title">Interviews</h2>
+    <div class="media-grid">
+      {
+        interviews.map((item) => (
+          <article
+            class:list={[
+              "media-card",
+              item.embed.variant === "portrait" && "media-card--portrait",
+              item.embed.variant === "audio" && "media-card--audio",
+            ]}
+          >
+            <div class="media-card__embed">
+              <iframe
+                class:list={[
+                  "media-frame",
+                  item.embed.variant === "portrait" && "media-frame--portrait",
+                  item.embed.variant === "audio" && "media-frame--audio",
+                ]}
+                src={item.embed.src}
+                title={item.embed.title}
+                width={item.embed.width}
+                height={item.embed.height}
+                loading="lazy"
+                allow={item.embed.allow}
+                sandbox={item.embed.sandbox}
+                allowfullscreen={item.embed.allowFullScreen}
+              />
+            </div>
+            <div class="media-card__body">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
 
 <style>
-  .multimedia-page {
-    display: grid;
-    gap: 2.5rem;
-  }
-
-  .multimedia-page h1 {
-    margin-bottom: 0;
-  }
-
-  .media-section {
-    display: grid;
-    gap: 1.35rem;
-  }
-
-  .media-section + .media-section {
-    border-top: 1px solid var(--line);
-    padding-top: 2rem;
-  }
-
-  .media-section h2 {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
   .media-grid {
     display: grid;
     gap: 1.5rem;

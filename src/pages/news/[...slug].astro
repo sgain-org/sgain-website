@@ -2,15 +2,8 @@
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
-const yearAnchors: Record<number, string> = {
-  2025: "twentyfive",
-  2024: "twentyfour",
-};
-
 const toPageTitle = (title: string) =>
   title.endsWith(" | SGAIN Project") ? title : `${title} | SGAIN Project`;
-
-const toYearAnchor = (year: number) => yearAnchors[year] ?? `year-${year}`;
 
 export async function getStaticPaths() {
   const pages = await getCollection("news");
@@ -24,47 +17,8 @@ type Props = {
   page: CollectionEntry<"news">;
 };
 
-type RenderedArchiveEntry = {
-  entry: CollectionEntry<"news">;
-  RenderedContent: Awaited<ReturnType<typeof render>>["Content"];
-};
-
 const { page } = Astro.props as Props;
 const { Content } = await render(page);
-const archiveEntries =
-  page.data.type === "archive-index"
-    ? await Promise.all(
-        (await getCollection("news", ({ data }) => data.type === "archived"))
-          .sort(
-            (a, b) =>
-              (b.data.year ?? 0) - (a.data.year ?? 0) ||
-              (a.data.order ?? 0) - (b.data.order ?? 0),
-          )
-          .map(async (entry) => {
-            const { Content: RenderedContent } = await render(entry);
-            return { entry, RenderedContent } satisfies RenderedArchiveEntry;
-          }),
-      )
-    : [];
-
-const archiveGroups = archiveEntries.reduce<
-  Array<{
-    year: number;
-    entries: RenderedArchiveEntry[];
-  }>
->((groups, entry) => {
-  const year = entry.entry.data.year;
-  if (!year) {
-    return groups;
-  }
-  const existingGroup = groups.find((group) => group.year === year);
-  if (existingGroup) {
-    existingGroup.entries.push(entry);
-    return groups;
-  }
-  groups.push({ year, entries: [entry] });
-  return groups;
-}, []);
 
 const frontmatter = {
   title: toPageTitle(page.data.title),
@@ -85,43 +39,6 @@ const frontmatter = {
       </>
     ) : (
       <Content />
-    )
-  }
-
-  {
-    page.data.type === "archive-index" && archiveGroups.length > 0 && (
-      <>
-        <p>
-          {archiveGroups.map((group, index) => (
-            <>
-              {index > 0 && ", "}
-              <strong>
-                <a href={`#${toYearAnchor(group.year)}`}>{group.year}</a>
-              </strong>
-            </>
-          ))}
-        </p>
-
-        {archiveGroups.map((group) => (
-          <section aria-labelledby={toYearAnchor(group.year)}>
-            <h2 id={toYearAnchor(group.year)}>{group.year}</h2>
-
-            {group.entries.map(({ entry, RenderedContent }) => (
-              <article>
-                <h3>
-                  <a href={`/news/${entry.id.replace(/\.md$/, "")}/`}>
-                    {entry.data.title}
-                  </a>
-                </h3>
-                {entry.data.displayDate && (
-                  <p class="post-meta">{entry.data.displayDate}</p>
-                )}
-                <RenderedContent />
-              </article>
-            ))}
-          </section>
-        ))}
-      </>
     )
   }
 </Layout>

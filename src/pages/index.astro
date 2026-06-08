@@ -1,4 +1,6 @@
 ---
+import Hero from "../components/Hero.astro";
+import MediaCard from "../components/MediaCard.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -14,72 +16,6 @@ const heroImage =
 ---
 
 <style>
-  /* Hero */
-  .hero {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(43, 74, 100, 0.86) 0%,
-        rgba(43, 74, 100, 0.55) 45%,
-        rgba(43, 74, 100, 0.68) 100%
-      ),
-      var(--hero-image) center / cover no-repeat;
-    color: var(--paper);
-    padding: clamp(3rem, 8vw, 6rem) 24px clamp(3.5rem, 9vw, 7rem);
-  }
-
-  .hero__inner {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .hero h1 {
-    margin: 0 0 1.6rem;
-    color: #fff;
-    font-family: "Fraunces", serif;
-    font-size: clamp(2.25rem, 5vw, 3.4rem);
-    font-weight: 700;
-    line-height: 1.12;
-    text-align: center;
-    text-wrap: balance;
-  }
-
-  .hero p {
-    margin: 0 0 1.1rem;
-    max-width: 72ch;
-    color: rgba(255, 255, 255, 0.94);
-    font-family: "Source Serif 4", serif;
-    font-size: clamp(1rem, 1.6vw, 1.13rem);
-    line-height: 1.62;
-  }
-
-  .hero a:not(.home-cta) {
-    color: #fff;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.16em;
-  }
-
-  /* Section dividers and bands */
-  .section-divider {
-    padding: 0 24px;
-  }
-
-  .section-divider::before {
-    content: "";
-    display: block;
-    max-width: 1100px;
-    height: 2px;
-    margin: 0 auto;
-    background: var(--ink);
-  }
-
-  .band {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  /* About Us */
   .about {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -93,8 +29,7 @@ const heroImage =
     height: auto;
   }
 
-  .about h2,
-  .updates__title {
+  .about h2 {
     margin: 0 0 1.1rem;
     color: var(--teal-d);
     font-family: "Fraunces", serif;
@@ -111,126 +46,40 @@ const heroImage =
     line-height: 1.62;
   }
 
-  /* Recent Updates */
-  .updates__title {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .updates {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-  }
-
-  .update-card {
-    position: relative;
-    display: block;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border-radius: 14px;
-    box-shadow: var(--shadow);
-    text-decoration: none;
-  }
-
-  .update-card img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-
-  .update-card:hover img {
-    transform: scale(1.04);
-  }
-
-  .update-card__overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: 0.85rem;
-    padding: 1.5rem;
-    background: linear-gradient(
-      0deg,
-      rgba(38, 51, 63, 0.86) 0%,
-      rgba(38, 51, 63, 0.18) 58%,
-      rgba(38, 51, 63, 0) 100%
-    );
-  }
-
-  .update-card__title {
-    color: #fff;
-    font-family: "Fraunces", serif;
-    font-size: clamp(1.15rem, 2vw, 1.45rem);
-    font-weight: 700;
-    line-height: 1.18;
-  }
-
-  /* Call-to-action buttons (square, matches site style) */
-  .home-cta-wrap {
-    display: inline-flex;
-    margin: 0;
-  }
-
-  .home-cta {
-    border: 1px solid var(--teal);
-    background: var(--paper);
-    color: var(--teal-d);
-    padding: 0.58rem 0.95rem;
-    font-family: "Work Sans", sans-serif;
-    font-size: 0.86rem;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .home-cta:hover,
-  .update-card:hover .home-cta {
-    border-color: var(--rust);
-    color: var(--rust);
-  }
-
   @media (max-width: 720px) {
-    .about,
-    .updates {
+    .about {
       grid-template-columns: 1fr;
     }
   }
 </style>
 
 <Layout frontmatter={frontmatter} bare>
-  <section class="hero" style={`--hero-image: url("${heroImage}")`}>
-    <div class="hero__inner">
-      <h1>
-        Sustainability Governance of China&#39;s Global Infrastructure
-        Investments
-      </h1>
-      <p>
-        <strong
-          >Sustainability Governance of China&#39;s Global Infrastructure
-          Investments (SGAIN)</strong
-        > is a £1.7 million research project awarded to <strong
-          >Dr <a href="https://www.yixiansun.com">Yixian Sun</a></strong
-        > at the University of Bath by the UKRI Future Leaders Fellowship.
-      </p>
-      <p>
-        Our seven-year study programme integrates innovative mixed methods to
-        assess China&#39;s efforts to promote green development through overseas
-        infrastructure investments and also environmental and social impacts of
-        key Chinese projects in different host contexts across the Global South.
-        Our research aims to advance understanding of China&#39;s overseas
-        engagement and its influence on global sustainable development. Our work
-        will help policy practitioners develop suitable strategies to align
-        international investments with local sustainability needs.
-      </p>
-      <p class="home-cta-wrap">
-        <a class="home-cta" href="/research/">Learn more</a>
-      </p>
-    </div>
-  </section>
+  <Hero
+    image={heroImage}
+    title="Sustainability Governance of China's Global Infrastructure Investments"
+  >
+    <p>
+      <strong
+        >Sustainability Governance of China&#39;s Global Infrastructure
+        Investments (SGAIN)</strong
+      > is a £1.7 million research project awarded to <strong
+        >Dr <a href="https://www.yixiansun.com">Yixian Sun</a></strong
+      > at the University of Bath by the UKRI Future Leaders Fellowship.
+    </p>
+    <p>
+      Our seven-year study programme integrates innovative mixed methods to
+      assess China&#39;s efforts to promote green development through overseas
+      infrastructure investments and also environmental and social impacts of
+      key Chinese projects in different host contexts across the Global South.
+      Our research aims to advance understanding of China&#39;s overseas
+      engagement and its influence on global sustainable development. Our work
+      will help policy practitioners develop suitable strategies to align
+      international investments with local sustainability needs.
+    </p>
+    <p class="home-cta-wrap">
+      <a class="home-cta" href="/research/">Learn more</a>
+    </p>
+  </Hero>
 
   <div class="section-divider"></div>
 
@@ -262,31 +111,19 @@ const heroImage =
   <div class="section-divider"></div>
 
   <section class="band">
-    <h2 class="updates__title">Recent Updates</h2>
-    <div class="updates">
-      <a
-        class="update-card"
+    <h2 class="section-title">Recent Updates</h2>
+    <div class="card-grid">
+      <MediaCard
         href="/news/bath-conference-on-china-and-global-sustainability-transition/"
-      >
-        <img
-          src="/images/remote/assets-zyrosite-com/dsc01886-yleq5rrxkjiqjvop-13b7ce341f.jpg"
-          alt=""
-        />
-        <span class="update-card__overlay">
-          <span class="update-card__title">Bath Conference June 2025</span>
-          <span class="home-cta">See more</span>
-        </span>
-      </a>
-      <a class="update-card" href="/news/">
-        <img
-          src="/images/remote/images-unsplash-com/photo-1523995462485-3d171b5c8fa9-b700a78d0c.jpg"
-          alt="bundle of newspaper on table"
-        />
-        <span class="update-card__overlay">
-          <span class="update-card__title">SGAIN International News</span>
-          <span class="home-cta">See more</span>
-        </span>
-      </a>
+        image="/images/remote/assets-zyrosite-com/dsc01886-yleq5rrxkjiqjvop-13b7ce341f.jpg"
+        title="Bath Conference June 2025"
+      />
+      <MediaCard
+        href="/news/"
+        image="/images/remote/images-unsplash-com/photo-1523995462485-3d171b5c8fa9-b700a78d0c.jpg"
+        imageAlt="bundle of newspaper on table"
+        title="SGAIN International News"
+      />
     </div>
   </section>
 </Layout>

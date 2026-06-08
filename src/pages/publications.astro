@@ -1,4 +1,6 @@
 ---
+import Hero from "../components/Hero.astro";
+import MediaCard from "../components/MediaCard.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -8,104 +10,104 @@ const frontmatter = {
 };
 ---
 
-<Layout frontmatter={frontmatter}>
-  <p>
-    <img
-      src="/images/remote/images-unsplash-com/photo-1528214968864-8dd00782fa9e-132b852a90.jpg"
-      alt="aerial view photography of mountains"
-    />
-  </p>
-  <h1><strong>Publications</strong></h1>
-  <h6>
-    Below you can find a sample of our most recent publications, as well as
-    navigation to our different publications, including journal articles and
-    books, non-academic publications, policy briefs, and mentions of SGAIN and
-    our work in the media
-  </h6>
-  <article class="publication-card">
-    <p class="publication-card__meta">Most recent article</p>
-    <h3>
-      <a
-        href="/news/dataset-development-in-earth-system-governance-learnings-stakes-and-pathways-for-impact/"
-        >Dataset development in earth system governance: Learnings, stakes, and
-        pathways for impact.</a>
-    </h3>
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/remote/images-unsplash-com/photo-1528214968864-8dd00782fa9e-132b852a90.jpg"
+    title="Publications"
+  >
     <p>
-      Morin, J.-F., Hollway, J., Sun, Y., Vadrot, A. B. M., Allan, J., Bernauer,
-      T., Betsill, M. M., Brandi, C., Fast, C., Kim, R. E., Laurens, N.,
-      Lecavalier, E., McCracken, M., Mitchell, R. B., Morton, K., Orsini, A.,
-      Papin, M., Rowan, S., &amp; Widerberg, O. E., 2026. Earth System
-      Governance, 28, 100328
+      Below you can find a sample of our most recent publications, as well as
+      navigation to our different publications, including journal articles and
+      books, non-academic publications, policy briefs, and mentions of SGAIN and
+      our work in the media
     </p>
-    <p>6/1/2026</p>
-  </article>
-  <article class="publication-card">
-    <p class="publication-card__meta">Most recent article</p>
-    <h3>
-      <a
-        href="/news/varieties-of-local-implementation-for-net-zero-in-china-evidence-from-three-cities/"
-        >Varieties of Local Implementation for Net Zero in China: Evidence From
-        Three Cities</a>
-    </h3>
-    <p>Guan, T., Gou, Z., and Sun, Y. 2026.</p>
-    <p>5/24/2026</p>
-  </article>
-  <article class="publication-card">
-    <p class="publication-card__meta">Most recent article</p>
-    <h3>
-      <a
-        href="/news/compound-path-dependence-in-green-transitions-a-comparative-analysis-of-ev-policy-coordination-in-indonesia-and-thailand/"
-        >Compound path dependence in green transitions: a comparative analysis
-        of EV policy coordination in Indonesia and Thailand</a>
-    </h3>
-    <p>Ye, C., Xia, Y., Sun, Y., and Cashore, B., 2026.</p>
-    <p>5/20/2026</p>
-  </article>
-  <article class="publication-card">
-    <p class="publication-card__meta">Most recent book</p>
-    <h3>
-      <a href="/news/climate-governance-in-china-a-multiactor-perspective/"
-        >Climate governance in China: a multi-actor perspective</a>
-    </h3>
-    <p>
-      Ye, Y., and Sun, Y., 2026. in: Handbook of Research on Sustainability and
-      Governance
-    </p>
-    <p>3/17/2026</p>
-  </article>
-  <h4>Explore our publications</h4>
-  <p>
-    <img
-      src="/images/remote/images-unsplash-com/photo-1610116306796-6fea9f4fae38-ab23508359.jpg"
-      alt="white and brown book on brown woven surface"
-    />
-  </p>
-  <h6><strong>Academic Publications</strong></h6>
-  <p>
-    <a href="/news/academic-publications/#academic-publications">See more</a>
-  </p>
-  <p>
-    <img
-      src="/images/remote/images-unsplash-com/photo-1482876555840-f31c5ebbff1c-7102bf977b.jpg"
-      alt="person holding book"
-    />
-  </p>
-  <h6><strong>Non-Academic Publications</strong></h6>
-  <p><a href="/non-academic-publications/#non-academic">See more</a></p>
-  <p>
-    <img
-      src="/images/remote/images-unsplash-com/photo-1454165804606-c3d57bc86b40-d476d060c9.jpg"
-      alt="person holding pencil near laptop computer"
-    />
-  </p>
-  <h6><strong>Policy Briefs and Reports</strong></h6>
-  <p><a href="/news/academic-publications/#policy-briefs">See more</a></p>
-  <p>
-    <img
-      src="/images/remote/images-unsplash-com/photo-1573152143286-0c422b4d2175-027b50c708.jpg"
-      alt="people using phone while standing"
-    />
-  </p>
-  <h6><strong>Media Coverage</strong></h6>
-  <p><a href="/non-academic-publications/#media-coverage">See more</a></p>
+  </Hero>
+
+  <section class="band">
+    <div class="content-shell markdown-content">
+      <article class="publication-card">
+        <p class="publication-card__meta">Most recent article</p>
+        <h3>
+          <a
+            href="/news/dataset-development-in-earth-system-governance-learnings-stakes-and-pathways-for-impact/"
+            >Dataset development in earth system governance: Learnings, stakes,
+            and pathways for impact.</a>
+        </h3>
+        <p>
+          Morin, J.-F., Hollway, J., Sun, Y., Vadrot, A. B. M., Allan, J.,
+          Bernauer, T., Betsill, M. M., Brandi, C., Fast, C., Kim, R. E.,
+          Laurens, N., Lecavalier, E., McCracken, M., Mitchell, R. B., Morton,
+          K., Orsini, A., Papin, M., Rowan, S., &amp; Widerberg, O. E., 2026.
+          Earth System Governance, 28, 100328
+        </p>
+        <p>6/1/2026</p>
+      </article>
+      <article class="publication-card">
+        <p class="publication-card__meta">Most recent article</p>
+        <h3>
+          <a
+            href="/news/varieties-of-local-implementation-for-net-zero-in-china-evidence-from-three-cities/"
+            >Varieties of Local Implementation for Net Zero in China: Evidence
+            From Three Cities</a>
+        </h3>
+        <p>Guan, T., Gou, Z., and Sun, Y. 2026.</p>
+        <p>5/24/2026</p>
+      </article>
+      <article class="publication-card">
+        <p class="publication-card__meta">Most recent article</p>
+        <h3>
+          <a
+            href="/news/compound-path-dependence-in-green-transitions-a-comparative-analysis-of-ev-policy-coordination-in-indonesia-and-thailand/"
+            >Compound path dependence in green transitions: a comparative
+            analysis of EV policy coordination in Indonesia and Thailand</a>
+        </h3>
+        <p>Ye, C., Xia, Y., Sun, Y., and Cashore, B., 2026.</p>
+        <p>5/20/2026</p>
+      </article>
+      <article class="publication-card">
+        <p class="publication-card__meta">Most recent book</p>
+        <h3>
+          <a href="/news/climate-governance-in-china-a-multiactor-perspective/"
+            >Climate governance in China: a multi-actor perspective</a>
+        </h3>
+        <p>
+          Ye, Y., and Sun, Y., 2026. in: Handbook of Research on Sustainability
+          and Governance
+        </p>
+        <p>3/17/2026</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="band">
+    <h2 class="section-title">Explore our publications</h2>
+    <div class="card-grid">
+      <MediaCard
+        href="/academic-publications/#academic-publications"
+        image="/images/remote/images-unsplash-com/photo-1610116306796-6fea9f4fae38-ab23508359.jpg"
+        imageAlt="white and brown book on brown woven surface"
+        title="Academic Publications"
+      />
+      <MediaCard
+        href="/non-academic-publications/#non-academic"
+        image="/images/remote/images-unsplash-com/photo-1482876555840-f31c5ebbff1c-7102bf977b.jpg"
+        imageAlt="person holding book"
+        title="Non-Academic Publications"
+      />
+      <MediaCard
+        href="/academic-publications/#policy-briefs"
+        image="/images/remote/images-unsplash-com/photo-1454165804606-c3d57bc86b40-d476d060c9.jpg"
+        imageAlt="person holding pencil near laptop computer"
+        title="Policy Briefs and Reports"
+      />
+      <MediaCard
+        href="/non-academic-publications/#media-coverage"
+        image="/images/remote/images-unsplash-com/photo-1573152143286-0c422b4d2175-027b50c708.jpg"
+        imageAlt="people using phone while standing"
+        title="Media Coverage"
+      />
+    </div>
+  </section>
 </Layout>

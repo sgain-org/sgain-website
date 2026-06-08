@@ -55,6 +55,8 @@ oldUrl: "https://sgain.org/bath-conference-on-china-and-global-sustainability-tr
   <p>
     <a
       href="https://drive.google.com/file/d/1rD8Lw3Xu8KMkW4eVr2J3Edquvinv-VIJ/view?usp=sharing"
+      target="_blank"
+      rel="noopener noreferrer"
       >Conference brochure</a>
   </p>
   <p>
