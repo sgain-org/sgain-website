@@ -65,13 +65,13 @@ const renderedNodes = orderedNodes.map((node) => ({
 
 <section class:list={["partner-network", className]} aria-label={ariaLabel}>
   <svg class="partner-network__lines" viewBox="0 0 100 100" aria-hidden="true">
-    <polygon points="50,10 84.6,30 84.6,70 50,90 15.4,70 15.4,30" />
-    <line x1="50" y1="50" x2="50" y2="10" />
-    <line x1="50" y1="50" x2="84.6" y2="30" />
-    <line x1="50" y1="50" x2="84.6" y2="70" />
-    <line x1="50" y1="50" x2="50" y2="90" />
-    <line x1="50" y1="50" x2="15.4" y2="70" />
-    <line x1="50" y1="50" x2="15.4" y2="30" />
+    <polygon points="50,10 84.6,30 84.6,70 50,90 15.4,70 15.4,30"></polygon>
+    <line x1="50" y1="50" x2="50" y2="10"></line>
+    <line x1="50" y1="50" x2="84.6" y2="30"></line>
+    <line x1="50" y1="50" x2="84.6" y2="70"></line>
+    <line x1="50" y1="50" x2="50" y2="90"></line>
+    <line x1="50" y1="50" x2="15.4" y2="70"></line>
+    <line x1="50" y1="50" x2="15.4" y2="30"></line>
   </svg>
 
   {
@@ -84,47 +84,41 @@ const renderedNodes = orderedNodes.map((node) => ({
           node.isTextOnly && "partner-network__node--text",
         ]}
       >
-        {
-          node.href ? (
-            <a class="partner-network__node-inner" href={node.href} aria-label={node.label}>
-              {
-                node.imageSrc ? (
-                  <img src={node.imageSrc} alt={node.altText} loading="lazy" />
-                ) : (
-                  <>
-                    <span class="partner-network__label" aria-hidden="true">
-                      {node.visibleLabel}
-                    </span>
-                    {
-                      node.visibleLabel !== node.label && (
-                        <span class="partner-network__sr-only">{node.label}</span>
-                      )
-                    }
-                  </>
-                )
-              }
-            </a>
-          ) : (
-            <div class="partner-network__node-inner">
-              {
-                node.imageSrc ? (
-                  <img src={node.imageSrc} alt={node.altText} loading="lazy" />
-                ) : (
-                  <>
-                    <span class="partner-network__label" aria-hidden="true">
-                      {node.visibleLabel}
-                    </span>
-                    {
-                      node.visibleLabel !== node.label && (
-                        <span class="partner-network__sr-only">{node.label}</span>
-                      )
-                    }
-                  </>
-                )
-              }
-            </div>
-          )
-        }
+        {node.href ? (
+          <a
+            class="partner-network__node-inner"
+            href={node.href}
+            aria-label={node.label}
+          >
+            {node.imageSrc ? (
+              <img src={node.imageSrc} alt={node.altText} loading="lazy" />
+            ) : (
+              <>
+                <span class="partner-network__label" aria-hidden="true">
+                  {node.visibleLabel}
+                </span>
+                {node.visibleLabel !== node.label && (
+                  <span class="partner-network__sr-only">{node.label}</span>
+                )}
+              </>
+            )}
+          </a>
+        ) : (
+          <div class="partner-network__node-inner">
+            {node.imageSrc ? (
+              <img src={node.imageSrc} alt={node.altText} loading="lazy" />
+            ) : (
+              <>
+                <span class="partner-network__label" aria-hidden="true">
+                  {node.visibleLabel}
+                </span>
+                {node.visibleLabel !== node.label && (
+                  <span class="partner-network__sr-only">{node.label}</span>
+                )}
+              </>
+            )}
+          </div>
+        )}
       </div>
     ))
   }
