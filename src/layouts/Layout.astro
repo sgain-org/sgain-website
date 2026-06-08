@@ -73,9 +73,9 @@ const navSections = [
   {
     label: "News & Events",
     links: [
-      { href: "/news/", label: "News & Events" },
+      { href: "/publications/", label: "News & Events" },
       {
-        href: "/news/bath-conference-on-china-and-global-sustainability-transition/",
+        href: "/publications/bath-conference-on-china-and-global-sustainability-transition/",
         label: "Bath Conference",
       },
       { href: "/news/archive/", label: "Archive" },
@@ -456,10 +456,9 @@ const sectionActive = (links: Array<{ href: string }>) =>
 
   .footer-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr) minmax(
-        180px,
-        0.7fr
-      ) auto;
+    grid-template-columns:
+      minmax(0, 1.4fr) minmax(220px, 0.8fr) minmax(180px, 0.7fr)
+      auto;
     align-items: start;
     gap: 36px;
     max-width: 1220px;
@@ -675,8 +674,16 @@ const sectionActive = (links: Array<{ href: string }>) =>
           aria-expanded="false"
           aria-controls="site-nav"
         >
-          <Menu class="nav-toggle-icon nav-toggle-open" size={28} aria-hidden="true" />
-          <X class="nav-toggle-icon nav-toggle-close" size={28} aria-hidden="true" />
+          <Menu
+            class="nav-toggle-icon nav-toggle-open"
+            size={28}
+            aria-hidden="true"
+          />
+          <X
+            class="nav-toggle-icon nav-toggle-close"
+            size={28}
+            aria-hidden="true"
+          />
         </button>
 
         <nav class="site-nav" id="site-nav" aria-label="Main navigation">
@@ -836,7 +843,8 @@ const sectionActive = (links: Array<{ href: string }>) =>
       });
 
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && isOpen()) closeMenu({ focusToggle: true });
+        if (event.key === "Escape" && isOpen())
+          closeMenu({ focusToggle: true });
       });
 
       // Reset state when resizing up to the desktop breakpoint.

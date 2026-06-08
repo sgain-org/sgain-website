@@ -89,7 +89,9 @@ const archiveGroups = archiveEntries.reduce<
                 {group.entries.map(({ entry, RenderedContent }) => (
                   <article>
                     <h3>
-                      <a href={`/news/${entry.id.replace(/\.md$/, "")}/`}>
+                      <a
+                        href={`/publications/${entry.id.replace(/\.md$/, "")}/`}
+                      >
                         {entry.data.title}
                       </a>
                     </h3>
