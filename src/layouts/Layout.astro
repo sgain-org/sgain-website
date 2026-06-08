@@ -1,4 +1,5 @@
 ---
+import { Menu, X } from "@lucide/astro";
 import SocialLinks from "../components/social/SocialLinks.astro";
 import "../styles/styles.css";
 
@@ -223,6 +224,28 @@ const sectionActive = (links: Array<{ href: string }>) =>
   .nav-panel a.active {
     background: var(--paper2);
     color: var(--teal);
+  }
+
+  .nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    margin: -3px -8px -3px 0;
+    border: 0;
+    background: transparent;
+    color: var(--paper);
+    cursor: pointer;
+  }
+
+  .nav-toggle:hover {
+    color: #fff;
+  }
+
+  .nav-toggle-close {
+    display: none;
   }
 
   .site-main {
@@ -474,26 +497,83 @@ const sectionActive = (links: Array<{ href: string }>) =>
   }
 
   @media (max-width: 980px) {
-    .site-bar {
-      align-items: flex-start;
-      flex-direction: column;
+    .nav-toggle {
+      display: inline-flex;
     }
 
     .site-nav {
+      position: fixed;
+      inset: var(--header-h, 80px) 0 0 0;
+      z-index: 5;
+      flex-direction: column;
+      align-items: stretch;
       justify-content: flex-start;
-      flex-wrap: wrap;
+      gap: 4px;
+      padding: 12px 16px 32px;
+      background: var(--teal-d);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+    }
+
+    body.nav-open .site-nav {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    body.nav-open .nav-toggle-open {
+      display: none;
+    }
+
+    body.nav-open .nav-toggle-close {
+      display: block;
+    }
+
+    .nav-link,
+    .nav-menu summary {
       width: 100%;
+      min-width: 0;
+      padding: 12px 10px;
+      font-size: 1rem;
     }
 
     .nav-menu {
       position: static;
     }
 
+    .nav-menu summary {
+      justify-content: space-between;
+    }
+
     .nav-panel {
       position: static;
-      width: min(100%, 360px);
+      width: 100%;
+      margin: 2px 0 6px;
+      border: 0;
       box-shadow: none;
-      margin-top: 4px;
+      padding: 4px 4px 4px 14px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-panel a {
+      color: var(--paper);
+    }
+
+    .nav-panel a:hover,
+    .nav-panel a.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
     }
 
     .footer-grid {
@@ -508,7 +588,6 @@ const sectionActive = (links: Array<{ href: string }>) =>
 
   @media (max-width: 680px) {
     .site-bar {
-      width: 100%;
       padding: 12px 16px;
     }
 
@@ -518,41 +597,6 @@ const sectionActive = (links: Array<{ href: string }>) =>
 
     .brand-logo {
       height: 44px;
-    }
-
-    .site-nav {
-      align-items: stretch;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      gap: 2px;
-      width: calc(100vw - 32px);
-      max-width: 100%;
-    }
-
-    .nav-link,
-    .nav-menu summary {
-      justify-content: center;
-      width: 100%;
-      min-width: 0;
-      padding: 7px 6px;
-      font-size: 0.84rem;
-      line-height: 1.2;
-      overflow-wrap: anywhere;
-      text-align: center;
-      white-space: normal;
-    }
-
-    .nav-menu {
-      min-width: 0;
-    }
-
-    .nav-menu summary::after {
-      flex: 0 0 auto;
-      margin-left: 6px;
-    }
-
-    .nav-panel {
-      width: 100%;
     }
 
     .site-main {
@@ -624,7 +668,18 @@ const sectionActive = (links: Array<{ href: string }>) =>
           <img class="brand-logo" src={logoWhite} alt="SGAIN Project" />
         </a>
 
-        <nav class="site-nav" aria-label="Main navigation">
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          <Menu class="nav-toggle-icon nav-toggle-open" size={28} aria-hidden="true" />
+          <X class="nav-toggle-icon nav-toggle-close" size={28} aria-hidden="true" />
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Main navigation">
           <a href="/" class:list={["nav-link", isActive("/") && "active"]}
             >Home</a
           >
@@ -738,5 +793,66 @@ const sectionActive = (links: Array<{ href: string }>) =>
         </div>
       </div>
     </footer>
+
+    <script>
+      const toggle = document.querySelector<HTMLElement>(".nav-toggle");
+      const nav = document.getElementById("site-nav");
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const root = document.documentElement;
+      const body = document.body;
+
+      const isOpen = () => body.classList.contains("nav-open");
+
+      const setHeaderHeight = () => {
+        if (header) {
+          root.style.setProperty("--header-h", `${header.offsetHeight}px`);
+        }
+      };
+
+      const openMenu = () => {
+        body.classList.add("nav-open");
+        toggle?.setAttribute("aria-expanded", "true");
+        toggle?.setAttribute("aria-label", "Close menu");
+        nav?.querySelector<HTMLElement>("a, summary")?.focus();
+      };
+
+      const closeMenu = ({ focusToggle = false } = {}) => {
+        body.classList.remove("nav-open");
+        toggle?.setAttribute("aria-expanded", "false");
+        toggle?.setAttribute("aria-label", "Open menu");
+        if (focusToggle) toggle?.focus();
+      };
+
+      toggle?.addEventListener("click", () => {
+        if (isOpen()) {
+          closeMenu({ focusToggle: true });
+        } else {
+          openMenu();
+        }
+      });
+
+      nav?.addEventListener("click", (event) => {
+        if ((event.target as HTMLElement | null)?.closest("a")) closeMenu();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && isOpen()) closeMenu({ focusToggle: true });
+      });
+
+      // Reset state when resizing up to the desktop breakpoint.
+      const desktop = window.matchMedia("(min-width: 981px)");
+      desktop.addEventListener("change", (event) => {
+        if (event.matches && isOpen()) closeMenu();
+      });
+
+      // Keep the overlay's top offset exactly under the sticky header.
+      let resizeFrame = 0;
+      window.addEventListener("resize", () => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(setHeaderHeight);
+      });
+
+      setHeaderHeight();
+    </script>
   </body>
 </html>
