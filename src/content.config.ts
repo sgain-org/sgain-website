@@ -15,4 +15,33 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const news = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/news" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().default(""),
+    oldUrl: z.string().optional(),
+    type: z.enum(["page", "archive-index", "archived"]).default("page"),
+    displayDate: z.string().optional(),
+    year: z.number().int().optional(),
+    order: z.number().int().positive().optional(),
+  }),
+});
+
+const team = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/team" }),
+  schema: z.object({
+    name: z.string(),
+    role: z.string().optional(),
+    section: z.enum(["bath", "partners", "advisory", "alumni"]),
+    group: z
+      .enum(["bath", "causal-map", "indonesia", "china", "bangladesh", "pakistan"])
+      .optional(),
+    order: z.number().int().positive(),
+    profileUrl: z.string().optional(),
+    image: z.string().optional(),
+    imageAlt: z.string().default(""),
+  }),
+});
+
+export const collections = { blog, news, team };

@@ -1,15 +1,314 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+type MediaVariant = "landscape" | "portrait" | "audio";
+
+type MediaItem = {
+  title: string;
+  description: string;
+  embed: {
+    src: string;
+    title: string;
+    variant: MediaVariant;
+    width: number;
+    height: number;
+    allow: string;
+    sandbox?: string;
+    allowFullScreen?: boolean;
+  };
+};
+
 const frontmatter = {
   title: "Multimedia | SGAIN Project",
-  description: "",
+  description:
+    "Conference coverage and interviews from the SGAIN Project, including videos from the 2025 Bath Conference and recent media appearances.",
   oldUrl: "https://sgain.org/multimedia",
 };
-const content =
-  '<p><img src="https://images.unsplash.com/photo-1528214968864-8dd00782fa9e?auto=format&fit=crop&w=1920" alt="aerial view photography of mountains"></p>\n<h1><strong>Multimedia</strong></h1>\n<h4>Insights from the 2025 Bath Conference</h4>\n<p><img src="https://i.vimeocdn.com/video/2122631576-64d02201ed935027a03a31955962fdbe166b1133eefd8e149c7da9bbeed3742a-d_720?region=us" alt=""></p>\n<h6><strong>Challenges &amp; Next Steps for China’s Sustainability Leadership</strong></h6>\n<p>China is reshaping the global sustainability landscape. From clean energy technology to global governance, its actions influence the world’s transition in multiple ways. At our conference, global experts shared their perspectives on China’s evolving role</p>\n<h6><strong>China’s Evolving Role in Global Sustainability Transition</strong></h6>\n<p>As China’s role in global sustainability grows, experts highlight a range of challenges that may influence its future direction. These include domestic policy considerations, sectoral transitions, and evolving international dynamics. In this video, we explore how these factors shape China’s potential next steps in sustainability leadership.</p>\n<h6><strong>China’s Global Partnerships for Sustainability</strong></h6>\n<p>China’s global role is reflected in its expanding partnerships across world regions, particularly in the Global South. These partnerships vary widely - shaped by local priorities, development needs, and environmental goals. In this video, experts share regional perspectives on China’s contributions and expectations for future collaboration.</p>\n<h4>Interviews</h4>\n<h6><strong>COP30 Key Takeaways</strong></h6>\n<p>The University of Bath interviewed PI Dr Yixian Sun after he returned from COP30 to discuss key takeaways that could shape the future of sustainability.</p>\n<h6><strong>The China Pivot: What will Beijing’s climate leadership look like?</strong></h6>\n<p>The Outrage and Optimism podcast featured project PI Dr. Yixian Sun for the 348th episode, to dicusss China&#39;s vision of leadership, its evolving role in the Global South, and the risks and opportunities of an increasingly multipolar climate order.</p>\n<h6><strong>Can China Lead the World on Climate Change?</strong></h6>\n<p>Mapping Global China Conversations hosts project PI Dr. Yixian Sun and Dr. Yifei Li, asking them about China’s evolving role in environmental governance, its efforts to green the Belt and Road Initiative (BRI), and the competing narratives of soft power and coercion in its global environmental strategy.</p>\n<p><img src="https://i.ytimg.com/vi/br2w5eeqzD8/hqdefault.jpg" alt=""></p>';
+
+const conferenceCoverage: MediaItem[] = [
+  {
+    title: "China’s Evolving Role in Global Sustainability Transition",
+    description:
+      "China is reshaping the global sustainability landscape. From clean energy technology to global governance, its actions influence the world’s transition in multiple ways. At our conference, global experts shared their perspectives on China’s evolving role.",
+    embed: {
+      src: "https://player.vimeo.com/video/1165332886?playlist=1165332886&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&muted=0",
+      title: "China’s Evolving Role in Global Sustainability Transition",
+      variant: "landscape",
+      width: 400,
+      height: 237,
+      allow: "autoplay; fullscreen; picture-in-picture",
+      allowFullScreen: true,
+    },
+  },
+  {
+    title: "Challenges & Next Steps for China’s Sustainability Leadership",
+    description:
+      "As China’s role in global sustainability grows, experts highlight a range of challenges that may influence its future direction. These include domestic policy considerations, sectoral transitions, and evolving international dynamics. In this video, we explore how these factors shape China’s potential next steps in sustainability leadership.",
+    embed: {
+      src: "https://player.vimeo.com/video/1165332386?playlist=1165332386&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&muted=0",
+      title: "Challenges & Next Steps for China’s Sustainability Leadership",
+      variant: "landscape",
+      width: 400,
+      height: 237,
+      allow: "autoplay; fullscreen; picture-in-picture",
+      allowFullScreen: true,
+    },
+  },
+  {
+    title: "China’s Global Partnerships for Sustainability",
+    description:
+      "China’s global role is reflected in its expanding partnerships across world regions, particularly in the Global South. These partnerships vary widely - shaped by local priorities, development needs, and environmental goals. In this video, experts share regional perspectives on China’s contributions and expectations for future collaboration.",
+    embed: {
+      src: "https://player.vimeo.com/video/1165332594?playlist=1165332594&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&muted=0",
+      title: "China’s Global Partnerships for Sustainability",
+      variant: "landscape",
+      width: 400,
+      height: 237,
+      allow: "autoplay; fullscreen; picture-in-picture",
+      allowFullScreen: true,
+    },
+  },
+];
+
+const interviews: MediaItem[] = [
+  {
+    title: "COP30 Key Takeaways",
+    description:
+      "The University of Bath interviewed PI Dr Yixian Sun after he returned from COP30 to discuss key takeaways that could shape the future of sustainability.",
+    embed: {
+      src: "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2067131037439780%2F&show_text=false&width=267&t=0",
+      title: "COP30 Key Takeaways",
+      variant: "portrait",
+      width: 267,
+      height: 476,
+      allow:
+        "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share",
+      allowFullScreen: true,
+    },
+  },
+  {
+    title: "The China Pivot: What will Beijing’s climate leadership look like?",
+    description:
+      "The Outrage and Optimism podcast featured project PI Dr Yixian Sun for the 348th episode to discuss China’s vision of leadership, its evolving role in the Global South, and the risks and opportunities of an increasingly multipolar climate order.",
+    embed: {
+      src: "https://embed.podcasts.apple.com/gb/podcast/the-china-pivot-what-will-beijings-climate-leadership/id1459416461?i=1000747135989&theme=light",
+      title:
+        "The China Pivot: What will Beijing’s climate leadership look like?",
+      variant: "audio",
+      width: 660,
+      height: 175,
+      allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
+      sandbox:
+        "allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation",
+    },
+  },
+  {
+    title: "Can China Lead the World on Climate Change?",
+    description:
+      "Mapping Global China Conversations hosts project PI Dr Yixian Sun and Dr Yifei Li, asking them about China’s evolving role in environmental governance, its efforts to green the Belt and Road Initiative (BRI), and the competing narratives of soft power and coercion in its global environmental strategy.",
+    embed: {
+      src: "https://www.youtube.com/embed/br2w5eeqzD8?playlist=br2w5eeqzD8&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&mute=0&start=4",
+      title: "Can China Lead the World on Climate Change?",
+      variant: "landscape",
+      width: 440,
+      height: 279,
+      allow:
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+      allowFullScreen: true,
+    },
+  },
+];
 ---
 
 <Layout frontmatter={frontmatter}>
-  <Fragment set:html={content} />
+  <div class="multimedia-page">
+    <p>
+      <img
+        src="/images/remote/images-unsplash-com/photo-1528214968864-8dd00782fa9e-132b852a90.jpg"
+        alt="Aerial view of mountains"
+      />
+    </p>
+    <h1>Multimedia</h1>
+
+    <section class="media-section" aria-labelledby="conference-coverage-title">
+      <h2 id="conference-coverage-title">
+        Insights from the 2025 Bath Conference
+      </h2>
+      <div class="media-grid">
+        {
+          conferenceCoverage.map((item) => (
+            <article
+              class:list={[
+                "media-card",
+                item.embed.variant === "portrait" && "media-card--portrait",
+                item.embed.variant === "audio" && "media-card--audio",
+              ]}
+            >
+              <div class="media-card__embed">
+                <iframe
+                  class:list={[
+                    "media-frame",
+                    item.embed.variant === "portrait" &&
+                      "media-frame--portrait",
+                    item.embed.variant === "audio" && "media-frame--audio",
+                  ]}
+                  src={item.embed.src}
+                  title={item.embed.title}
+                  width={item.embed.width}
+                  height={item.embed.height}
+                  loading="lazy"
+                  allow={item.embed.allow}
+                  sandbox={item.embed.sandbox}
+                  allowfullscreen={item.embed.allowFullScreen}
+                />
+              </div>
+              <div class="media-card__body">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="media-section" aria-labelledby="interviews-title">
+      <h2 id="interviews-title">Interviews</h2>
+      <div class="media-grid">
+        {
+          interviews.map((item) => (
+            <article
+              class:list={[
+                "media-card",
+                item.embed.variant === "portrait" && "media-card--portrait",
+                item.embed.variant === "audio" && "media-card--audio",
+              ]}
+            >
+              <div class="media-card__embed">
+                <iframe
+                  class:list={[
+                    "media-frame",
+                    item.embed.variant === "portrait" &&
+                      "media-frame--portrait",
+                    item.embed.variant === "audio" && "media-frame--audio",
+                  ]}
+                  src={item.embed.src}
+                  title={item.embed.title}
+                  width={item.embed.width}
+                  height={item.embed.height}
+                  loading="lazy"
+                  allow={item.embed.allow}
+                  sandbox={item.embed.sandbox}
+                  allowfullscreen={item.embed.allowFullScreen}
+                />
+              </div>
+              <div class="media-card__body">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 </Layout>
+
+<style>
+  .multimedia-page {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .multimedia-page h1 {
+    margin-bottom: 0;
+  }
+
+  .media-section {
+    display: grid;
+    gap: 1.35rem;
+  }
+
+  .media-section + .media-section {
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+
+  .media-section h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .media-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .media-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.25rem;
+    align-items: start;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .media-card--portrait {
+    grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  }
+
+  .media-card__embed {
+    display: grid;
+    align-content: start;
+  }
+
+  .media-card__body {
+    min-width: 0;
+  }
+
+  .media-card__body h3 {
+    margin: 0;
+    color: var(--teal-d);
+    font-size: 1.45rem;
+  }
+
+  .media-card__body p {
+    margin-top: 0.85rem;
+    margin-bottom: 0;
+  }
+
+  .media-frame {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    background: #000;
+  }
+
+  .media-frame--portrait {
+    max-width: 320px;
+    aspect-ratio: 267 / 476;
+    margin-inline: auto;
+    background: transparent;
+  }
+
+  .media-frame--audio {
+    aspect-ratio: auto;
+    min-height: 175px;
+    background: transparent;
+  }
+
+  @media (max-width: 820px) {
+    .media-card,
+    .media-card--portrait,
+    .media-card--audio {
+      grid-template-columns: 1fr;
+    }
+
+    .media-frame--portrait {
+      max-width: 280px;
+    }
+  }
+</style>

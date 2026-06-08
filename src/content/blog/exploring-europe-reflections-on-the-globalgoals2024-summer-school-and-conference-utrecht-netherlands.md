@@ -5,7 +5,7 @@ oldUrl: "https://sgain.org/exploring-europe-reflections-on-the-globalgoals2024-s
 author: "Muhammad Faisal Sharif, Doctoral Researcher, University of Bath"
 date: "2024-09-09"
 readingTime: "4 min read"
-heroImage: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=434,fit=crop/mxB7zBBp2Bc866y1/globalgoals-blog-picture-1-m6LJnx5wP6SgDQ28.jpg"
+heroImage: "/images/remote/assets-zyrosite-com/globalgoals-blog-picture-1-m6ljnx5wp6sgdq28-e1e5f1e5e4.jpg"
 ---
 
 **Journey to Utrecht**
@@ -22,7 +22,7 @@ The subsequent two-day international research conference, with over 150 delegate
 
 University of Bath’s Centre for Development Studies (CDS), the key partner of the conference, co-hosted the memorable reception on the first evening. During the event, Dr. Sun, Associate Professor in International Development and Lead of [the](https://www.bath.ac.uk/corporate-information/earth-system-governance-research-centre-bath/) [Earth System Governance Research Centre Bath](https://www.bath.ac.uk/corporate-information/earth-system-governance-research-centre-bath/), delivered an insightful speech, encouraging participants to collaborate more closely in pursuit of a sustainable future. This gathering greatly contributed to the collaborative spirit of the conference.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1366,fit=crop/mxB7zBBp2Bc866y1/img-20240830-wa0006-Yleyw2pz9ZHP6D23.jpg)
+![](/images/remote/assets-zyrosite-com/img-20240830-wa0006-yleyw2pz9zhp6d23-3160110777.jpg)
 
 One of the highlights of the week was representing the exceptional group of summer school participants in the Final Plenary of the Conference; it was both an honor and a responsibility for me. I presented our collective vision and emphasized the need for greater inclusivity in policymaking, including ensuring meaningful participation from poor and marginalized communities, in order to better align policies with the needs of the people and the SDGs. I also took the opportunity to highlight the critical importance of climate financing for Global South countries, like Pakistan, to achieve equitable and sustainable futures.
 
@@ -40,4 +40,4 @@ Overall, this journey was transformative. The diversity of perspectives, the dep
 
 I extend my heartfelt thanks to the exceptional organizing team from Utrecht University’s GLOBALGOALS Project (Fronika de Wit, Mara Wendebourg, Guilherme de Queiroz Stein, Yi Hyun Kang, and Michele Joie Prawiromaruto) and passionate volunteers whose tireless efforts made this possible. Their proactive communication and warm hospitality truly enhanced the event.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=506,fit=crop/mxB7zBBp2Bc866y1/globalgoals-blog-picture-3-YBg40M50GxtQ9Qzz.jpg)
+![](/images/remote/assets-zyrosite-com/globalgoals-blog-picture-3-ybg40m50gxtq9qzz-aa387108b0.jpg)

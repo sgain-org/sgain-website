@@ -1,0 +1,12 @@
+---
+title: "What Would It Take for China to be a Global Environmental Leader? | SGAIN Project"
+description: "Hale, T., & Sun, Y. (2025). Global Policy Opinion & Analysis."
+oldUrl: "https://sgain.org/what-would-it-take-for-china-to-be-a-global-environmental-leader"
+---
+
+<h1>What Would It Take for China to be a Global Environmental Leader?</h1>
+  <p>Hale, T., &amp; Sun, Y. (2025). Global Policy Opinion &amp; Analysis.</p>
+  <p>In this article, SGAIN Advisory Board member Thomas Hale and PI Yixian Sun call for serious research and dialogue to make China to a global environmental leader.</p>
+  <p><em>What would it take for China to be an international environmental leader? The question worth asking—not just because China’s footprint on our shared planet is second to none, but because the</em> <em>shifting geopolitical landscape demands it.</em></p>
+  <p><em>The United States’ oscillation between ambition and abdication on climate, the limits of the EU to do more than lead by example, and the limited interest and capacity of emerging economies like Brazil or India, all mean that global progress hinges, to an unusual degree, on what happens in Beijing.</em></p>
+  <p>Read the full article <a href="https://www.globalpolicyjournal.com/blog/02/07/2025/what-would-it-take-china-be-global-environmental-leader">here</a></p>

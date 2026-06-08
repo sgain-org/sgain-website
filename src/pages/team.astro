@@ -1,4 +1,5 @@
 ---
+import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -7,10 +8,326 @@ const frontmatter = {
     "Discover the SGAIN project team, including members from around the globe and our esteemed advisory board. Learn about their affiliations and research areas contributing to the project's success.",
   oldUrl: "https://sgain.org/team",
 };
-const content =
-  '<p><img src="https://images.unsplash.com/photo-1684142636731-90ac495fe76c?auto=format&fit=crop&w=1920" alt="an aerial view of a city with a train on the tracks"></p>\n<h1><strong>Team</strong></h1>\n<p><a href="/team/#bath-team">Bath Team</a></p>\n<p><a href="/team/#international-partners">International Partners</a></p>\n<p><a href="/team/#advisory-board">Advisory Board</a></p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=512,fit=crop/mxB7zBBp2Bc866y1/dsc02337-1-vb0ltdU3USPo4flG.jpg" alt=""></p>\n<h3><strong>Bath Team</strong></h3>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=131,fit=crop/mxB7zBBp2Bc866y1/uob-logo-black-Yan920jrrxSN7a5J.png" alt=""></p>\n<h6><strong><a href="https://yixiansun.com">Yixian Sun</a></strong></h6>\n<p><strong>Principal Investigator</strong></p>\n<p><strong>Dr Yixian Sun</strong> is a Professor of Sustainability Governance at the University of Bath and a UKRI Future Leaders Fellow. As a leading expert of environmental governance and sustainable development, his research examines the changing role of emerging economies – especially China – in global environmental governance. He is also an editor of <em>Global Environmental Politics</em> and a member of the Scientific Steering Committee of the Earth System Governance Project. He has published multiple books and over 40 peer-reviewed articles in high-impact international journals. Find <a href="https://researchportal.bath.ac.uk/en/persons/yixian-sun" title="https://researchportal.bath.ac.uk/en/persons/yixian-sun">here</a> for more details on his work including all publications for free access.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=514,fit=crop/mxB7zBBp2Bc866y1/flf_2025-162-JPwyo3GOQwpxTBON.jpg" alt=""></p>\n<h6><strong><a href="https://www.linkedin.com/in/muhammad-faisal-sharif-922a707/">Muhammad Faisal Sharif</a></strong></h6>\n<p><strong>Faisal</strong> is a Doctoral Researcher examining socio-political, economic, and justice implications of the energy transition in Pakistan. He is an experienced energy sector practitioner with diverse academic qualifications including BSc in Mechanical Engineering, Master’s in Energy Management and MBA, M.Sc. in Renewable Energy and MRes International Development.</p>\n<p><strong>UKRI-ESRC SWDTP Funded Doctoral Researcher</strong></p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=375,fit=crop/mxB7zBBp2Bc866y1/faisal-Yleygnz7Bws7oXDN.jpg" alt=""></p>\n<h6><strong><a href="https://www.linkedin.com/in/jiuyang9971/">Jiuyang Li</a></strong></h6>\n<p><strong>PhD Student</strong></p>\n<p><strong>Jiuyang Li</strong> is a funded PhD student in the Department of Social &amp; Policy Sciences at the University of Bath, focusing on the sustainability governance of China&#39;s overseas infrastructure investments. Jiuyang&#39;s research explores China&#39;s environmental politics and governance. He holds a Master’s in Political Science from Lund University and a Bachelor’s in International Relations.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=563,fit=crop/mxB7zBBp2Bc866y1/photo-2025-03-12-10-57-02-Yg2jBJ2Er9uQqWJ3.jpg" alt=""></p>\n<h6><strong><a href="https://www.linkedin.com/in/ciara-o-brien-147a06305/">Ciara O&#39;Brien</a></strong></h6>\n<p><strong>Project Manager &amp; Research Assistant</strong></p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1363,fit=crop/mxB7zBBp2Bc866y1/fullsizerender-1-itVpYPqXD6ef6tTc.jpg" alt=""></p>\n<p><strong>Ciara O&#39;Brien</strong> is a final year Politics and International Relations undergraduate student at the University of Bath. She has a particular interest in foreign policy and international development, with her research focusing on national and international discursive shifts.</p>\n<p><strong>Dr Yitong Ye&#39;s</strong> research is on comparative politics, environmental governance, and sustainability. She specializes in applying advanced mixed research methods and integrating AI into data analysis across the entire research lifecycle (data collection-&gt; feature extraction-&gt; coding and fine-tuning -&gt; inference &amp; insights), aiming to provide comprehensive insights across analysis levels.</p>\n<h6><strong><a href="https://www.linkedin.com/in/yitong-ye-a03bab203/">Yitong Ye</a></strong></h6>\n<p><strong>Postdoctoral Research Associate</strong></p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=1065,fit=crop/mxB7zBBp2Bc866y1/img_6394-YD04XaQXGpHRxXDz.jpg" alt=""></p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=498,fit=crop/mxB7zBBp2Bc866y1/picture1-mxB7ePwrj6Uaryyl.jpg" alt=""></p>\n<h6><strong>Yuen Gu</strong></h6>\n<p><strong>PhD Student</strong></p>\n<p><strong>Yuen Gu</strong>, funded by the China Scholarship Council, focuses her research on China&#39;s climate finance and investment abroad, including China&#39;s international climate stance, South-South climate cooperation, and climate collaboration under the Belt and Road Initiative.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=375,fit=crop/mxB7zBBp2Bc866y1/ya-xiao-A85e2a3R3MtrrPjp.jpg" alt=""></p>\n<h6><strong><a href="https://www.linkedin.com/in/ya-xiao-201217/">Ya Xiao</a></strong></h6>\n<p><strong>Research Assistant</strong></p>\n<p><strong>Ya Xiao</strong> is a Doctoral Researcher exploring socio-technical transformation and its implications for sustainability. Her research focuses on the roles of non-state actors in shaping emerging sustainability agendas. Key areas of research include private governance, corporate social responsibility (CSR), and global sustainability governance. Before her PhD, she gained extensive work experience across NGO, UN agency, and the private CSR sector.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=583,fit=crop/mxB7zBBp2Bc866y1/screenshot-2026-05-11-090714-d41oMtm67bON8PZH.png" alt=""></p>\n<h6><strong><a href="https://www.linkedin.com/in/aarshia-sawhney-680135321">Aarshia Sawhney</a></strong></h6>\n<p><strong>Research Assistant</strong></p>\n<p><strong>Aarshia Sawhney</strong> is a BSc International Development with Economics student at the University of Bath. Her interests focus on sustainable development and political economy. Her current research examines emerging powers’ narratives of climate leadership in China, Brazil, and India using computational text analysis.</p>\n<h6><strong>Steve Powell</strong></h6>\n<p><strong>Co-founder and Director of Causal Map Ltd.</strong></p>\n<p>With 25+ years of experience in global research and evaluation, Steve has led projects from post-tsunami psychosocial programming to East African community resilience. He holds a PhD in psychology on post-war trauma in Bosnia-Herzegovina. Co-founder of Causal Map Ltd., Steve is dedicated to enhancing collection and synthesis of people’s ideas about ‘what influences what’.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=312,fit=crop/mxB7zBBp2Bc866y1/picture1-AR0bgvRwQbC33r1Z.jpg" alt=""></p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=422,fit=crop/mxB7zBBp2Bc866y1/picture2-dWxbgWkyvlHl3K2k.jpg" alt=""></p>\n<h6><strong>Fiona Remnant</strong></h6>\n<p><strong>Co-founder and Director of Causal Map Ltd.</strong></p>\n<p>Fiona is a communications and research professional with expertise in applying academic research in international development. She has held key global roles, including at Sri Lanka&#39;s Centre for Poverty Analysis. Co-author of the QuIP and co-founder of Bath SDR Ltd., Fiona works with Steve on her experience from causal mapping QuIP data to help with designing Causal Map.</p>\n<h4><strong>Causal Map Team</strong></h4>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=280,fit=crop/mxB7zBBp2Bc866y1/causal-map-logorgb-mv07g9KpBKFLN289.jpg" alt=""></p>\n<h3><strong>International Partners</strong></h3>\n<h6><strong>Nur Rachmat Yuliantoro</strong></h6>\n<p><strong>Professor,</strong> Universitas Gadjah Mada</p>\n<p><strong>Dr Nur Rachmat Yuliantoro</strong> is a full professor at the Department of International Relations, Universitas Gadjah Mada. He has studied Chinese foreign policy as one of his areas of research since 2004. His current focus is the development of the Belt and Road Initiative in Indonesia. He can be reached at <a href="mailto:nur.rachmat@ugm.ac.id">nur.rachmat@ugm.ac.id</a>.</p>\n<h6><strong>Maharani Hapsari</strong></h6>\n<p><strong>Assistant Professor,</strong> Universitas Gadjah Mada</p>\n<p><strong>Dr Maharani Hapsari</strong> is Assistant Professor at the Department of International Relations, Faculty of Social and Political Science, Universitas Gadjah Mada, Indonesia. She has Master degree and Ph.D degree from the Graduate School of International Development (GSID), Nagoya University, Japan. Her research interest covers knowledge co-production in sustainability transition and political economy of development.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=1025,fit=crop/mxB7zBBp2Bc866y1/mh-pic-AzG7gOD51yH2lnKM.jpeg" alt=""></p>\n<h6><strong>Bowen Yu</strong></h6>\n<p><strong>Associate Professor, Fudan University</strong></p>\n<p><strong>Dr Bowen Yu</strong> is an Associate Professor at the School of International Relations and Public Affairs of Fudan University. He is also associate editor of <em>Chinese Political Science Review</em> and affiliated researcher at the Environmental Governance Lab of the University of Toronto. His research focuses on international organization, global development, global environmental governance, and international relations theory.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=578,fit=crop/mxB7zBBp2Bc866y1/mpi_1845-mjE9gzg98KU5BrMa.jpg" alt=""></p>\n<h6><strong>Muhammad Badrul Hasan</strong></h6>\n<p><strong>Associate Professor, University of Dhaka</strong></p>\n<p><strong>Dr Muhammad Badrul Hasan</strong> is an Associate Professor at the Department of Political Science of the University of Dhaka. He completed his PhD on water governance in Bangladesh from Copernicus Institute of Sustainable Development at Utrecht University, the Netherlands. His research interests include environmental governance, common resource management, disaster and groundwater governance and climate change impact.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=482,fit=crop/mxB7zBBp2Bc866y1/screenshot-2025-11-05-140134-Q1xUIkJudscRGtp1.png" alt=""></p>\n<h6><strong>Randy Wirasta Nandyatama</strong></h6>\n<p><strong>Assistant Professor,</strong> Universitas Gadjah Mada</p>\n<p><strong>Dr Randy Wirasta Nandyatama</strong> is an Assistant Professor and the head of the Undergraduate Program at the Department of International Relations at Universitas Gadjah Mada, Indonesia. He received his PhD in 2019 from the University of Melbourne. His research interests span global governance, human rights, ASEAN, and Sino-Southeast Asia relations.</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=571,fit=crop/mxB7zBBp2Bc866y1/foto-randy-YBg49E0EpNHvOkbw.jpg" alt=""></p>\n<h4><strong>Team in Indonesia</strong></h4>\n<h4><strong>Team in China</strong></h4>\n<h4><strong>Team in Bangladesh</strong></h4>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=471,fit=crop/mxB7zBBp2Bc866y1/nur-rachmat-yuliantoro---ugm-indonesia-AQEpP3eQo5ike2Xl.jpg" alt=""></p>\n<h4><strong>Team in Pakistan</strong></h4>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=768,fit=crop/mxB7zBBp2Bc866y1/picture2-YD04LR1RlMcor200.jpg" alt=""></p>\n<h6><strong>Dr. Hina Aslam</strong></h6>\n<p><strong>Visiting Fellow, SDPI</strong></p>\n<p><strong>Dr. Hina Aslam</strong> is a Senior Research Fellow at ANU’s College of Law, Governance and Policy and a Visiting Fellow at SDPI. She holds a PhD in Ecology and has over a decade of experience in natural resource management, climate policy, energy transition, and sustainability governance. Committed to global sustainability goals, Dr. Hina focuses on regulatory frameworks that support decarbonization and resilient, sustainable transitions across regions. A leader in green development, she has spearheaded transformative programs, including the Green CPEC Alliance, and clean energy initiatives</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=768,fit=crop/mxB7zBBp2Bc866y1/picture3-Awvk3R0xE1HD6J2N.jpg" alt=""></p>\n<p><strong>Ubaid</strong> is a mechanical engineer with specialization in energy systems, currently leading the clean energy transition and CPEC Green Development Program of SDPI. His areas of expertise include energy, forecasting &amp; short/long-term planning through LEAP &amp; MARKAL/TIMES, investigating and identifying the impact of policy decisions, designing modeling frameworks for both short and long-term energy planning, and spearheading key projects.</p>\n<p><strong>Head of Energy Unit, SDPI</strong></p>\n<h6><strong>Engr. Ubaid ur Rehman Zia</strong></h6>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=373,fit=crop/mxB7zBBp2Bc866y1/picture-1-A1aJnJVQjJHb3ng3.jpg" alt=""></p>\n<h6><strong>Dr. Khalid Waleed</strong></h6>\n<p><strong>Research Fellow, SDPI</strong></p>\n<p><strong>Dr Khalid</strong> <strong>Waleed</strong> is a PhD in energy economics. With over 12 years of experience, his expertise include energy transition (Macro and Micro level). He advocates for tailored approaches that cater to the specific energy needs and consumption patterns, empowering individuals, and communities to actively participate in acceleration of renewable energy and more.</p>\n<h3><strong>Advisory Board</strong></h3>\n<h6><strong><a href="https://lkyspp.nus.edu.sg/ies">Benjamin William Cashore</a></strong></h6>\n<p>Li Ka Shing Professor in Public Management and Director, Institute for Environment and Sustainability (IES), Lee Kuan Yew School of Public Policy, National University of Singapore</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=375,fit=crop/mxB7zBBp2Bc866y1/cashore-mk39KVblWbt7Wvka.jpeg" alt=""></p>\n<h6><strong><a href="https://sppga.ubc.ca/profile/kristen-hopewell/">Kristen Hopewell</a></strong></h6>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=441,fit=crop/mxB7zBBp2Bc866y1/2024-headshot-website-crop-mP4QrKJ19eceENXN.jpg" alt=""></p>\n<p>Professor and Canada Research Chair, School of Public Policy and Global Affairs, University of British Columbia</p>\n<h6><strong><a href="https://www.bsg.ox.ac.uk/people/thomas-hale">Thomas Hale</a></strong></h6>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=375,fit=crop/mxB7zBBp2Bc866y1/thomas-hale-faculty-YleyKV3W31cEoQ9j.jpg" alt=""></p>\n<p>Professor in Public Policy &amp; Director of Master in Public Policy, Blavatnik School of Government, University of Oxford</p>\n<h6><strong><a href="https://gufaculty360.georgetown.edu/s/contact/00336000014RXOmAAO/joanna-lewis">Joanna Lewis</a></strong></h6>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=424,fit=crop/mxB7zBBp2Bc866y1/lewisheadshot-AzG7WrWqZMsvaDrn.jpeg" alt=""></p>\n<p>Provost&#39;s Distinguished Associate Professor and Director, Science, Technology and International Affairs (STIA), Georgetown University</p>\n<h6><strong><a href="https://asiasociety.org/policy-institute/kate-logan">Kate Logan</a></strong></h6>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=563,fit=crop/mxB7zBBp2Bc866y1/logan_headshot3-m6LJOv32eMcpX0zj.jpg" alt=""></p>\n<p>Director of China Climate Hub and Climate Diplomacy, Asia Society Policy Institute &amp; Fellow, Center for China Analysis</p>\n<h6><strong><a href="https://www.bappenas.go.id/">Sumedi Andono Mulyo, Ph.D</a></strong></h6>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=438,fit=crop/mxB7zBBp2Bc866y1/whatsapp-image-2022-11-05-at-08.41.36-YNqrWRRvzzh050ME.jpeg" alt=""></p>\n<p>Director for National Priority Infrastructure Projects Development and Planning, Ministry of National Development Planning/Bappenas, The Government of Indonesia</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=357,fit=crop/mxB7zBBp2Bc866y1/eriksolheim-edpg-AE048opBq9cNkeJ8.jpg" alt=""></p>\n<h6><strong><a href="https://www.linkedin.com/in/erik-solheim-a9464b225/">Erik Solheim</a></strong></h6>\n<p>President Europe-Asia Center &amp; Former Executive Director UN Environment</p>\n<h6><strong><a href="https://www.linkedin.com/in/joshuawickerham/">Joshua Wickerham</a></strong></h6>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=680,fit=crop/mxB7zBBp2Bc866y1/joshua-8-2024-AE04NrGnLQUproBl.JPG" alt=""></p>\n<p>Senior Advisor, Outreach and Engagement, ISEAL</p>\n<h6><strong><a href="https://www.linkedin.com/in/ellen-kelly-%E5%AD%94%E7%88%B1%E9%98%BE-ba005614/">Ellen Kelly</a></strong></h6>\n<p>Development Counsellor and Head of Cooperation, EU Delegation to China</p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=565,fit=crop/mxB7zBBp2Bc866y1/mmexport1726398357310-YleyJRv778HQNWLR.jpg" alt=""></p>\n<h3><strong>Alumni</strong></h3>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=500,fit=crop/mxB7zBBp2Bc866y1/freya-chant-Y4LvZWPkO3ckOBJZ.JPG" alt=""></p>\n<p><strong>Freya</strong> is an undergraduate student studying Sociology at the University of Bath, with a strong interest in environmental governance and policymaking. Over 2025 summer, Freya worked as a Research Assistant as part of the ISCC summer placement program, helping to deliver the Bath Conference.</p>\n<h6><strong><a href="https://www.linkedin.com/in/freya-chant-4037a0330/">Freya Chant</a></strong></h6>\n<p><strong>2025 Summer Research Assistant</strong></p>\n<p><img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=768,fit=crop/mxB7zBBp2Bc866y1/zhc_photo-wkejBP5jKCAzRFKx.jpg" alt=""></p>\n<h6><strong><a href="https://linkedin.com/in/zhc1">Hanchi Zhao</a></strong></h6>\n<p><strong>2025 Summer Research Assistant</strong></p>\n<p><strong>Hanchi Zhao</strong> is a Master&#39;s student in Diplomacy and Global Governance at the Brussels School of Governance, an alliance with the Vrije Universiteit Brussel. From 2024 to 2025, he served as a Research Assistant for the CGEL database. His research interests lie at the intersection of international relations, global security governance, and geopolitical dynamics. He holds a Bachelor&#39;s degree in Politics from King’s College London.</p>';
+
+type TeamSectionId = "bath" | "partners" | "advisory" | "alumni";
+type TeamGroupId =
+  | "bath"
+  | "causal-map"
+  | "indonesia"
+  | "china"
+  | "bangladesh"
+  | "pakistan";
+type TeamAsset = {
+  src: string;
+  alt: string;
+};
+
+const teamMembers = await Promise.all(
+  (await getCollection("team")).map(async (entry) => {
+    const { Content } = await render(entry);
+    return { ...entry, Content };
+  }),
+);
+
+type TeamMember = (typeof teamMembers)[number];
+type TeamGroup = {
+  id: string;
+  title?: string;
+  asset?: TeamAsset;
+  members: TeamMember[];
+};
+type TeamSection = {
+  id: string;
+  title: string;
+  asset?: TeamAsset;
+  groups: TeamGroup[];
+};
+
+const compareMembers = (first: TeamMember, second: TeamMember) => {
+  if (first.data.order !== second.data.order) {
+    return first.data.order - second.data.order;
+  }
+
+  return first.data.name.localeCompare(second.data.name);
+};
+
+const getMembers = (section: TeamSectionId, group?: TeamGroupId) =>
+  teamMembers
+    .filter(
+      (member) =>
+        member.data.section === section &&
+        (group ? member.data.group === group : true),
+    )
+    .sort(compareMembers);
+
+const sections: TeamSection[] = [
+  {
+    id: "bath-team",
+    title: "Bath Team",
+    asset: {
+      src: "/images/remote/assets-zyrosite-com/uob-logo-black-yan920jrrxsn7a5j-6d26b42342.png",
+      alt: "University of Bath logo",
+    },
+    groups: [
+      {
+        id: "bath",
+        members: getMembers("bath", "bath"),
+      },
+      {
+        id: "causal-map",
+        title: "Causal Map Team",
+        asset: {
+          src: "/images/remote/assets-zyrosite-com/causal-map-logorgb-mv07g9kpbkfln289-6507cf55ed.jpg",
+          alt: "Causal Map logo",
+        },
+        members: getMembers("bath", "causal-map"),
+      },
+    ],
+  },
+  {
+    id: "international-partners",
+    title: "International Partners",
+    groups: [
+      {
+        id: "indonesia",
+        title: "Team in Indonesia",
+        members: getMembers("partners", "indonesia"),
+      },
+      {
+        id: "china",
+        title: "Team in China",
+        members: getMembers("partners", "china"),
+      },
+      {
+        id: "bangladesh",
+        title: "Team in Bangladesh",
+        members: getMembers("partners", "bangladesh"),
+      },
+      {
+        id: "pakistan",
+        title: "Team in Pakistan",
+        members: getMembers("partners", "pakistan"),
+      },
+    ],
+  },
+  {
+    id: "advisory-board",
+    title: "Advisory Board",
+    groups: [
+      {
+        id: "advisory-board-members",
+        members: getMembers("advisory"),
+      },
+    ],
+  },
+  {
+    id: "alumni",
+    title: "Alumni",
+    groups: [
+      {
+        id: "alumni-members",
+        members: getMembers("alumni"),
+      },
+    ],
+  },
+].map(
+  (section): TeamSection => ({
+    ...section,
+    groups: section.groups.filter((group) => group.members.length > 0),
+  }),
+);
+
+const sectionLinks = sections.map((section) => ({
+  id: section.id,
+  label: section.title,
+}));
 ---
 
 <Layout frontmatter={frontmatter}>
-  <Fragment set:html={content} />
+  <p>
+    <img
+      src="/images/remote/images-unsplash-com/photo-1684142636731-90ac495fe76c-6838e971b8.jpg"
+      alt="an aerial view of a city with a train on the tracks"
+    />
+  </p>
+  <h1><strong>Team</strong></h1>
+  <nav class="team-links" aria-label="Team sections">
+    {
+      sectionLinks.map((section) => (
+        <a href={`#${section.id}`}>{section.label}</a>
+      ))
+    }
+  </nav>
+
+  <p>
+    <img
+      src="/images/remote/assets-zyrosite-com/dsc02337-1-vb0ltdu3uspo4flg-73366ef2ef.jpg"
+      alt="Members of the SGAIN project team"
+    />
+  </p>
+
+  {
+    sections.map((section) => (
+      <section
+        id={section.id}
+        class="team-section"
+        aria-labelledby={`${section.id}-heading`}
+      >
+        <h3 id={`${section.id}-heading`}>
+          <strong>{section.title}</strong>
+        </h3>
+        {section.asset && (
+          <p class="team-section__asset">
+            <img src={section.asset.src} alt={section.asset.alt} />
+          </p>
+        )}
+
+        {section.groups.map((group) => (
+          <div class="team-group">
+            {group.title && (
+              <h4>
+                <strong>{group.title}</strong>
+              </h4>
+            )}
+            {group.asset && (
+              <p class="team-section__asset">
+                <img src={group.asset.src} alt={group.asset.alt} />
+              </p>
+            )}
+
+            <div class="team-grid">
+              {group.members.map(({ Content, data }) => (
+                <article class="team-card">
+                  {data.image && (
+                    <p class="team-card__image-wrap">
+                      <img
+                        class="team-card__image"
+                        src={data.image}
+                        alt={data.imageAlt}
+                      />
+                    </p>
+                  )}
+
+                  <h5 class="team-card__name">
+                    {data.profileUrl ? (
+                      <a href={data.profileUrl}>{data.name}</a>
+                    ) : (
+                      data.name
+                    )}
+                  </h5>
+
+                  {data.role && <p class="team-card__role">{data.role}</p>}
+
+                  <div class="team-card__body">
+                    <Content />
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+    ))
+  }
 </Layout>
+
+<style>
+  .team-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.25rem 0 2rem;
+  }
+
+  .team-links a {
+    border: 1px solid var(--teal);
+    background: var(--paper);
+    color: var(--teal-d);
+    padding: 0.58rem 0.82rem;
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .team-links a:hover {
+    border-color: var(--rust);
+    color: var(--rust);
+  }
+
+  .team-section {
+    margin-top: 3rem;
+    scroll-margin-top: 110px;
+  }
+
+  .team-section__asset img {
+    max-width: min(100%, 360px);
+  }
+
+  .team-group + .team-group {
+    margin-top: 2.5rem;
+  }
+
+  .team-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .team-card {
+    border-left: 3px solid var(--teal);
+    background: var(--paper2);
+    padding: 1rem 1.15rem;
+  }
+
+  .team-card__image-wrap {
+    width: min(100%, 280px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .team-card__image {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    margin: 0;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .team-card__name {
+    margin: 0;
+    color: var(--teal-d);
+    font-size: 1.35rem;
+  }
+
+  .team-card__name a {
+    color: inherit;
+  }
+
+  .team-card__role {
+    margin: 0.35rem 0 0;
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .team-card__body {
+    margin-top: 0.85rem;
+  }
+
+  .team-card__body :global(p) {
+    margin: 0;
+  }
+
+  .team-card__body :global(p + p) {
+    margin-top: 0.75rem;
+  }
+
+  @media (min-width: 760px) {
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

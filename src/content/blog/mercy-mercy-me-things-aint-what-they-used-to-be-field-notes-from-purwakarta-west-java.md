@@ -5,7 +5,7 @@ oldUrl: "https://sgain.org/mercy-mercy-me-things-aint-what-they-used-to-be-field
 author: "Nadya Zafira, Research Assistant, Universitas Gadjah Mada"
 date: "2025-09-15"
 readingTime: "3 min read"
-heroImage: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=434,fit=crop/mxB7zBBp2Bc866y1/blog-2-A1azepgMkPSPvZGo.jpeg"
+heroImage: "/images/remote/assets-zyrosite-com/blog-2-a1azepgmkpspvzgo-4913fa6ded.jpeg"
 ---
 
 When I first joined the Indonesia team of the SGAIN project, I had zero expectations that my role as a Research Assistant would entail participating in a fieldwork process that would reinvigorate my love for academic pursuits. Luckily, fortune was on my side.
@@ -14,7 +14,7 @@ From August 1st to August 7th of 2025, accompanied by three of the Indonesian te
 
 It was not a surprise that the site of our fieldwork was within walking distance of Kota Bukit Indah Industrial Zone, one of the oldest and most prominent industrial parks in Purwakarta. In 2024, Indonesia’s largest ground-mounted solar power plant was built across various parts of the park’s terrain. On August 2nd, we had scheduled a meeting with one of the heads of the neighbouring village, who would facilitate our conversation with members of the local community. During the car ride from our accommodation to the village, I commented on how visibly close the solar plant was to the residential area, not knowing that the distance (or lack thereof) would become one of the most salient findings expressed to us during the interviews.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=576,fit=crop/mxB7zBBp2Bc866y1/blog-22-A0xv3Gee1liZ6wJa.jpeg)
+![](/images/remote/assets-zyrosite-com/blog-22-a0xv3gee1liz6wja-a082a96e93.jpeg)
 
 During our first day of fieldwork, we did our interviews using an approach that was characteristically very Indonesian. _Sowan_ (“to visit”) is a term in the Javanese language that refers to the culture of visiting homes (usually that of a religious teacher) to seek spiritual fulfillment. For hours, we went around and visited the homes of multiple locals whose lives have been impacted in similar but also unique ways by the project. A series of lengthy conversations with the locals revealed to us that a dense and thick forest once occupied the very land that was now covered by hundreds of solar panels.
 

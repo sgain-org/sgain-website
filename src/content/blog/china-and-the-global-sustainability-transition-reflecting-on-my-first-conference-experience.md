@@ -5,7 +5,7 @@ oldUrl: "https://sgain.org/china-and-the-global-sustainability-transition-reflec
 author: "Freya Chant, Summer Research Assistant, University of Bath"
 date: "2025-07-07"
 readingTime: "4 min read"
-heroImage: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=576,fit=crop/mxB7zBBp2Bc866y1/c2bc85cb-6338-46b7-ab1a-a7bac1a929fc-mv0JDNlpyysnay3W.jpg"
+heroImage: "/images/remote/assets-zyrosite-com/c2bc85cb-6338-46b7-ab1a-a7bac1a929fc-mv0jdnlpyysnay3w-b979c07fb1.jpg"
 ---
 
 On Tuesday the 24th and Wednesday 25th June, I had the exciting and unique opportunity to help run and partake in the conference hosted by our SGAIN team on China and Global Sustainability Transition. This brought together knowledge from across the globe and different disciplines to explore how international engagement with China can help accelerate the global sustainability transition. As a new member to the SGAIN team, this was the first conference I had been part of with the team and there had been lots of anticipation and work building up to this event. Tuesday started with welcoming the guests upon arrival and I found it extremely insightful greeting everyone and seeing experts from different backgrounds and world regions, which set the tone for two jam-packed days of knowledge sharing.
@@ -16,7 +16,7 @@ The final conference session took a highly interactive approach where we separat
 
 This conference offered me a new and exciting opportunity as an undergraduate student, and I will look back on this as a highlight of my summer. It also allowed me to experience my university city in a unique way as I got to visit both the Roman Baths and spend two days in the historic Guildhall, which I found to be a fascinating building. My first conference experience was eye-opening, and I look forward to seeing what happens next as part of the SGAIN project!
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=511,fit=crop/mxB7zBBp2Bc866y1/22128e95-c306-43e9-8b7f-e031a4c36145-AGBb65veV3S2o8Mn.jpg)
+![](/images/remote/assets-zyrosite-com/22128e95-c306-43e9-8b7f-e031a4c36145-agbb65vev3s2o8mn-47720dcd05.jpg)
 
 My main role during these sessions was to take notes to support my research for the post-conference report, which meant I was able to really engage with the roundtables and consider each of the speakers' points. I found the first roundtable to be both engaging and topical as it focused on climate action in the context of the second Trump Administration, which is a political shift that I feel is greatly impacting international climate cooperation. The conversation around China’s emerging clean energy sector and the race to meet global climate targets and China’s own NDCs highlighted to me the changing role of China as a global polluter to a climate leader. I particularly enjoyed learning about how this is further pursued through South-South cooperation and diplomacy with Western countries, which was echoed in many of the roundtables. I also found the roundtable on critical mineral supply chains very thought provoking and helped expand my understanding of the different ways in which China’s investments can support both cooperation and sustainable development. The points on AI and critical minerals also felt extremely topical and important to discuss as part of a sustainability conference.
 
@@ -24,6 +24,6 @@ As the first conference day wrapped up, we had an exciting evening at the Roman 
 
 The second day kicked off with a speech by our Vice-chancellor of the University of Bath, Professor Phil Taylor, who emphasized the need for collaboration during the climate emergency. This was followed by interesting keynote speeches by two prominent academics Professor Katherine Morton and Professor Thomas Hale which called us to think about the future of China’s sustainable development and whether they can truly be a role model. I was particularly interested in the question of what a just transition would look like within a Chinese context as suggested by Professor Hale. The final roundtable of the conference similarly reflected these dialogues and brought global insights on whether China can be a role model for the world. This felt like a relevant and thought-provoking end to the roundtables at the conference as it helped reflect on China’s growing green ambitions and how cooperation is needed to lead the sustainability transition.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=511,fit=crop/mxB7zBBp2Bc866y1/6b5b9903-9f93-4591-b7a1-be26d6c9fd3d-AR03ywVverFJz61w.jpg)
+![](/images/remote/assets-zyrosite-com/6b5b9903-9f93-4591-b7a1-be26d6c9fd3d-ar03ywvverfjz61w-5c0dfe0361.jpg)
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=1154,fit=crop/mxB7zBBp2Bc866y1/3385e79c-974f-41bd-bf3b-9cc1fecc0b09-m7VbwlkJ2MSKzqZZ.jpg)
+![](/images/remote/assets-zyrosite-com/3385e79c-974f-41bd-bf3b-9cc1fecc0b09-m7vbwlkj2mskzqzz-e3fa33a2be.jpg)

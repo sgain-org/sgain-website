@@ -5,12 +5,12 @@ oldUrl: "https://sgain.org/reflections-researching-global-china-conference-by-re
 author: "Yuen Gu, PhD Student, University of Bath"
 date: "2025-03-03"
 readingTime: "4 min read"
-heroImage: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=250,fit=crop/mxB7zBBp2Bc866y1/yitong-ciara-m7V5OaDgbkCDPDNl.jpg"
+heroImage: "/images/remote/assets-zyrosite-com/yitong-ciara-m7v5oadgbkcdpdnl-2d8e2846d4.jpg"
 ---
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=250,fit=crop/mxB7zBBp2Bc866y1/ciara-presenting-A1aBZMzLpRs48R36.jpg)
+![](/images/remote/assets-zyrosite-com/ciara-presenting-a1abzmzlprs48r36-f7c1eca267.jpg)
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=514,fit=crop/mxB7zBBp2Bc866y1/yuen-presentation-YyvZrRDQWoH4B4pe.jpg)
+![](/images/remote/assets-zyrosite-com/yuen-presentation-yyvzrrdqwoh4b4pe-3e59dbfede.jpg)
 
 Before this conference, I had not deeply considered the broader implications of ‘Global China’. So far in my PhD, my research has largely been focused on my specific topic of interest, without extensive reflection on its theoretical context. This may be due to the fact that in China, the term ‘Global China’ does not have a direct equivalent; instead, discussions typically revolve around the country's going out strategy—where it goes, what it does, and whether it succeeds.
 
@@ -18,9 +18,9 @@ After listening to multiple presentations across the conference, however, I bega
 
 In contrast, the second keynote speech by Dr. Julie Klinger took a broader perspective, exploring China’s role in global mineral and infrastructure supply chains. She emphasized that Global China researchers must strive for objective analysis, even as different political actors in different countries may expect research to support particular narratives.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=514,fit=crop/mxB7zBBp2Bc866y1/keynote-day-1-mk3qWR4nxJIeORDR.jpg)
+![](/images/remote/assets-zyrosite-com/keynote-day-1-mk3qwr4nxjieordr-7dffbb6780.jpg)
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=514,fit=crop/mxB7zBBp2Bc866y1/keynote-day-2-YBge6NjMootyVzjK.jpg)
+![](/images/remote/assets-zyrosite-com/keynote-day-2-ybge6njmootyvzjk-c470a5bf70.jpg)
 
 The contrasting perspectives of the keynote speakers led me to question: Why is Global China a distinct research theme, while there is no equivalent Global \[Other Country\]? China has been a key participant in global affairs for centuries—why has Global China only recently become a widely discussed research topic? What has changed? These questions ultimately tie back to China’s growing influence. Over the past two decades, China’s expanding global presence has sparked a range of reactions—some view it with suspicion, fear, or hostility, while others welcome, support, or seek collaboration. These varied attitudes likely shape how different scholars approach Global China. This realization prompted me to reflect more critically on my own ontological and epistemological position in this field.
 

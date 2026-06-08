@@ -8,8 +8,6 @@ const frontmatter = {
     "Explore our blogs, a place for our team members to share thier insights and experiences, covering academic conferences, overseas trips, and global field research. ",
   oldUrl: "https://sgain.org/blogs",
 };
-const intro =
-  '<p><img src="https://images.unsplash.com/photo-1502252007251-fd6a4d508125?auto=format&fit=crop&w=1920" alt="body of water surrounded by orange trees"></p>\n<h1><strong>Blogs</strong></h1>\n<h3>A space for our community to share thoughts and reflections</h3>';
 const posts = (await getCollection("blog")).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("en-GB", {
@@ -20,7 +18,9 @@ const formatDate = (value: string) =>
 ---
 
 <Layout frontmatter={frontmatter}>
-  <Fragment set:html={intro} />
+  <p><img src="/images/remote/images-unsplash-com/photo-1502252007251-fd6a4d508125-1d415067fd.jpg" alt="body of water surrounded by orange trees"></p>
+  <h1><strong>Blogs</strong></h1>
+  <h3>A space for our community to share thoughts and reflections</h3>
 
   <section class="content-list" aria-label="Blog posts">
     {posts.map((post) => (

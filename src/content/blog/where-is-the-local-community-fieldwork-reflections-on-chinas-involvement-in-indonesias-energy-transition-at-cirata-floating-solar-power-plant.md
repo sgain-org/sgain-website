@@ -5,7 +5,7 @@ oldUrl: "https://sgain.org/where-is-the-local-community-fieldwork-reflections-on
 author: "Ni Made Diah Apsari Dewi, Research Assistant, Universitas Gadjah Mada"
 date: "2025-09-15"
 readingTime: "4 min read"
-heroImage: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=577,fit=crop/mxB7zBBp2Bc866y1/day-1---visit-to-cirata-reservoir-mjE4zwOP8eI9QNkY.jpeg"
+heroImage: "/images/remote/assets-zyrosite-com/day-1-visit-to-cirata-reservoir-mje4zwop8ei9qnky-bcf513cc95.jpeg"
 ---
 
 Amid Indonesia’s renewable energy boom, how do local communities perceive and are impacted by China’s role in Indonesia’s energy transition? This is the question that frames our focus as we navigate the vast expanse of Ciroyom Hilir, a village neighbouring the Cirata Floating Solar Power Plant (PLTS Cirata).
@@ -13,9 +13,9 @@ Amid Indonesia’s renewable energy boom, how do local communities perceive and 
 The Cirata Floating Solar Power Plant is a massive renewable energy infrastructure project, and arguably one of Indonesia’s most ambitious. Spanning 200 hectares and bordering three regions –Purwakarta, Cianjur, and West Bandung - the plant is the largest floating solar power plant in Indonesia and Southeast Asia. The project was completed in 2024 through a collaboration between Indonesia’s PT. PLN Nusantara Renewables and the United Arab Emirates’ Masdar, with PowerChina as the constructor.  
 From August 4 to 6, 2025, I conducted the fieldwork with Yuen Gu and Nadya Zafira. I was the primary research assistant for Cirata, with Yuen Gu serving as the PhD Researcher from the University of Bath, and Nadya Zafira as a fellow research assistant from the Indonesian team.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=576,fit=crop/mxB7zBBp2Bc866y1/day-2---visit-to-bagang-YrD43wk19OsO4LQP.jpeg)
+![](/images/remote/assets-zyrosite-com/day-2-visit-to-bagang-yrd43wk19oso4lqp-43b5f924e3.jpeg)
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=576,fit=crop/mxB7zBBp2Bc866y1/day-2---yuen-and-diah-on-the-bagang-AGBzql13x7uQD0ZR.jpg)
+![](/images/remote/assets-zyrosite-com/day-2-yuen-and-diah-on-the-bagang-agbzql13x7uqd0zr-a1ffd86be2.jpg)
 
 **Visiting Ciroyom Hilir**  
 Our first day started with a meeting with a local reporter who also served as our local facilitator. He explained how the government-led development of the reservoir, which began in the 1980s, has repeatedly displaced families and changed the community’s lives: “The people who are currently displaced in this area have also seen their parents, even their grandparents, displaced by the development of the reservoir”. Yet despite generations of upheaval, inclusion of the local community in Cirata’s development planning has remained minimal.
@@ -26,7 +26,7 @@ Our facilitator then led us to interview four fishermen and five housewives at t
 
 Decreasing income is worsened by increasing expenses elsewhere – particularly health and electricity bills – to adapt to the secondary environmental impact of the power plant. Housewives shared how mounting stress has even fueled more frequent conflicts within families. Interestingly, when asked about China’s role, most villagers were unaware of the country’s involvement. They recalled seeing Chinese workers during construction but had little interaction with them due to language barriers and segregated work arrangements.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=576,fit=crop/mxB7zBBp2Bc866y1/day-2---all-researcher-mjE4zwOQB0T2PVrR.jpg)
+![](/images/remote/assets-zyrosite-com/day-2-all-researcher-mje4zwoqb0t2pvrr-7f1e08ea23.jpg)
 
 **Reflection and areas of interest moving forward**  
 Three points regarding Indonesia’s energy transition process stood out to me after my visit to Ciroyom Hilir. First, for Indonesia’s energy transition to be inclusive, local community’s participation is essential. The construction of PLTS Cirata still reflects a troublesome pattern of energy transition in Indonesia, one that relies on the creation of mega-infrastructures, which too often bypasses community involvement in its development process. Without the community’s participation, considerations of the community’s needs, projections on potential loss and damage, as well as the cost calculation of the community’s adaptation to the power plant are invisibilized. In the long run, communities with the least resources are the ones that have to shoulder the burden of the energy transition process. Second, participatory decision-making processes also need to consider context-specific barriers to participation. For example, in Ciroyom Hilir, the history of continuous displacements backed by state-sponsored control of the project leads to hesitation and fear among the local community in voicing their concerns. Finally, the local community’s limited knowledge of China in the energy transition suggests an opportunity. Unlocking this opportunity could start by asking how China can help usher in a just energy transition that takes into account the local community’s needs.

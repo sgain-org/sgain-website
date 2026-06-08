@@ -5,7 +5,7 @@ oldUrl: "https://sgain.org/researching-with-data-reflections-on-the-climbio-data
 author: "Yitong Ye, Postdoctoral Research Associate, University of Bath"
 date: "2024-12-12"
 readingTime: "3 min read"
-heroImage: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,h=434,fit=crop/mxB7zBBp2Bc866y1/utrecht-2024-dOq8jnZ8JeTNvNaO.jpg"
+heroImage: "/images/remote/assets-zyrosite-com/utrecht-2024-doq8jnz8jetnvnao-11c81597f1.jpg"
 ---
 
 Over the past two days, I had the privilege of participating in the ClimBio Database Workshop in Utrecht, from 4th to 5th December 2024. This workshop brought researchers, practitioners, and other different actors together, offering an excellent platform to discuss, reflects, and cooperates for future database research.
@@ -14,9 +14,9 @@ Over the past two days, I had the privilege of participating in the ClimBio Data
 
 The workshop started by introductions over lunch, where we quickly got to know each other and had preliminary understandings of others’ research, as we all shared the interest in transnational climate and biodiversity governance. The ClimBio Frontiers research groups firstly introduced us to the project aims to unpack the role of Transnational Governance Initiatives (TGIs) as critical actors at the climate-biodiversity frontier. To do so, they seek to develop an open-access database of TGIs (WP1) and critical analysis of TGI framings around climate, biodiversity, and justice (WP2). Their reflection on the ongoing conceptual work inspires me to deeply think the dynamic evolution of “frontiers” in political science.
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=512,fit=crop/mxB7zBBp2Bc866y1/utrecht-2024-2-YbNq67LzVWuwBKPO.jpg)
+![](/images/remote/assets-zyrosite-com/utrecht-2024-2-ybnq67lzvwuwbkpo-bc89e774c3.jpg)
 
-![](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=577,fit=crop/mxB7zBBp2Bc866y1/utrecht-2024-3-A0x1LzOEDQHyZjNN.jpg)
+![](/images/remote/assets-zyrosite-com/utrecht-2024-3-a0x1lzoedqhyzjnn-ec5d361cc8.jpg)
 
 In the following session, researchers introduced their data work associated with transnational climate governance and biodiversity. The Climate Cooperative Initiatives Database (C-CID) made me impressive. It covers 900 relevant initiatives, with over 100,000 instances of actor engagement across 100+ variables. Then based on the C-CID data, the project also developed a Nature-based Climate Cooperative Initiatives Database (N-CID). Not only the initiatives covered by C-CID and N-CID provides a great reference for the cases in our database, but the process also sparks my ideas for improving interoperability and accessibility, particularly for researchers and policymakers working across disciplines. The Problem Shifts Database stood out as a particularly insightful repository, documenting cases where efforts to solve environmental problems. I learnt a lot from their ways of storing and maintaining databases.
 

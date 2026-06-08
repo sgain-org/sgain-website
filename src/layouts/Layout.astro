@@ -77,36 +77,545 @@ const navSections = [
   },
 ];
 
-const sectionActive = (links: Array<{ href: string }>) => links.some((link) => isActive(link.href));
+const sectionActive = (links: Array<{ href: string }>) =>
+  links.some((link) => isActive(link.href));
 ---
 
-<!doctype html>
+<style is:global>
+  .skip-link {
+    position: fixed;
+    left: 16px;
+    top: 12px;
+    z-index: 20;
+    transform: translateY(-140%);
+    border: 1px solid var(--teal);
+    background: var(--paper);
+    color: var(--teal-d);
+    padding: 8px 12px;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--line);
+    background: rgba(245, 246, 247, 0.94);
+    backdrop-filter: blur(14px);
+  }
+
+  .site-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    max-width: 1220px;
+    min-height: 74px;
+    margin: 0 auto;
+    padding: 12px 28px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 240px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    display: grid;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    border: 2px solid var(--teal);
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .brand-copy {
+    display: grid;
+    gap: 1px;
+  }
+
+  .brand-copy strong {
+    font-family: "Fraunces", serif;
+    font-size: 1.16rem;
+    font-weight: 700;
+  }
+
+  .brand-copy span {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .nav-link,
+  .nav-menu summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    border: 1px solid transparent;
+    padding: 8px 10px;
+    color: var(--ink);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nav-link:hover,
+  .nav-menu:hover summary,
+  .nav-menu[open] summary {
+    border-color: var(--line);
+    background: var(--paper2);
+    color: var(--teal-d);
+  }
+
+  .nav-link.active,
+  .nav-menu.active summary {
+    color: var(--teal);
+    border-bottom-color: var(--teal);
+  }
+
+  .nav-menu {
+    position: relative;
+  }
+
+  .nav-menu summary {
+    list-style: none;
+  }
+
+  .nav-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-menu summary::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-bottom: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+  }
+
+  .nav-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    display: none;
+    min-width: 260px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    padding: 8px;
+  }
+
+  .nav-menu:hover .nav-panel,
+  .nav-menu[open] .nav-panel,
+  .nav-menu:focus-within .nav-panel {
+    display: grid;
+  }
+
+  .nav-panel a {
+    display: block;
+    padding: 9px 10px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-panel a:hover,
+  .nav-panel a.active {
+    background: var(--paper2);
+    color: var(--teal);
+  }
+
+  .site-main {
+    padding: 54px 24px 78px;
+  }
+
+  .content-shell {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .markdown-content {
+    font-family: "Source Serif 4", serif;
+    font-size: 1.13rem;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown-content > * {
+    margin-block: 0;
+  }
+
+  .markdown-content > * + * {
+    margin-top: 1.05rem;
+  }
+
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
+    color: var(--teal-d);
+    font-family: "Fraunces", serif;
+    line-height: 1.16;
+  }
+
+  .markdown-content h1 {
+    max-width: 15ch;
+    margin-top: 0;
+    font-size: 3rem;
+  }
+
+  .markdown-content h2 {
+    margin-top: 3.2rem;
+    font-size: 2.25rem;
+  }
+
+  .markdown-content h3 {
+    margin-top: 2.5rem;
+    color: var(--teal);
+    font-size: 1.7rem;
+  }
+
+  .markdown-content h4 {
+    margin-top: 2rem;
+    color: var(--slate);
+    font-size: 1.28rem;
+  }
+
+  .markdown-content h5,
+  .markdown-content h6 {
+    margin-top: 1.65rem;
+    color: var(--rust);
+    font-size: 1rem;
+  }
+
+  .markdown-content p,
+  .markdown-content li {
+    color: var(--ink);
+  }
+
+  .markdown-content strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .markdown-content ul,
+  .markdown-content ol {
+    padding-left: 1.35rem;
+  }
+
+  .markdown-content li + li {
+    margin-top: 0.42rem;
+  }
+
+  .markdown-content blockquote {
+    margin-left: 0;
+    border-left: 4px solid var(--sky);
+    padding: 0.2rem 0 0.2rem 1rem;
+    color: var(--muted);
+  }
+
+  .markdown-content hr {
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background: var(--line);
+    margin: 2.5rem 0;
+  }
+
+  .markdown-content img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 1.8rem auto;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  .markdown-content > p:has(> img:only-child) {
+    margin: 2rem 0;
+  }
+
+  .markdown-content > p:first-of-type:has(> img:only-child) img {
+    width: 100%;
+    max-height: 430px;
+    object-fit: cover;
+  }
+
+  .markdown-content > p:has(> a:only-child) {
+    display: inline-flex;
+    margin-top: 0.9rem;
+    margin-right: 0.55rem;
+  }
+
+  .markdown-content > p:has(> a:only-child) a {
+    border: 1px solid var(--teal);
+    background: var(--paper);
+    color: var(--teal-d);
+    padding: 0.58rem 0.82rem;
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .markdown-content > p:has(> a:only-child) a:hover {
+    border-color: var(--rust);
+    color: var(--rust);
+  }
+
+  .markdown-content .publication-card {
+    border-left: 3px solid var(--teal);
+    background: var(--paper2);
+    padding: 1rem 1.15rem;
+  }
+
+  .markdown-content .publication-card + .publication-card {
+    margin-top: 1rem;
+  }
+
+  .markdown-content .publication-card h3 {
+    margin-top: 0.25rem;
+    font-size: 1.25rem;
+  }
+
+  .markdown-content .publication-card h3 a {
+    color: inherit;
+  }
+
+  .markdown-content .publication-card p {
+    margin-top: 0.55rem;
+  }
+
+  .markdown-content .publication-card__meta {
+    color: var(--rust);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .markdown-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.92rem;
+  }
+
+  .markdown-content th,
+  .markdown-content td {
+    border: 1px solid var(--line);
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .markdown-content th {
+    background: var(--paper2);
+    color: var(--teal-d);
+    font-weight: 700;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--teal-d);
+    color: var(--paper);
+    padding: 42px 28px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.8fr) minmax(
+        180px,
+        0.7fr
+      );
+    gap: 36px;
+    max-width: 1220px;
+    margin: 0 auto;
+  }
+
+  .footer-brand,
+  .site-footer h2 {
+    margin: 0 0 10px;
+    font-family: "Fraunces", serif;
+    font-size: 1.28rem;
+  }
+
+  .site-footer h2 {
+    font-size: 1rem;
+  }
+
+  .site-footer p {
+    margin: 0;
+    color: var(--paper2);
+  }
+
+  .site-footer a {
+    color: var(--paper);
+  }
+
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (max-width: 980px) {
+    .site-bar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .site-nav {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .nav-menu {
+      position: static;
+    }
+
+    .nav-panel {
+      position: static;
+      width: min(100%, 360px);
+      box-shadow: none;
+      margin-top: 4px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .site-bar {
+      width: 100%;
+      padding: 12px 16px;
+    }
+
+    .brand {
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+    }
+
+    .site-nav {
+      align-items: stretch;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 2px;
+      width: calc(100vw - 32px);
+      max-width: 100%;
+    }
+
+    .nav-link,
+    .nav-menu summary {
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+      padding: 7px 6px;
+      font-size: 0.84rem;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+      text-align: center;
+      white-space: normal;
+    }
+
+    .nav-menu {
+      min-width: 0;
+    }
+
+    .nav-menu summary::after {
+      flex: 0 0 auto;
+      margin-left: 6px;
+    }
+
+    .nav-panel {
+      width: 100%;
+    }
+
+    .site-main {
+      padding: 34px 16px 58px;
+    }
+
+    .markdown-content {
+      font-size: 1.04rem;
+    }
+
+    .markdown-content h1 {
+      font-size: 2.25rem;
+    }
+
+    .markdown-content h2 {
+      font-size: 1.85rem;
+    }
+
+    .markdown-content h3 {
+      font-size: 1.45rem;
+    }
+
+    .markdown-content > p:first-of-type:has(> img:only-child) img {
+      max-height: 300px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>{title}</title>
-    <meta name="description" content={description}>
-    <link rel="canonical" href={canonical}>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
 
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="SGAIN Project">
-    <meta property="og:title" content={title}>
-    <meta property="og:description" content={description}>
-    <meta property="og:url" content={canonical}>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SGAIN Project" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
     {ogImage && <meta property="og:image" content={ogImage} />}
 
-    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"}>
-    <meta name="twitter:title" content={title}>
-    <meta name="twitter:description" content={description}>
+    <meta
+      name="twitter:card"
+      content={ogImage ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Work+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
-    >
+    />
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
@@ -122,42 +631,73 @@ const sectionActive = (links: Array<{ href: string }>) => links.some((link) => i
         </a>
 
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="/" class:list={["nav-link", isActive("/") && "active"]}>Home</a>
+          <a href="/" class:list={["nav-link", isActive("/") && "active"]}
+            >Home</a
+          >
 
-          {navSections.slice(0, 1).map((section) => (
-            <details class:list={["nav-menu", sectionActive(section.links) && "active"]}>
-              <summary>{section.label}</summary>
-              <div class="nav-panel">
-                {section.links.map((link) => (
-                  <a href={link.href} class:list={[isActive(link.href) && "active"]}>
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </details>
-          ))}
+          {
+            navSections.slice(0, 1).map((section) => (
+              <details
+                class:list={[
+                  "nav-menu",
+                  sectionActive(section.links) && "active",
+                ]}
+              >
+                <summary>{section.label}</summary>
+                <div class="nav-panel">
+                  {section.links.map((link) => (
+                    <a
+                      href={link.href}
+                      class:list={[isActive(link.href) && "active"]}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </details>
+            ))
+          }
 
-          <a href="/team/" class:list={["nav-link", isActive("/team/") && "active"]}>Team</a>
-          <a href="/network/" class:list={["nav-link", isActive("/network/") && "active"]}>
+          <a
+            href="/team/"
+            class:list={["nav-link", isActive("/team/") && "active"]}>Team</a
+          >
+          <a
+            href="/network/"
+            class:list={["nav-link", isActive("/network/") && "active"]}
+          >
             Network
           </a>
 
-          {navSections.slice(1).map((section) => (
-            <details class:list={["nav-menu", sectionActive(section.links) && "active"]}>
-              <summary>{section.label}</summary>
-              <div class="nav-panel">
-                {section.links.map((link) => (
-                  <a href={link.href} class:list={[isActive(link.href) && "active"]}>
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </details>
-          ))}
+          {
+            navSections.slice(1).map((section) => (
+              <details
+                class:list={[
+                  "nav-menu",
+                  sectionActive(section.links) && "active",
+                ]}
+              >
+                <summary>{section.label}</summary>
+                <div class="nav-panel">
+                  {section.links.map((link) => (
+                    <a
+                      href={link.href}
+                      class:list={[isActive(link.href) && "active"]}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </details>
+            ))
+          }
 
           <a
             href="/contact-information/"
-            class:list={["nav-link", isActive("/contact-information/") && "active"]}
+            class:list={[
+              "nav-link",
+              isActive("/contact-information/") && "active",
+            ]}
           >
             Contact
           </a>
@@ -176,14 +716,14 @@ const sectionActive = (links: Array<{ href: string }>) => links.some((link) => i
         <div>
           <div class="footer-brand">SGAIN Project</div>
           <p>
-            Sustainability Governance of China's Global Infrastructure Investments, University of
-            Bath.
+            Sustainability Governance of China's Global Infrastructure
+            Investments, University of Bath.
           </p>
         </div>
         <div>
           <h2>Contact</h2>
           <p>
-            <a href="mailto:sgain@bath.ac.uk">sgain@bath.ac.uk</a><br>
+            <a href="mailto:sgain@bath.ac.uk">sgain@bath.ac.uk</a><br />
             University of Bath, Claverton Down, BA2 7AY
           </p>
         </div>
@@ -191,7 +731,9 @@ const sectionActive = (links: Array<{ href: string }>) => links.some((link) => i
           <h2>Follow</h2>
           <p class="social-links">
             <a href="https://x.com/sgain_project">X</a>
-            <a href="https://www.linkedin.com/company/sgain/?viewAsMember=true">LinkedIn</a>
+            <a href="https://www.linkedin.com/company/sgain/?viewAsMember=true"
+              >LinkedIn</a
+            >
             <a href="https://bsky.app/profile/sgain.bsky.social">Bluesky</a>
           </p>
         </div>
