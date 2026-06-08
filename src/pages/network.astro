@@ -1,4 +1,5 @@
 ---
+import PartnerNetwork from "../components/PartnerNetwork.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -8,6 +9,45 @@ const frontmatter = {
   oldUrl: "https://sgain.org/network",
 };
 
+const partnerNetworkNodes = [
+  {
+    position: "top",
+    label: "Bath Social & Development Research Ltd",
+    displayLabel: "Bath Social & Development Research",
+  },
+  {
+    position: "upper-right",
+    label: "Universitas Gadjah Mada",
+    displayLabel: "Universitas Gadjah Mada",
+  },
+  {
+    position: "lower-right",
+    label: "Sustainable Development Policy Institute",
+    displayLabel: "SDPI",
+  },
+  {
+    position: "bottom",
+    label: "University of Dhaka",
+    displayLabel: "University of Dhaka",
+  },
+  {
+    position: "lower-left",
+    label: "National University of Singapore",
+    displayLabel: "NUS",
+  },
+  {
+    position: "upper-left",
+    label: "Fudan University",
+    displayLabel: "Fudan University",
+  },
+  {
+    position: "centre",
+    label: "SGAIN Project",
+    imageSrc: "/images/remote/assets-zyrosite-com/sgain-logo-full-aqepxwr6wafrpnng-32339a3ece.png",
+    alt: "SGAIN Project",
+  },
+] as const;
+
 ---
 
 <Layout frontmatter={frontmatter}>
@@ -15,6 +55,8 @@ const frontmatter = {
   <h1><strong>Network</strong></h1>
   <p>Based on our project, we are building a global knowledge network to involve both researchers and practitioners of sustainability governance. Our primary goal is to facilitate exchange and promote inclusive knowledge production to support global sustainable development. We are particularly interested in engaging with colleagues working on the Global South and China’s global engagement.</p>
   <p>Our network will be maintained through a series of channels including newsletters, webinars and also in-person events such as workshops and conferences. Through these activities, we hope to create more opportunities for collaboration. If you are interested in joining us, please sign up <strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSeH30yh9itlUx9K8shQfTvc4-IPz5En0Ms0ZkVtXoKxIYCqVQ/viewform">here</a></strong>!</p>
+  <p>The diagram below highlights several of our institutional partners across the SGAIN network.</p>
+  <PartnerNetwork nodes={partnerNetworkNodes} />
   <p>The map below shows the location of all of our international partners and collaborators.</p>
   <p><img src="/images/remote/assets-zyrosite-com/map-yz9jmp465qsnnk5d-c00d987bff.jpeg" alt=""></p>
   <h3><strong>Project Affiliates</strong></h3>

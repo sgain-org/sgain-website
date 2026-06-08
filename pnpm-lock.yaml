@@ -11,6 +11,9 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.3
         version: 3.7.3
+      '@lucide/astro':
+        specifier: ^1.17.0
+        version: 1.17.0(astro@6.4.4(@types/node@24.13.1)(rollup@4.61.1)(yaml@2.9.0))
       astro:
         specifier: ^6.4.4
         version: 6.4.4(@types/node@24.13.1)(rollup@4.61.1)(yaml@2.9.0)
@@ -495,6 +498,11 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
+
+  '@lucide/astro@1.17.0':
+    resolution: {integrity: sha512-wF5wyjF8zThvI5JVUWG1WLoFdbTcMNXouxnholAyR0EEFfWNnGP1DGsvuu7cym/2mj2vUEjPbIPPDgWwjabFRQ==}
+    peerDependencies:
+      astro: ^4 || ^5 || ^6
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
@@ -2202,6 +2210,10 @@ snapshots:
     optional: true
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
+
+  '@lucide/astro@1.17.0(astro@6.4.4(@types/node@24.13.1)(rollup@4.61.1)(yaml@2.9.0))':
+    dependencies:
+      astro: 6.4.4(@types/node@24.13.1)(rollup@4.61.1)(yaml@2.9.0)
 
   '@oslojs/encoding@1.1.0': {}
 

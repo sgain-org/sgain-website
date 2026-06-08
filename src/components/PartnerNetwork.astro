@@ -1,0 +1,288 @@
+---
+type NetworkNodePosition =
+  | "top"
+  | "upper-right"
+  | "lower-right"
+  | "bottom"
+  | "lower-left"
+  | "upper-left"
+  | "centre";
+
+type PartnerNetworkNode = {
+  position: NetworkNodePosition;
+  label: string;
+  displayLabel?: string;
+  alt?: string;
+  imageSrc?: string;
+  href?: string;
+};
+
+type Props = {
+  ariaLabel?: string;
+  class?: string;
+  nodes: readonly PartnerNetworkNode[];
+};
+
+const {
+  ariaLabel = "Partner network diagram",
+  class: className,
+  nodes,
+} = Astro.props as Props;
+
+const positionOrder: NetworkNodePosition[] = [
+  "top",
+  "upper-right",
+  "lower-right",
+  "bottom",
+  "lower-left",
+  "upper-left",
+  "centre",
+];
+
+const positionClassNames: Record<NetworkNodePosition, string> = {
+  top: "node--top",
+  "upper-right": "node--upper-right",
+  "lower-right": "node--lower-right",
+  bottom: "node--bottom",
+  "lower-left": "node--lower-left",
+  "upper-left": "node--upper-left",
+  centre: "node--centre-position",
+};
+
+const orderedNodes = positionOrder
+  .map((position) => nodes.find((node) => node.position === position))
+  .filter(Boolean) as PartnerNetworkNode[];
+
+const renderedNodes = orderedNodes.map((node) => ({
+  ...node,
+  altText: node.alt ?? node.label,
+  className: positionClassNames[node.position],
+  isCentre: node.position === "centre",
+  isTextOnly: !node.imageSrc,
+  visibleLabel: node.displayLabel ?? node.label,
+}));
+---
+
+<section class:list={["partner-network", className]} aria-label={ariaLabel}>
+  <svg class="partner-network__lines" viewBox="0 0 100 100" aria-hidden="true">
+    <polygon points="50,10 84.6,30 84.6,70 50,90 15.4,70 15.4,30" />
+    <line x1="50" y1="50" x2="50" y2="10" />
+    <line x1="50" y1="50" x2="84.6" y2="30" />
+    <line x1="50" y1="50" x2="84.6" y2="70" />
+    <line x1="50" y1="50" x2="50" y2="90" />
+    <line x1="50" y1="50" x2="15.4" y2="70" />
+    <line x1="50" y1="50" x2="15.4" y2="30" />
+  </svg>
+
+  {
+    renderedNodes.map((node) => (
+      <div
+        class:list={[
+          "partner-network__node",
+          node.className,
+          node.isCentre && "partner-network__node--centre",
+          node.isTextOnly && "partner-network__node--text",
+        ]}
+      >
+        {
+          node.href ? (
+            <a class="partner-network__node-inner" href={node.href} aria-label={node.label}>
+              {
+                node.imageSrc ? (
+                  <img src={node.imageSrc} alt={node.altText} loading="lazy" />
+                ) : (
+                  <>
+                    <span class="partner-network__label" aria-hidden="true">
+                      {node.visibleLabel}
+                    </span>
+                    {
+                      node.visibleLabel !== node.label && (
+                        <span class="partner-network__sr-only">{node.label}</span>
+                      )
+                    }
+                  </>
+                )
+              }
+            </a>
+          ) : (
+            <div class="partner-network__node-inner">
+              {
+                node.imageSrc ? (
+                  <img src={node.imageSrc} alt={node.altText} loading="lazy" />
+                ) : (
+                  <>
+                    <span class="partner-network__label" aria-hidden="true">
+                      {node.visibleLabel}
+                    </span>
+                    {
+                      node.visibleLabel !== node.label && (
+                        <span class="partner-network__sr-only">{node.label}</span>
+                      )
+                    }
+                  </>
+                )
+              }
+            </div>
+          )
+        }
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  .partner-network {
+    --size: min(100%, 620px);
+    --node-size: clamp(94px, 18vw, 145px);
+    --circle-border-width: clamp(5px, 1vw, 7px);
+    --line-width: clamp(1.5px, 0.3vw, 2.5px);
+
+    position: relative;
+    width: var(--size);
+    aspect-ratio: 1;
+    margin: 2rem auto;
+  }
+
+  .partner-network__lines {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: visible;
+  }
+
+  .partner-network__lines line,
+  .partner-network__lines polygon {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: var(--line-width);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .partner-network__node {
+    position: absolute;
+    z-index: 2;
+    width: var(--node-size);
+    height: var(--node-size);
+    display: grid;
+    place-items: center;
+    background: #fff;
+    border: var(--circle-border-width) solid var(--ink);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(38, 51, 63, 0.08);
+    transform: translate(-50%, -50%);
+  }
+
+  .partner-network__node-inner {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    padding: clamp(0.7rem, 1.8vw, 1rem);
+    color: var(--ink);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .partner-network__node img {
+    width: 76%;
+    height: 76%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .partner-network__node--centre {
+    box-shadow:
+      inset 0 0 0 4px var(--teal),
+      inset 0 0 0 8px var(--rust),
+      0 18px 40px rgba(38, 51, 63, 0.08);
+  }
+
+  .partner-network__node--text .partner-network__node-inner {
+    padding: clamp(0.8rem, 2vw, 1.15rem);
+  }
+
+  .partner-network__label {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(0.58rem, 1vw, 0.84rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+  }
+
+  .partner-network__node--centre .partner-network__label {
+    font-size: clamp(0.68rem, 1.1vw, 0.94rem);
+  }
+
+  .node--top {
+    left: 50%;
+    top: 10%;
+  }
+
+  .node--upper-right {
+    left: 84.6%;
+    top: 30%;
+  }
+
+  .node--lower-right {
+    left: 84.6%;
+    top: 70%;
+  }
+
+  .node--bottom {
+    left: 50%;
+    top: 90%;
+  }
+
+  .node--lower-left {
+    left: 15.4%;
+    top: 70%;
+  }
+
+  .node--upper-left {
+    left: 15.4%;
+    top: 30%;
+  }
+
+  .node--centre-position {
+    left: 50%;
+    top: 50%;
+  }
+
+  .partner-network__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 640px) {
+    .partner-network {
+      --node-size: clamp(82px, 22vw, 108px);
+      --circle-border-width: 5px;
+      --line-width: 1.75px;
+    }
+
+    .partner-network__label {
+      font-size: clamp(0.54rem, 2vw, 0.72rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .partner-network {
+      --node-size: clamp(76px, 24vw, 96px);
+    }
+
+    .partner-network__label {
+      font-size: clamp(0.48rem, 2.3vw, 0.64rem);
+    }
+  }
+</style>
