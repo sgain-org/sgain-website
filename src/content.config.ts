@@ -16,15 +16,24 @@ const blog = defineCollection({
 });
 
 const news = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/news" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().default(""),
+    oldUrl: z.string().optional(),
+    type: z.enum(["page", "archive-index", "archived", "post"]).default("page"),
+    displayDate: z.string().optional(),
+    year: z.number().int().optional(),
+    order: z.number().int().positive().optional(),
+  }),
+});
+
+const publications = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/publications" }),
   schema: z.object({
     title: z.string(),
     description: z.string().default(""),
     oldUrl: z.string().optional(),
-    type: z.enum(["page", "archive-index", "archived"]).default("page"),
-    displayDate: z.string().optional(),
-    year: z.number().int().optional(),
-    order: z.number().int().positive().optional(),
   }),
 });
 
@@ -44,4 +53,4 @@ const team = defineCollection({
   }),
 });
 
-export const collections = { blog, news, team };
+export const collections = { blog, news, team, publications };

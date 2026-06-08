@@ -6,7 +6,7 @@ const toPageTitle = (title: string) =>
   title.endsWith(" | SGAIN Project") ? title : `${title} | SGAIN Project`;
 
 export async function getStaticPaths() {
-  const pages = await getCollection("news");
+  const pages = await getCollection("publications");
   return pages.map((page) => ({
     params: { slug: page.id.replace(/\.md$/, "") },
     props: { page },
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  page: CollectionEntry<"news">;
+  page: CollectionEntry<"publications">;
 };
 
 const { page } = Astro.props as Props;
@@ -28,17 +28,5 @@ const frontmatter = {
 ---
 
 <Layout frontmatter={frontmatter}>
-  {
-    page.data.type === "archived" || page.data.type === "post" ? (
-      <>
-        <h1>{page.data.title}</h1>
-        {page.data.displayDate && (
-          <p class="post-meta">{page.data.displayDate}</p>
-        )}
-        <Content />
-      </>
-    ) : (
-      <Content />
-    )
-  }
+  <Content />
 </Layout>
