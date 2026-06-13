@@ -10,6 +10,7 @@
   --muted: #6b7884;
   --sky: #7c9cb5;
   --shadow: 0 18px 50px rgba(38, 51, 63, 0.12);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 * {

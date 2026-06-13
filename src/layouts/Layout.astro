@@ -112,6 +112,11 @@ const sectionActive = (links: Array<{ href: string }>) =>
     z-index: 10;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     background: var(--teal-d);
+    transition: box-shadow 0.3s var(--ease);
+  }
+
+  .site-header.scrolled {
+    box-shadow: 0 8px 30px -18px rgba(12, 34, 54, 0.4);
   }
 
   .site-bar {
@@ -153,10 +158,15 @@ const sectionActive = (links: Array<{ href: string }>) =>
     align-items: center;
     min-height: 38px;
     border: 1px solid transparent;
+    border-radius: 8px;
     padding: 8px 10px;
     color: var(--paper);
     text-decoration: none;
     cursor: pointer;
+    transition:
+      color 0.2s,
+      background 0.2s,
+      border-color 0.2s;
   }
 
   .nav-link:hover,
@@ -189,32 +199,51 @@ const sectionActive = (links: Array<{ href: string }>) =>
     content: "";
     width: 6px;
     height: 6px;
+    margin-top: -2px;
     margin-left: 8px;
     border-bottom: 1.5px solid currentColor;
     border-right: 1.5px solid currentColor;
-    transform: rotate(45deg) translateY(-2px);
+    transform: rotate(45deg);
+    transition: transform 0.25s var(--ease);
+  }
+
+  .nav-menu:hover summary::after,
+  .nav-menu[open] summary::after,
+  .nav-menu:focus-within summary::after {
+    transform: rotate(225deg);
   }
 
   .nav-panel {
     position: absolute;
     right: 0;
     top: calc(100% + 8px);
-    display: none;
+    display: grid;
     min-width: 260px;
     border: 1px solid var(--line);
+    border-radius: 12px;
     background: var(--paper);
     box-shadow: var(--shadow);
     padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition:
+      opacity 0.22s var(--ease),
+      transform 0.22s var(--ease),
+      visibility 0.22s;
   }
 
   .nav-menu:hover .nav-panel,
   .nav-menu[open] .nav-panel,
   .nav-menu:focus-within .nav-panel {
-    display: grid;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .nav-panel a {
     display: block;
+    border-radius: 8px;
     padding: 9px 10px;
     color: var(--ink);
     text-decoration: none;
@@ -235,6 +264,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
     height: 44px;
     margin: -3px -8px -3px 0;
     border: 0;
+    border-radius: 10px;
     background: transparent;
     color: var(--paper);
     cursor: pointer;
@@ -557,12 +587,22 @@ const sectionActive = (links: Array<{ href: string }>) =>
 
     .nav-panel {
       position: static;
+      display: none;
       width: 100%;
       margin: 2px 0 6px;
       border: 0;
+      border-radius: 0;
       box-shadow: none;
       padding: 4px 4px 4px 14px;
       background: rgba(255, 255, 255, 0.06);
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: none;
+    }
+
+    .nav-menu[open] .nav-panel {
+      display: grid;
     }
 
     .nav-panel a {
@@ -815,6 +855,10 @@ const sectionActive = (links: Array<{ href: string }>) =>
           root.style.setProperty("--header-h", `${header.offsetHeight}px`);
         }
       };
+
+      window.addEventListener("scroll", () => {
+        header?.classList.toggle("scrolled", window.scrollY > 12);
+      });
 
       const openMenu = () => {
         body.classList.add("nav-open");

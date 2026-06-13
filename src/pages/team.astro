@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -144,14 +145,10 @@ const sectionLinks = sections.map((section) => ({
 ---
 
 <Layout frontmatter={frontmatter} bare>
-  <header
-    class="team-hero"
-    style='--hero-image: url("/images/remote/images-unsplash-com/photo-1684142636731-90ac495fe76c-6838e971b8.jpg")'
-  >
-    <div class="team-hero__inner">
-      <h1><strong>Team</strong></h1>
-    </div>
-  </header>
+  <Hero
+    image="/images/remote/images-unsplash-com/photo-1684142636731-90ac495fe76c-6838e971b8.jpg"
+    title="Team"
+  />
 
   <nav class="team-nav" aria-label="Team sections">
     <div class="team-nav__inner">
@@ -257,36 +254,6 @@ const sectionLinks = sections.map((section) => ({
 </Layout>
 
 <style>
-  /* Hero */
-  .team-hero {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(43, 74, 100, 0.82) 0%,
-        rgba(43, 74, 100, 0.5) 45%,
-        rgba(43, 74, 100, 0.74) 100%
-      ),
-      var(--hero-image) center / cover no-repeat;
-    color: var(--paper);
-    padding: clamp(3.5rem, 9vw, 6.5rem) 24px;
-  }
-
-  .team-hero__inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .team-hero h1 {
-    margin: 0;
-    color: #fff;
-    font-family: "Fraunces", serif;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    text-align: center;
-  }
-
   /* Section nav */
   .team-nav {
     border-bottom: 1px solid var(--line);
