@@ -89,6 +89,7 @@ a:hover {
 
 .home-cta {
   border: 1px solid var(--teal);
+  border-radius: 8px;
   background: var(--paper);
   color: var(--teal-d);
   padding: 0.58rem 0.95rem;
