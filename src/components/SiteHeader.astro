@@ -1,5 +1,28 @@
 ---
-import { Menu, X } from "@lucide/astro";
+import {
+  Archive,
+  Award,
+  BookOpen,
+  Clapperboard,
+  Compass,
+  Database,
+  FileText,
+  Globe,
+  Library,
+  Megaphone,
+  Menu,
+  Newspaper,
+  PenLine,
+  Presentation,
+  Users,
+  X,
+} from "@lucide/astro";
+import {
+  contactLink,
+  homeLink,
+  type IconName,
+  navSections,
+} from "@/data/navigation";
 
 const logoWhite =
   "/images/remote/assets-zyrosite-com/sgain-logo-full-white.png";
@@ -10,58 +33,25 @@ const currentPath = Astro.url.pathname.endsWith("/")
 
 const normalize = (href: string) => (href.endsWith("/") ? href : `${href}/`);
 const isActive = (href: string) => currentPath === normalize(href);
-
-const navSections = [
-  {
-    label: "Research",
-    links: [
-      { href: "/research/", label: "Research" },
-      { href: "/cgel-database/", label: "CGEL Database" },
-    ],
-  },
-  {
-    label: "Team",
-    links: [
-      { href: "/team/", label: "Team" },
-      { href: "/international-partners/", label: "International Partners" },
-      { href: "/advisory-board/", label: "Advisory Board" },
-    ],
-  },
-  {
-    label: "Publications",
-    links: [
-      { href: "/publications/", label: "Publications" },
-      {
-        href: "/articles-and-book-chapters/",
-        label: "Articles and Book Chapters",
-      },
-      {
-        href: "/policy-briefs-and-reports/",
-        label: "Policy Briefs and Reports",
-      },
-      {
-        href: "/non-academic-publications/",
-        label: "Non-Academic Publications",
-      },
-      { href: "/multimedia/", label: "Multimedia" },
-    ],
-  },
-  {
-    label: "News & Events",
-    links: [
-      { href: "/news/", label: "News & Events" },
-      {
-        href: "/news/bath-conference-on-china-and-global-sustainability-transition/",
-        label: "Bath Conference",
-      },
-      { href: "/news/archive/", label: "Archive" },
-      { href: "/blog/", label: "Blog" },
-    ],
-  },
-];
-
 const sectionActive = (links: Array<{ href: string }>) =>
   links.some((link) => isActive(link.href));
+
+const iconFor: Record<IconName, typeof Menu> = {
+  research: Compass,
+  database: Database,
+  team: Users,
+  partners: Globe,
+  advisory: Award,
+  publications: Library,
+  articles: BookOpen,
+  policy: FileText,
+  nonAcademic: Newspaper,
+  multimedia: Clapperboard,
+  news: Megaphone,
+  conference: Presentation,
+  archive: Archive,
+  blog: PenLine,
+};
 ---
 
 <a class="skip-link" href="#content">Skip to content</a>
@@ -92,7 +82,12 @@ const sectionActive = (links: Array<{ href: string }>) =>
     </button>
 
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-      <a href="/" class:list={["nav-link", isActive("/") && "active"]}>Home</a>
+      <a
+        href={homeLink.href}
+        class:list={["nav-link", isActive(homeLink.href) && "active"]}
+      >
+        {homeLink.label}
+      </a>
 
       {
         navSections.map((section) => (
@@ -101,27 +96,36 @@ const sectionActive = (links: Array<{ href: string }>) =>
           >
             <summary>{section.label}</summary>
             <div class="nav-panel">
-              {section.links.map((link) => (
-                <a
-                  href={link.href}
-                  class:list={[isActive(link.href) && "active"]}
-                >
-                  {link.label}
-                </a>
-              ))}
+              <div class="nav-card">
+                <p class="nav-card-eyebrow">{section.label}</p>
+                {section.links.map((link) => {
+                  const Icon = iconFor[link.icon];
+                  return (
+                    <a
+                      href={link.href}
+                      class:list={["nav-row", isActive(link.href) && "active"]}
+                    >
+                      <span class="nav-row-icon">
+                        <Icon size={18} aria-hidden="true" />
+                      </span>
+                      <span class="nav-row-text">
+                        <span class="nav-row-title">{link.label}</span>
+                        <span class="nav-row-desc">{link.description}</span>
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </details>
         ))
       }
 
       <a
-        href="/contact-information/"
-        class:list={[
-          "nav-link",
-          isActive("/contact-information/") && "active",
-        ]}
+        href={contactLink.href}
+        class:list={["nav-link", isActive(contactLink.href) && "active"]}
       >
-        Contact
+        {contactLink.label}
       </a>
     </nav>
   </div>
@@ -215,13 +219,13 @@ const sectionActive = (links: Array<{ href: string }>) =>
     position: sticky;
     top: 0;
     z-index: 10;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    background: var(--teal-d);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    background: var(--slate);
     transition: box-shadow 0.3s var(--ease);
   }
 
   .site-header.scrolled {
-    box-shadow: 0 8px 30px -18px rgba(12, 34, 54, 0.4);
+    box-shadow: 0 8px 30px -18px rgba(12, 34, 54, 0.45);
   }
 
   .site-bar {
@@ -264,8 +268,8 @@ const sectionActive = (links: Array<{ href: string }>) =>
     min-height: 38px;
     border: 1px solid transparent;
     border-radius: 8px;
-    padding: 8px 10px;
-    color: var(--paper);
+    padding: 8px 12px;
+    color: #fff;
     text-decoration: none;
     cursor: pointer;
     transition:
@@ -276,16 +280,16 @@ const sectionActive = (links: Array<{ href: string }>) =>
 
   .nav-link:hover,
   .nav-menu:hover summary,
-  .nav-menu[open] summary {
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+  .nav-menu[open] summary,
+  .nav-menu:focus-within summary {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.14);
   }
 
   .nav-link.active,
   .nav-menu.active summary {
-    color: #fff;
-    border-bottom-color: var(--paper);
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .nav-menu {
@@ -318,24 +322,22 @@ const sectionActive = (links: Array<{ href: string }>) =>
     transform: rotate(225deg);
   }
 
+  /* Desktop hover card (mega-menu) */
   .nav-panel {
     position: absolute;
+    top: 100%;
     right: 0;
-    top: calc(100% + 8px);
-    display: grid;
-    min-width: 260px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: var(--paper);
-    box-shadow: var(--shadow);
-    padding: 8px;
+    z-index: 1;
+    /* Transparent bridge so the cursor can cross from summary to card
+       without the panel closing. */
+    padding-top: 10px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
+    transform: translateY(6px);
     transition:
-      opacity 0.22s var(--ease),
-      transform 0.22s var(--ease),
-      visibility 0.22s;
+      opacity 0.2s var(--ease),
+      transform 0.2s var(--ease),
+      visibility 0.2s;
   }
 
   .nav-menu:hover .nav-panel,
@@ -346,18 +348,87 @@ const sectionActive = (links: Array<{ href: string }>) =>
     transform: translateY(0);
   }
 
-  .nav-panel a {
-    display: block;
-    border-radius: 8px;
+  .nav-card {
+    width: max-content;
+    min-width: 320px;
+    max-width: 360px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    padding: 8px;
+  }
+
+  .nav-card-eyebrow {
+    margin: 0 0 4px;
+    padding: 6px 10px 8px;
+    border-bottom: 1px solid var(--line);
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
     padding: 9px 10px;
-    color: var(--ink);
     text-decoration: none;
   }
 
-  .nav-panel a:hover,
-  .nav-panel a.active {
+  .nav-row-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
     background: var(--paper2);
     color: var(--teal);
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  .nav-row-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .nav-row-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+
+  .nav-row-desc {
+    margin-top: 2px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--muted);
+  }
+
+  .nav-row:hover,
+  .nav-row.active {
+    background: var(--paper2);
+  }
+
+  .nav-row:hover .nav-row-title,
+  .nav-row.active .nav-row-title {
+    color: var(--teal-d);
+  }
+
+  .nav-row:hover .nav-row-icon,
+  .nav-row.active .nav-row-icon {
+    background: var(--teal);
+    color: #fff;
   }
 
   .nav-toggle {
@@ -371,12 +442,12 @@ const sectionActive = (links: Array<{ href: string }>) =>
     border: 0;
     border-radius: 10px;
     background: transparent;
-    color: var(--paper);
+    color: #fff;
     cursor: pointer;
   }
 
   .nav-toggle:hover {
-    color: #fff;
+    background: rgba(255, 255, 255, 0.14);
   }
 
   .nav-toggle :global(.nav-toggle-close) {
@@ -397,7 +468,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
       justify-content: flex-start;
       gap: 4px;
       padding: 12px 16px 32px;
-      background: var(--teal-d);
+      background: var(--slate);
       overflow-y: auto;
       overscroll-behavior: contain;
       visibility: hidden;
@@ -443,16 +514,11 @@ const sectionActive = (links: Array<{ href: string }>) =>
       justify-content: space-between;
     }
 
+    /* Flatten the hover card into an inline accordion panel. */
     .nav-panel {
       position: static;
       display: none;
-      width: 100%;
-      margin: 2px 0 6px;
-      border: 0;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 4px 4px 4px 14px;
-      background: rgba(255, 255, 255, 0.06);
+      padding-top: 0;
       opacity: 1;
       visibility: visible;
       transform: none;
@@ -460,16 +526,48 @@ const sectionActive = (links: Array<{ href: string }>) =>
     }
 
     .nav-menu[open] .nav-panel {
-      display: grid;
+      display: block;
     }
 
-    .nav-panel a {
+    .nav-card {
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      margin: 2px 0 6px;
+      border: 0;
+      border-radius: 12px;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px;
+    }
+
+    .nav-card-eyebrow,
+    .nav-row-desc {
+      display: none;
+    }
+
+    .nav-row-icon {
+      background: rgba(255, 255, 255, 0.12);
       color: var(--paper);
     }
 
-    .nav-panel a:hover,
-    .nav-panel a.active {
+    .nav-row-title {
+      color: var(--paper);
+    }
+
+    .nav-row:hover,
+    .nav-row.active {
       background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-row:hover .nav-row-title,
+    .nav-row.active .nav-row-title {
+      color: #fff;
+    }
+
+    .nav-row:hover .nav-row-icon,
+    .nav-row.active .nav-row-icon {
+      background: rgba(255, 255, 255, 0.2);
       color: #fff;
     }
   }
