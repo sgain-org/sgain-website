@@ -168,14 +168,6 @@ const renderedNodes = [...partnerPoints, centrePoint].map((node) => ({
 
   .partner-network__node-inner:is(a) {
     cursor: pointer;
-    transition:
-      background 180ms var(--ease),
-      color 180ms var(--ease);
-  }
-
-  .partner-network__node-inner:is(a):hover {
-    background: rgba(176, 106, 60, 0.08);
-    color: var(--rust);
   }
 
   .partner-network__node:focus-within {
