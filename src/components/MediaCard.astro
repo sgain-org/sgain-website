@@ -1,4 +1,6 @@
 ---
+import Cta from "./Cta.astro";
+
 type Props = {
   href: string;
   image: string;
@@ -25,7 +27,7 @@ const isExternal = href.startsWith("http");
   <span class="media-card__overlay">
     {meta && <span class="media-card__meta">{meta}</span>}
     <span class="media-card__title">{title}</span>
-    {cta && <span class="home-cta">{cta}</span>}
+    {cta && <Cta as="span">{cta}</Cta>}
   </span>
 </a>
 
@@ -86,7 +88,7 @@ const isExternal = href.startsWith("http");
     line-height: 1.18;
   }
 
-  .media-card:hover :global(.home-cta) {
+  .media-card:hover :global(.cta) {
     border-color: var(--rust);
     color: var(--rust);
   }

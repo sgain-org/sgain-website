@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
+import Band from "../components/Band.astro";
 import Hero from "../components/Hero.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -170,10 +172,10 @@ const sectionLinks = sections.map((section) => ({
   {
     sections.map((section, index) => (
       <>
-        {index > 0 && <div class="section-divider" />}
-        <section
+        {index > 0 && <SectionDivider />}
+        <Band
           id={section.id}
-          class="band team-section"
+          class="team-section"
           aria-labelledby={`${section.id}-heading`}
         >
           <div class="team-section__header">
@@ -247,7 +249,7 @@ const sectionLinks = sections.map((section) => ({
               </div>
             </div>
           ))}
-        </section>
+        </Band>
       </>
     ))
   }
@@ -310,27 +312,9 @@ const sectionLinks = sections.map((section) => ({
     box-shadow: var(--shadow);
   }
 
-  /* Section dividers + bands (mirrors home page) */
-  .section-divider {
-    padding: 0 24px;
-  }
-
-  .section-divider::before {
-    content: "";
-    display: block;
-    max-width: 1100px;
-    height: 2px;
-    margin: 0 auto;
-    background: var(--ink);
-  }
-
-  .band {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .team-section {
+  /* Anchored band offset under the sticky header (Band renders the element,
+     so target it globally by its passed-through class). */
+  :global(.team-section) {
     scroll-margin-top: 100px;
   }
 

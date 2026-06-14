@@ -1,4 +1,5 @@
 ---
+import Band from "../components/Band.astro";
 import Hero from "../components/Hero.astro";
 import SocialLinks from "../components/social/SocialLinks.astro";
 import Layout from "../layouts/Layout.astro";
@@ -17,7 +18,7 @@ const frontmatter = {
     title="Contact Us"
   />
 
-  <section class="band">
+  <Band>
     <div class="contact-grid">
       <div class="contact-card">
         <p class="contact-follow">Follow SGAIN on social media.</p>
@@ -43,7 +44,7 @@ const frontmatter = {
         id="contact-us"
         aria-labelledby="contact-us-title"
       >
-        <h2 id="contact-us-title" class="section-title">Send a Message</h2>
+        <h2 id="contact-us-title" class="contact-title">Send a Message</h2>
         <p>
           Reach the team directly at <a href="mailto:sgain@bath.ac.uk"
             >sgain@bath.ac.uk</a
@@ -51,18 +52,11 @@ const frontmatter = {
         </p>
       </section>
     </div>
-  </section>
+  </Band>
 </Layout>
 
 <style>
-  /* Band */
-  .band {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .section-title {
+  .contact-title {
     margin: 0 0 1rem;
     color: var(--teal-d);
     font-family: "Fraunces", serif;

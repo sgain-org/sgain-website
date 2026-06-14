@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import Band from "../../components/Band.astro";
 import Hero from "../../components/Hero.astro";
+import Prose from "../../components/Prose.astro";
 import Layout from "../../layouts/Layout.astro";
 
 const frontmatter = {
@@ -66,8 +68,8 @@ const archiveGroups = archiveEntries.reduce<
     </p>
   </Hero>
 
-  <section class="band">
-    <div class="content-shell markdown-content">
+  <Band>
+    <Prose>
       {
         archiveGroups.length > 0 && (
           <>
@@ -106,6 +108,6 @@ const archiveGroups = archiveEntries.reduce<
           </>
         )
       }
-    </div>
-  </section>
+    </Prose>
+  </Band>
 </Layout>

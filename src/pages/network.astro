@@ -1,7 +1,11 @@
 ---
+import Band from "../components/Band.astro";
 import Hero from "../components/Hero.astro";
 import PartnerNetwork from "../components/PartnerNetwork.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import SectionTitle from "../components/SectionTitle.astro";
 import Layout from "../layouts/Layout.astro";
+import { networkCentre, networkPartners } from "../lib/network";
 
 const frontmatter = {
   title: "SGAIN: Network | SGAIN Project",
@@ -9,40 +13,6 @@ const frontmatter = {
     "Explore our global knowledge network that unites researchers and practitioners in sustainability governance. Sign up for our newsletter or contact us to become a project affiliate",
   oldUrl: "https://sgain.org/network",
 };
-
-const networkPartners = [
-  {
-    label: "Bath Social & Development Research Ltd",
-    displayLabel: "Bath Social & Development Research",
-  },
-  {
-    label: "Universitas Gadjah Mada",
-    displayLabel: "Universitas Gadjah Mada",
-  },
-  {
-    label: "Sustainable Development Policy Institute",
-    displayLabel: "SDPI",
-  },
-  {
-    label: "University of Dhaka",
-    displayLabel: "University of Dhaka",
-  },
-  {
-    label: "National University of Singapore",
-    displayLabel: "NUS",
-  },
-  {
-    label: "Fudan University",
-    displayLabel: "Fudan University",
-  },
-] as const;
-
-const networkCentre = {
-  label: "SGAIN Project",
-  imageSrc:
-    "/images/remote/assets-zyrosite-com/sgain-logo-full-aqepxwr6wafrpnng-32339a3ece.png",
-  alt: "SGAIN Project",
-} as const;
 ---
 
 <Layout frontmatter={frontmatter} bare>
@@ -51,7 +21,8 @@ const networkCentre = {
     title="Network"
   />
 
-  <section class="band prose">
+  <Band prose>
+    <div class="prose">
     <p>
       Based on our project, we are building a global knowledge network to involve
       both researchers and practitioners of sustainability governance. Our primary
@@ -73,16 +44,20 @@ const networkCentre = {
         ></strong
       >!
     </p>
-  </section>
+    </div>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
+  <Band>
     <p class="diagram-caption">
       The diagram below highlights several of our institutional partners across
       the SGAIN network.
     </p>
-    <PartnerNetwork centre={networkCentre} partners={networkPartners} />
+    <PartnerNetwork
+      centre={networkCentre}
+      partners={networkPartners}
+    />
     <p class="diagram-caption">
       The map below shows the location of all of our international partners and
       collaborators.
@@ -93,12 +68,12 @@ const networkCentre = {
         alt=""
       />
     </figure>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
-    <h3 class="section-title"><strong>Project Affiliates</strong></h3>
+  <Band>
+    <SectionTitle as="h3" align="left"><strong>Project Affiliates</strong></SectionTitle>
     <p class="section-intro">
       Our project affiliates include researchers across the globe who collaborate
       with us on various issues. They are key members in our network.
@@ -246,12 +221,13 @@ const networkCentre = {
         </p>
       </article>
     </div>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band prose">
-    <h3 class="section-title"><strong>Visiting Doctoral Fellowship</strong></h3>
+  <Band prose>
+    <SectionTitle as="h3" align="left"><strong>Visiting Doctoral Fellowship</strong></SectionTitle>
+    <div class="prose">
     <p>
       Our fellowship programme is to support early career researchers (PhD
       students) who want to work with our project team to conduct research (up to
@@ -284,48 +260,11 @@ const networkCentre = {
       may take some time. We advise you to apply 6-9 months before the planned
       state date of your visit.
     </p>
-  </section>
+    </div>
+  </Band>
 </Layout>
 
 <style>
-  /* Bands + dividers */
-  .band {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .band.prose {
-    max-width: 820px;
-  }
-
-  .section-divider {
-    padding: 0 24px;
-  }
-
-  .section-divider::before {
-    content: "";
-    display: block;
-    max-width: 1100px;
-    height: 2px;
-    margin: 0 auto;
-    background: var(--ink);
-  }
-
-  /* Section heading */
-  .section-title {
-    margin: 0 0 1.25rem;
-    color: var(--teal-d);
-    font-family: "Fraunces", serif;
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    font-weight: 700;
-    line-height: 1.16;
-  }
-
-  .section-title strong {
-    font-weight: 700;
-  }
-
   /* Prose */
   .prose > * + * {
     margin-top: 1.05rem;

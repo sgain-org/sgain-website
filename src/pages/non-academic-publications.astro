@@ -1,6 +1,11 @@
 ---
+import Band from "../components/Band.astro";
+import CardGrid from "../components/CardGrid.astro";
 import Hero from "../components/Hero.astro";
 import MediaCard from "../components/MediaCard.astro";
+import Prose from "../components/Prose.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import SectionTitle from "../components/SectionTitle.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -27,8 +32,8 @@ const frontmatter = {
     title="Associated Publications"
   />
 
-  <section class="band">
-    <div class="content-shell markdown-content">
+  <Band>
+    <Prose>
       <h4 id="non-academic">Non-Academic Publications</h4>
       <h6>
         Read the most recent publications from members of our team in online
@@ -89,14 +94,14 @@ const frontmatter = {
         </h3>
         <p>Sun, Y. (2025). The Conversation.</p>
       </article>
-    </div>
-  </section>
+    </Prose>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
-    <h2 class="section-title" id="media-coverage">Media Coverage</h2>
-    <div class="card-grid">
+  <Band>
+    <SectionTitle id="media-coverage">Media Coverage</SectionTitle>
+    <CardGrid>
       <MediaCard
         href="https://www.outrageandoptimism.org/episodes/the-china-pivot-what-will-beijings-climate-leadership-look-like?hsLang=en"
         image="/images/remote/images-unsplash-com/photo-1508804185872-d7badad00f7d-58858f784b.jpg"
@@ -129,10 +134,10 @@ const frontmatter = {
         meta="13/01"
         cta="Interview"
       />
-    </div>
+    </CardGrid>
 
     <h3 class="year-title">2025</h3>
-    <div class="card-grid">
+    <CardGrid>
       <MediaCard
         href="https://www.reuters.com/sustainability/climate-energy/can-china-fill-vacuum-climate-leadership--ecmii-2025-11-04/"
         image="/images/remote/images-unsplash-com/photo-1551350594-508a1315946b-a4a34c7a3f.jpg"
@@ -179,6 +184,6 @@ const frontmatter = {
         meta="16/09"
         cta="Event Coverage"
       />
-    </div>
-  </section>
+    </CardGrid>
+  </Band>
 </Layout>

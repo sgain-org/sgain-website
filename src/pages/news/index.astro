@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
+import Band from "../../components/Band.astro";
 import Hero from "../../components/Hero.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
 import Layout from "../../layouts/Layout.astro";
 
 const frontmatter = {
@@ -26,7 +28,7 @@ const posts = await Promise.all(
     title="News & Events"
   />
 
-  <section class="band-prose news-intro">
+  <Band prose class="news-intro">
     <p class="news-lead">
       <strong
         >On this page we share updates about SGAIN, and various events attended
@@ -38,11 +40,11 @@ const posts = await Promise.all(
         ><a href="/news/archive/#twentyfive">2025</a></strong
       >, <strong><a href="/news/archive/#twentyfour">2024</a></strong>
     </p>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band-prose news-feed">
+  <Band prose class="news-feed">
     {
       posts.map(({ entry, Content }) => (
         <article class="news-item">
@@ -54,30 +56,10 @@ const posts = await Promise.all(
         </article>
       ))
     }
-  </section>
+  </Band>
 </Layout>
 
 <style>
-  /* Bands + dividers */
-  .band-prose {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .section-divider {
-    padding: 0 24px;
-  }
-
-  .section-divider::before {
-    content: "";
-    display: block;
-    max-width: 1100px;
-    height: 2px;
-    margin: 0 auto;
-    background: var(--ink);
-  }
-
   /* Intro */
   .news-lead {
     margin: 0;

@@ -1,5 +1,8 @@
 ---
+import Band from "../components/Band.astro";
 import Hero from "../components/Hero.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import SectionTitle from "../components/SectionTitle.astro";
 import Layout from "../layouts/Layout.astro";
 
 type MediaVariant = "landscape" | "portrait" | "audio";
@@ -127,10 +130,10 @@ const interviews: MediaItem[] = [
     title="Multimedia"
   />
 
-  <section class="band" aria-labelledby="conference-coverage-title">
-    <h2 id="conference-coverage-title" class="section-title">
+  <Band aria-labelledby="conference-coverage-title">
+    <SectionTitle id="conference-coverage-title">
       Insights from the 2025 Bath Conference
-    </h2>
+    </SectionTitle>
     <div class="media-grid">
       {
         conferenceCoverage.map((item) => (
@@ -166,12 +169,12 @@ const interviews: MediaItem[] = [
         ))
       }
     </div>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band" aria-labelledby="interviews-title">
-    <h2 id="interviews-title" class="section-title">Interviews</h2>
+  <Band aria-labelledby="interviews-title">
+    <SectionTitle id="interviews-title">Interviews</SectionTitle>
     <div class="media-grid">
       {
         interviews.map((item) => (
@@ -207,7 +210,7 @@ const interviews: MediaItem[] = [
         ))
       }
     </div>
-  </section>
+  </Band>
 </Layout>
 
 <style>

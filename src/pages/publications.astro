@@ -1,6 +1,11 @@
 ---
+import Band from "../components/Band.astro";
+import CardGrid from "../components/CardGrid.astro";
 import Hero from "../components/Hero.astro";
 import MediaCard from "../components/MediaCard.astro";
+import Prose from "../components/Prose.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import SectionTitle from "../components/SectionTitle.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -23,8 +28,8 @@ const frontmatter = {
     </p>
   </Hero>
 
-  <section class="band">
-    <div class="content-shell markdown-content">
+  <Band>
+    <Prose>
       <article class="publication-card">
         <p class="publication-card__meta">Most recent article</p>
         <h3>
@@ -81,14 +86,14 @@ const frontmatter = {
         </p>
         <p>3/17/2026</p>
       </article>
-    </div>
-  </section>
+    </Prose>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
-    <h2 class="section-title">Explore our publications</h2>
-    <div class="card-grid">
+  <Band>
+    <SectionTitle>Explore our publications</SectionTitle>
+    <CardGrid>
       <MediaCard
         href="/academic-publications/#academic-publications"
         image="/images/remote/images-unsplash-com/photo-1610116306796-6fea9f4fae38-ab23508359.jpg"
@@ -113,6 +118,6 @@ const frontmatter = {
         imageAlt="people using phone while standing"
         title="Media Coverage"
       />
-    </div>
-  </section>
+    </CardGrid>
+  </Band>
 </Layout>

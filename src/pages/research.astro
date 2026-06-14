@@ -1,5 +1,8 @@
 ---
+import Band from "../components/Band.astro";
 import Hero from "../components/Hero.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import SectionTitle from "../components/SectionTitle.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -24,7 +27,8 @@ const frontmatter = {
     </div>
   </nav>
 
-  <section class="band-prose prose">
+  <Band prose>
+    <div class="prose">
     <p>
       The rise of China as a global power is a defining feature of world politics
       in the 21st century, but research on the impacts of a rising China on global
@@ -67,12 +71,13 @@ const frontmatter = {
       to help policy practitioners across the globe develop more effective
       strategies to engage China for supporting global sustainable development.
     </p>
-  </section>
+    </div>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band" id="rationale">
-    <h3 class="section-title"><strong>Rationale</strong></h3>
+  <Band id="rationale">
+    <SectionTitle as="h3" align="left"><strong>Rationale</strong></SectionTitle>
     <div class="prose section-prose">
       <p>
         The primary goal of SGAIN is to assess China&#39;s efforts to promote green
@@ -113,12 +118,13 @@ const frontmatter = {
         </p>
       </article>
     </div>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band-prose prose" id="research-questions">
-    <h3 class="section-title"><strong>Research Questions</strong></h3>
+  <Band prose id="research-questions">
+    <SectionTitle as="h3" align="left"><strong>Research Questions</strong></SectionTitle>
+    <div class="prose">
     <p>
       SGAIN takes an interdisciplinary approach by integrating theories and
       methods from different social science disciplines including international
@@ -150,13 +156,14 @@ const frontmatter = {
         > describing our research programme</strong
       ><strong>.</strong>
     </p>
-  </section>
+    </div>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band" id="methodology">
-    <h3 class="section-title"><strong>Methodology</strong></h3>
-  </section>
+  <Band id="methodology">
+    <SectionTitle as="h3" align="left"><strong>Methodology</strong></SectionTitle>
+  </Band>
 </Layout>
 
 <style>
@@ -197,46 +204,6 @@ const frontmatter = {
     border-color: var(--teal-d);
     background: var(--teal-d);
     color: #fff;
-  }
-
-  /* Bands + dividers */
-  .band {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .band-prose {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .section-divider {
-    padding: 0 24px;
-  }
-
-  .section-divider::before {
-    content: "";
-    display: block;
-    max-width: 1100px;
-    height: 2px;
-    margin: 0 auto;
-    background: var(--ink);
-  }
-
-  /* Section heading */
-  .section-title {
-    margin: 0 0 1.25rem;
-    color: var(--teal-d);
-    font-family: "Fraunces", serif;
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    font-weight: 700;
-    line-height: 1.16;
-  }
-
-  .section-title strong {
-    font-weight: 700;
   }
 
   /* Prose */

@@ -11,7 +11,6 @@ type Props = {
   ariaLabel?: string;
   class?: string;
   centre: NetworkNode;
-  centreRing?: boolean;
   partners: readonly NetworkNode[];
   radius?: number;
   startAngle?: number;
@@ -21,7 +20,6 @@ const {
   ariaLabel = "Partner network diagram",
   class: className,
   centre,
-  centreRing = true,
   partners,
   radius = 40,
   startAngle = -90,
@@ -67,7 +65,6 @@ const renderedNodes = [...partnerPoints, centrePoint].map((node) => ({
         class:list={[
           "partner-network__node",
           node.isCentre && "partner-network__node--centre",
-          node.isCentre && centreRing && "partner-network__node--centre-ring",
           node.isTextOnly && "partner-network__node--text",
         ]}
         style={`left:${node.x}%;top:${node.y}%`}
@@ -76,7 +73,9 @@ const renderedNodes = [...partnerPoints, centrePoint].map((node) => ({
           <a
             class="partner-network__node-inner"
             href={node.href}
-            aria-label={node.label}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${node.label} website`}
           >
             {node.imageSrc ? (
               <img src={node.imageSrc} alt={node.altText} loading="lazy" />
@@ -165,6 +164,27 @@ const renderedNodes = [...partnerPoints, centrePoint].map((node) => ({
     color: var(--ink);
     text-align: center;
     text-decoration: none;
+  }
+
+  .partner-network__node-inner:is(a) {
+    cursor: pointer;
+    transition:
+      background 180ms var(--ease),
+      color 180ms var(--ease);
+  }
+
+  .partner-network__node-inner:is(a):hover {
+    background: rgba(176, 106, 60, 0.08);
+    color: var(--rust);
+  }
+
+  .partner-network__node:focus-within {
+    outline: 3px solid var(--rust);
+    outline-offset: 5px;
+  }
+
+  .partner-network__node-inner:is(a):focus-visible {
+    outline: none;
   }
 
   .partner-network__node img {

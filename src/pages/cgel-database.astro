@@ -1,5 +1,7 @@
 ---
+import Band from "../components/Band.astro";
 import Hero from "../components/Hero.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -15,7 +17,7 @@ const frontmatter = {
     title="CGEL Database"
   />
 
-  <section class="band-prose">
+  <Band prose>
     <div class="prose">
       <p>
         The China&#39;s Global Environmental Leadership database is the first and
@@ -38,11 +40,11 @@ const frontmatter = {
       China&#39;s Global Environmental Leadership (CGEL) Database - Version 1.0.
       SGAIN Project. University of Bath.
     </p>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
+  <Band>
     <p class="section-intro">
       The unit for analysis in the CGEL database is a governance initiative.
       Therefore, the following guidelines are used to determine which initiatives
@@ -89,11 +91,11 @@ const frontmatter = {
         </p>
       </article>
     </div>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
+  <Band>
     <p class="findings-note">
       <strong
         >Full preliminary findings of the CGEL Database can be viewed on desktop</strong
@@ -197,35 +199,10 @@ const frontmatter = {
         environmental governance.
       </p>
     </div>
-  </section>
+  </Band>
 </Layout>
 
 <style>
-  /* Bands + dividers */
-  .band {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .band-prose {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 24px;
-  }
-
-  .section-divider {
-    padding: 0 24px;
-  }
-
-  .section-divider::before {
-    content: "";
-    display: block;
-    max-width: 1100px;
-    height: 2px;
-    margin: 0 auto;
-    background: var(--ink);
-  }
 
   /* Prose */
   .prose > * + * {

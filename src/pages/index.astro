@@ -1,8 +1,14 @@
 ---
+import Band from "../components/Band.astro";
+import CardGrid from "../components/CardGrid.astro";
+import Cta from "../components/Cta.astro";
 import Hero from "../components/Hero.astro";
 import MediaCard from "../components/MediaCard.astro";
 import PartnerNetwork from "../components/PartnerNetwork.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import SectionTitle from "../components/SectionTitle.astro";
 import Layout from "../layouts/Layout.astro";
+import { networkCentre, networkPartners } from "../lib/network";
 
 const frontmatter = {
   title:
@@ -14,39 +20,6 @@ const frontmatter = {
 
 const heroImage =
   "/images/remote/images-unsplash-com/photo-1515344905723-babc01aac23d.jpg";
-
-const homeNetworkPartners = [
-  {
-    label: "Bath Social & Development Research Ltd",
-    imageSrc: "/network/bath_sdr.jpeg",
-  },
-  {
-    label: "Universitas Gadjah Mada",
-    imageSrc: "/network/universitas_gadjah_mada.jpg",
-  },
-  {
-    label: "Sustainable Development Policy Institute",
-    imageSrc: "/network/sdpi.jpeg",
-  },
-  {
-    label: "University of Dhaka",
-    imageSrc: "/network/dhaka_university_logo.png",
-  },
-  {
-    label: "National University of Singapore",
-    imageSrc: "/network/nus_logo.jpg",
-  },
-  {
-    label: "Fudan University",
-    imageSrc: "/network/fudan_university_logo.png",
-  },
-] as const;
-
-const homeNetworkCentre = {
-  label: "University of Bath",
-  imageSrc: "/network/university_of_bath_logo.jpg",
-  alt: "University of Bath",
-} as const;
 ---
 
 <style>
@@ -104,20 +77,17 @@ const homeNetworkCentre = {
       will help policy practitioners develop suitable strategies to align
       international investments with local sustainability needs.
     </p>
-    <p class="home-cta-wrap">
-      <a class="home-cta" href="/research/">Learn more</a>
-    </p>
+    <Cta href="/research/">Learn more</Cta>
   </Hero>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
+  <Band>
     <div class="about">
       <div class="about__figure">
         <PartnerNetwork
-          centre={homeNetworkCentre}
-          partners={homeNetworkPartners}
-          centreRing={false}
+          centre={networkCentre}
+          partners={networkPartners}
         />
       </div>
       <div class="about__copy">
@@ -130,18 +100,16 @@ const homeNetworkCentre = {
           Development Policy Institute (Pakistan), and National University of
           Singapore (Singapore).
         </p>
-        <p class="home-cta-wrap">
-          <a class="home-cta" href="/team/">Meet the team</a>
-        </p>
+        <Cta href="/team/">Meet the team</Cta>
       </div>
     </div>
-  </section>
+  </Band>
 
-  <div class="section-divider"></div>
+  <SectionDivider />
 
-  <section class="band">
-    <h2 class="section-title">Recent Updates</h2>
-    <div class="card-grid">
+  <Band>
+    <SectionTitle>Recent Updates</SectionTitle>
+    <CardGrid>
       <MediaCard
         href="/news/bath-conference-on-china-and-global-sustainability-transition/"
         image="/images/remote/assets-zyrosite-com/dsc01886-yleq5rrxkjiqjvop-13b7ce341f.jpg"
@@ -153,6 +121,6 @@ const homeNetworkCentre = {
         imageAlt="bundle of newspaper on table"
         title="SGAIN International News"
       />
-    </div>
-  </section>
+    </CardGrid>
+  </Band>
 </Layout>

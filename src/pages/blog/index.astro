@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Band from "../../components/Band.astro";
 import Hero from "../../components/Hero.astro";
 import Layout from "../../layouts/Layout.astro";
 
@@ -28,7 +29,7 @@ const formatDate = (value: string) =>
     <p>A space for our community to share thoughts and reflections</p>
   </Hero>
 
-  <section class="band" aria-label="Blog posts">
+  <Band aria-label="Blog posts">
     <div class="pub-grid">
       {
         posts.map((post) => (
@@ -48,7 +49,7 @@ const formatDate = (value: string) =>
         ))
       }
     </div>
-  </section>
+  </Band>
 </Layout>
 
 <style>
