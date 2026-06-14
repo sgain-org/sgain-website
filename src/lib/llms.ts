@@ -1,17 +1,8 @@
 // biome-ignore lint/correctness/noUnresolvedImports: `astro:content` is an Astro virtual module (types live in the biome-excluded .astro/ dir)
 import { getCollection } from "astro:content";
+import { makeUrl } from "@/lib/site.ts";
 
-/**
- * Builders for `/llms.txt` and `/llms-full.txt`.
- *
- * `llms.txt` (see https://llmstxt.org) is a curated, link-only index of the
- * site; `llms-full.txt` inlines the full text of every collection entry. Both
- * are generated from the content collections at build time so they stay in
- * sync with the site — the same philosophy as the `@astrojs/sitemap`
- * integration.
- */
-
-export const SITE = "https://sgain.org";
+type Url = (path: string) => string;
 
 export const PROJECT_TITLE =
   "SGAIN — Sustainability Governance of China's Global Infrastructure Investments";
@@ -29,88 +20,89 @@ type Page = {
   description: string;
 };
 
-/** Curated index of the main navigational pages (the non-collection routes). */
-export const STATIC_PAGES: Page[] = [
-  {
-    title: "Home",
-    url: `${SITE}/`,
-    description: "Project overview and recent updates.",
-  },
-  {
-    title: "Research",
-    url: `${SITE}/research/`,
-    description:
-      "The project's rationale and methodology, its three key research questions and our strategic approach to answering them.",
-  },
-  {
-    title: "Team",
-    url: `${SITE}/team/`,
-    description:
-      "The SGAIN project team, including members from around the globe and their affiliations and research areas.",
-  },
-  {
-    title: "Advisory Board",
-    url: `${SITE}/advisory-board/`,
-    description:
-      "The distinguished advisors guiding the project across sustainability governance, climate policy and global development.",
-  },
-  {
-    title: "International Partners",
-    url: `${SITE}/international-partners/`,
-    description:
-      "The project's international partners and collaborators across Indonesia, China, Bangladesh, Pakistan and beyond.",
-  },
-  {
-    title: "Publications",
-    url: `${SITE}/publications/`,
-    description:
-      "Index of the SGAIN team's academic and non-academic publications and policy outputs.",
-  },
-  {
-    title: "Articles and Book Chapters",
-    url: `${SITE}/articles-and-book-chapters/`,
-    description:
-      "The most recent peer-reviewed articles and book chapters from members of the team.",
-  },
-  {
-    title: "Non-Academic Publications",
-    url: `${SITE}/non-academic-publications/`,
-    description: "Op-eds, commentary and other non-academic writing by SGAIN team members.",
-  },
-  {
-    title: "Policy Briefs and Reports",
-    url: `${SITE}/policy-briefs-and-reports/`,
-    description:
-      "The SGAIN policy brief and report series — all open access and shared on the website.",
-  },
-  {
-    title: "CGEL Database",
-    url: `${SITE}/cgel-database/`,
-    description:
-      "China's Global Environmental Leadership (CGEL) Database — granular data on cross-border environmental governance initiatives led by Chinese state and non-state actors.",
-  },
-  {
-    title: "Multimedia",
-    url: `${SITE}/multimedia/`,
-    description:
-      "Conference coverage and interviews, including videos from the 2025 Bath Conference and recent media appearances.",
-  },
-  {
-    title: "News & Events",
-    url: `${SITE}/news/`,
-    description: "Updates about SGAIN and events attended by team members.",
-  },
-  {
-    title: "Blog",
-    url: `${SITE}/blog/`,
-    description: "Reflections and field notes from the SGAIN team and research assistants.",
-  },
-  {
-    title: "Contact",
-    url: `${SITE}/contact-information/`,
-    description: "Contact form, email and social media for the SGAIN Project.",
-  },
-];
+function staticPages(url: Url): Page[] {
+  return [
+    {
+      title: "Home",
+      url: url("/"),
+      description: "Project overview and recent updates.",
+    },
+    {
+      title: "Research",
+      url: url("/research/"),
+      description:
+        "The project's rationale and methodology, its three key research questions and our strategic approach to answering them.",
+    },
+    {
+      title: "Team",
+      url: url("/team/"),
+      description:
+        "The SGAIN project team, including members from around the globe and their affiliations and research areas.",
+    },
+    {
+      title: "Advisory Board",
+      url: url("/advisory-board/"),
+      description:
+        "The distinguished advisors guiding the project across sustainability governance, climate policy and global development.",
+    },
+    {
+      title: "International Partners",
+      url: url("/international-partners/"),
+      description:
+        "The project's international partners and collaborators across Indonesia, China, Bangladesh, Pakistan and beyond.",
+    },
+    {
+      title: "Publications",
+      url: url("/publications/"),
+      description:
+        "Index of the SGAIN team's academic and non-academic publications and policy outputs.",
+    },
+    {
+      title: "Articles and Book Chapters",
+      url: url("/articles-and-book-chapters/"),
+      description:
+        "The most recent peer-reviewed articles and book chapters from members of the team.",
+    },
+    {
+      title: "Non-Academic Publications",
+      url: url("/non-academic-publications/"),
+      description: "Op-eds, commentary and other non-academic writing by SGAIN team members.",
+    },
+    {
+      title: "Policy Briefs and Reports",
+      url: url("/policy-briefs-and-reports/"),
+      description:
+        "The SGAIN policy brief and report series — all open access and shared on the website.",
+    },
+    {
+      title: "CGEL Database",
+      url: url("/cgel-database/"),
+      description:
+        "China's Global Environmental Leadership (CGEL) Database — granular data on cross-border environmental governance initiatives led by Chinese state and non-state actors.",
+    },
+    {
+      title: "Multimedia",
+      url: url("/multimedia/"),
+      description:
+        "Conference coverage and interviews, including videos from the 2025 Bath Conference and recent media appearances.",
+    },
+    {
+      title: "News & Events",
+      url: url("/news/"),
+      description: "Updates about SGAIN and events attended by team members.",
+    },
+    {
+      title: "Blog",
+      url: url("/blog/"),
+      description: "Reflections and field notes from the SGAIN team and research assistants.",
+    },
+    {
+      title: "Contact",
+      url: url("/contact-information/"),
+      description: "Contact form, email and social media for the SGAIN Project.",
+    },
+  ];
+}
 
 type Item = {
   title: string;
@@ -119,17 +111,11 @@ type Item = {
   body: string;
 };
 
-/** Mirror the slug derivation used by the dynamic `[...slug]` routes. */
 const slugOf = (id: string): string => id.replace(/\.md$/, "");
 
 const stripTitleSuffix = (title: string): string =>
   title.replace(/\s*\|\s*SGAIN Project\s*$/, "").trim();
 
-/**
- * Normalize a collection body to readable plain text. Publication bodies are
- * authored as raw HTML; blog and news bodies are plain markdown and pass
- * through largely untouched.
- */
 export function cleanText(raw: string): string {
   return raw
     .replace(/<br\s*\/?>/gi, "\n")
@@ -148,41 +134,40 @@ export function cleanText(raw: string): string {
     .trim();
 }
 
-export async function getPublications(): Promise<Item[]> {
+export async function getPublications(url: Url): Promise<Item[]> {
   const entries = await getCollection("publications");
   return entries
     .sort((a, b) => a.id.localeCompare(b.id))
     .map((entry) => ({
       title: stripTitleSuffix(entry.data.title),
-      url: `${SITE}/publications/${slugOf(entry.id)}/`,
+      url: url(`/publications/${slugOf(entry.id)}/`),
       description: entry.data.description,
       body: entry.body ?? "",
     }));
 }
 
-export async function getBlog(): Promise<Item[]> {
+export async function getBlog(url: Url): Promise<Item[]> {
   const entries = await getCollection("blog");
   return entries
     .sort((a, b) => b.data.date.localeCompare(a.data.date))
     .map((entry) => ({
       title: stripTitleSuffix(entry.data.title),
-      url: `${SITE}/blog/${slugOf(entry.id)}/`,
+      url: url(`/blog/${slugOf(entry.id)}/`),
       description: [entry.data.author, entry.data.date].filter(Boolean).join(" · "),
       body: entry.body ?? "",
     }));
 }
 
-export async function getNews(): Promise<{ current: Item[]; archive: Item[] }> {
+export async function getNews(url: Url): Promise<{ current: Item[]; archive: Item[] }> {
   const entries = await getCollection("news");
   const toItem = (entry: (typeof entries)[number]): Item => {
     const displayDate = entry.data.displayDate ?? "";
     const year = entry.data.year ? String(entry.data.year) : "";
-    // Only append the year when the display date doesn't already include it.
     const description =
       year && !displayDate.includes(year) ? `${displayDate} ${year}`.trim() : displayDate || year;
     return {
       title: stripTitleSuffix(entry.data.title),
-      url: `${SITE}/news/${slugOf(entry.id)}/`,
+      url: url(`/news/${slugOf(entry.id)}/`),
       description,
       body: entry.body ?? "",
     };
@@ -204,8 +189,6 @@ export async function getNews(): Promise<{ current: Item[]; archive: Item[] }> {
   return { current, archive };
 }
 
-/** Collapse a field to a single line (some source descriptions contain literal
- * `\n` escapes or real newlines that would break a markdown list item). */
 const oneLine = (text: string): string =>
   text
     .replace(/\\[nrt]/g, " ")
@@ -221,14 +204,19 @@ function section(heading: string, lines: string[]): string {
   return [`## ${heading}`, ...lines].join("\n");
 }
 
-export async function buildLlmsTxt(): Promise<string> {
-  const [publications, blog, news] = await Promise.all([getPublications(), getBlog(), getNews()]);
+export async function buildLlmsTxt(site: URL | undefined): Promise<string> {
+  const url = makeUrl(site);
+  const [publications, blog, news] = await Promise.all([
+    getPublications(url),
+    getBlog(url),
+    getNews(url),
+  ]);
 
   const blocks = [
     `# ${PROJECT_TITLE}`,
     `> ${PROJECT_SUMMARY}`,
     PROJECT_INTRO,
-    section("Pages", STATIC_PAGES.map(linkLine)),
+    section("Pages", staticPages(url).map(linkLine)),
     section("Publications", publications.map(linkLine)),
     section("Blog", blog.map(linkLine)),
     section("News", news.current.map(linkLine)),
@@ -255,8 +243,13 @@ function fullSection(heading: string, items: Item[]): string {
   return [`## ${heading}`, ...items.map(fullEntry)].join("\n\n");
 }
 
-export async function buildLlmsFullTxt(): Promise<string> {
-  const [publications, blog, news] = await Promise.all([getPublications(), getBlog(), getNews()]);
+export async function buildLlmsFullTxt(site: URL | undefined): Promise<string> {
+  const url = makeUrl(site);
+  const [publications, blog, news] = await Promise.all([
+    getPublications(url),
+    getBlog(url),
+    getNews(url),
+  ]);
 
   const blocks = [
     `# ${PROJECT_TITLE}`,

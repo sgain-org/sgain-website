@@ -64,7 +64,6 @@ const newsSlugs = [
   "bath-conference-on-china-and-global-sustainability-transition",
 ] as const satisfies readonly SlugEntry[];
 
-/** Standalone page redirects whose target is not a content slug. */
 const pageRedirects: readonly Redirect[] = [
   { from: "academic-publications-and-policy-reports", to: "/articles-and-book-chapters/" },
   { from: "archive", to: "/news/archive/" },

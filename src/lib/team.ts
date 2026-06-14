@@ -9,7 +9,6 @@ export type TeamAsset = {
   alt: string;
 };
 
-/** Load every team member with its rendered markdown body. */
 export const loadTeamMembers = async () =>
   Promise.all(
     (await getCollection("team")).map(async (entry) => {
@@ -42,7 +41,6 @@ const compareMembers = (first: TeamMember, second: TeamMember) => {
   return first.data.name.localeCompare(second.data.name);
 };
 
-/** Members in a section (optionally a group), sorted by order then name. */
 export const selectMembers = (members: TeamMember[], section: TeamSectionId, group?: TeamGroupId) =>
   members
     .filter(
@@ -50,6 +48,5 @@ export const selectMembers = (members: TeamMember[], section: TeamSectionId, gro
     )
     .sort(compareMembers);
 
-/** Drop groups that have no members. */
 export const withMembers = (groups: TeamGroup[]) =>
   groups.filter((group) => group.members.length > 0);
