@@ -1,7 +1,7 @@
 ---
 name: "Fiona Remnant"
 role: "Co-founder and Director of Causal Map Ltd."
-section: "bath"
+section: "partners"
 group: "causal-map"
 order: 10
 image: "/images/remote/assets-zyrosite-com/picture2-dwxbgwkyvlhl3k2k-b5d453ff65.jpg"

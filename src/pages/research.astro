@@ -1,9 +1,9 @@
 ---
-import Band from "../components/Band.astro";
-import Hero from "../components/Hero.astro";
-import SectionDivider from "../components/SectionDivider.astro";
-import SectionTitle from "../components/SectionTitle.astro";
-import Layout from "../layouts/Layout.astro";
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import SectionTitle from "@/components/SectionTitle.astro";
+import Layout from "@/layouts/Layout.astro";
 
 const frontmatter = {
   title: "SGAIN Project: Research | SGAIN Project",
@@ -27,8 +27,9 @@ const frontmatter = {
     </div>
   </nav>
 
-  <Band prose>
-    <div class="prose">
+  <Band id="rationale">
+    <SectionTitle as="h3" align="left"><strong>Rationale</strong></SectionTitle>
+    <div class="prose section-prose">
     <p>
       The rise of China as a global power is a defining feature of world politics
       in the 21st century, but research on the impacts of a rising China on global
@@ -76,8 +77,8 @@ const frontmatter = {
 
   <SectionDivider />
 
-  <Band id="rationale">
-    <SectionTitle as="h3" align="left"><strong>Rationale</strong></SectionTitle>
+  <Band id="research-questions">
+    <SectionTitle as="h3" align="left"><strong>Research Questions</strong></SectionTitle>
     <div class="prose section-prose">
       <p>
         The primary goal of SGAIN is to assess China&#39;s efforts to promote green
@@ -122,9 +123,9 @@ const frontmatter = {
 
   <SectionDivider />
 
-  <Band prose id="research-questions">
-    <SectionTitle as="h3" align="left"><strong>Research Questions</strong></SectionTitle>
-    <div class="prose">
+  <Band id="methodology">
+    <SectionTitle as="h3" align="left"><strong>Methodology</strong></SectionTitle>
+    <div class="prose section-prose">
     <p>
       SGAIN takes an interdisciplinary approach by integrating theories and
       methods from different social science disciplines including international
@@ -158,12 +159,6 @@ const frontmatter = {
     </p>
     </div>
   </Band>
-
-  <SectionDivider />
-
-  <Band id="methodology">
-    <SectionTitle as="h3" align="left"><strong>Methodology</strong></SectionTitle>
-  </Band>
 </Layout>
 
 <style>
@@ -185,6 +180,7 @@ const frontmatter = {
 
   .page-nav a {
     border: 1px solid var(--line);
+    border-radius: 999px;
     background: var(--paper);
     color: var(--teal-d);
     padding: 0.5rem 0.95rem;

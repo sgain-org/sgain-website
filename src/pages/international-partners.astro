@@ -1,0 +1,112 @@
+---
+import Band from "@/components/Band.astro";
+import Hero from "@/components/Hero.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import TeamSection from "@/components/TeamSection.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  loadTeamMembers,
+  selectMembers,
+  type TeamSectionData,
+  withMembers,
+} from "@/lib/team";
+
+const frontmatter = {
+  title: "SGAIN: International Partners | SGAIN Project",
+  description:
+    "Meet the SGAIN project's international partners and collaborators across Indonesia, China, Bangladesh, Pakistan and beyond.",
+  oldUrl: "https://sgain.org/international-partners",
+};
+
+const teamMembers = await loadTeamMembers();
+
+const sections: TeamSectionData[] = [
+  {
+    id: "indonesia",
+    title: "Indonesia",
+    groups: [{ id: "indonesia", members: selectMembers(teamMembers, "partners", "indonesia") }],
+  },
+  {
+    id: "china",
+    title: "China",
+    groups: [{ id: "china", members: selectMembers(teamMembers, "partners", "china") }],
+  },
+  {
+    id: "bangladesh",
+    title: "Bangladesh",
+    groups: [{ id: "bangladesh", members: selectMembers(teamMembers, "partners", "bangladesh") }],
+  },
+  {
+    id: "pakistan",
+    title: "Pakistan",
+    groups: [{ id: "pakistan", members: selectMembers(teamMembers, "partners", "pakistan") }],
+  },
+  {
+    id: "causal-map",
+    title: "Causal Map Team",
+    groups: [{ id: "causal-map", members: selectMembers(teamMembers, "partners", "causal-map") }],
+  },
+]
+  .map((section) => ({ ...section, groups: withMembers(section.groups) }))
+  .filter((section) => section.groups.length > 0);
+---
+
+<Layout frontmatter={frontmatter} bare>
+  <Hero
+    image="/images/remote/images-unsplash-com/photo-1707667573875-207658a82c68-d51e8e4915.jpg"
+    title="International Partners"
+  />
+
+  <Band>
+    <p class="map-caption">
+      The map below shows the location of all of our international partners and
+      collaborators, including those in addition to the official partners listed
+      below.
+    </p>
+    <figure class="page-feature">
+      <img
+        src="/images/remote/assets-zyrosite-com/map-yz9jmp465qsnnk5d-c00d987bff.jpeg"
+        alt="Map showing the location of SGAIN international partners and collaborators"
+      />
+    </figure>
+  </Band>
+
+  {
+    sections.map((section) => (
+      <>
+        <SectionDivider />
+        <TeamSection section={section} />
+      </>
+    ))
+  }
+</Layout>
+
+<style>
+  .map-caption {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-family: "Source Serif 4", serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .page-feature {
+    margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  }
+
+  .page-feature img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (max-width: 680px) {
+    .page-feature img {
+      border-radius: 12px;
+    }
+  }
+</style>

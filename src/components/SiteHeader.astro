@@ -20,6 +20,14 @@ const navSections = [
     ],
   },
   {
+    label: "Team",
+    links: [
+      { href: "/team/", label: "Team" },
+      { href: "/international-partners/", label: "International Partners" },
+      { href: "/advisory-board/", label: "Advisory Board" },
+    ],
+  },
+  {
     label: "Publications",
     links: [
       { href: "/publications/", label: "Publications" },
@@ -83,38 +91,7 @@ const sectionActive = (links: Array<{ href: string }>) =>
       <a href="/" class:list={["nav-link", isActive("/") && "active"]}>Home</a>
 
       {
-        navSections.slice(0, 1).map((section) => (
-          <details
-            class:list={["nav-menu", sectionActive(section.links) && "active"]}
-          >
-            <summary>{section.label}</summary>
-            <div class="nav-panel">
-              {section.links.map((link) => (
-                <a
-                  href={link.href}
-                  class:list={[isActive(link.href) && "active"]}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </details>
-        ))
-      }
-
-      <a
-        href="/team/"
-        class:list={["nav-link", isActive("/team/") && "active"]}>Team</a
-      >
-      <a
-        href="/network/"
-        class:list={["nav-link", isActive("/network/") && "active"]}
-      >
-        Network
-      </a>
-
-      {
-        navSections.slice(1).map((section) => (
+        navSections.map((section) => (
           <details
             class:list={["nav-menu", sectionActive(section.links) && "active"]}
           >

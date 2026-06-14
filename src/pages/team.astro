@@ -1,9 +1,14 @@
 ---
-import { getCollection, render } from "astro:content";
-import Band from "../components/Band.astro";
-import Hero from "../components/Hero.astro";
-import SectionDivider from "../components/SectionDivider.astro";
-import Layout from "../layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import SectionDivider from "@/components/SectionDivider.astro";
+import TeamSection from "@/components/TeamSection.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  loadTeamMembers,
+  selectMembers,
+  type TeamSectionData,
+  withMembers,
+} from "@/lib/team";
 
 const frontmatter = {
   title: "SGAIN: Team | SGAIN Project",
@@ -12,58 +17,9 @@ const frontmatter = {
   oldUrl: "https://sgain.org/team",
 };
 
-type TeamSectionId = "bath" | "partners" | "advisory" | "alumni";
-type TeamGroupId =
-  | "bath"
-  | "causal-map"
-  | "indonesia"
-  | "china"
-  | "bangladesh"
-  | "pakistan";
-type TeamAsset = {
-  src: string;
-  alt: string;
-};
+const teamMembers = await loadTeamMembers();
 
-const teamMembers = await Promise.all(
-  (await getCollection("team")).map(async (entry) => {
-    const { Content } = await render(entry);
-    return { ...entry, Content };
-  }),
-);
-
-type TeamMember = (typeof teamMembers)[number];
-type TeamGroup = {
-  id: string;
-  title?: string;
-  asset?: TeamAsset;
-  members: TeamMember[];
-};
-type TeamSection = {
-  id: string;
-  title: string;
-  asset?: TeamAsset;
-  groups: TeamGroup[];
-};
-
-const compareMembers = (first: TeamMember, second: TeamMember) => {
-  if (first.data.order !== second.data.order) {
-    return first.data.order - second.data.order;
-  }
-
-  return first.data.name.localeCompare(second.data.name);
-};
-
-const getMembers = (section: TeamSectionId, group?: TeamGroupId) =>
-  teamMembers
-    .filter(
-      (member) =>
-        member.data.section === section &&
-        (group ? member.data.group === group : true),
-    )
-    .sort(compareMembers);
-
-const sections: TeamSection[] = [
+const sections: TeamSectionData[] = [
   {
     id: "bath-team",
     title: "Bath Team",
@@ -74,52 +30,7 @@ const sections: TeamSection[] = [
     groups: [
       {
         id: "bath",
-        members: getMembers("bath", "bath"),
-      },
-      {
-        id: "causal-map",
-        title: "Causal Map Team",
-        asset: {
-          src: "/images/remote/assets-zyrosite-com/causal-map-logorgb-mv07g9kpbkfln289-6507cf55ed.jpg",
-          alt: "Causal Map logo",
-        },
-        members: getMembers("bath", "causal-map"),
-      },
-    ],
-  },
-  {
-    id: "international-partners",
-    title: "International Partners",
-    groups: [
-      {
-        id: "indonesia",
-        title: "Team in Indonesia",
-        members: getMembers("partners", "indonesia"),
-      },
-      {
-        id: "china",
-        title: "Team in China",
-        members: getMembers("partners", "china"),
-      },
-      {
-        id: "bangladesh",
-        title: "Team in Bangladesh",
-        members: getMembers("partners", "bangladesh"),
-      },
-      {
-        id: "pakistan",
-        title: "Team in Pakistan",
-        members: getMembers("partners", "pakistan"),
-      },
-    ],
-  },
-  {
-    id: "advisory-board",
-    title: "Advisory Board",
-    groups: [
-      {
-        id: "advisory-board-members",
-        members: getMembers("advisory"),
+        members: selectMembers(teamMembers, "bath", "bath"),
       },
     ],
   },
@@ -129,21 +40,11 @@ const sections: TeamSection[] = [
     groups: [
       {
         id: "alumni-members",
-        members: getMembers("alumni"),
+        members: selectMembers(teamMembers, "alumni"),
       },
     ],
   },
-].map(
-  (section): TeamSection => ({
-    ...section,
-    groups: section.groups.filter((group) => group.members.length > 0),
-  }),
-);
-
-const sectionLinks = sections.map((section) => ({
-  id: section.id,
-  label: section.title,
-}));
+].map((section) => ({ ...section, groups: withMembers(section.groups) }));
 ---
 
 <Layout frontmatter={frontmatter} bare>
@@ -151,16 +52,6 @@ const sectionLinks = sections.map((section) => ({
     image="/images/remote/images-unsplash-com/photo-1684142636731-90ac495fe76c-6838e971b8.jpg"
     title="Team"
   />
-
-  <nav class="team-nav" aria-label="Team sections">
-    <div class="team-nav__inner">
-      {
-        sectionLinks.map((section) => (
-          <a href={`#${section.id}`}>{section.label}</a>
-        ))
-      }
-    </div>
-  </nav>
 
   <figure class="team-feature">
     <img
@@ -173,129 +64,13 @@ const sectionLinks = sections.map((section) => ({
     sections.map((section, index) => (
       <>
         {index > 0 && <SectionDivider />}
-        <Band
-          id={section.id}
-          class="team-section"
-          aria-labelledby={`${section.id}-heading`}
-        >
-          <div class="team-section__header">
-            <h3 id={`${section.id}-heading`}>
-              <strong>{section.title}</strong>
-            </h3>
-            {section.asset && (
-              <img
-                class="team-logo"
-                src={section.asset.src}
-                alt={section.asset.alt}
-              />
-            )}
-          </div>
-
-          {section.groups.map((group) => (
-            <div class="team-group">
-              {(group.title || group.asset) && (
-                <div class="team-group__header">
-                  {group.title && (
-                    <h4>
-                      <strong>{group.title}</strong>
-                    </h4>
-                  )}
-                  {group.asset && (
-                    <img
-                      class="team-logo"
-                      src={group.asset.src}
-                      alt={group.asset.alt}
-                    />
-                  )}
-                </div>
-              )}
-
-              <div class="team-grid">
-                {group.members.map(({ Content, data }) => (
-                  <article class="team-card">
-                    {data.image && (
-                      <div class="team-card__image-wrap">
-                        <img
-                          class="team-card__image"
-                          src={data.image}
-                          alt={data.imageAlt}
-                        />
-                      </div>
-                    )}
-
-                    <div class="team-card__text">
-                      <h5 class="team-card__name">
-                        {data.profileUrl ? (
-                          <a
-                            href={data.profileUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {data.name}
-                          </a>
-                        ) : (
-                          data.name
-                        )}
-                      </h5>
-
-                      {data.role && <p class="team-card__role">{data.role}</p>}
-
-                      <div class="team-card__body">
-                        <Content />
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          ))}
-        </Band>
+        <TeamSection section={section} />
       </>
     ))
   }
 </Layout>
 
 <style>
-  /* Section nav */
-  .team-nav {
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
-  }
-
-  .team-nav__inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 1rem 24px;
-  }
-
-  .team-nav a {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: var(--paper);
-    color: var(--teal-d);
-    padding: 0.5rem 0.95rem;
-    font-family: "Work Sans", sans-serif;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition:
-      border-color 0.2s ease,
-      background 0.2s ease,
-      color 0.2s ease;
-  }
-
-  .team-nav a:hover {
-    border-color: var(--teal-d);
-    background: var(--teal-d);
-    color: #fff;
-  }
-
   /* Featured team photo */
   .team-feature {
     max-width: 1100px;
@@ -310,185 +85,6 @@ const sectionLinks = sections.map((section) => ({
     border-radius: 16px;
     object-fit: cover;
     box-shadow: var(--shadow);
-  }
-
-  /* Anchored band offset under the sticky header (Band renders the element,
-     so target it globally by its passed-through class). */
-  :global(.team-section) {
-    scroll-margin-top: 100px;
-  }
-
-  /* Section + group headers */
-  .team-section__header,
-  .team-group__header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.85rem 1.5rem;
-  }
-
-  .team-section__header {
-    margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
-  }
-
-  .team-section h3 {
-    margin: 0;
-    color: var(--teal-d);
-    font-family: "Fraunces", serif;
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    font-weight: 700;
-    line-height: 1.16;
-  }
-
-  .team-group + .team-group {
-    margin-top: clamp(2rem, 5vw, 3.25rem);
-  }
-
-  .team-group__header {
-    margin-bottom: 1.25rem;
-  }
-
-  .team-group h4 {
-    margin: 0;
-    color: var(--slate);
-    font-family: "Fraunces", serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
-  .team-logo {
-    height: 42px;
-    width: auto;
-    max-width: 220px;
-    object-fit: contain;
-  }
-
-  /* Member grid */
-  .team-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(1.25rem, 3vw, 1.85rem);
-    align-items: start;
-  }
-
-  /* Member card */
-  .team-card {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 6px 22px rgba(38, 51, 63, 0.06);
-    transition:
-      box-shadow 0.3s ease,
-      transform 0.3s ease;
-  }
-
-  .team-card:hover {
-    box-shadow: var(--shadow);
-    transform: translateY(-3px);
-  }
-
-  .team-card__image-wrap {
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    background: var(--paper2);
-  }
-
-  .team-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    transition: transform 0.4s ease;
-  }
-
-  .team-card:hover .team-card__image {
-    transform: scale(1.04);
-  }
-
-  .team-card__text {
-    display: flex;
-    flex-direction: column;
-    padding: 1.1rem 1.25rem 1.35rem;
-  }
-
-  .team-card__name {
-    margin: 0;
-    color: var(--teal-d);
-    font-family: "Fraunces", serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
-  .team-card__name a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .team-card__name a:hover {
-    color: var(--rust);
-    text-decoration: underline;
-    text-underline-offset: 0.16em;
-  }
-
-  .team-card__role {
-    margin: 0.45rem 0 0;
-    color: var(--rust);
-    font-family: "Work Sans", sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    line-height: 1.45;
-  }
-
-  .team-card__body {
-    margin-top: 0.85rem;
-    color: var(--ink);
-    font-family: "Source Serif 4", serif;
-    font-size: 0.98rem;
-    line-height: 1.55;
-  }
-
-  .team-card__body:empty {
-    display: none;
-  }
-
-  .team-card__body :global(p) {
-    margin: 0;
-  }
-
-  .team-card__body :global(p + p) {
-    margin-top: 0.7rem;
-  }
-
-  .team-card__body :global(a) {
-    color: var(--teal);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.16em;
-  }
-
-  .team-card__body :global(a:hover) {
-    color: var(--rust);
-  }
-
-  .team-card__body :global(strong) {
-    color: var(--ink);
-    font-weight: 700;
-  }
-
-  @media (min-width: 640px) {
-    .team-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 900px) {
-    .team-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
   }
 
   @media (max-width: 680px) {

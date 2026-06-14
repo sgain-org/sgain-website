@@ -67,10 +67,9 @@ const newsSlugs = [
 /** Standalone page redirects whose target is not a content slug. */
 const pageRedirects: readonly Redirect[] = [
   { from: "academic-publications-and-policy-reports", to: "/academic-publications/" },
-  { from: "advisory-board", to: "/team#advisory-board" },
   { from: "archive", to: "/news/archive/" },
   { from: "blogs", to: "/blog/" },
-  { from: "international-partners", to: "/team#international-partners" },
+  { from: "network", to: "/international-partners/" },
   { from: "news-and-events", to: "/news/" },
 ];
 

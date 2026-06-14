@@ -1,5 +1,5 @@
 ---
-import { redirects } from "../lib/redirects";
+import { redirects } from "@/lib/redirects";
 
 export function getStaticPaths() {
   return redirects.map(({ from, to }) => ({

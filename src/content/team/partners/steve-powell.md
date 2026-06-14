@@ -1,7 +1,7 @@
 ---
 name: "Steve Powell"
 role: "Co-founder and Director of Causal Map Ltd."
-section: "bath"
+section: "partners"
 group: "causal-map"
 order: 9
 image: "/images/remote/assets-zyrosite-com/picture1-ar0bgvrwqbc33r1z-dfc4c76167.jpg"
