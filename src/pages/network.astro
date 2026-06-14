@@ -10,45 +10,39 @@ const frontmatter = {
   oldUrl: "https://sgain.org/network",
 };
 
-const partnerNetworkNodes = [
+const networkPartners = [
   {
-    position: "top",
     label: "Bath Social & Development Research Ltd",
     displayLabel: "Bath Social & Development Research",
   },
   {
-    position: "upper-right",
     label: "Universitas Gadjah Mada",
     displayLabel: "Universitas Gadjah Mada",
   },
   {
-    position: "lower-right",
     label: "Sustainable Development Policy Institute",
     displayLabel: "SDPI",
   },
   {
-    position: "bottom",
     label: "University of Dhaka",
     displayLabel: "University of Dhaka",
   },
   {
-    position: "lower-left",
     label: "National University of Singapore",
     displayLabel: "NUS",
   },
   {
-    position: "upper-left",
     label: "Fudan University",
     displayLabel: "Fudan University",
   },
-  {
-    position: "centre",
-    label: "SGAIN Project",
-    imageSrc:
-      "/images/remote/assets-zyrosite-com/sgain-logo-full-aqepxwr6wafrpnng-32339a3ece.png",
-    alt: "SGAIN Project",
-  },
 ] as const;
+
+const networkCentre = {
+  label: "SGAIN Project",
+  imageSrc:
+    "/images/remote/assets-zyrosite-com/sgain-logo-full-aqepxwr6wafrpnng-32339a3ece.png",
+  alt: "SGAIN Project",
+} as const;
 ---
 
 <Layout frontmatter={frontmatter} bare>
@@ -88,7 +82,7 @@ const partnerNetworkNodes = [
       The diagram below highlights several of our institutional partners across
       the SGAIN network.
     </p>
-    <PartnerNetwork nodes={partnerNetworkNodes} />
+    <PartnerNetwork centre={networkCentre} partners={networkPartners} />
     <p class="diagram-caption">
       The map below shows the location of all of our international partners and
       collaborators.

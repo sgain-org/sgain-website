@@ -1,6 +1,7 @@
 ---
 import Hero from "../components/Hero.astro";
 import MediaCard from "../components/MediaCard.astro";
+import PartnerNetwork from "../components/PartnerNetwork.astro";
 import Layout from "../layouts/Layout.astro";
 
 const frontmatter = {
@@ -13,6 +14,39 @@ const frontmatter = {
 
 const heroImage =
   "/images/remote/images-unsplash-com/photo-1515344905723-babc01aac23d.jpg";
+
+const homeNetworkPartners = [
+  {
+    label: "Bath Social & Development Research Ltd",
+    imageSrc: "/network/bath_sdr.jpeg",
+  },
+  {
+    label: "Universitas Gadjah Mada",
+    imageSrc: "/network/universitas_gadjah_mada.jpg",
+  },
+  {
+    label: "Sustainable Development Policy Institute",
+    imageSrc: "/network/sdpi.jpeg",
+  },
+  {
+    label: "University of Dhaka",
+    imageSrc: "/network/dhaka_university_logo.png",
+  },
+  {
+    label: "National University of Singapore",
+    imageSrc: "/network/nus_logo.jpg",
+  },
+  {
+    label: "Fudan University",
+    imageSrc: "/network/fudan_university_logo.png",
+  },
+] as const;
+
+const homeNetworkCentre = {
+  label: "University of Bath",
+  imageSrc: "/network/university_of_bath_logo.jpg",
+  alt: "University of Bath",
+} as const;
 ---
 
 <style>
@@ -21,12 +55,6 @@ const heroImage =
     grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 5vw, 4rem);
     align-items: center;
-  }
-
-  .about__figure img {
-    display: block;
-    width: 100%;
-    height: auto;
   }
 
   .about h2 {
@@ -86,9 +114,10 @@ const heroImage =
   <section class="band">
     <div class="about">
       <div class="about__figure">
-        <img
-          src="/images/remote/assets-zyrosite-com/screenshot-2024-09-11-100621-m2wqr5er0ah1zbym-4d9c09fe7e.png"
-          alt=""
+        <PartnerNetwork
+          centre={homeNetworkCentre}
+          partners={homeNetworkPartners}
+          centreRing={false}
         />
       </div>
       <div class="about__copy">

@@ -1,63 +1,51 @@
 ---
-type NetworkNodePosition =
-  | "top"
-  | "upper-right"
-  | "lower-right"
-  | "bottom"
-  | "lower-left"
-  | "upper-left"
-  | "centre";
-
-type PartnerNetworkNode = {
-  position: NetworkNodePosition;
+type NetworkNode = {
   label: string;
   displayLabel?: string;
-  alt?: string;
   imageSrc?: string;
+  alt?: string;
   href?: string;
 };
 
 type Props = {
   ariaLabel?: string;
   class?: string;
-  nodes: readonly PartnerNetworkNode[];
+  centre: NetworkNode;
+  centreRing?: boolean;
+  partners: readonly NetworkNode[];
+  radius?: number;
+  startAngle?: number;
 };
 
 const {
   ariaLabel = "Partner network diagram",
   class: className,
-  nodes,
+  centre,
+  centreRing = true,
+  partners,
+  radius = 40,
+  startAngle = -90,
 } = Astro.props as Props;
 
-const positionOrder: NetworkNodePosition[] = [
-  "top",
-  "upper-right",
-  "lower-right",
-  "bottom",
-  "lower-left",
-  "upper-left",
-  "centre",
-];
+const n = partners.length;
 
-const positionClassNames: Record<NetworkNodePosition, string> = {
-  top: "node--top",
-  "upper-right": "node--upper-right",
-  "lower-right": "node--lower-right",
-  bottom: "node--bottom",
-  "lower-left": "node--lower-left",
-  "upper-left": "node--upper-left",
-  centre: "node--centre-position",
-};
+const partnerPoints = partners.map((node, i) => {
+  const angle = ((startAngle + (i * 360) / n) * Math.PI) / 180;
+  return {
+    ...node,
+    x: 50 + radius * Math.cos(angle),
+    y: 50 + radius * Math.sin(angle),
+    isCentre: false,
+  };
+});
 
-const orderedNodes = positionOrder
-  .map((position) => nodes.find((node) => node.position === position))
-  .filter(Boolean) as PartnerNetworkNode[];
+const polygonPoints = partnerPoints.map((p) => `${p.x},${p.y}`).join(" ");
 
-const renderedNodes = orderedNodes.map((node) => ({
+const centrePoint = { ...centre, x: 50, y: 50, isCentre: true };
+
+const renderedNodes = [...partnerPoints, centrePoint].map((node) => ({
   ...node,
   altText: node.alt ?? node.label,
-  className: positionClassNames[node.position],
-  isCentre: node.position === "centre",
   isTextOnly: !node.imageSrc,
   visibleLabel: node.displayLabel ?? node.label,
 }));
@@ -65,13 +53,12 @@ const renderedNodes = orderedNodes.map((node) => ({
 
 <section class:list={["partner-network", className]} aria-label={ariaLabel}>
   <svg class="partner-network__lines" viewBox="0 0 100 100" aria-hidden="true">
-    <polygon points="50,10 84.6,30 84.6,70 50,90 15.4,70 15.4,30"></polygon>
-    <line x1="50" y1="50" x2="50" y2="10"></line>
-    <line x1="50" y1="50" x2="84.6" y2="30"></line>
-    <line x1="50" y1="50" x2="84.6" y2="70"></line>
-    <line x1="50" y1="50" x2="50" y2="90"></line>
-    <line x1="50" y1="50" x2="15.4" y2="70"></line>
-    <line x1="50" y1="50" x2="15.4" y2="30"></line>
+    <polygon points={polygonPoints}></polygon>
+    {
+      partnerPoints.map((p) => (
+        <line x1="50" y1="50" x2={p.x} y2={p.y} />
+      ))
+    }
   </svg>
 
   {
@@ -79,10 +66,11 @@ const renderedNodes = orderedNodes.map((node) => ({
       <div
         class:list={[
           "partner-network__node",
-          node.className,
           node.isCentre && "partner-network__node--centre",
+          node.isCentre && centreRing && "partner-network__node--centre-ring",
           node.isTextOnly && "partner-network__node--text",
         ]}
+        style={`left:${node.x}%;top:${node.y}%`}
       >
         {node.href ? (
           <a
@@ -129,7 +117,7 @@ const renderedNodes = orderedNodes.map((node) => ({
     --size: min(100%, 620px);
     --node-size: clamp(94px, 18vw, 145px);
     --circle-border-width: clamp(5px, 1vw, 7px);
-    --line-width: clamp(1.5px, 0.3vw, 2.5px);
+    --line-width: clamp(1px, 0.2vw, 1.5px);
 
     position: relative;
     width: var(--size);
@@ -186,7 +174,7 @@ const renderedNodes = orderedNodes.map((node) => ({
     display: block;
   }
 
-  .partner-network__node--centre {
+  .partner-network__node--centre-ring {
     box-shadow:
       inset 0 0 0 4px var(--teal),
       inset 0 0 0 8px var(--rust),
@@ -211,41 +199,6 @@ const renderedNodes = orderedNodes.map((node) => ({
     font-size: clamp(0.68rem, 1.1vw, 0.94rem);
   }
 
-  .node--top {
-    left: 50%;
-    top: 10%;
-  }
-
-  .node--upper-right {
-    left: 84.6%;
-    top: 30%;
-  }
-
-  .node--lower-right {
-    left: 84.6%;
-    top: 70%;
-  }
-
-  .node--bottom {
-    left: 50%;
-    top: 90%;
-  }
-
-  .node--lower-left {
-    left: 15.4%;
-    top: 70%;
-  }
-
-  .node--upper-left {
-    left: 15.4%;
-    top: 30%;
-  }
-
-  .node--centre-position {
-    left: 50%;
-    top: 50%;
-  }
-
   .partner-network__sr-only {
     position: absolute;
     width: 1px;
@@ -262,7 +215,7 @@ const renderedNodes = orderedNodes.map((node) => ({
     .partner-network {
       --node-size: clamp(82px, 22vw, 108px);
       --circle-border-width: 5px;
-      --line-width: 1.75px;
+      --line-width: 1.25px;
     }
 
     .partner-network__label {
