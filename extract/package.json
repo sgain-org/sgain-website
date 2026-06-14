@@ -1,14 +1,10 @@
 {
   "name": "extract",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
+  "description": "extract original sgain.org website",
   "type": "module",
-  "main": "index.js",
   "scripts": {
-    "crawl": "node crawl-site.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "crawl": "node crawl-site.ts"
   },
   "devDependencies": {
     "cheerio": "^1.2.0",

@@ -1,4 +1,3 @@
-// scripts/crawl-site.ts
 import { chromium } from "playwright";
 import * as cheerio from "cheerio";
 import fs from "fs-extra";
