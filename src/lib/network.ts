@@ -1,5 +1,8 @@
-// Shared data for the PartnerNetwork diagram, used on the home and network
-// pages so both render the same diagram (partner logos that link out).
+type NetworkNode = {
+  label: string;
+  imageSrc: string;
+  href: string;
+};
 
 export const networkPartners = [
   {
@@ -32,10 +35,10 @@ export const networkPartners = [
     imageSrc: "/network/fudan_university_logo.png",
     href: "https://www.fudan.edu.cn/en/",
   },
-] as const;
+] as const satisfies readonly NetworkNode[];
 
 export const networkCentre = {
   label: "University of Bath",
   imageSrc: "/network/university_of_bath_logo.jpg",
-  alt: "University of Bath",
-} as const;
+  href: "https://www.bath.ac.uk/",
+} as const satisfies NetworkNode;
