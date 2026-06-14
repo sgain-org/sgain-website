@@ -7,7 +7,7 @@ import Layout from "@/layouts/Layout.astro";
 const frontmatter = {
   title: "SGAIN: Contact Information | SGAIN Project",
   description:
-    "Find all the contact information for the SGAIN Project here. Submit your questions using our form, reach out via email for more project information, or follow our social media.",
+    "Find all the contact information for the SGAIN Project here. Reach out via email for more project information, or follow our social media.",
   oldUrl: "https://sgain.org/contact-information",
 };
 ---
@@ -19,45 +19,32 @@ const frontmatter = {
   />
 
   <Band>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <p class="contact-follow">Follow SGAIN on social media.</p>
-        <div class="contact-social">
-          <SocialLinks />
-        </div>
-        <div class="contact-actions">
-          <a
-            class="contact-btn"
-            href="https://www.linkedin.com/company/sgain"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Social Media
-          </a>
-          <a class="contact-btn" href="mailto:sgain@bath.ac.uk">Email</a>
-          <a class="contact-btn" href="#contact-us">Send a Message</a>
-        </div>
+    <div class="contact">
+      <h2 class="contact-title">Get in touch</h2>
+
+      <p class="contact-text">Follow SGAIN on social media.</p>
+      <div class="contact-social">
+        <SocialLinks size={28} />
       </div>
 
-      <section
-        class="contact-card contact-message"
-        id="contact-us"
-        aria-labelledby="contact-us-title"
-      >
-        <h2 id="contact-us-title" class="contact-title">Send a Message</h2>
-        <p>
-          Reach the team directly at <a href="mailto:sgain@bath.ac.uk"
-            >sgain@bath.ac.uk</a
-          >.
-        </p>
-      </section>
+      <p class="contact-text">
+        Or email the team at <a href="mailto:sgain@bath.ac.uk"
+          >sgain@bath.ac.uk</a
+        >.
+      </p>
     </div>
   </Band>
 </Layout>
 
 <style>
+  .contact {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   .contact-title {
-    margin: 0 0 1rem;
+    margin: 0 0 1.5rem;
     color: var(--teal-d);
     font-family: "Fraunces", serif;
     font-size: clamp(1.5rem, 2.5vw, 1.9rem);
@@ -65,68 +52,14 @@ const frontmatter = {
     line-height: 1.16;
   }
 
-  /* Contact layout */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(1.25rem, 3vw, 2rem);
-    align-items: start;
-    max-width: 880px;
-    margin: 0 auto;
-  }
-
-  .contact-card {
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    padding: clamp(1.5rem, 4vw, 2.25rem);
-    box-shadow: 0 6px 22px rgba(38, 51, 63, 0.06);
-  }
-
-  .contact-follow {
-    margin: 0;
-    color: var(--teal-d);
-    font-family: "Fraunces", serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
   .contact-social {
-    margin-top: 1.1rem;
-    color: var(--teal-d);
-  }
-
-  .contact-actions {
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 1.5rem;
-  }
-
-  .contact-btn {
-    border: 1px solid var(--teal);
-    border-radius: 8px;
-    background: var(--paper);
+    justify-content: center;
+    margin: 1.25rem 0 2rem;
     color: var(--teal-d);
-    padding: 0.7rem 1rem;
-    font-family: "Work Sans", sans-serif;
-    font-size: 0.86rem;
-    font-weight: 700;
-    text-align: center;
-    text-decoration: none;
-    transition:
-      border-color 0.2s ease,
-      background 0.2s ease,
-      color 0.2s ease;
   }
 
-  .contact-btn:hover {
-    border-color: var(--rust);
-    color: var(--rust);
-  }
-
-  .contact-message p {
+  .contact-text {
     margin: 0;
     color: var(--ink);
     font-family: "Source Serif 4", serif;
@@ -134,19 +67,13 @@ const frontmatter = {
     line-height: 1.62;
   }
 
-  .contact-message a {
+  .contact-text a {
     color: var(--teal);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.16em;
   }
 
-  .contact-message a:hover {
+  .contact-text a:hover {
     color: var(--rust);
-  }
-
-  @media (min-width: 760px) {
-    .contact-grid {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 </style>
