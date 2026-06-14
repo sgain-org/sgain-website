@@ -5,5 +5,4 @@ section: "advisory"
 order: 6
 profileUrl: "https://www.bappenas.go.id/"
 image: "/images/remote/assets-zyrosite-com/whatsapp-image-2022-11-05-at-08-41-36-ynqrwrrvzzh050me-7bf866ff5d.jpeg"
-imageAlt: "Portrait of Sumedi Andono Mulyo"
 ---

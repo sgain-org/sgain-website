@@ -5,5 +5,4 @@ section: "advisory"
 order: 1
 profileUrl: "https://lkyspp.nus.edu.sg/ies"
 image: "/images/remote/assets-zyrosite-com/cashore-mk39kvblwbt7wvka-1627d28d8a.jpeg"
-imageAlt: "Portrait of Benjamin William Cashore"
 ---

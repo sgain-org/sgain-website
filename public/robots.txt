@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://sgain.org/sitemap-index.xml

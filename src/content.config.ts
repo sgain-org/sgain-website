@@ -49,7 +49,6 @@ const team = defineCollection({
     order: z.number().int().positive(),
     profileUrl: z.string().optional(),
     image: z.string().optional(),
-    imageAlt: z.string().default(""),
   }),
 });
 

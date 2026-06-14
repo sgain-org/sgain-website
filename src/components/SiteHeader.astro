@@ -92,6 +92,7 @@ const iconFor: Record<IconName, typeof Menu> = {
       {
         navSections.map((section) => (
           <details
+            name="nav-section"
             class:list={["nav-menu", sectionActive(section.links) && "active"]}
           >
             <summary>{section.label}</summary>
@@ -184,6 +185,59 @@ const iconFor: Record<IconName, typeof Menu> = {
   const desktop = window.matchMedia("(min-width: 981px)");
   desktop.addEventListener("change", (event) => {
     if (event.matches && isOpen()) closeMenu();
+  });
+
+  // Desktop: reveal dropdown cards on hover/focus. A closed <details> hides
+  // its content, so CSS :hover alone can't show the panel — we open the
+  // element instead. On touch/mobile the native click toggle drives the
+  // accordion, so we leave it untouched there.
+  const canHover = window.matchMedia("(hover: hover) and (min-width: 981px)");
+  const menus = document.querySelectorAll<HTMLDetailsElement>(".nav-menu");
+
+  menus.forEach((menu) => {
+    let closeTimer = 0;
+
+    const openCard = () => {
+      window.clearTimeout(closeTimer);
+      menu.open = true;
+    };
+    const scheduleClose = () => {
+      window.clearTimeout(closeTimer);
+      // Brief grace period so moving from the label into the card (or to a
+      // sibling) doesn't flicker the panel shut.
+      closeTimer = window.setTimeout(() => {
+        menu.open = false;
+      }, 120);
+    };
+
+    menu.addEventListener("pointerenter", () => {
+      if (canHover.matches) openCard();
+    });
+    menu.addEventListener("pointerleave", () => {
+      if (canHover.matches) scheduleClose();
+    });
+    menu.addEventListener("focusin", () => {
+      if (canHover.matches) openCard();
+    });
+    menu.addEventListener("focusout", (event) => {
+      if (canHover.matches && !menu.contains(event.relatedTarget as Node)) {
+        menu.open = false;
+      }
+    });
+    // On desktop the card is hover/focus driven, so a click on the summary
+    // shouldn't toggle it shut.
+    menu.querySelector("summary")?.addEventListener("click", (event) => {
+      if (canHover.matches) event.preventDefault();
+    });
+  });
+
+  // Collapse any hover-opened cards when crossing down to mobile.
+  canHover.addEventListener("change", (event) => {
+    if (!event.matches) {
+      menus.forEach((menu) => {
+        menu.open = false;
+      });
+    }
   });
 
   // Keep the overlay's top offset exactly under the sticky header.
