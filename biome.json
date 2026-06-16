@@ -12,6 +12,7 @@
       "!**/dist",
       "!**/extract",
       "!**/node_modules",
+      "!**/public",
       "!**/resources"
     ],
     "ignoreUnknown": false
@@ -30,7 +31,7 @@
       "types": "all"
     },
     "rules": {
-      "recommended": true
+      "preset": "recommended"
     }
   },
   "javascript": {

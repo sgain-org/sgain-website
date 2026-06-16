@@ -11,18 +11,20 @@
     "lint": "biome check",
     "lint:fix": "biome check --fix",
     "preview": "astro preview",
+    "svg": "svgo -rf ./public -o ./public",
     "tree": "./scripts/tree.sh",
     "unused": "knip --cache"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "@lucide/astro": "^1.17.0",
+    "@lucide/astro": "^1.18.0",
     "astro": "^6.4.6"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@biomejs/biome": "^2.4.16",
+    "@biomejs/biome": "^2.5.0",
     "knip": "^6.16.1",
+    "svgo": "^4.0.1",
     "typescript": "^6.0.3"
   }
 }
