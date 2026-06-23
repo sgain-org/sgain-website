@@ -4,7 +4,7 @@ import { getCollection, render } from "astro:content";
 export type TeamSectionId = "bath" | "partners" | "advisory" | "alumni";
 export type TeamGroupId = "bath" | "causal-map" | "indonesia" | "china" | "bangladesh" | "pakistan";
 
-export type TeamAsset = {
+type TeamAsset = {
   src: string;
   alt: string;
 };

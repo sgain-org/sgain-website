@@ -14,17 +14,17 @@ export type IconName =
   | "archive"
   | "blog";
 
-export interface NavLink {
+type NavLink = {
   href: string;
   label: string;
   description: string;
   icon: IconName;
-}
+};
 
-export interface NavSection {
+export type NavSection = {
   label: string;
   links: NavLink[];
-}
+};
 
 export const homeLink = { href: "/", label: "Home" };
 export const contactLink = { href: "/contact-information/", label: "Contact" };

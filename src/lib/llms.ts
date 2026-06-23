@@ -4,13 +4,13 @@ import { makeUrl } from "@/lib/site.ts";
 
 type Url = (path: string) => string;
 
-export const PROJECT_TITLE =
+const PROJECT_TITLE =
   "SGAIN — Sustainability Governance of China's Global Infrastructure Investments";
 
-export const PROJECT_SUMMARY =
+const PROJECT_SUMMARY =
   "A UKRI Future Leaders Fellowship research project at the University of Bath, led by Dr Yixian Sun, studying how China's overseas infrastructure investments shape sustainability and environmental governance across the Global South.";
 
-export const PROJECT_INTRO = `Sustainability Governance of China's Global Infrastructure Investments (SGAIN) is a £1.7 million, seven-year research programme awarded to Dr Yixian Sun at the University of Bath by the UKRI Future Leaders Fellowship. It integrates innovative mixed methods to assess China's efforts to promote green development through overseas infrastructure investments, and the environmental and social impacts of key Chinese projects across different host contexts in the Global South.
+const PROJECT_INTRO = `Sustainability Governance of China's Global Infrastructure Investments (SGAIN) is a £1.7 million, seven-year research programme awarded to Dr Yixian Sun at the University of Bath by the UKRI Future Leaders Fellowship. It integrates innovative mixed methods to assess China's efforts to promote green development through overseas infrastructure investments, and the environmental and social impacts of key Chinese projects across different host contexts in the Global South.
 
 The team brings together researchers in international relations, environmental governance and development studies based at Fudan University (China), Universitas Gadjah Mada (Indonesia), University of Dhaka (Bangladesh), Sustainable Development Policy Institute (Pakistan) and the National University of Singapore.`;
 
@@ -116,7 +116,7 @@ const slugOf = (id: string): string => id.replace(/\.md$/, "");
 const stripTitleSuffix = (title: string): string =>
   title.replace(/\s*\|\s*SGAIN Project\s*$/, "").trim();
 
-export function cleanText(raw: string): string {
+function cleanText(raw: string): string {
   return raw
     .replace(/<br\s*\/?>/gi, "\n")
     .replace(/<\/(p|h[1-6]|li|div|figure|figcaption|blockquote)>/gi, "\n\n")
@@ -134,7 +134,7 @@ export function cleanText(raw: string): string {
     .trim();
 }
 
-export async function getPublications(url: Url): Promise<Item[]> {
+async function getPublications(url: Url): Promise<Item[]> {
   const entries = await getCollection("publications");
   return entries
     .sort((a, b) => a.id.localeCompare(b.id))
@@ -146,7 +146,7 @@ export async function getPublications(url: Url): Promise<Item[]> {
     }));
 }
 
-export async function getBlog(url: Url): Promise<Item[]> {
+async function getBlog(url: Url): Promise<Item[]> {
   const entries = await getCollection("blog");
   return entries
     .sort((a, b) => b.data.date.localeCompare(a.data.date))
@@ -158,7 +158,7 @@ export async function getBlog(url: Url): Promise<Item[]> {
     }));
 }
 
-export async function getNews(url: Url): Promise<{ current: Item[]; archive: Item[] }> {
+async function getNews(url: Url): Promise<{ current: Item[]; archive: Item[] }> {
   const entries = await getCollection("news");
   const toItem = (entry: (typeof entries)[number]): Item => {
     const displayDate = entry.data.displayDate ?? "";
