@@ -55,7 +55,6 @@
       "includes": ["src/pages/**/*.astro"],
       "linter": {
         "rules": {
-          "suspicious": { "noExplicitAny": "off" },
           "style": { "noNonNullAssertion": "off" }
         }
       }

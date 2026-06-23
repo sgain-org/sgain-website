@@ -5,7 +5,10 @@ set -euo pipefail
 # from, so `.env` and `./dist/` resolve consistently.
 cd "$(dirname "$0")/.."
 
-source .env
+# Local runs read config from .env; CI provides it via the environment (secrets).
+if [[ -f .env ]]; then
+  source .env
+fi
 
 # The static build output is what we deploy; refuse to mirror if it's missing
 # (with --delete a missing/empty source is dangerous). Run `pnpm build` first.

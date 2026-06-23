@@ -7,3 +7,6 @@ node_modules
 # build output
 dist/
 .astro/
+
+# macOS
+.DS_Store
