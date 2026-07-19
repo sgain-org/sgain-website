@@ -34,7 +34,7 @@
     "sharp": "^0.35.3",
     "svgo": "^4.0.1",
     "typescript": "^6.0.3",
-    "wrangler": "^4.110.0"
+    "wrangler": "^4.112.0"
   },
   "packageManager": "pnpm@11.11.0",
   "engines": {
