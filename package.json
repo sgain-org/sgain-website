@@ -30,7 +30,7 @@
     "@astrojs/check": "^0.9.9",
     "@biomejs/biome": "^2.5.3",
     "@types/node": "^26.1.1",
-    "knip": "^6.26.0",
+    "knip": "^6.27.0",
     "sharp": "^0.35.3",
     "svgo": "^4.0.1",
     "typescript": "^6.0.3",
