@@ -24,7 +24,7 @@
     "unused": "knip --cache"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.1.4",
+    "@astrojs/cloudflare": "^14.1.5",
     "@astrojs/markdown-satteri": "0.3.4",
     "@astrojs/sitemap": "^3.7.3",
     "@lucide/astro": "^1.25.0",
