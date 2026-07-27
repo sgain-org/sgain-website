@@ -36,7 +36,7 @@
     "@biomejs/biome": "^2.5.5",
     "@types/d3-geo": "^3.1.0",
     "@types/geojson": "^7946.0.16",
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.1.2",
     "@types/topojson-client": "^3.1.5",
     "@types/topojson-specification": "^1.0.5",
     "d3-geo": "^3.1.1",
