@@ -1,6 +1,5 @@
 ---
 title: "Essential Concepts for Implementing the Sustainable Development Goals: An A-Z Guide."
-oldUrl: "https://sgain.org/essential-concepts-for-implementing-the-sustainable-development-goals-an-a-z-guide"
 category: "book-chapter"
 citation: "Biermann, F., Hickmann, T., Kang, Y.H., Senit, C-A., & Sun, Y. (Eds)., 2025."
 order: 12

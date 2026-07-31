@@ -1,6 +1,5 @@
 ---
 title: "What Would It Take for China to be a Global Environmental Leader?"
-oldUrl: "https://sgain.org/what-would-it-take-for-china-to-be-a-global-environmental-leader"
 category: "non-academic"
 citation: "Hale, T., & Sun, Y. (2025). Global Policy Opinion & Analysis."
 order: 4

@@ -1,6 +1,5 @@
 ---
 title: "Compound path dependence in green transitions: a comparative analysis of EV policy coordination in Indonesia and Thailand"
-oldUrl: "https://sgain.org/compound-path-dependence-in-green-transitions-a-comparative-analysis-of-ev-policy-coordination-in-indonesia-and-thailand"
 category: "article"
 citation: "Ye, C., Xia, Y., Sun, Y., and Cashore, B., 2026. Policy Sciences"
 displayDate: "5/20/2026"

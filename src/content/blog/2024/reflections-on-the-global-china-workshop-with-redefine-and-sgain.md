@@ -1,7 +1,6 @@
 ---
 title: "Reflections on the Global China Workshop with REDEFINE & SGAIN"
 description: ""
-oldUrl: "https://sgain.org/reflections-on-the-global-china-workshop-with-redefine-and-sgain"
 author: "Jiuyang Li, PhD Student, University of Bath"
 date: "2024-11-07"
 readingTime: "3 min read"

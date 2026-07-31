@@ -1,6 +1,5 @@
 ---
 title: "Assessing climate ambition through policy outputs: a comparative measure of 35 major emitters"
-oldUrl: "https://sgain.org/assessing-climate-ambition-through-policy-outputs-a-comparative-measure-of-35-major-emitters"
 category: "article"
 citation: "Ye, Y., 2025. npj Climate Action, 4(75)"
 order: 10

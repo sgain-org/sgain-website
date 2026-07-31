@@ -1,6 +1,5 @@
 ---
 title: "The world needs climate change leadership – it’s time for China to step up."
-oldUrl: "https://sgain.org/the-world-needs-climate-change-leadership-its-time-for-china-to-step-up"
 category: "non-academic"
 citation: "Sun, Y. (2025). The Conversation."
 order: 5

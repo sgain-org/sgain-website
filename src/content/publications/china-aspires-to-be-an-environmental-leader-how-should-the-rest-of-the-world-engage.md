@@ -1,6 +1,5 @@
 ---
 title: "China Aspires to be an Environmental Leader: How Should the Rest of the World Engage?"
-oldUrl: "https://sgain.org/china-aspires-to-be-an-environmental-leader-how-should-the-rest-of-the-world-engage"
 category: "article"
 citation: "Harlan, T., Sun, Y., Lu, J., DiCarlo, J., Goron, C., Li, Y., Liao, J. C., Mao, K., Rodenbiker, J., Seligsohn, D., Wang, A., Weins, N., & Zhu, A. L., 2025. Journal of Current Chinese Affairs"
 displayDate: "12/19/2025"

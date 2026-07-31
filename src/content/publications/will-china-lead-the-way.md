@@ -1,6 +1,5 @@
 ---
 title: "Will China lead the way?"
-oldUrl: "https://sgain.org/will-china-lead-the-way"
 category: "non-academic"
 citation: "Interview with Dr Yixian Sun in the Institute of Sustainability and Environmental Professionals, 2025"
 displayDate: "12/8/2025"

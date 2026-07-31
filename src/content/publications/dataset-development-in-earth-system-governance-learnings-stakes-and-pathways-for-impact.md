@@ -1,6 +1,5 @@
 ---
 title: "Dataset development in earth system governance: Learnings, stakes, and pathways for impact."
-oldUrl: "https://sgain.org/dataset-development-in-earth-system-governance-learnings-stakes-and-pathways-for-impact"
 category: "article"
 citation: "Morin, J.-F., Hollway, J., Sun, Y., Vadrot, A. B. M., Allan, J., Bernauer, T., Betsill, M. M., Brandi, C., Fast, C., Kim, R. E., Laurens, N., Lecavalier, E., McCracken, M., Mitchell, R. B., Morton, K., Orsini, A., Papin, M., Rowan, S., & Widerberg, O. E., 2026. Earth System Governance, 28, 100328"
 displayDate: "6/1/2026"

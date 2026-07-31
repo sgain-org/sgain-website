@@ -1,6 +1,5 @@
 ---
 title: "How much has Bangladesh achieved from BRI?"
-oldUrl: "https://sgain.org/how-much-has-bangladesh-achieved-from-bri"
 category: "non-academic"
 citation: "Hasan, M.B., 2025. The Daily Star"
 order: 3

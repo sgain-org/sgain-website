@@ -1,6 +1,5 @@
 ---
 title: "Global Environmental Politics amid Geopolitical Turbulence"
-oldUrl: "https://sgain.org/global-environmental-politics-amid-geopolitical-turbulence-copy"
 category: "article"
 citation: "Sun, Y., Clapp, J., Andonova, L., Dauvergne, P., Jayaram, D., Mbeva, K., Paterson, M., Wijaya, T., and Wu, F. 2026. Global Environmental Politics, 26(1)"
 displayDate: "1/28/2026"

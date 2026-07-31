@@ -1,6 +1,5 @@
 ---
 title: "China and Global Sustainability Transition Outlook 2025"
-oldUrl: "https://sgain.org/china-and-global-sustainability-transition-outlook-2025"
 category: "policy-report"
 summary: "China’s emerging leadership in global sustainability governance amid geopolitical turbulence."
 citation: "Sun, Y., Chant, F., O’Brien, C., Ye, Y., Li, J., Gu, Y., & Xiao, Y."

@@ -1,6 +1,5 @@
 ---
 title: "Towards a Just Transition: Integrating Fair Share, Equity and Justice into Climate Transition Plans"
-oldUrl: "https://sgain.org/towards-a-just-transition-integrating-fair-share-equity-and-justice-into-climate-transition-plans"
 category: "policy-report"
 citation: "Race to Zero Working Group Report"
 displayDate: "11/3/2025"

@@ -1,6 +1,5 @@
 ---
 title: "Unpacking China’s climate policy mixes shows a disconnect between policy density and intensity in the post-Paris era."
-oldUrl: "https://sgain.org/unpacking-chinas-climate-policy-mixes-shows-a-disconnect-between-policy-density-and-intensity-in-the-post-paris-era"
 category: "article"
 citation: "Li, X., He, S., Gu, Y., & Sun, Y., 2025. npj Climate Action, 4(30)"
 order: 13

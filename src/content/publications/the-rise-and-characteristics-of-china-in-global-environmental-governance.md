@@ -1,6 +1,5 @@
 ---
 title: "The rise and characteristics of China in global environmental governance: Insights from China’s global environmental leadership database"
-oldUrl: ""
 category: "article"
 citation: "Sun,Y., and Ye, Y., 2026. Earth System Governance, 29"
 order: 1

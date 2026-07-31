@@ -1,6 +1,5 @@
 ---
 title: "Climate governance in China: a multi-actor perspective"
-oldUrl: "https://sgain.org/climate-governance-in-china-a-multi-actor-perspective"
 category: "book-chapter"
 citation: "Ye, Y., and Sun, Y., 2026. in: Handbook of Research on Sustainability and Governance"
 displayDate: "3/17/2026"

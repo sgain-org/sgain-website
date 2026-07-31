@@ -1,6 +1,5 @@
 ---
 title: "Is goal-setting an effective strategy for global sustainability governance? Insights from the Sustainable Development Goals"
-oldUrl: "https://sgain.org/is-goal-setting-an-effective-strategy-for-global-sustainability-governance-insights-from-the-sustainable-development-goals-copy"
 category: "article"
 citation: "Hickmann, T., Senit, C.A., and Sun, Y., 2026. Earth System Governance, 27, 100309"
 displayDate: "3/2/2026"

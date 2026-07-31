@@ -1,7 +1,6 @@
 ---
 title: "Exploring Europe: Reflections on the GlobalGoals2024 Summer School and Conference, Utrecht, Netherlands."
 description: ""
-oldUrl: "https://sgain.org/exploring-europe-reflections-on-the-globalgoals2024-summer-school-and-conference-utrecht-netherlands"
 author: "Muhammad Faisal Sharif, Doctoral Researcher, University of Bath"
 date: "2024-09-09"
 readingTime: "4 min read"

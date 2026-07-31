@@ -7,7 +7,6 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().default(""),
-    oldUrl: z.string(),
     author: z.string(),
     date: z.string(),
     readingTime: z.string(),
@@ -20,7 +19,6 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().default(""),
-    oldUrl: z.string().optional(),
     type: z.enum(["page", "news"]).default("page"),
     displayDate: z.string().optional(),
     year: z.number().int().optional(),
@@ -33,7 +31,6 @@ const publications = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().default(""),
-    oldUrl: z.string().optional(),
     // Set on publications surfaced by the listing pages.
     category: z.enum(["article", "book-chapter", "non-academic", "policy-report"]).optional(),
     citation: z.string().optional(),

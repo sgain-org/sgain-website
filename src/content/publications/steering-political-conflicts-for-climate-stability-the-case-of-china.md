@@ -1,6 +1,5 @@
 ---
 title: "Steering Political Conflicts for Climate Stability: The Case of China"
-oldUrl: "https://sgain.org/steering-political-conflicts-for-climate-stability-the-case-of-china"
 category: "book-chapter"
 citation: "Sun, Y., Shen, W., Lewis, J.I, 2025. in: Stability and Politicization in Climate Governance."
 displayDate: "8/7/2025"

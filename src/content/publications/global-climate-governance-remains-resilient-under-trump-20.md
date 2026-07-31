@@ -1,6 +1,5 @@
 ---
 title: "Global climate governance remains resilient under Trump 2.0"
-oldUrl: "https://sgain.org/global-climate-governance-remains-resilient-under-trump-20"
 category: "article"
 citation: "Sun, Y., and Yitong, Y., 2025. Global Public Policy and Governance, 5"
 displayDate: "11/17/2025"
