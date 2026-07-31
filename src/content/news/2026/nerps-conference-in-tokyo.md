@@ -2,9 +2,8 @@
 title: "NERPS Conference in Tokyo"
 description: "On 4–6 March 2026, SGAIN researchers shared their work at the Network for Education and Research on Peace and Sustainability Conference in Tokyo."
 type: "news"
+date: "2026-03-04"
 displayDate: "March 2026"
-year: 2026
-order: 8
 ---
 
 On 4–6 March 2026, SGAIN researchers had the opportunity to share our work at the Network for Education and Research on Peace and Sustainability Conference in Tokyo. The conference, organized by Hiroshima University, brought together over 300 scholars and practitioners from across the globe to discuss sustainability, governance, and global challenges.\

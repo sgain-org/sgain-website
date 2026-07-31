@@ -2,9 +2,8 @@
 title: "Future of Sustainable Development Goals Conference"
 description: "The international research conference GLOBALGOALS2024—The Future of the SDGs, held 29-30 August 2024 in Utrecht, the Netherlands, offered a global platform to share and discuss ideas for the future of Sustainable Development Goals and global sustainablity governance, ahead of the UN Summit of the Future in September."
 type: "news"
+date: "2024-08-29"
 displayDate: "29-30 August 2024"
-year: 2024
-order: 9
 ---
 
 The international research conference GLOBALGOALS2024—The Future of the SDGs, held 29-30 August 2024 in Utrecht, the Netherlands, offered a global platform to share and discuss ideas for the future of Sustainable Development Goals and global sustainablity governance, ahead of the UN Summit of the Future in September.

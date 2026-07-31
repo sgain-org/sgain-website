@@ -2,8 +2,7 @@
 title: "Towards a Just Transition: Integrating Fair Share, Equity and Justice into Climate Transition Plans"
 category: "policy-report"
 citation: "Race to Zero Working Group Report"
-displayDate: "11/3/2025"
-order: 3
+date: "2025-11-03"
 image: "/images/publications/towards-a-just-transition-integrating-fair-share-equity-and-justice-into-climate-transition-plans.jpg"
 imageAlt: "green leaf in close up photography"
 link: "https://www.climatechampions.net/media/uurbni2u/towards-a-just-transition.pdf"

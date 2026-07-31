@@ -4,7 +4,7 @@ import Band from "@/components/Band.astro";
 import Hero from "@/components/Hero.astro";
 import PublicationCard from "@/components/PublicationCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { entrySlug } from "@/lib/content";
+import { byDateDesc, entrySlug, formatDate } from "@/lib/content";
 import { toDisplayTitle } from "@/lib/page";
 
 const frontmatter = {
@@ -15,11 +15,7 @@ const frontmatter = {
 
 const reports = (await getCollection("publications"))
   .filter((entry) => entry.data.category === "policy-report")
-  .sort(
-    (a, b) =>
-      (a.data.order ?? Number.POSITIVE_INFINITY) -
-      (b.data.order ?? Number.POSITIVE_INFINITY),
-  );
+  .sort(byDateDesc);
 ---
 
 <Layout frontmatter={frontmatter} bare>
@@ -44,7 +40,7 @@ const reports = (await getCollection("publications"))
             lines={[
               report.data.summary,
               report.data.citation,
-              report.data.displayDate,
+              formatDate(report.data.date),
             ].filter((line): line is string => Boolean(line))}
             image={report.data.image}
             imageAlt={report.data.imageAlt}

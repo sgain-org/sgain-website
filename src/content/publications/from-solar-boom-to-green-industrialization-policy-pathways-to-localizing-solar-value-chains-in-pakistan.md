@@ -2,8 +2,7 @@
 title: "From Solar Boom to Green Industrialization: Policy Pathways to Localizing Solar Value Chains in Pakistan"
 category: "policy-report"
 citation: "Sustainable Development Policy Institute (SDPI) and SGAIN"
-displayDate: "11/14/2025"
-order: 2
+date: "2025-11-14"
 image: "/images/publications/from-solar-boom-to-green-industrialization-policy-pathways-to-localizing-solar-value-chains-in-pakistan.jpg"
 imageAlt: "solar panels on green field"
 link: "/from-solar-boom-to-green-industrialization-policy-report.pdf"

@@ -8,7 +8,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string().default(""),
     author: z.string(),
-    date: z.string(),
+    date: z.iso.date(),
     readingTime: z.string(),
     heroImage: z.string().optional(),
   }),
@@ -20,9 +20,10 @@ const news = defineCollection({
     title: z.string(),
     description: z.string().default(""),
     type: z.enum(["page", "news"]).default("page"),
+    // Sorts the listing and groups it by year. For a multi-day event, use the day it started.
+    date: z.iso.date(),
+    // Overrides the rendered date, for spans and approximations ("4-5 December 2024", "Spring 2026").
     displayDate: z.string().optional(),
-    year: z.number().int().optional(),
-    order: z.number().int().positive().optional(),
   }),
 });
 
@@ -35,8 +36,8 @@ const publications = defineCollection({
     category: z.enum(["article", "book-chapter", "non-academic", "policy-report"]).optional(),
     citation: z.string().optional(),
     summary: z.string().optional(),
-    order: z.number().int().positive().optional(),
-    displayDate: z.string().optional(),
+    // Publication date, newest first on the listing pages.
+    date: z.iso.date(),
     image: z.string().optional(),
     imageAlt: z.string().default(""),
     link: z.string().optional(),

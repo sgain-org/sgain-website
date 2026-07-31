@@ -2,9 +2,8 @@
 title: "Field Research in Bangladesh"
 description: "The Bangladesh team has successfully completed major fieldwork under the ongoing SGAIN research project, carried out in two phases at two large-scale solar power plants."
 type: "news"
+date: "2026-04-30"
 displayDate: "April 2026"
-year: 2026
-order: 4
 ---
 
 We are pleased to announce that the Bangladesh team has successfully completed major fieldwork under the ongoing SGAIN research project in Bangladesh.

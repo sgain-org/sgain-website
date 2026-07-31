@@ -2,9 +2,8 @@
 title: "TC/ESG Conference, Johannesburg"
 description: "Between 15-23 August, SGAIN PI Dr Yixian Sun had a productive visit in South Africa."
 type: "news"
+date: "2025-08-15"
 displayDate: "15-23 August 2025"
-year: 2025
-order: 10
 ---
 
 Between 15-23 August, SGAIN PI Dr Yixian Sun had a productive visit in South Africa.

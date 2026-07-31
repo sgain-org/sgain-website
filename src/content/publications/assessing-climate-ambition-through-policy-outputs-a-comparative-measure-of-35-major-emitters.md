@@ -2,7 +2,7 @@
 title: "Assessing climate ambition through policy outputs: a comparative measure of 35 major emitters"
 category: "article"
 citation: "Ye, Y., 2025. npj Climate Action, 4(75)"
-order: 10
+date: "2025-08-10"
 image: "/images/publications/assessing-climate-ambition-through-policy-outputs-a-comparative-measure-of-35-major-emitters.jpg"
 imageAlt: "forest and mountain partially covered with fog"
 link: "https://www.nature.com/articles/s44168-025-00278-7"

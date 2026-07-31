@@ -2,9 +2,8 @@
 title: "Mapping Global China Interview"
 description: "Earlier this month, Mapping Global China shared an important interview with SGAIN PI Dr Yixian Sun, and Dr Yifei Li, Assistant Professor of Environmental Studies at NYU Shanghai."
 type: "news"
+date: "2025-06-10"
 displayDate: "June 2025"
-year: 2025
-order: 14
 ---
 
 Earlier this month, Mapping Global China shared an important interview with SGAIN PI Dr Yixian Sun, and Dr Yifei Li, Assistant Professor of Environmental Studies at NYU Shanghai.

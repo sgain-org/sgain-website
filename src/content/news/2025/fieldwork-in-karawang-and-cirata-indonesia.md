@@ -2,9 +2,8 @@
 title: "Fieldwork in Karawang and Cirata, Indonesia"
 description: "In late July 2025, team member Yuen Gu conducted field research with the UGM team in Indonesia to study the social and environmental impacts of large-scale renewable energy projects contracted to Chinese companies. The fieldwork focused on two flagship sites:"
 type: "news"
+date: "2025-07-21"
 displayDate: "July 2025"
-year: 2025
-order: 9
 ---
 
 In late July 2025, team member Yuen Gu conducted field research with the UGM team in Indonesia to study the social and environmental impacts of large-scale renewable energy projects contracted to Chinese companies. The fieldwork focused on two flagship sites:

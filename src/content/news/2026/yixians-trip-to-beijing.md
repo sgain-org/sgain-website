@@ -2,9 +2,8 @@
 title: "Yixian's trip to Beijing"
 description: "On 19-24 Jan 2026, our PI Dr Yixian Sun had a productive trip in Beijing to attend several events and meet with collaborators."
 type: "news"
+date: "2026-01-19"
 displayDate: "19-24 January 2026"
-year: 2026
-order: 12
 ---
 
 On 19-24 Jan, our PI Dr Yixian Sun had a productive trip in Beijing to attend several events and meet with collaborators.

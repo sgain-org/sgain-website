@@ -2,9 +2,8 @@
 title: "ISA Annual Convention in Columbus, Ohio"
 description: "From 22–25 March 2026, SGAIN researchers attended the 67th Annual Convention of the International Studies Association (ISA) in Columbus, Ohio."
 type: "news"
+date: "2026-03-22"
 displayDate: "March 2026"
-year: 2026
-order: 7
 ---
 
 From 22–25 March 2026, SGAIN researchers attended the 67th Annual Convention of the International Studies Association (ISA) in Columbus, Ohio. The convention brought together thousands of scholars and practitioners from across the globe to engage with the latest research in international relations, global governance, and sustainability. SGAIN was well represented at this year’s convention, with three team members presenting research and chairing panels across a wide range of topics central to the project’s mission.

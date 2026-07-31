@@ -2,9 +2,8 @@
 title: "Dr Sun visit to Islamabad"
 description: "We are excited to share that in September, Project PI Dr Yixian Sun visited Islamabad to advance dialogue on greening the China-Pakistan Economic Corridor."
 type: "news"
+date: "2025-09-18"
 displayDate: "September 2025"
-year: 2025
-order: 7
 ---
 
 We are excited to share that in September, Project PI Dr Yixian Sun visited Islamabad to advance dialogue on greening the China-Pakistan Economic Corridor.

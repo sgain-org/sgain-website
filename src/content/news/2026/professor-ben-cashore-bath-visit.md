@@ -2,9 +2,8 @@
 title: "Professor Ben Cashore Bath Visit"
 description: "SGAIN was delighted to support Professor Ben Cashore's Global Chair Public Lecture, “Climate Policy Thermostats: The Planet's Last Hope?”, held on Thursday, 14 May 2026."
 type: "news"
+date: "2026-05-14"
 displayDate: "14 May 2026"
-year: 2026
-order: 3
 ---
 
 SGAIN was delighted to support Professor Ben Cashore’s Global Chair Public Lecture, “Climate Policy Thermostats: The Planet’s Last Hope?”, held on Thursday, 14 May 2026. Hosted by Prof. Yixian Sun and co-hosted by the Institute for Sustainability and Climate Change and the Department of Social & Policy Sciences, the event explored why decades of climate policy experimentation have not yet delivered the scale of action required to avoid catastrophic warming.

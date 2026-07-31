@@ -2,9 +2,8 @@
 title: "Field Research in Jakarta"
 description: "From 12-15 April 2026, the SGAIN Indonesia team conducted its second round of fieldwork, visiting key national stakeholders in Jakarta, Indonesia."
 type: "news"
+date: "2026-04-12"
 displayDate: "April 2026"
-year: 2026
-order: 5
 ---
 
 We are excited to share that from 12-15 April 2026, the SGAIN Indonesia team conducted its second round of fieldwork, visiting key national stakeholders in Jakarta, Indonesia, where researchers Nur Rachmat Yuliantoro, Maharani Hapsari, Randy Nandyatama, and Nadya Zafira conducted interviews.\

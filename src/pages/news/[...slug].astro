@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import { entrySlug } from "@/lib/content";
+import { toDisplayDate } from "@/lib/news";
 import { toPageTitle } from "@/lib/page";
 
 export async function getStaticPaths() {
@@ -30,9 +31,7 @@ const frontmatter = {
     page.data.type === "news" ? (
       <>
         <h1>{page.data.title}</h1>
-        {page.data.displayDate && (
-          <p class="post-meta">{page.data.displayDate}</p>
-        )}
+        <p class="post-meta">{toDisplayDate(page.data)}</p>
         <Content />
       </>
     ) : (

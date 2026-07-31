@@ -2,9 +2,8 @@
 title: "SGAIN at UN Climate Change Conference"
 description: "Over the last two weeks, the UN Climate Change Conference COP29 has taken place in Baku, bringing together world leaders, businesses, civil societies and academics to advance solutions for tackling climate change."
 type: "news"
+date: "2024-11-11"
 displayDate: "Baku, 11-22 November 2024"
-year: 2024
-order: 3
 ---
 
 Over the last two weeks, the UN Climate Change Conference COP29 has taken place in Baku, bringing together world leaders, businesses, civil societies and academics to advance solutions for tackling climate change.

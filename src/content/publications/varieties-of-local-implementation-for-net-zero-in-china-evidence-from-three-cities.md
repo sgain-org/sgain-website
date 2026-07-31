@@ -2,8 +2,7 @@
 title: "Varieties of Local Implementation for Net Zero in China: Evidence From Three Cities"
 category: "article"
 citation: "Guan, T., Gou, Z., and Sun, Y. 2026. Environmental Policy and Governance"
-displayDate: "5/24/2026"
-order: 2
+date: "2026-05-24"
 image: "/images/publications/varieties-of-local-implementation-for-net-zero-in-china-evidence-from-three-cities.jpg"
 imageAlt: "Orient Pearl, Shanghai, China taken during daytime"
 link: "https://onlinelibrary.wiley.com/doi/10.1002/eet.70101"

@@ -1,6 +1,7 @@
 ---
 title: "Bath Conference on China & Global Sustainability | SGAIN Project"
 description: "Read about the Bath Conference on China and Global Sustainability Transition, which took place 24-25th June, 2025. Engage with over 50 participants from research and policy backgrounds to discuss critical sustainability issues."
+date: "2025-06-24"
 ---
 
 ![body of water surrounded by orange trees](/images/news/bath-conference-on-china-and-global-sustainability-transition/1.jpg)

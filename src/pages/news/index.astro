@@ -1,11 +1,11 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Band from "@/components/Band.astro";
 import Hero from "@/components/Hero.astro";
 import SectionDivider from "@/components/SectionDivider.astro";
 import Layout from "@/layouts/Layout.astro";
-import { entrySlug } from "@/lib/content";
-import { toYearAnchor } from "@/lib/news";
+import { byDateDesc, entrySlug, entryYear } from "@/lib/content";
+import { toDisplayDate, toYearAnchor } from "@/lib/news";
 
 const frontmatter = {
   title: "SGAIN: News and Events  | SGAIN Project",
@@ -17,14 +17,11 @@ const currentYear = new Date().getFullYear();
 
 const allNews = await getCollection("news", ({ data }) => data.type === "news");
 
-const byOrder = (a: CollectionEntry<"news">, b: CollectionEntry<"news">) =>
-  (a.data.order ?? 0) - (b.data.order ?? 0);
-
 // The current year is rendered in full; older years are listed by year below.
 const current = await Promise.all(
   allNews
-    .filter((entry) => entry.data.year === currentYear)
-    .sort(byOrder)
+    .filter((entry) => entryYear(entry.data.date) === currentYear)
+    .sort(byDateDesc)
     .map(async (entry) => {
       const { Content } = await render(entry);
       return { entry, Content };
@@ -34,14 +31,14 @@ const current = await Promise.all(
 const previousYears = [
   ...new Set(
     allNews
-      .map((entry) => entry.data.year)
-      .filter((year): year is number => year !== undefined && year !== currentYear),
+      .map((entry) => entryYear(entry.data.date))
+      .filter((year) => year !== currentYear),
   ),
 ].sort((a, b) => b - a);
 
 const previousGroups = previousYears.map((year) => ({
   year,
-  entries: allNews.filter((entry) => entry.data.year === year).sort(byOrder),
+  entries: allNews.filter((entry) => entryYear(entry.data.date) === year).sort(byDateDesc),
 }));
 
 const navYears = [...(current.length > 0 ? [currentYear] : []), ...previousYears];
@@ -86,11 +83,9 @@ const navYears = [...(current.length > 0 ? [currentYear] : []), ...previousYears
           </h2>
           {current.map(({ entry, Content }) => (
             <article class="news-item">
-              {entry.data.displayDate && (
-                <p class="news-item__date">
-                  <strong>{entry.data.displayDate}</strong>
-                </p>
-              )}
+              <p class="news-item__date">
+                <strong>{toDisplayDate(entry.data)}</strong>
+              </p>
               <h3 class="news-item__title">{entry.data.title}</h3>
               <div class="news-item__body">
                 <Content />
@@ -111,9 +106,7 @@ const navYears = [...(current.length > 0 ? [currentYear] : []), ...previousYears
             {entries.map((entry) => (
               <li class="news-archive-item">
                 <a href={`/news/${entrySlug(entry.id)}/`}>{entry.data.title}</a>
-                {entry.data.displayDate && (
-                  <span class="news-archive-item__date">{entry.data.displayDate}</span>
-                )}
+                <span class="news-archive-item__date">{toDisplayDate(entry.data)}</span>
               </li>
             ))}
           </ul>

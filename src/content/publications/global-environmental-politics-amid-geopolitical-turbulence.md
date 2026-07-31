@@ -2,8 +2,7 @@
 title: "Global Environmental Politics amid Geopolitical Turbulence"
 category: "article"
 citation: "Sun, Y., Clapp, J., Andonova, L., Dauvergne, P., Jayaram, D., Mbeva, K., Paterson, M., Wijaya, T., and Wu, F. 2026. Global Environmental Politics, 26(1)"
-displayDate: "1/28/2026"
-order: 6
+date: "2026-01-28"
 image: "/images/publications/global-environmental-politics-amid-geopolitical-turbulence.jpg"
 imageAlt: "white printer paper"
 link: "https://direct.mit.edu/glep/article/doi/10.1162/GLEP.a.731/135064/Global-Environmental-Politics-amid-Geopolitical"

@@ -4,7 +4,7 @@ import Band from "@/components/Band.astro";
 import Hero from "@/components/Hero.astro";
 import PublicationCard from "@/components/PublicationCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { entrySlug } from "@/lib/content";
+import { byDateDesc, entrySlug } from "@/lib/content";
 import { toDisplayTitle } from "@/lib/page";
 
 const frontmatter = {
@@ -24,11 +24,7 @@ const publications = (await getCollection("publications"))
       entry.data.category === "article" ||
       entry.data.category === "book-chapter",
   )
-  .sort(
-    (a, b) =>
-      (a.data.order ?? Number.POSITIVE_INFINITY) -
-      (b.data.order ?? Number.POSITIVE_INFINITY),
-  );
+  .sort(byDateDesc);
 ---
 
 <Layout frontmatter={frontmatter} bare>

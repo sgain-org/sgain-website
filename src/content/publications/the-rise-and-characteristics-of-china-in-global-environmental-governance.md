@@ -2,7 +2,7 @@
 title: "The rise and characteristics of China in global environmental governance: Insights from China’s global environmental leadership database"
 category: "article"
 citation: "Sun,Y., and Ye, Y., 2026. Earth System Governance, 29"
-order: 1
+date: "2026-06-09"
 image: "/images/publications/cgel-paper.jpg"
 imageAlt: "forest and mountain partially covered with fog"
 link: "https://www.sciencedirect.com/science/article/pii/S2589811626000297?via%3Dihub"

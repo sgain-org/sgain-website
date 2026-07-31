@@ -2,8 +2,7 @@
 title: "Global climate governance remains resilient under Trump 2.0"
 category: "article"
 citation: "Sun, Y., and Yitong, Y., 2025. Global Public Policy and Governance, 5"
-displayDate: "11/17/2025"
-order: 9
+date: "2025-11-17"
 image: "/images/publications/global-climate-governance-remains-resilient-under-trump-20.jpg"
 imageAlt: "our world our future our choice streamer"
 link: "https://link.springer.com/article/10.1007/s43508-025-00131-x"

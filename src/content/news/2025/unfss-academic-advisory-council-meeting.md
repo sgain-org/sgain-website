@@ -2,9 +2,8 @@
 title: "UNFSS Academic Advisory Council Meeting"
 description: "We are pleased to share that last week, Principal Investigator Yixian Sun participated in the UNFSS Academy Advisory Council meeting in Bonn, joining a global network of experts to advance the knowledge on Voluntary Sustainability Standards (VSS) and chart a path forward for policy and research. This year’s meeting, hosted by the German Institute of Development and Sustainability (IDOS), focused on the changing landscape of sustainability governance and the future of VSS."
 type: "news"
+date: "2025-03-31"
 displayDate: "31 March - 1 April"
-year: 2025
-order: 18
 ---
 
 We are pleased to share that last week, Principal Investigator Yixian Sun participated in the UNFSS Academy Advisory Council meeting in Bonn, joining a global network of experts to advance the knowledge on Voluntary Sustainability Standards (VSS) and chart a path forward for policy and research. This year’s meeting, hosted by the German Institute of Development and Sustainability (IDOS), focused on the changing landscape of sustainability governance and the future of VSS.

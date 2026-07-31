@@ -2,9 +2,8 @@
 title: "Stakeholder workshop and field research in Jakarta"
 description: "On 3 February 2026, the SGAIN Indonesia team organised a workshop in Jakarta on advancing Indonesia-China partnerships for clean energy transition."
 type: "news"
+date: "2026-02-03"
 displayDate: "February 2026"
-year: 2026
-order: 11
 ---
 
 On 3 February 2026, the SGAIN Indonesia team organised a workshop in Jakarta, entitled “Advancing Indonesia-China Partnerships for Clean Energy Transition: Policy, Governance, and Practices”. Over thirty representatives of Indonesian and Chinese governments, businesses, and civil society participated in the workshop together in Jakarta as part of the SGAIN project’s stakeholder workshop to share opportunities and challenges to collaboration in the clean energy sector and identify pathways to better leverage China’s support for the acceleration of Indonesia’s energy transition.

@@ -2,8 +2,7 @@
 title: "Will China lead the way?"
 category: "non-academic"
 citation: "Interview with Dr Yixian Sun in the Institute of Sustainability and Environmental Professionals, 2025"
-displayDate: "12/8/2025"
-order: 2
+date: "2025-12-08"
 image: "/images/publications/will-china-lead-the-way.jpg"
 imageAlt: "Oriental Pearl Tower in Shanghai during daytime"
 link: "https://www.isepglobal.org/engage/transform/features/will-china-lead-the-way/"

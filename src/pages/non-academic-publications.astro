@@ -8,7 +8,7 @@ import PublicationCard from "@/components/PublicationCard.astro";
 import SectionDivider from "@/components/SectionDivider.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 import Layout from "@/layouts/Layout.astro";
-import { entrySlug } from "@/lib/content";
+import { byDateDesc, entrySlug } from "@/lib/content";
 import { toDisplayTitle } from "@/lib/page";
 
 const frontmatter = {
@@ -18,11 +18,7 @@ const frontmatter = {
 
 const opEds = (await getCollection("publications"))
   .filter((entry) => entry.data.category === "non-academic")
-  .sort(
-    (a, b) =>
-      (a.data.order ?? Number.POSITIVE_INFINITY) -
-      (b.data.order ?? Number.POSITIVE_INFINITY),
-  );
+  .sort(byDateDesc);
 ---
 
 <style>

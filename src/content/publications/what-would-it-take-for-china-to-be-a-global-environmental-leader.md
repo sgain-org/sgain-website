@@ -2,7 +2,7 @@
 title: "What Would It Take for China to be a Global Environmental Leader?"
 category: "non-academic"
 citation: "Hale, T., & Sun, Y. (2025). Global Policy Opinion & Analysis."
-order: 4
+date: "2025-07-02"
 image: "/images/publications/what-would-it-take-for-china-to-be-a-global-environmental-leader.jpg"
 imageAlt: "Shanghai skyline behind green foliage"
 link: "https://www.globalpolicyjournal.com/blog/02/07/2025/what-would-it-take-china-be-global-environmental-leader"
