@@ -1,25 +1,27 @@
 ---
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import Band from "@/components/Band.astro";
 import Hero from "@/components/Hero.astro";
 import SectionDivider from "@/components/SectionDivider.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 import Layout from "@/layouts/Layout.astro";
+import { byDateDesc } from "@/lib/content";
 
-type MediaVariant = "landscape" | "portrait" | "audio";
+type Section = CollectionEntry<"multimedia">["data"]["section"];
 
-type MediaItem = {
-  title: string;
-  description: string;
-  embed: {
-    src: string;
-    variant: MediaVariant;
-    width: number;
-    height: number;
-    allow: string;
-    sandbox?: string;
-    allowFullScreen?: boolean;
-  };
-};
+const allMedia = await getCollection("multimedia");
+
+/** Entries for one section, newest first, with the description rendered. */
+const bySection = (section: Section) =>
+  Promise.all(
+    allMedia
+      .filter((entry) => entry.data.section === section)
+      .sort(byDateDesc)
+      .map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+  );
+
+const conferenceCoverage = await bySection("conference-coverage");
+const interviews = await bySection("interviews");
 
 const frontmatter = {
   title: "Multimedia | SGAIN Project",
@@ -27,92 +29,6 @@ const frontmatter = {
     "Conference coverage and interviews from the SGAIN Project, including videos from the 2025 Bath Conference and recent media appearances.",
 };
 
-const conferenceCoverage: MediaItem[] = [
-  {
-    title: "China’s Evolving Role in Global Sustainability Transition",
-    description:
-      "China is reshaping the global sustainability landscape. From clean energy technology to global governance, its actions influence the world’s transition in multiple ways. At our conference, global experts shared their perspectives on China’s evolving role.",
-    embed: {
-      src: "https://player.vimeo.com/video/1165332886?playlist=1165332886&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&muted=0",
-      variant: "landscape",
-      width: 400,
-      height: 237,
-      allow: "autoplay; fullscreen; picture-in-picture",
-      allowFullScreen: true,
-    },
-  },
-  {
-    title: "Challenges & Next Steps for China’s Sustainability Leadership",
-    description:
-      "As China’s role in global sustainability grows, experts highlight a range of challenges that may influence its future direction. These include domestic policy considerations, sectoral transitions, and evolving international dynamics. In this video, we explore how these factors shape China’s potential next steps in sustainability leadership.",
-    embed: {
-      src: "https://player.vimeo.com/video/1165332386?playlist=1165332386&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&muted=0",
-      variant: "landscape",
-      width: 400,
-      height: 237,
-      allow: "autoplay; fullscreen; picture-in-picture",
-      allowFullScreen: true,
-    },
-  },
-  {
-    title: "China’s Global Partnerships for Sustainability",
-    description:
-      "China’s global role is reflected in its expanding partnerships across world regions, particularly in the Global South. These partnerships vary widely - shaped by local priorities, development needs, and environmental goals. In this video, experts share regional perspectives on China’s contributions and expectations for future collaboration.",
-    embed: {
-      src: "https://player.vimeo.com/video/1165332594?playlist=1165332594&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&muted=0",
-      variant: "landscape",
-      width: 400,
-      height: 237,
-      allow: "autoplay; fullscreen; picture-in-picture",
-      allowFullScreen: true,
-    },
-  },
-];
-
-const interviews: MediaItem[] = [
-  {
-    title: "COP30 Key Takeaways",
-    description:
-      "The University of Bath interviewed PI Dr Yixian Sun after he returned from COP30 to discuss key takeaways that could shape the future of sustainability.",
-    embed: {
-      src: "https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2067131037439780%2F&show_text=false&width=267&t=0",
-      variant: "portrait",
-      width: 267,
-      height: 476,
-      allow:
-        "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share",
-      allowFullScreen: true,
-    },
-  },
-  {
-    title: "The China Pivot: What will Beijing’s climate leadership look like?",
-    description:
-      "The Outrage and Optimism podcast featured project PI Dr Yixian Sun for the 348th episode to discuss China’s vision of leadership, its evolving role in the Global South, and the risks and opportunities of an increasingly multipolar climate order.",
-    embed: {
-      src: "https://embed.podcasts.apple.com/gb/podcast/the-china-pivot-what-will-beijings-climate-leadership/id1459416461?i=1000747135989&theme=light",
-      variant: "audio",
-      width: 660,
-      height: 175,
-      allow: "autoplay *; encrypted-media *; fullscreen *; clipboard-write",
-      sandbox:
-        "allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation",
-    },
-  },
-  {
-    title: "Can China Lead the World on Climate Change?",
-    description:
-      "Mapping Global China Conversations hosts project PI Dr Yixian Sun and Dr Yifei Li, asking them about China’s evolving role in environmental governance, its efforts to green the Belt and Road Initiative (BRI), and the competing narratives of soft power and coercion in its global environmental strategy.",
-    embed: {
-      src: "https://www.youtube.com/embed/br2w5eeqzD8?playlist=br2w5eeqzD8&autoplay=0&controls=1&loop=0&autopause=0&playsinline=1&mute=0&start=4",
-      variant: "landscape",
-      width: 440,
-      height: 279,
-      allow:
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-      allowFullScreen: true,
-    },
-  },
-];
 ---
 
 <Layout frontmatter={frontmatter} bare>
@@ -127,34 +43,34 @@ const interviews: MediaItem[] = [
     </SectionTitle>
     <div class="media-grid">
       {
-        conferenceCoverage.map((item) => (
+        conferenceCoverage.map(({ entry: { data }, Content }) => (
           <article
             class:list={[
               "media-card",
-              item.embed.variant === "portrait" && "media-card--portrait",
-              item.embed.variant === "audio" && "media-card--audio",
+              data.embed.variant === "portrait" && "media-card--portrait",
+              data.embed.variant === "audio" && "media-card--audio",
             ]}
           >
             <div class="media-card__embed">
               <iframe
                 class:list={[
                   "media-frame",
-                  item.embed.variant === "portrait" && "media-frame--portrait",
-                  item.embed.variant === "audio" && "media-frame--audio",
+                  data.embed.variant === "portrait" && "media-frame--portrait",
+                  data.embed.variant === "audio" && "media-frame--audio",
                 ]}
-                src={item.embed.src}
-                title={item.title}
-                width={item.embed.width}
-                height={item.embed.height}
+                src={data.embed.src}
+                title={data.title}
+                width={data.embed.width}
+                height={data.embed.height}
                 loading="lazy"
-                allow={item.embed.allow}
-                sandbox={item.embed.sandbox}
-                allowfullscreen={item.embed.allowFullScreen}
+                allow={data.embed.allow}
+                sandbox={data.embed.sandbox}
+                allowfullscreen={data.embed.allowFullScreen}
               />
             </div>
             <div class="media-card__body">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <h3>{data.title}</h3>
+              <Content />
             </div>
           </article>
         ))
@@ -168,34 +84,34 @@ const interviews: MediaItem[] = [
     <SectionTitle id="interviews-title">Interviews</SectionTitle>
     <div class="media-grid">
       {
-        interviews.map((item) => (
+        interviews.map(({ entry: { data }, Content }) => (
           <article
             class:list={[
               "media-card",
-              item.embed.variant === "portrait" && "media-card--portrait",
-              item.embed.variant === "audio" && "media-card--audio",
+              data.embed.variant === "portrait" && "media-card--portrait",
+              data.embed.variant === "audio" && "media-card--audio",
             ]}
           >
             <div class="media-card__embed">
               <iframe
                 class:list={[
                   "media-frame",
-                  item.embed.variant === "portrait" && "media-frame--portrait",
-                  item.embed.variant === "audio" && "media-frame--audio",
+                  data.embed.variant === "portrait" && "media-frame--portrait",
+                  data.embed.variant === "audio" && "media-frame--audio",
                 ]}
-                src={item.embed.src}
-                title={item.title}
-                width={item.embed.width}
-                height={item.embed.height}
+                src={data.embed.src}
+                title={data.title}
+                width={data.embed.width}
+                height={data.embed.height}
                 loading="lazy"
-                allow={item.embed.allow}
-                sandbox={item.embed.sandbox}
-                allowfullscreen={item.embed.allowFullScreen}
+                allow={data.embed.allow}
+                sandbox={data.embed.sandbox}
+                allowfullscreen={data.embed.allowFullScreen}
               />
             </div>
             <div class="media-card__body">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <h3>{data.title}</h3>
+              <Content />
             </div>
           </article>
         ))
@@ -241,7 +157,8 @@ const interviews: MediaItem[] = [
     font-size: 1.45rem;
   }
 
-  .media-card__body p {
+  /* The description is the entry body, so it needs :global to reach the rendered <p>. */
+  .media-card__body :global(p) {
     margin-top: 0.85rem;
     margin-bottom: 0;
   }

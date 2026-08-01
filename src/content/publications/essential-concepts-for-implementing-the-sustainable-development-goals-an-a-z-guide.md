@@ -3,7 +3,7 @@ title: "Essential Concepts for Implementing the Sustainable Development Goals: A
 category: "book-chapter"
 citation: "Biermann, F., Hickmann, T., Kang, Y.H., Senit, C-A., & Sun, Y. (Eds)., 2025."
 date: "2025-07-24"
-image: "/images/publications/essential-concepts-for-implementing-the-sustainable-development-goals-an-a-z-guide.jpg"
+image: "/images/publications/essential-concepts-for-implementing-the-sustainable-development-goals-an-a-z-guide/hero.jpg"
 imageAlt: "Essential Concepts for Implementing the Sustainable Development Goals book cover"
 link: "https://www.taylorfrancis.com/books/oa-edit/10.4324/9781003519560/essential-concepts-implementing-sustainable-development-goals-frank-biermann-thomas-hickmann-yixian-sun-carole-anne-s%C3%A9nit-yi-hyun-kang"
 ---

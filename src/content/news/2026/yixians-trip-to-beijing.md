@@ -13,22 +13,16 @@ On 22 Jan, he participated in the first [UK-China Track 2 Developed Cooperation 
 During his time in Beijing, Dr Sun also gave a talk entitled “The rise and characteristics of China’s leadership in global environmental governance” at Beijing Normal University, and met collaborators from Peking University, Tsinghua University, University of International Business and Economics, CHINCA, Institute for Global Decarbonization Progress, and WRI China.
 
 <div class="news-gallery">
-  <figure>
-    <img
-      src="/images/news/2026/yixians-trip-to-beijing/1.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/yixians-trip-to-beijing/2.png"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/yixians-trip-to-beijing/3.jpg"
-      alt=""
-    />
-  </figure>
+  <img
+    src="/images/news/2026/yixians-trip-to-beijing/1.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/yixians-trip-to-beijing/2.png"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/yixians-trip-to-beijing/3.jpg"
+    alt=""
+  />
 </div>

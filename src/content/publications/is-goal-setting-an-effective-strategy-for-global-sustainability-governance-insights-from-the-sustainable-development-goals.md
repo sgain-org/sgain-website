@@ -3,7 +3,7 @@ title: "Is goal-setting an effective strategy for global sustainability governan
 category: "article"
 citation: "Hickmann, T., Senit, C.A., and Sun, Y., 2026. Earth System Governance, 27, 100309"
 date: "2026-03-02"
-image: "/images/publications/is-goal-setting-an-effective-strategy-for-global-sustainability-governance-insights-from-the-sustainable-development-goals.jpg"
+image: "/images/publications/is-goal-setting-an-effective-strategy-for-global-sustainability-governance-insights-from-the-sustainable-development-goals/hero.jpg"
 imageAlt: "a building with a sign on the side of it"
 link: "https://www.sciencedirect.com/science/article/pii/S2589811625000758#sec1"
 ---

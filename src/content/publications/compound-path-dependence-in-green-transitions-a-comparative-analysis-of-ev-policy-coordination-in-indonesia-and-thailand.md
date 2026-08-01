@@ -3,7 +3,7 @@ title: "Compound path dependence in green transitions: a comparative analysis of
 category: "article"
 citation: "Ye, C., Xia, Y., Sun, Y., and Cashore, B., 2026. Policy Sciences"
 date: "2026-05-20"
-image: "/images/publications/compound-path-dependence-in-green-transitions-a-comparative-analysis-of-ev-policy-coordination-in-indonesia-and-thailand.jpg"
+image: "/images/publications/compound-path-dependence-in-green-transitions-a-comparative-analysis-of-ev-policy-coordination-in-indonesia-and-thailand/hero.jpg"
 imageAlt: "a person pumping gas into a car at a gas station"
 link: "https://link.springer.com/article/10.1007/s11077-026-09614-y"
 ---

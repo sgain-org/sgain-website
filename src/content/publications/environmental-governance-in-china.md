@@ -3,7 +3,7 @@ title: "Environmental governance in China"
 category: "book-chapter"
 citation: "Sun, Y., 2026. Elgar Encyclopedia of Business and Government"
 date: "2026-01-08"
-image: "/images/publications/environmental-governance-in-china.jpg"
+image: "/images/publications/environmental-governance-in-china/hero.jpg"
 imageAlt: "a building with a chinese flag flying in front of it"
 link: "https://www.elgaronline.com/display/book/9781035307784/chapter24.xml"
 ---

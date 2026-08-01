@@ -3,7 +3,7 @@ title: "Steering Political Conflicts for Climate Stability: The Case of China"
 category: "book-chapter"
 citation: "Sun, Y., Shen, W., Lewis, J.I, 2025. in: Stability and Politicization in Climate Governance."
 date: "2025-08-07"
-image: "/images/publications/steering-political-conflicts-for-climate-stability-the-case-of-china.jpg"
+image: "/images/publications/steering-political-conflicts-for-climate-stability-the-case-of-china/hero.jpg"
 imageAlt: "a group of oil rigs in the ocean"
 link: "https://www.cambridge.org/core/books/stability-and-politicization-in-climate-governance/steering-political-conflicts-for-climate-stability/1B3DDAE3EB3271BBD72A74DDE8D8909E"
 ---

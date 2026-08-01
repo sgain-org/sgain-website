@@ -13,16 +13,12 @@ Drawing on fieldwork conducted in Fujian Province between 2019 and 2022, Dr Wang
 The seminar brought together staff and students from across disciplines and generated engaging discussions on environmental governance, conservation policy, and sustainability transitions in China and beyond.
 
 <div class="news-gallery">
-  <figure>
-    <img
-      src="/images/news/2026/dr-weiye-wang-guest-lecture/1.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/dr-weiye-wang-guest-lecture/2.jpg"
-      alt=""
-    />
-  </figure>
+  <img
+    src="/images/news/2026/dr-weiye-wang-guest-lecture/1.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/dr-weiye-wang-guest-lecture/2.jpg"
+    alt=""
+  />
 </div>

@@ -15,22 +15,16 @@ Altogether, the workshop has produced valuable insights from a diversity of stak
 In the rest of the last week, our project PI Yixian Sun and PhD researcher Yuen Gu also had meetings with a range of key Chinese companies in the clean energy supply chains operating in Indonesia. This research trip has significantly expanded our networks in Indonesia, which will allow us to produce more relevant and impactful research in coming years.
 
 <div class="news-gallery">
-  <figure>
-    <img
-      src="/images/news/2026/stakeholder-workshop-and-field-research-in-jakarta/1.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/stakeholder-workshop-and-field-research-in-jakarta/2.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/stakeholder-workshop-and-field-research-in-jakarta/3.jpg"
-      alt=""
-    />
-  </figure>
+  <img
+    src="/images/news/2026/stakeholder-workshop-and-field-research-in-jakarta/1.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/stakeholder-workshop-and-field-research-in-jakarta/2.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/stakeholder-workshop-and-field-research-in-jakarta/3.jpg"
+    alt=""
+  />
 </div>

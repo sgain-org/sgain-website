@@ -3,7 +3,7 @@ title: "How much has Bangladesh achieved from BRI?"
 category: "non-academic"
 citation: "Hasan, M.B., 2025. The Daily Star"
 date: "2025-09-25"
-image: "/images/publications/how-much-has-bangladesh-achieved-from-bri.jpg"
+image: "/images/publications/how-much-has-bangladesh-achieved-from-bri/hero.jpg"
 imageAlt: "Illustration of Belt and Road infrastructure linking China and Bangladesh — ship, plane, factory, bridge and railway over a map"
 link: "https://www.thedailystar.net/opinion/views/news/how-much-has-bangladesh-achieved-bri-3993761"
 ---

@@ -4,7 +4,7 @@ category: "policy-report"
 summary: "China’s emerging leadership in global sustainability governance amid geopolitical turbulence."
 citation: "Sun, Y., Chant, F., O’Brien, C., Ye, Y., Li, J., Gu, Y., & Xiao, Y."
 date: "2025-12-30"
-image: "/images/publications/china-and-global-sustainability-transition-outlook-2025.jpg"
+image: "/images/publications/china-and-global-sustainability-transition-outlook-2025/hero.jpg"
 imageAlt: "woman in black coat standing near round white red and blue wall"
 link: "https://researchportal.bath.ac.uk/en/publications/china-and-global-sustainability-transition-outlook-2025-chinas-em/"
 ---

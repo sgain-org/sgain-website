@@ -13,16 +13,12 @@ During his stay at CSU, Faisal participated in research discussions, seminars, w
 We look forward to future collaboration between the University of Bath and Colorado State University!
 
 <div class="news-gallery">
-  <figure>
-    <img
-      src="/images/news/2026/colorado-state-university-visit/1.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/colorado-state-university-visit/2.jpeg"
-      alt=""
-    />
-  </figure>
+  <img
+    src="/images/news/2026/colorado-state-university-visit/1.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/colorado-state-university-visit/2.jpeg"
+    alt=""
+  />
 </div>

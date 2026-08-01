@@ -12,16 +12,12 @@ This round of fieldwork serves to collect data at the national level in order to
 The Jakarta fieldwork provided valuable insights to deepen our understanding of the challenges and opportunities of Indonesia’s energy transition. As a follow-up, more interviews with government key stakeholders are planned.
 
 <div class="news-gallery">
-  <figure>
-    <img
-      src="/images/news/2026/field-research-in-jakarta/1.jpeg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/field-research-in-jakarta/2.jpeg"
-      alt=""
-    />
-  </figure>
+  <img
+    src="/images/news/2026/field-research-in-jakarta/1.jpeg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/field-research-in-jakarta/2.jpeg"
+    alt=""
+  />
 </div>

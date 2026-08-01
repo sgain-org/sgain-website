@@ -40,7 +40,29 @@ const publications = defineCollection({
     date: z.iso.date(),
     image: z.string().optional(),
     imageAlt: z.string().default(""),
-    link: z.string().optional(),
+    // Either an external URL or a site-relative path, e.g. a PDF in `public/`.
+    link: z.union([z.url(), z.string().startsWith("/")]).optional(),
+  }),
+});
+
+const multimedia = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/multimedia" }),
+  schema: z.object({
+    title: z.string(),
+    section: z.enum(["conference-coverage", "interviews"]),
+    // Newest first within the section. These all share a release date, so
+    // `byDateDesc` falls back to the title.
+    date: z.iso.date(),
+    embed: z.object({
+      src: z.url(),
+      // Drives the card and iframe aspect ratio.
+      variant: z.enum(["landscape", "portrait", "audio"]),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
+      allow: z.string(),
+      sandbox: z.string().optional(),
+      allowFullScreen: z.boolean().default(false),
+    }),
   }),
 });
 
@@ -54,9 +76,9 @@ const team = defineCollection({
       .enum(["bath", "causal-map", "indonesia", "china", "bangladesh", "pakistan"])
       .optional(),
     order: z.number().int().positive(),
-    profileUrl: z.string().optional(),
+    profileUrl: z.url().optional(),
     image: z.string().optional(),
   }),
 });
 
-export const collections = { blog, news, team, publications };
+export const collections = { blog, news, team, publications, multimedia };

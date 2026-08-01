@@ -13,22 +13,16 @@ The field investigation was carried out in two phases at two large-scale solar p
 The fieldwork generated valuable insights into local perceptions of Chinese investment as well as the socio-economic and environmental impacts of large-scale solar power projects in Bangladesh.
 
 <div class="news-gallery">
-  <figure>
-    <img
-      src="/images/news/2026/field-research-in-bangladesh/1.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/field-research-in-bangladesh/2.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/field-research-in-bangladesh/3.jpeg"
-      alt=""
-    />
-  </figure>
+  <img
+    src="/images/news/2026/field-research-in-bangladesh/1.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/field-research-in-bangladesh/2.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/field-research-in-bangladesh/3.jpeg"
+    alt=""
+  />
 </div>
