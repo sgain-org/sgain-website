@@ -8,22 +8,17 @@ import PublicationCard from "@/components/PublicationCard.astro";
 import SectionDivider from "@/components/SectionDivider.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 import Layout from "@/layouts/Layout.astro";
-import { entrySlug } from "@/lib/content";
+import { byDateDesc, entrySlug } from "@/lib/content";
 import { toDisplayTitle } from "@/lib/page";
 
 const frontmatter = {
   title: "Non-Academic Publications | SGAIN Project",
   description: "",
-  oldUrl: "https://sgain.org/non-academic-publications",
 };
 
 const opEds = (await getCollection("publications"))
   .filter((entry) => entry.data.category === "non-academic")
-  .sort(
-    (a, b) =>
-      (a.data.order ?? Number.POSITIVE_INFINITY) -
-      (b.data.order ?? Number.POSITIVE_INFINITY),
-  );
+  .sort(byDateDesc);
 ---
 
 <style>
@@ -149,7 +144,7 @@ const opEds = (await getCollection("publications"))
         href="https://chinaglobalsouth.com/analysis/africa-solar-manufacturing-dependence-on-china/"
         image="/images/pages/non-academic-publications/card-7.jpg"
         imageAlt="the sun is setting behind power lines and telephone poles"
-        title="China’s Manufacturing Might Keep Africa Tied to Its Solar Supply Chain"
+        title="China's Manufacturing Might Keep Africa Tied to Its Solar Supply Chain"
         meta="15/10"
         cta="Interview"
       />

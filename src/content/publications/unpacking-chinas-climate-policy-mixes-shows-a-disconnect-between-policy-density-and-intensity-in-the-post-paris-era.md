@@ -1,15 +1,12 @@
 ---
 title: "Unpacking China’s climate policy mixes shows a disconnect between policy density and intensity in the post-Paris era."
-oldUrl: "https://sgain.org/unpacking-chinas-climate-policy-mixes-shows-a-disconnect-between-policy-density-and-intensity-in-the-post-paris-era"
 category: "article"
 citation: "Li, X., He, S., Gu, Y., & Sun, Y., 2025. npj Climate Action, 4(30)"
-order: 13
-image: "/images/publications/unpacking-chinas-climate-policy-mixes-shows-a-disconnect-between-policy-density-and-intensity-in-the-post-paris-era.jpg"
+date: "2025-03-24"
+image: "/images/publications/unpacking-chinas-climate-policy-mixes-shows-a-disconnect-between-policy-density-and-intensity-in-the-post-paris-era/hero.jpg"
 imageAlt: "Figure from the study on China's climate policy mixes"
 link: "https://www.nature.com/articles/s44168-025-00233-6"
 ---
-
-**Abstract**
 
 As the world’s largest greenhouse gas emitter, China would make important contributions to the achievement of the Paris goals if it made economy-wide, strong policy interventions to combat climate change. Despite a growing number of studies on China’s climate governance, the overall landscape of China’s climate policy and its key characteristics remain underexamined.
 

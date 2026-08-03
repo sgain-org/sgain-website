@@ -2,9 +2,7 @@
 title: "Affiliation with the Earth System Governance Project"
 description: "SGAIN is pleased to announce our affiliation with the Earth System Governance Project (ESG), the world's largest research network on sustainability governance. Stay tuned for updates on our shared initiatives."
 type: "news"
-displayDate: ""
-year: 2024
-order: 6
+date: "2024-10-01"
 ---
 
 SGAIN is pleased to announce our affiliation with the Earth System Governance Project (ESG), the world's largest research network on sustainability governance. Stay tuned for updates on our shared initiatives.

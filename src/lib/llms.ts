@@ -1,6 +1,7 @@
 // biome-ignore lint/correctness/noUnresolvedImports: astro:content is a virtual module resolved by Astro at build time
 import { getCollection } from "astro:content";
-import { entrySlug } from "@/lib/content.ts";
+import { byDateDesc, entrySlug, entryYear } from "@/lib/content.ts";
+import { toDisplayDate } from "@/lib/news.ts";
 import { makeUrl } from "@/lib/site.ts";
 
 type Url = (path: string) => string;
@@ -137,56 +138,49 @@ function cleanText(raw: string): string {
 
 async function getPublications(url: Url): Promise<Item[]> {
   const entries = await getCollection("publications");
-  return entries
-    .sort((a, b) => a.id.localeCompare(b.id))
-    .map((entry) => ({
-      title: stripTitleSuffix(entry.data.title),
-      url: url(`/publications/${slugOf(entry.id)}/`),
-      description: entry.data.citation ?? entry.data.description,
-      body: entry.body ?? "",
-    }));
+  return entries.sort(byDateDesc).map((entry) => ({
+    title: stripTitleSuffix(entry.data.title),
+    url: url(`/publications/${slugOf(entry.id)}/`),
+    description: entry.data.citation ?? entry.data.description,
+    body: entry.body ?? "",
+  }));
 }
 
 async function getBlog(url: Url): Promise<Item[]> {
   const entries = await getCollection("blog");
-  return entries
-    .sort((a, b) => b.data.date.localeCompare(a.data.date))
-    .map((entry) => ({
-      title: stripTitleSuffix(entry.data.title),
-      url: url(`/blog/${slugOf(entry.id)}/`),
-      description: [entry.data.author, entry.data.date].filter(Boolean).join(" · "),
-      body: entry.body ?? "",
-    }));
+  return entries.sort(byDateDesc).map((entry) => ({
+    title: stripTitleSuffix(entry.data.title),
+    url: url(`/blog/${slugOf(entry.id)}/`),
+    description: [entry.data.author, entry.data.date].filter(Boolean).join(" · "),
+    body: entry.body ?? "",
+  }));
 }
 
 async function getNews(url: Url): Promise<{ current: Item[]; archive: Item[] }> {
   const entries = await getCollection("news");
   const toItem = (entry: (typeof entries)[number]): Item => {
-    const displayDate = entry.data.displayDate ?? "";
-    const year = entry.data.year ? String(entry.data.year) : "";
-    const description =
-      year && !displayDate.includes(year) ? `${displayDate} ${year}`.trim() : displayDate || year;
+    // `displayDate` may omit the year ("23-24 April"), which readers of llms.txt lack context for.
+    const year = String(entryYear(entry.data.date));
+    const displayed = toDisplayDate(entry.data);
     return {
       title: stripTitleSuffix(entry.data.title),
       url: url(`/news/${slugOf(entry.id)}/`),
-      description,
+      description: displayed.includes(year) ? displayed : `${displayed} ${year}`,
       body: entry.body ?? "",
     };
   };
 
   const currentYear = new Date().getFullYear();
+  const isNews = (entry: (typeof entries)[number]) => entry.data.type === "news";
 
   const current = entries
-    .filter((entry) => entry.data.type === "news" && entry.data.year === currentYear)
-    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+    .filter((entry) => isNews(entry) && entryYear(entry.data.date) === currentYear)
+    .sort(byDateDesc)
     .map(toItem);
 
   const archive = entries
-    .filter((entry) => entry.data.type === "news" && entry.data.year !== currentYear)
-    .sort(
-      (a, b) =>
-        (b.data.year ?? 0) - (a.data.year ?? 0) || (b.data.order ?? 0) - (a.data.order ?? 0),
-    )
+    .filter((entry) => isNews(entry) && entryYear(entry.data.date) !== currentYear)
+    .sort(byDateDesc)
     .map(toItem);
 
   return { current, archive };

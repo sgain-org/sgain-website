@@ -2,9 +2,8 @@
 title: "Dr Yixian Sun's trip to China"
 description: "On 21-27 April, our PI Dr Yixian Sun had a trip in China to share our work at multiple events and engage with various partners in the country. During this trip, Yixian gave talks on his book project on China’s green soft power and introduced our China’s Global Environmental Leadership Database at Fudan University, New York University Shanghai, and Nanjing University. He had fruitful exchanges with Chinese scholars and students at these universities and have received many constructive feedback."
 type: "news"
+date: "2025-04-21"
 displayDate: "21-27 April 2025"
-year: 2025
-order: 16
 ---
 
 On 21-27 April, our PI Dr Yixian Sun had a trip in China to share our work at multiple events and engage with various partners in the country. During this trip, Yixian gave talks on his book project on China’s green soft power and introduced our China’s Global Environmental Leadership Database at Fudan University, New York University Shanghai, and Nanjing University. He had fruitful exchanges with Chinese scholars and students at these universities and have received many constructive feedback.

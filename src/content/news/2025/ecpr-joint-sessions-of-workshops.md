@@ -2,9 +2,8 @@
 title: "ECPR Joint Sessions of Workshops"
 description: "On 20–23 May 2025, SGAIN team member Dr Yitong Ye, participated in the ECPR Joint Sessions of Workshops in Prague. At the workshop “Text-as-Data Analysis in Political Science: Unlocking Political Insights with New Research Tools”, she shared our work titled “Seeing China from Different Perspectives: Analyzing Media Reporting on the Sustainability Impacts of Chinese Overseas Investments”"
 type: "news"
+date: "2025-05-20"
 displayDate: "20-23 May 2025"
-year: 2025
-order: 15
 ---
 
 On 20–23 May 2025, SGAIN team member Dr Yitong Ye, participated in the ECPR Joint Sessions of Workshops in Prague. At the workshop “Text-as-Data Analysis in Political Science: Unlocking Political Insights with New Research Tools”, she shared our work titled “Seeing China from Different Perspectives: Analyzing Media Reporting on the Sustainability Impacts of Chinese Overseas Investments”

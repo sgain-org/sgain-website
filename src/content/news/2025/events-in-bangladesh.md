@@ -2,9 +2,8 @@
 title: "Events in Bangladesh"
 description: "In the last two weeks of October 2025, SGAIN advanced our work in Bangladesh."
 type: "news"
+date: "2025-10-18"
 displayDate: "October 2025"
-year: 2025
-order: 5
 ---
 
 In the last two weeks of October 2025, SGAIN advanced our work in Bangladesh.

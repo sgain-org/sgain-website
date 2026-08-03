@@ -1,7 +1,6 @@
 ---
 title: "China and the Global Sustainability Transition: Reflecting on my First conference Experience"
 description: "Freya Chant, Summer Research Assistant, University of Bath"
-oldUrl: "https://sgain.org/china-and-the-global-sustainability-transition-reflecting-on-my-first-conference-experience"
 author: "Freya Chant, Summer Research Assistant, University of Bath"
 date: "2025-07-07"
 readingTime: "4 min read"

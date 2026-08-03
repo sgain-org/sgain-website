@@ -2,9 +2,8 @@
 title: "Researching Global China Conference"
 description: "In late February, the REDEFINE project hosted the ‘Researching Global China Conference – Innovation and Challenges’, bringing together key Global China scholar to discuss methodological research in the field."
 type: "news"
+date: "2025-02-25"
 displayDate: "25-25 February 2025"
-year: 2025
-order: 20
 ---
 
 In late February, the REDEFINE project hosted the ‘Researching Global China Conference – Innovation and Challenges’, bringing together key Global China scholar to discuss methodological research in the field.

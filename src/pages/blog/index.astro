@@ -4,33 +4,22 @@ import Band from "@/components/Band.astro";
 import Hero from "@/components/Hero.astro";
 import PublicationCard from "@/components/PublicationCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { entrySlug } from "@/lib/content";
+import { byDateDesc, entrySlug, entryYear, formatDate } from "@/lib/content";
 
 const frontmatter = {
   title: "SGAIN: Blogs | SGAIN Project",
   description:
     "Explore our blogs, a place for our team members to share their insights and experiences, covering academic conferences, overseas trips, and global field research. ",
-  oldUrl: "https://sgain.org/blogs",
 };
-const posts = (await getCollection("blog")).sort((a, b) =>
-  b.data.date.localeCompare(a.data.date),
-);
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(new Date(`${value}T00:00:00`));
+const posts = (await getCollection("blog")).sort(byDateDesc);
 
-const postYears = [
-  ...new Set(posts.map((post) => new Date(`${post.data.date}T00:00:00`).getFullYear())),
-].sort((a, b) => b - a);
+const postYears = [...new Set(posts.map((post) => entryYear(post.data.date)))].sort(
+  (a, b) => b - a,
+);
 
 const postGroups = postYears.map((year) => ({
   year,
-  posts: posts.filter(
-    (post) => new Date(`${post.data.date}T00:00:00`).getFullYear() === year,
-  ),
+  posts: posts.filter((post) => entryYear(post.data.date) === year),
 }));
 ---
 
