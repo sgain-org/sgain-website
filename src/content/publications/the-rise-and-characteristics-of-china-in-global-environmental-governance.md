@@ -4,7 +4,7 @@ category: "article"
 citation: "Sun,Y., and Ye, Y., 2026. Earth System Governance, 29"
 date: "2026-06-09"
 image: "/images/publications/the-rise-and-characteristics-of-china-in-global-environmental-governance/hero.jpg"
-imageAlt: "forest and mountain partially covered with fog"
+imageAlt: "Beijing skyline with the sun setting in the background"
 link: "https://www.sciencedirect.com/science/article/pii/S2589811626000297"
 ---
 
