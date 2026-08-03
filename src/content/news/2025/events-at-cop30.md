@@ -2,9 +2,8 @@
 title: "Events at COP30"
 description: "Project PI Dr Yixian Sun led the University of Bath delegation at COP30. Over the two week event, SGAIN co-organized or joined several events and meetings with our network in Belem."
 type: "news"
+date: "2025-11-10"
 displayDate: "November 2025"
-year: 2025
-order: 3
 ---
 
 Project PI Dr Yixian Sun led the University of Bath delegation at COP30. Over the two week event, SGAIN co-organized or joined several events and meetings with our network in Belem.

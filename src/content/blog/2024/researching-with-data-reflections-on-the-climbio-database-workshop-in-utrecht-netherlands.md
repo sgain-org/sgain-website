@@ -1,7 +1,6 @@
 ---
 title: "Researching with Data: Reflections on the ClimBio Database Workshop in Utrecht, Netherlands"
 description: ""
-oldUrl: "https://sgain.org/researching-with-data-reflections-on-the-climbio-database-workshop-in-utrecht-netherlands"
 author: "Yitong Ye, Postdoctoral Research Associate, University of Bath"
 date: "2024-12-12"
 readingTime: "3 min read"

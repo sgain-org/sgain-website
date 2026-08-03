@@ -1,7 +1,6 @@
 ---
 title: "Where is the local community?: Fieldwork Reflections on China’s Involvement in Indonesia’s Energy Transition at Cirata Floating Solar Power Plant"
 description: ""
-oldUrl: "https://sgain.org/where-is-the-local-community-fieldwork-reflections-on-chinas-involvement-in-indonesias-energy-transition-at-cirata-floating-solar-power-plant"
 author: "Ni Made Diah Apsari Dewi, Research Assistant, Universitas Gadjah Mada"
 date: "2025-09-15"
 readingTime: "4 min read"

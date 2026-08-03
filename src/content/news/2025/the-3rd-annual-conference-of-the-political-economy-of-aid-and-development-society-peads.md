@@ -2,9 +2,8 @@
 title: "The 3rd Annual Conference of the Political Economy of Aid and Development Society (PEADS)"
 description: "This April, team member Yuen Gu participated in the 3rd Annual Conference of the Political Economy of Aid and Development Society (PEADS) held at the Glasgow University Union. She presented her paper, China's Financing for South-South Climate Cooperation: Balancing Global Climate Governance and National Interests, in the \"Climate and Humanitarian Assistance\" session, examining China's allocation preference in China's South-South climate cooperation."
 type: "news"
+date: "2025-04-23"
 displayDate: "23-24 April"
-year: 2025
-order: 17
 ---
 
 This April, team member Yuen Gu participated in the 3rd Annual Conference of the Political Economy of Aid and Development Society (PEADS) held at the Glasgow University Union. She presented her paper, *China's Financing for South-South Climate Cooperation: Balancing Global Climate Governance and National Interests*, in the "Climate and Humanitarian Assistance" session, examining China's allocation preference in China's South-South climate cooperation.
