@@ -1,7 +1,7 @@
 ---
 title: "Forum: The Passports They Carry: Global South Scholars and the Global Academic Mobility Divide"
 category: "article"
-citation: "Yildiz, E., Cangönül, M., Sun, Y., Uribe, J., Sharani, S., Tiky, L., & Zvobgo, K., 2026. International Studies Perspectives, ekag007"
+citation: "Yildiz, E., Cangönül, M., Sun, Y., Uribe, J., Sharani, S., Tiky, L., & Zvobgo, K. (2026) International Studies Perspectives, ekag007"
 date: "2026-07-14"
 image: "/images/publications/the-passports-they-carry-global-south-scholars-and-the-global-academic-mobility-divide/hero.jpg"
 imageAlt: "two passports in front of an airplane window"
