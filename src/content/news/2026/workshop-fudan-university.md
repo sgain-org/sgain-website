@@ -4,7 +4,7 @@ description: "On 4 July 2026, we organised a workshop entitled “The Shifting L
 type: "news"
 displayDate: "4 July 2026"
 year: 2026
-order: 2
+order: 1
 ---
 
 On 4 July 2026, we organised a workshop entitled “The Shifting Landscape of Global Climate Governance” in Shanghai. The workshop was co-convened by our PI, Professor Yixian Sun, and our China team lead, Professor Bowen Yu, at the School of International Relations and Public Affairs (SIRPA) of Fudan University. Bringing together around twenty leading experts on climate policy and governance from top Chinese universities, the Ministry of Ecology and Environment, the Ministry of Science and Technology, and China Meteorological Administration, the workshop provided a platform for transdisciplinary dialogue on how global climate governance is evolving in response to geopolitical change and the role that China can play in advancing climate action.
