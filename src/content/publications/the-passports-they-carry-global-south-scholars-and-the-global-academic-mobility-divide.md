@@ -3,6 +3,7 @@ title: "Forum: The Passports They Carry: Global South Scholars and the Global Ac
 oldUrl: ""
 category: "article"
 citation: "Yildiz, E., Cangönül, M., Sun, Y., Uribe, J., Sharani, S., Tiky, L., & Zvobgo, K. (2026) International Studies Perspectives, ekag007"
+displayDate: "14/7/2025"
 order: 1
 image: "/images/publications/passport-article.jpg"
 imageAlt: "two passports in front of an airplane window"
