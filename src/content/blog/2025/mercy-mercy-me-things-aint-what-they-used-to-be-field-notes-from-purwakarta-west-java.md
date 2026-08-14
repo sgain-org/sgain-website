@@ -1,7 +1,6 @@
 ---
 title: "Mercy, Mercy Me, Things Ain’t What They Used To Be: Field Notes from Purwakarta, West Java"
 description: ""
-oldUrl: "https://sgain.org/mercy-mercy-me-things-aint-what-they-used-to-be-field-notes-from-purwakarta-west-java"
 author: "Nadya Zafira, Research Assistant, Universitas Gadjah Mada"
 date: "2025-09-15"
 readingTime: "3 min read"

@@ -8,13 +8,12 @@ import PublicationCard from "@/components/PublicationCard.astro";
 import SectionDivider from "@/components/SectionDivider.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 import Layout from "@/layouts/Layout.astro";
-import { entrySlug } from "@/lib/content";
+import { byDateDesc, entrySlug, formatDate } from "@/lib/content";
 import { toDisplayTitle } from "@/lib/page";
 
 const frontmatter = {
   title: "Publications | SGAIN Project",
   description: "",
-  oldUrl: "https://sgain.org/publications",
 };
 
 const recentPublications = (await getCollection("publications"))
@@ -22,11 +21,7 @@ const recentPublications = (await getCollection("publications"))
     (entry) =>
       entry.data.category === "article" || entry.data.category === "book-chapter",
   )
-  .sort(
-    (a, b) =>
-      (a.data.order ?? Number.POSITIVE_INFINITY) -
-      (b.data.order ?? Number.POSITIVE_INFINITY),
-  )
+  .sort(byDateDesc)
   .slice(0, 4);
 ---
 
@@ -53,7 +48,7 @@ const recentPublications = (await getCollection("publications"))
             href={`/publications/${entrySlug(publication.id)}/`}
             lines={[
               publication.data.citation ?? publication.data.description,
-              publication.data.displayDate,
+              formatDate(publication.data.date),
             ].filter((line): line is string => Boolean(line))}
             image={publication.data.image}
             imageAlt={publication.data.imageAlt}

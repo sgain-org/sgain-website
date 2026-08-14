@@ -2,9 +2,8 @@
 title: "Yixian's trip to Beijing"
 description: "On 19-24 Jan 2026, our PI Dr Yixian Sun had a productive trip in Beijing to attend several events and meet with collaborators."
 type: "news"
+date: "2026-01-19"
 displayDate: "19-24 January 2026"
-year: 2026
-order: 12
 ---
 
 On 19-24 Jan, our PI Dr Yixian Sun had a productive trip in Beijing to attend several events and meet with collaborators.
@@ -14,22 +13,16 @@ On 22 Jan, he participated in the first [UK-China Track 2 Developed Cooperation 
 During his time in Beijing, Dr Sun also gave a talk entitled “The rise and characteristics of China’s leadership in global environmental governance” at Beijing Normal University, and met collaborators from Peking University, Tsinghua University, University of International Business and Economics, CHINCA, Institute for Global Decarbonization Progress, and WRI China.
 
 <div class="news-gallery">
-  <figure>
-    <img
-      src="/images/news/2026/yixians-trip-to-beijing/1.jpg"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/yixians-trip-to-beijing/2.png"
-      alt=""
-    />
-  </figure>
-  <figure>
-    <img
-      src="/images/news/2026/yixians-trip-to-beijing/3.jpg"
-      alt=""
-    />
-  </figure>
+  <img
+    src="/images/news/2026/yixians-trip-to-beijing/1.jpg"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/yixians-trip-to-beijing/2.png"
+    alt=""
+  />
+  <img
+    src="/images/news/2026/yixians-trip-to-beijing/3.jpg"
+    alt=""
+  />
 </div>

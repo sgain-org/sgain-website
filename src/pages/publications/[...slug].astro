@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import { formatDate } from "@/lib/content";
 import { externalLinkAttrs } from "@/lib/links.ts";
 import { toDisplayTitle, toPageTitle } from "@/lib/page";
 
@@ -22,7 +23,6 @@ const { Content } = await render(page);
 const frontmatter = {
   title: toPageTitle(page.data.title),
   description: page.data.description,
-  oldUrl: page.data.oldUrl,
 };
 
 const linkLabels = {
@@ -41,7 +41,7 @@ const linkLabel = page.data.category
   <h1>{toDisplayTitle(page.data.title)}</h1>
   {page.data.summary && <p>{page.data.summary}</p>}
   {page.data.citation && <p>{page.data.citation}</p>}
-  {page.data.displayDate && <p>{page.data.displayDate}</p>}
+  <p>{formatDate(page.data.date)}</p>
 
   <Content />
 

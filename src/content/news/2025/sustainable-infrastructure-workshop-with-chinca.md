@@ -2,9 +2,8 @@
 title: "Sustainable Infrastructure Workshop with CHINCA"
 description: "On September 10th, our SGAIN team hosted a delegation of the China International Contractors Association (CHINCA) and WWF-China to the University of Bath for an invitation-only workshop. Workshop participants include senior officers from CHINCA, Energy China, JSTI GROUP, British Standards Institute, European Climate Foundation."
 type: "news"
+date: "2025-09-10"
 displayDate: "10 September 2025"
-year: 2025
-order: 8
 ---
 
 On September 10th, our SGAIN team hosted a delegation of the China International Contractors Association (CHINCA) and WWF-China to the University of Bath for an invitation-only workshop. Workshop participants include senior officers from CHINCA, Energy China, JSTI GROUP, British Standards Institute, European Climate Foundation.
