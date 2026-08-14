@@ -3,7 +3,7 @@ name: "Jiuyang Li"
 role: "PhD Student"
 section: "bath"
 group: "bath"
-order: 3
+order: 4
 profileUrl: "https://www.linkedin.com/in/jiuyang9971/"
 image: "/images/team/bath/jiuyang-li.jpg"
 ---

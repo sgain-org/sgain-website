@@ -3,7 +3,7 @@ name: "Muhammad Faisal Sharif"
 role: "UKRI-ESRC SWDTP Funded Doctoral Researcher"
 section: "bath"
 group: "bath"
-order: 2
+order: 5
 profileUrl: "https://www.linkedin.com/in/muhammad-faisal-sharif-922a707/"
 image: "/images/team/bath/muhammad-faisal-sharif.jpg"
 ---

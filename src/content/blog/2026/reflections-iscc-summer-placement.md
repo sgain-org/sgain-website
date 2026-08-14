@@ -1,0 +1,35 @@
+---
+title: "Reflections: ISCC Summer Placement with SGAIN"
+description: ""
+oldUrl: ""
+author: "Aarshia Sawhney, Summer Research Assistant, University of Bath"
+date: "2026-08-14"
+readingTime: "4 min read"
+heroImage: "/images/blog/2026/reflections-iscc-summer-placement/hero.jpg"
+---
+
+![](/images/blog/2026/reflections-iscc-summer-placement/2.jpeg)
+
+Over eight weeks this summer, I worked as a Summer Research Assistant at the Institute of Sustainability and Climate Change (ISCC) under Dr Yixian Sun and Dr Yitong Ye, as part of the SGAIN team. The project investigated how three major emerging economies — China, India, and Brazil — discursively construct climate leadership across three UN arenas: UN General Assembly speeches, UNFCCC COP High-Level Statements, and Nationally Determined Contributions, between the years 2015 and 2025. Our aim was to study how these emerging powers talk about climate change, and what that reveals about power, legitimacy, and global climate governance.
+
+Coming into this placement, I had no exposure to the field of climate governance. My previous experiences were working with social enterprises on grassroots WaSH initiatives in India, and in ESG research. I knew what development looked like at the community level, but not what it looked like in international UN negotiations, or how much a country's discursive choices matter, alongside the actions and commitments they actually carry out. This gap is what made the summer so interesting.
+
+My work centred around data collection and preliminary analysis. I collected a corpus of official speeches across the three UN arenas, sourced from official archives and governmental websites, organised into a metadata sheet, and extracted and cleaned for the open coding stage. We then developed an open coding framework across four analytical dimensions: problem framing, justificatory framing, authority claims, and prescriptive proposals. My main technical contribution was developing the Python script used for the LLM-assisted open coding, which generated the initial set of open codes. These codes were then repeatedly refined into higher-order categories before being applied across the full corpus for comparative analysis.
+
+![](/images/blog/2026/reflections-iscc-summer-placement/3.jpeg)
+
+![](/images/blog/2026/reflections-iscc-summer-placement/4.jpeg)
+
+I was surprised to learn how indispensable Python is to qualitative social science research. I had always associated programming with quantitative methods such as modelling and datasets. However, the idea that I could use code to assist with thematic mapping across a large corpus of texts was very exciting. It changed how I think about the methods available to researchers working on questions of governance, discourse, and politics.
+
+I came into this placement believing climate leadership was primarily about ambition, and that international climate negotiations were largely Western-dominated. Over these eight weeks, I learned that leadership itself is constructed through distinct discourse. It is not a fixed status. China, India, and Brazil speak about climate in ways shaped by their distinct economic, political, and developmental priorities, which in turn shape the commitments they put forth. From our preliminary findings, Brazil frames itself most often as a leader and exemplar. China emphasises its role as a responsible major power and provider of public goods. India positions itself most frequently as a creator of climate-focused institutions and initiatives. These differences reflect distinct political identities and competing visions of what equitable global governance should look like.
+
+That insight reshaped how I think about international climate politics. The problem is not only that countries fail to commit enough. It is also about who defines what sufficient commitment looks like, whose framings of leadership are treated as legitimate, and how historical responsibility is invoked or quietly sidelined in multilateral negotiations. Coming from grassroots development work, where questions of whose priorities get centred are immediate and practical, seeing the same dynamics play out at the level of UN arenas also opened my eyes to why reform and progress takes time.
+
+I was also privileged to attend a number of ISCC seminars throughout the placement, which opened my eyes to the breadth of new research happening in this field. Dr Weiye Wang's talk on environmental governance in China through the Green Shield Action was particularly striking, specifically on campaign-style governance, where central authorities mobilise resources intensively over a short period to address regulatory failures. It raised important questions about the tensions between top-down enforcement and long-term institutional change, and how environmental commitments translate, or fail to translate, into practice on the ground.
+
+I had also signed up to volunteer at the SDPI Conference, which featured a keynote by Christina Figueres, one of the architects of the Paris Agreement. It was, somewhat ironically, postponed due to a heatwave that week. A talk on climate leadership, during climate week, cancelled because of the very crisis it was meant to address. It has yet to be rescheduled, but I look forward to it. I also attended a talk on climate risk perception and decision-making, which introduced me to how psychological frameworks are being applied to understand public responses to climate change. Across all of these talks, I was exposed to literature I would not have encountered otherwise: on energy justice, on China's role in global environmental governance, on the politics of South-South climate cooperation.
+
+One of the most valuable parts of this placement was being able to work in a research environment for the first time, surrounded by the SGAIN team. I have always known I want to pursue a PhD. What I did not fully appreciate before this summer was what a researcher's day-to-day actually looks like: how collaborative it is, how much of the work is iterative and uncertain, how ideas develop through conversation as much as through reading. Our team meetings featured discussions that were open, questions were welcomed, and the work felt shared rather than siloed. The summer gathering was a highlight that made the team feel a lot more like a family.
+
+I return to Bath in September with new research skills, a clearer understanding of how climate governance operates, and a set of questions I am excited to keep pursuing. This summer did not just teach me about climate politics; it introduced me to what it means to think like a researcher. I will be continuing with the SGAIN team into the new academic year, and I cannot wait to see where the project goes next.

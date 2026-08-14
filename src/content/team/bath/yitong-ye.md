@@ -3,7 +3,7 @@ name: "Yitong Ye"
 role: "Postdoctoral Research Associate"
 section: "bath"
 group: "bath"
-order: 5
+order: 2
 profileUrl: "https://www.linkedin.com/in/yitong-ye-a03bab203/"
 image: "/images/team/bath/yitong-ye.jpg"
 ---
