@@ -2,9 +2,8 @@
 title: "Policy Report Launch Event"
 description: "The Network for Clean Energy Transition: Research and Advocacy, in collaboration with SGAIN, held an event to celebrate the launch of our policy report From Solar Boom to Green Industrialization: Policy Pathways to Localizing Solar Value Chains in Pakistan on December 22."
 type: "news"
+date: "2025-12-22"
 displayDate: "22 December 2025"
-year: 2025
-order: 1
 ---
 
 The Network for Clean Energy Transition: Research and Advocacy, in collaboration with SGAIN, held an event to celebrate the launch of our policy report ***[From Solar Boom to Green Industrialization: Policy Pathways to Localizing Solar Value Chains in Pakistan](/publications/from-solar-boom-to-green-industrialization-policy-pathways-to-localizing-solar-value-chains-in-pakistan/)*** on December 22.

@@ -2,9 +2,8 @@
 title: "Asia Energy Transition Summit"
 description: "The first 'Asia Energy Transition Summit', organised by the Pakistan Renewable Energy Coalition in collaboration with member organisations (Sustainable Development Policy Institute, Policy Research Institute for Equitable Development, Lahore University of Management Sciences and Renewables First) will take place in Lahore."
 type: "news"
+date: "2024-09-28"
 displayDate: "28-29 September 2024"
-year: 2024
-order: 7
 ---
 
 The first 'Asia Energy Transition Summit', organised by the Pakistan Renewable Energy Coalition in collaboration with member organisations (Sustainable Development Policy Institute, Policy Research Institute for Equitable Development, Lahore University of Management Sciences and Renewables First) will take place in Lahore.

@@ -2,9 +2,8 @@
 title: "Indonesia and Singapore Visits"
 description: "On 8-15 December 2024, the PI of the SGAIN project, Dr Yixian Sun, travelled to Indonesia and Singapore to meet various stakeholders and prepare SGAIN’s work in Southeast Asia."
 type: "news"
+date: "2024-12-08"
 displayDate: "8-15 December 2024"
-year: 2024
-order: 1
 ---
 
 On 8-15 December 2024, the PI of the SGAIN project, Dr Yixian Sun, travelled to Indonesia and Singapore to meet various stakeholders and prepare SGAIN’s work in Southeast Asia.

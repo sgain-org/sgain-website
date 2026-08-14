@@ -2,9 +2,8 @@
 title: "BRLSI COP30 Panel"
 description: "On December 11 2025, Dr Yixian Sun and project manager Ciara O'Brien appeared on a panel \"COP30 demystified: is the world any further forward?\" at the Bath Royal Literary Scientific Institute."
 type: "news"
+date: "2025-12-11"
 displayDate: "11 December 2025"
-year: 2025
-order: 2
 ---
 
 On December 11 2025, Dr Yixian Sun and project manager Ciara O'Brien appeared on a panel "**[COP30 demystified: is the world any further forward?](https://www.brlsi.org/whatson/cop30-demystified-is-the-world-any-further-forward/)**" at the Bath Royal Literary Scientific Institute.

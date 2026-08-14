@@ -1,11 +1,9 @@
 ---
 title: "How can the world engage with China to strengthen global environmental governance?"
-oldUrl: "https://sgain.org/how-can-the-world-engage-with-china-to-strengthen-global-environmental-governance"
 category: "non-academic"
 citation: "Sun, Y., and Harlan, T., 2025. Dialogue Earth."
-displayDate: "12/18/2025"
-order: 1
-image: "/images/publications/how-can-the-world-engage-with-china-to-strengthen-global-environmental-governance.jpg"
+date: "2025-12-18"
+image: "/images/publications/how-can-the-world-engage-with-china-to-strengthen-global-environmental-governance/hero.jpg"
 imageAlt: "a field of plants"
 link: "https://dialogue.earth/en/climate/how-can-the-world-engage-with-china-to-strengthen-global-environmental-governance/"
 ---

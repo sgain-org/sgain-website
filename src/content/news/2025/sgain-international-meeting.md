@@ -2,9 +2,8 @@
 title: "SGAIN International Meeting"
 description: "Across two days at the end of June 2025, SGAIN team members met at Bath University to discuss their work over the last year, and plan future collaboration. Members from Bath, Indonesia, Bangladesh, China, and Pakistan presented their ongoing and planned research, before brainstorming sessions on how to enhance cross-country learning."
 type: "news"
+date: "2025-06-26"
 displayDate: "26-27 June 2025"
-year: 2025
-order: 12
 ---
 
 Across two days at the end of June 2025, SGAIN team members met at Bath University to discuss their work over the last year, and plan future collaboration. Members from Bath, Indonesia, Bangladesh, China, and Pakistan presented their ongoing and planned research, before brainstorming sessions on how to enhance cross-country learning.

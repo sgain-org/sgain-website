@@ -2,9 +2,8 @@
 title: "IfTI Global Symposium"
 description: "The IfTI Global Symposium, hosted at the University of St Gallen, Switzerland (4-5 September 2024) aimed to inform policymakers , financiers, exporters and researchers, deepening knowledge and strengthening cooperation between key stakeholders to help address pressing issues in the future of global trade."
 type: "news"
+date: "2024-09-04"
 displayDate: "4-5 September 2024"
-year: 2024
-order: 8
 ---
 
 The IfTI Global Symposium, hosted at the University of St Gallen, Switzerland (4-5 September 2024) aimed to inform policymakers , financiers, exporters and researchers, deepening knowledge and strengthening cooperation between key stakeholders to help address pressing issues in the future of global trade.

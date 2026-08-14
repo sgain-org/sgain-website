@@ -2,9 +2,8 @@
 title: "Advisory Academic Council Appointment"
 description: "Project PI Dr Yixian Sun has been appointed to the Academic Advisory Council (AAC) of the United Nations Forum on Sustainability Standards (UNFSS)."
 type: "news"
+date: "2026-04-20"
 displayDate: "April 2026"
-year: 2026
-order: 6
 ---
 
 Project PI Dr Yixian Sun has been appointed to the Academic Advisory Council (AAC) of the United Nations Forum on Sustainability Standards (UNFSS) .

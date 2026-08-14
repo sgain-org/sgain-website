@@ -2,9 +2,8 @@
 title: "International Studies Association (ISA) 2025"
 description: "We are pleased to share that earlier this month, SGAIN was represented at the 66th Annual Convention of the International Studies Association (ISA) in Chicago by several team members."
 type: "news"
+date: "2025-03-02"
 displayDate: "2-5 March 2025"
-year: 2025
-order: 19
 ---
 
 We are pleased to share that earlier this month, SGAIN was represented at the 66th Annual Convention of the International Studies Association (ISA) in Chicago by several team members.
