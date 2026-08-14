@@ -6,7 +6,7 @@ citation: "Yildiz, E., Cangönül, M., Sun, Y., Uribe, J., Sharani, S., Tiky, L.
 order: 1
 image: "/images/publications/passport-article.jpg"
 imageAlt: "two passports in front of an airplane window"
-link: "https://doi.org/10.1093/isp/ekag007"
+link: "https://academic.oup.com/isp/advance-article/doi/10.1093/isp/ekag007/8733708"
 ---
 
 **Abstract**
