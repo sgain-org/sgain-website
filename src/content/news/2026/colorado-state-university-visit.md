@@ -4,6 +4,8 @@ description: "Doctoral Researcher Muhammad Faisal Sharif undertook a six-week Ov
 type: "news"
 date: "2026-05-20"
 displayDate: "Spring 2026"
+year: 2026
+order: 5
 ---
 
 Doctoral Researcher Muhammad Faisal Sharif undertook a six-week Overseas Institutional Visit at the Center for Environmental Justice, Colorado State University, supported by the ESRC South West Doctoral Training Partnership (SWDTP).
