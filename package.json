@@ -33,7 +33,7 @@
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.9",
+    "@astrojs/check": "^0.9.10",
     "@biomejs/biome": "^2.5.5",
     "@types/d3-geo": "^3.1.0",
     "@types/geojson": "^7946.0.16",
