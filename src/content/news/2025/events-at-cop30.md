@@ -8,7 +8,7 @@ displayDate: "November 2025"
 
 Project PI Dr Yixian Sun led the University of Bath delegation at COP30. Over the two week event, SGAIN co-organized or joined several events and meetings with our network in Belem.
 
-Dr Sun spoke about China-Brazil cooperation on green trade and sustainable infrastructure, as well as China’s role in supporting clean energy transition in the Global South. Dr Sun’s COP30 activities included:
+Dr Sun spoke about China-Brazil cooperation on green trade and sustainable infrastructure, as well as China's role in supporting clean energy transition in the Global South. Dr Sun's COP30 activities included:
 
 - 15 November: Can Brazil deliver traceable commodities?
 - 17 November 9:30-10:45: Sino-Brazilian experiences in forests and infrastructure

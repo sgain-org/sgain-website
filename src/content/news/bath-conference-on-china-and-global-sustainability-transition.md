@@ -12,9 +12,9 @@ date: "2025-06-24"
 
 The Bath 2025 conference gathered leading experts on China and sustainability from both the Global North and South to discuss opportunities and challenges to engage China for accelerating global sustainability transition. The conference was organized in partnership with [Bath Institute of Sustainability and Climate Change](https://www.bath.ac.uk/research-institutes/institute-of-sustainability-and-climate-change/) and [Dialogue Earth](https://dialogue.earth/en/about/).
 
-Understanding China’s fast evolving role in global environmental governance requires inputs from experts of all backgrounds and experiences. As such, conference participants came from the academic, policy-making, and civil society communities, and represented a variety of disciplinary backgrounds.
+Understanding China's fast evolving role in global environmental governance requires inputs from experts of all backgrounds and experiences. As such, conference participants came from the academic, policy-making, and civil society communities, and represented a variety of disciplinary backgrounds.
 
-We aim to build a strong global academic-policy network for overcoming barriers to understanding China and to chart constructive paths to cooperation between China and the rest of the world for sustainable development. This 1.5-day conference consisted of keynote speakers, several thematic roundtables on China’s changing influence on global sustainability governance, and interactive group discussions to gather opinions from all participants. The conference was held under the Chatham House Rule.
+We aim to build a strong global academic-policy network for overcoming barriers to understanding China and to chart constructive paths to cooperation between China and the rest of the world for sustainable development. This 1.5-day conference consisted of keynote speakers, several thematic roundtables on China's changing influence on global sustainability governance, and interactive group discussions to gather opinions from all participants. The conference was held under the Chatham House Rule.
 
 A summary of the conference by attendee Wanyuan Song, Carbon Brief, is now available in their weekly newsletter **[here](https://www.carbonbrief.org/china-briefing-26-june-2025-first-uk-china-climate-dialogue-china-climate-conference-summary-oil-peak-in-2027/)**.
 

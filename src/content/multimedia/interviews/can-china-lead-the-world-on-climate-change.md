@@ -11,4 +11,4 @@ embed:
   allowFullScreen: true
 ---
 
-Mapping Global China Conversations hosts project PI Dr Yixian Sun and Dr Yifei Li, asking them about China’s evolving role in environmental governance, its efforts to green the Belt and Road Initiative (BRI), and the competing narratives of soft power and coercion in its global environmental strategy.
+Mapping Global China Conversations hosts project PI Dr Yixian Sun and Dr Yifei Li, asking them about China's evolving role in environmental governance, its efforts to green the Belt and Road Initiative (BRI), and the competing narratives of soft power and coercion in its global environmental strategy.

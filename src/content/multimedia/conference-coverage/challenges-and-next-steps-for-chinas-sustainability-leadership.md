@@ -1,5 +1,5 @@
 ---
-title: "Challenges & Next Steps for China’s Sustainability Leadership"
+title: "Challenges & Next Steps for China's Sustainability Leadership"
 section: "conference-coverage"
 date: "2026-02-16"
 embed:
@@ -11,4 +11,4 @@ embed:
   allowFullScreen: true
 ---
 
-As China’s role in global sustainability grows, experts highlight a range of challenges that may influence its future direction. These include domestic policy considerations, sectoral transitions, and evolving international dynamics. In this video, we explore how these factors shape China’s potential next steps in sustainability leadership.
+As China's role in global sustainability grows, experts highlight a range of challenges that may influence its future direction. These include domestic policy considerations, sectoral transitions, and evolving international dynamics. In this video, we explore how these factors shape China's potential next steps in sustainability leadership.

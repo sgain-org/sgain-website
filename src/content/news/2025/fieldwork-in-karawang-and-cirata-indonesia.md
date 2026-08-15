@@ -9,11 +9,11 @@ displayDate: "July 2025"
 In late July 2025, team member Yuen Gu conducted field research with the UGM team in Indonesia to study the social and environmental impacts of large-scale renewable energy projects contracted to Chinese companies. The fieldwork focused on two flagship sites:
 
 - Karawang 100 MW Solar Park, located in a major industrial estate and built by PowerChina Hubei.
-- Cirata 145 MW Floating Solar Plant, Southeast Asia’s largest floating solar facility, constructed by PowerChina Huadong.
+- Cirata 145 MW Floating Solar Plant, Southeast Asia's largest floating solar facility, constructed by PowerChina Huadong.
 
 Over the course of two weeks, Yuen and our SGAIN UGM team engaged with local villagers, fishers, community leaders, journalists, and project stakeholders. The research explored themes of employment, community participation, environmental impacts, compensation mechanisms, and local perceptions of Chinese EPCs.
 
-We are excited to build on these insights as part of SGAIN’s broader research agenda on China’s overseas energy investments, and we look forward to sharing further analysis and recommendations in the coming months.
+We are excited to build on these insights as part of SGAIN's broader research agenda on China's overseas energy investments, and we look forward to sharing further analysis and recommendations in the coming months.
 
 Read more about the reflections on our fieldwork
 

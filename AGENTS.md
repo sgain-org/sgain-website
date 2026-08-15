@@ -36,6 +36,7 @@ Static [Astro](https://astro.build/) site, deployed to Hostinger.
 - News renders `displayDate` when set, else the formatted `date`. Use it for spans and approximations ("4-5 December 2024", "Spring 2026"), and set `date` to when the event started so sorting stays right.
 - Images live in `public/images/<collection>/<year>/<slug>/`, mirroring the content path — `hero.jpg` for the card/hero, `1.jpg`, `2.jpg`, … for body images. Don't reference another entry's folder, and don't add flat files at the collection root. Resize to ≤ 1600 px / ≤ 400 KB before committing.
 - Galleries are bare `<img>` children of a `.news-gallery` div — no `<figure>` wrappers.
+- Write straight quotes (`"` and `'`) in content Markdown, never curly ones (`“ ” ‘ ’`) — the Markdown processor has smart punctuation on, so bodies render curled anyway. In frontmatter, escape inner quotes as `\"` inside the double-quoted YAML scalar.
 - The `news`, `publications` and `blog` content schemas are `.strict()`: a stray `order:`/`year:`/`oldUrl:` fails `pnpm check` instead of being ignored.
 - Animate with the helpers in `src/lib/motion.ts`. Mark scroll-revealed elements `data-reveal`; they start hidden only when `<html>` has `motion-ready`, which `Layout.astro` withholds from visitors who prefer reduced motion.
 - Don't edit generated/vendored dirs: `dist/`, `.astro/`, `node_modules/`, `public/`, `resources/`.

@@ -1,5 +1,5 @@
 ---
-title: "China’s Evolving Role in Global Sustainability Transition"
+title: "China's Evolving Role in Global Sustainability Transition"
 section: "conference-coverage"
 date: "2026-02-16"
 embed:
@@ -11,4 +11,4 @@ embed:
   allowFullScreen: true
 ---
 
-China is reshaping the global sustainability landscape. From clean energy technology to global governance, its actions influence the world’s transition in multiple ways. At our conference, global experts shared their perspectives on China’s evolving role.
+China is reshaping the global sustainability landscape. From clean energy technology to global governance, its actions influence the world's transition in multiple ways. At our conference, global experts shared their perspectives on China's evolving role.
