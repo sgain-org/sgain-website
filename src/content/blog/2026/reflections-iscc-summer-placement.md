@@ -3,7 +3,6 @@ title: "Reflections: ISCC Summer Placement with SGAIN"
 description: ""
 author: "Aarshia Sawhney, Summer Research Assistant, University of Bath"
 date: "2026-08-14"
-readingTime: "4 min read"
 heroImage: "/images/blog/2026/reflections-iscc-summer-placement/hero.jpg"
 ---
 

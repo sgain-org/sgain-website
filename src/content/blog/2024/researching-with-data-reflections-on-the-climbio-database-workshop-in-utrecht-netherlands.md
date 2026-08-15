@@ -3,7 +3,6 @@ title: "Researching with Data: Reflections on the ClimBio Database Workshop in U
 description: ""
 author: "Yitong Ye, Postdoctoral Research Associate, University of Bath"
 date: "2024-12-12"
-readingTime: "3 min read"
 heroImage: "/images/blog/2024/researching-with-data-reflections-on-the-climbio-database-workshop-in-utrecht-netherlands/hero.jpg"
 ---
 

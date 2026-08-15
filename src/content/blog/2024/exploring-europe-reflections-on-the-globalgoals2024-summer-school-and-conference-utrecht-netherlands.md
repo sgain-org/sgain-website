@@ -3,7 +3,6 @@ title: "Exploring Europe: Reflections on the GlobalGoals2024 Summer School and C
 description: ""
 author: "Muhammad Faisal Sharif, Doctoral Researcher, University of Bath"
 date: "2024-09-09"
-readingTime: "4 min read"
 heroImage: "/images/blog/2024/exploring-europe-reflections-on-the-globalgoals2024-summer-school-and-conference-utrecht-netherlands/hero.jpg"
 ---
 

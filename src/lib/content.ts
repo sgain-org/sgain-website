@@ -18,3 +18,9 @@ export const formatDate = (date: string): string =>
     month: "long",
     year: "numeric",
   }).format(new Date(`${date}T00:00:00`));
+
+import getReadingTime from "reading-time/lib/reading-time";
+
+/** "4 min read" from the raw Markdown body. Syntax noise doesn't shift the estimate. */
+export const readingTime = (body: string | undefined): string | undefined =>
+  body ? getReadingTime(body).text : undefined;

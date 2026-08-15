@@ -31,8 +31,9 @@ Static [Astro](https://astro.build/) site, deployed to Hostinger.
 
 - Run `pnpm lint:fix` and `pnpm check` before committing.
 - Formatting and imports are enforced by Biome (`biome.json` is the source of truth).
-- Source lives in `src/`: `components/`, `layouts/`, `lib/`, `pages/`, `styles/`.
+- Source lives in `src/`: `components/`, `layouts/`, `lib/`, `pages/`, `styles/`. Markdown-processor plugins live in `plugins/`, typed off `@astrojs/markdown-satteri` rather than importing `satteri` directly.
 - Blog, news and publications are ordered by their `date` (`YYYY-MM-DD`) — newest first, via `byDateDesc` in `src/lib/content.ts`. Don't reintroduce a manual `order` field; to move an entry, fix its date. Team members are the exception: they carry an explicit `order`, since no date applies.
+- Blog reading time is derived from the body via `readingTime` in `src/lib/content.ts` — don't add a `readingTime` frontmatter field back (the `.strict()` schema will reject it anyway).
 - News renders `displayDate` when set, else the formatted `date`. Use it for spans and approximations ("4-5 December 2024", "Spring 2026"), and set `date` to when the event started so sorting stays right.
 - Images live in `public/images/<collection>/<year>/<slug>/`, mirroring the content path — `hero.jpg` for the card/hero, `1.jpg`, `2.jpg`, … for body images. Don't reference another entry's folder, and don't add flat files at the collection root. Resize to ≤ 1600 px / ≤ 400 KB before committing.
 - Galleries are bare `<img>` children of a `.news-gallery` div — no `<figure>` wrappers.

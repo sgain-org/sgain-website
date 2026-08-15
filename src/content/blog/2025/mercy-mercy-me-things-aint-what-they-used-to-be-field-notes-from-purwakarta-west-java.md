@@ -3,7 +3,6 @@ title: "Mercy, Mercy Me, Things Ain't What They Used To Be: Field Notes from Pur
 description: ""
 author: "Nadya Zafira, Research Assistant, Universitas Gadjah Mada"
 date: "2025-09-15"
-readingTime: "3 min read"
 heroImage: "/images/blog/2025/mercy-mercy-me-things-aint-what-they-used-to-be-field-notes-from-purwakarta-west-java/hero.jpeg"
 ---
 

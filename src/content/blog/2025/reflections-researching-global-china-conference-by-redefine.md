@@ -3,7 +3,6 @@ title: "Reflections: Researching Global China Conference by REDEFINE"
 description: "Yuen Gu, PhD Student, University of Bath"
 author: "Yuen Gu, PhD Student, University of Bath"
 date: "2025-03-03"
-readingTime: "4 min read"
 heroImage: "/images/blog/2025/reflections-researching-global-china-conference-by-redefine/hero.jpg"
 ---
 
