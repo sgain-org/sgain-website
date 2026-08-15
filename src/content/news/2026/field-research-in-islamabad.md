@@ -1,5 +1,5 @@
 ---
-title: "Field Research in Islamabad "
+title: "Field Research in Islamabad"
 description: "SGAIN Doctoral Researcher Jiuyang Li completed three weeks of fieldwork in Islamabad, hosted by the Sustainable Development Policy Institute (SDPI), home to the SGAIN Pakistan team."
 type: "news"
 date: "2026-06-26"

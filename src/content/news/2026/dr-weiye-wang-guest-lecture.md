@@ -4,8 +4,6 @@ description: "On 26 May 2026, the Institute of Sustainability and Climate Change
 type: "news"
 date: "2026-05-26"
 displayDate: "26 May 2026"
-year: 2026
-order: 3
 ---
 
 On 26 May 2026, the Institute of Sustainability and Climate Change (ISCC) at the University of Bath, together with the SGAIN team, hosted Dr Weiye Wang, Associate Professor at Renmin University of China, for a guest lecture on environmental governance in China through the Green Shield Action campaign.
