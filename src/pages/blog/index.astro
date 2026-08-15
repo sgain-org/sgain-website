@@ -4,7 +4,7 @@ import Band from "@/components/Band.astro";
 import Hero from "@/components/Hero.astro";
 import PublicationCard from "@/components/PublicationCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { byDateDesc, entrySlug, entryYear, formatDate } from "@/lib/content";
+import { byDateDesc, entrySlug, entryYear, formatDate, readingTime } from "@/lib/content";
 
 const frontmatter = {
   title: "SGAIN: Blogs | SGAIN Project",
@@ -19,7 +19,9 @@ const postYears = [...new Set(posts.map((post) => entryYear(post.data.date)))].s
 
 const postGroups = postYears.map((year) => ({
   year,
-  posts: posts.filter((post) => entryYear(post.data.date) === year),
+  posts: posts
+    .filter((post) => entryYear(post.data.date) === year)
+    .map((post) => ({ post, minutesRead: readingTime(post.body) })),
 }));
 ---
 
@@ -36,7 +38,7 @@ const postGroups = postYears.map((year) => ({
       <Band aria-label={`Blog posts from ${year}`}>
         <h2 class="blog-year">{year}</h2>
         <div class="pub-grid">
-          {yearPosts.map((post) => (
+          {yearPosts.map(({ post, minutesRead }) => (
             <PublicationCard
               meta="Blog"
               title={post.data.title}
@@ -48,7 +50,7 @@ const postGroups = postYears.map((year) => ({
                 <time datetime={post.data.date}>
                   {formatDate(post.data.date)}
                 </time>
-                {post.data.readingTime && <> · {post.data.readingTime}</>}
+                {minutesRead && <> · {minutesRead}</>}
               </p>
             </PublicationCard>
           ))}

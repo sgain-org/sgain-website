@@ -3,7 +3,6 @@ title: "Where is the local community?: Fieldwork Reflections on China's Involvem
 description: ""
 author: "Ni Made Diah Apsari Dewi, Research Assistant, Universitas Gadjah Mada"
 date: "2025-09-15"
-readingTime: "4 min read"
 heroImage: "/images/blog/2025/where-is-the-local-community-fieldwork-reflections-on-chinas-involvement-in-indonesias-energy-transition-at-cirata-floating-solar-power-plant/hero.jpeg"
 ---
 
