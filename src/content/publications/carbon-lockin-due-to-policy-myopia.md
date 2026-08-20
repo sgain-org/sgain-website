@@ -2,7 +2,7 @@
 title: "Carbon lock-in due to policy myopia: The influence of political elites and interest groups on Pakistan's energy governance"
 category: "article"
 citation: "Sharif, M.F., and Sun, Y. Energy Research & Social Science, 140"
-date: "2026-18-08"
+date: "2026-08-18"
 image: "/images/publications/carbon-lockin-due-to-policy-myopia/hero.jpg"
 imageAlt: "solar panels in pakistan"
 link: "https://www.sciencedirect.com/science/article/pii/S2214629626003944"
