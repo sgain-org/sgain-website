@@ -1,14 +1,12 @@
 ---
-title: "Bath Conference on China & Global Sustainability | SGAIN Project"
+title: "Bath Conference on China & Global Sustainability Transition"
 description: "Read about the Bath Conference on China and Global Sustainability Transition, which took place 24-25th June, 2025. Engage with over 50 participants from research and policy backgrounds to discuss critical sustainability issues."
+type: "news"
 date: "2025-06-24"
+displayDate: "24-25 June 2025"
 ---
 
 ![body of water surrounded by orange trees](/images/news/bath-conference-on-china-and-global-sustainability-transition/1.jpg)
-
-# Bath Conference on China & Global Sustainability Transition
-
-###### 24th-25th June 2025
 
 The Bath 2025 conference gathered leading experts on China and sustainability from both the Global North and South to discuss opportunities and challenges to engage China for accelerating global sustainability transition. The conference was organized in partnership with [Bath Institute of Sustainability and Climate Change](https://www.bath.ac.uk/research-institutes/institute-of-sustainability-and-climate-change/) and [Dialogue Earth](https://dialogue.earth/en/about/).
 
@@ -22,6 +20,8 @@ Team member Freya Chant reflects on her first conference experience **[here](/bl
 
 [Conference brochure](https://drive.google.com/file/d/1rD8Lw3Xu8KMkW4eVr2J3Edquvinv-VIJ/view?usp=sharing)
 
+<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1134543531?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="SGAIN&#039;s research on China and Global Sustainability Transition"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
 ![](/images/news/bath-conference-on-china-and-global-sustainability-transition/2.jpg)
 
 ![](/images/news/bath-conference-on-china-and-global-sustainability-transition/3.jpg)
@@ -30,18 +30,16 @@ Team member Freya Chant reflects on her first conference experience **[here](/bl
 
 ![](/images/news/bath-conference-on-china-and-global-sustainability-transition/5.jpg)
 
-![](/images/news/bath-conference-on-china-and-global-sustainability-transition/6.jpg)
-
-##### Organised by:
+## Organised by
 
 ![SGAIN Project](/logos/SGAIN_Logo_full.png)
 
-[![Dialogue Earth](/images/news/bath-conference-on-china-and-global-sustainability-transition/7.svg)](https://dialogue.earth/en/about/)
+[![Dialogue Earth](/images/news/bath-conference-on-china-and-global-sustainability-transition/6.svg)](https://dialogue.earth/en/about/)
 
-[![UK Research and Innovation](/images/news/bath-conference-on-china-and-global-sustainability-transition/8.png)](https://www.ukri.org/)
+[![UK Research and Innovation](/images/news/bath-conference-on-china-and-global-sustainability-transition/7.png)](https://www.ukri.org/)
 
-##### In Partnership with:
+## In Partnership with
 
 ![University of Bath](/logos/Uni_of_Bath_logo.png)
 
-[![Bath Institute of Sustainability and Climate Change](/images/news/bath-conference-on-china-and-global-sustainability-transition/9.png)](https://www.bath.ac.uk/research-institutes/institute-of-sustainability-and-climate-change/)
+[![Bath Institute of Sustainability and Climate Change](/images/news/bath-conference-on-china-and-global-sustainability-transition/8.png)](https://www.bath.ac.uk/research-institutes/institute-of-sustainability-and-climate-change/)
