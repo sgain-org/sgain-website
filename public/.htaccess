@@ -1,3 +1,5 @@
+ErrorDocument 404 /404.html
+
 # Generated redirects for moved SGAIN routes.
 RedirectMatch 301 ^/academic-publications-and-policy-reports/?$ /news/academic-publications/
 RedirectMatch 301 ^/archive/?$ /news/archive/

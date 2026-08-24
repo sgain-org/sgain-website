@@ -1,4 +1,3 @@
-// biome-ignore lint/correctness/noUnresolvedImports: astro:content is a virtual module resolved by Astro at build time
 import { getCollection } from "astro:content";
 import { byDateDesc, entrySlug, entryYear } from "@/lib/content.ts";
 import { toDisplayDate } from "@/lib/news.ts";

@@ -1,4 +1,3 @@
-// biome-ignore lint/correctness/noUnresolvedImports: astro:content is a virtual module resolved by Astro at build time
 import { getCollection, render } from "astro:content";
 
 export type TeamSectionId = "bath" | "partners" | "advisory" | "alumni";

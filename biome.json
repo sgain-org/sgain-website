@@ -26,8 +26,10 @@
   "linter": {
     "enabled": true,
     "domains": {
-      "project": "all",
-      "types": "all"
+      "project": "recommended",
+      "types": "recommended",
+      "astro": "recommended",
+      "test": "recommended"
     },
     "rules": {
       "preset": "recommended"
