@@ -27,7 +27,7 @@
     "@astrojs/cloudflare": "^14.2.3",
     "@astrojs/markdown-satteri": "0.3.7",
     "@astrojs/sitemap": "^3.7.3",
-    "@lucide/astro": "^1.33.0",
+    "@lucide/astro": "^1.35.0",
     "astro": "^7.2.4",
     "motion": "^13.1.1",
     "reading-time": "^1.5.0"
