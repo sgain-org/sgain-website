@@ -28,7 +28,7 @@
     "@astrojs/markdown-satteri": "0.3.7",
     "@astrojs/sitemap": "^3.7.3",
     "@lucide/astro": "^1.33.0",
-    "astro": "^7.2.4",
+    "astro": "^7.2.9",
     "motion": "^13.1.1",
     "reading-time": "^1.5.0"
   },
