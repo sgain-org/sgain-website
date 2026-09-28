@@ -12,7 +12,7 @@ In “China’s emerging leadership in global environmental governance and green
 
 <div class="news-gallery">
   <img
-    src="/images/news/2026/esg-bath-conference/1.jpeg
+    src="/images/news/2026/esg-bath-conference/1.jpeg"
     alt=""
   />
   <img
