@@ -1,6 +1,6 @@
 ---
 title: "Green Development Cooperation and Asian Partners Conference"
-description: "In October 2026, project member Jiuyang Li attended the Green Development Cooperation and Asian Partners Conference
+description: "In October 2026, project member Jiuyang Li attended the Green Development Cooperation and Asian Partners Conference."
 type: "news"
 date: "2026-10-10"
 displayDate: "8-9 October 2026"
