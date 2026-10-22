@@ -8,4 +8,4 @@ profileUrl: "https://www.linkedin.com/in/jiuyang9971/"
 image: "/images/team/bath/jiuyang-li.jpg"
 ---
 
-Jiuyang Li is a funded PhD student in the Department of Social & Policy Sciences at the University of Bath, focusing on the sustainability governance of China's overseas infrastructure investments. Jiuyang's research explores China's environmental politics and governance. He holds a Master's in Political Science from Lund University and a Bachelor's in International Relations.
+Jiuyang Li is a UKRI-funded PhD candidate in the Department of Social and Policy Sciences at the University of Bath. He is also an Earth System Governance (ESG) Research Fellow. His research focuses on environmental politics and governance, with particular attention to China's engagement in South-South cooperation and the diffusion of global green norms.
